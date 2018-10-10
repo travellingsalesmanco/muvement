@@ -1,3 +1,9 @@
+.body {
+    height: 100vh;
+}
+.contents {
+    background-color: #191919;
+}
 .section-title-container {
     display: -webkit-flex; /* Safari */
     -webkit-align-items: center; /* Safari 7.0+ */
@@ -7,13 +13,53 @@
 }
 .section-title {
     border-radius: 20px;
-    border: 1px solid #001529;
+    border: 2px solid #00a2b6;
     text-align: center;
     padding: 0 3em;
     margin: 2rem 0;
 }
-
 .section-title h3 {
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
+    color: #fff;
+}
+.contents .breadcrumb {
+    margin: 16px 0;
+}
+.contents .ant-breadcrumb,
+.contents .ant-breadcrumb-separator,
+.contents .ant-breadcrumb > span:last-child {
+    color: #fff;
+}
+.sider .ant-menu-dark {
+    background: #191919;
+}
+.sider .ant-menu-inline > .ant-menu-item {
+    height: 75px;
+}
+.sider ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.sider li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.sider li p {
+    margin-bottom: 0;
+}
+.sider .ant-menu-item .anticon {
+    margin-right: 0;
+    font-size: 18px;
+}
+.sider .ant-menu.ant-menu-dark .ant-menu-item-selected {
+    background-color: transparent;
+}
+.footer {
+    background: #131313;
+    text-align: center;
+    color: #fff;
 }

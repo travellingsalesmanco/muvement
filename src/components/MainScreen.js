@@ -9,9 +9,9 @@ class MainScreen extends Component {
     const { SubMenu } = Menu;
     return (
       <Fragment>
-        <Layout className="layout" style={{ height: '100vh' }}>
+        <Layout className="body">
           <Navigation/>
-          <Layout>
+          <Layout className="contents">
             <Content style={{ padding: '0 50px' }}>
               <div className="section-title-container">
                 <div className="section-title">
@@ -21,40 +21,45 @@ class MainScreen extends Component {
               <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
                 Insert Konva Stage
               </div>
-              <Breadcrumb separator=">" style={{ margin: '16px 0' }}>
+              <Breadcrumb separator=">" className="breadcrumb">
                 <Breadcrumb.Item>NUS BLAST! Showcase</Breadcrumb.Item>
                 <Breadcrumb.Item>Introduction (30 seconds)</Breadcrumb.Item>
               </Breadcrumb>
             </Content>
-            <Sider width={200}>
+            <Sider width={200} className="sider">
               <Menu
                 mode="inline"
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
                 style={{ height: '100%', borderRight: 0 }}
+                theme="dark"
               >
-                <SubMenu key="sub1" title={<span><Icon type="user" />subnav 1</span>}>
-                  <Menu.Item key="1">option1</Menu.Item>
-                  <Menu.Item key="2">option2</Menu.Item>
-                  <Menu.Item key="3">option3</Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub2" title={<span><Icon type="laptop" />subnav 2</span>}>
-                  <Menu.Item key="5">option5</Menu.Item>
-                  <Menu.Item key="6">option6</Menu.Item>
-                  <Menu.Item key="7">option7</Menu.Item>
-                  <Menu.Item key="8">option8</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub3" title={<span><Icon type="notification" />subnav 3</span>}>
-                  <Menu.Item key="9">option9</Menu.Item>
-                  <Menu.Item key="10">option10</Menu.Item>
-                  <Menu.Item key="11">option11</Menu.Item>
-                  <Menu.Item key="12">option12</Menu.Item>
-                </SubMenu>
+                <Menu.Item key="1">
+                  <Button shape="circle" icon="user-add" />
+                  <p>Performers</p>
+                </Menu.Item>
+                <Menu.Item key="2">
+                  <Button shape="circle" icon="file-add" />
+                  <p>Add Formation</p>
+                </Menu.Item>
+                <Menu.Item key="3">
+                  <Button shape="circle" icon="customer-service" />
+                  <p>Add Music</p>
+                </Menu.Item>
+                <Menu.Item key="4">
+                  <Button shape="circle" icon="border-inner" />
+                  <p>Stage Dimensions</p>
+                </Menu.Item>
+                <Menu.Item key="5">
+                  <Button shape="circle" icon="left" />
+                  <p>Previous</p>
+                </Menu.Item>
+                <Menu.Item key="6">
+                  <Button shape="circle" icon="right" />
+                  <p>Next</p>
+                </Menu.Item>
               </Menu>
             </Sider>
           </Layout>
-          <Footer style={{ textAlign: 'center', backgroundColor: '#252525', color: '#fff' }} >
+          <Footer className="footer">
             Muvement© 2018. Made with <span role="img" aria-label="Love">❤️</span>by TSCo.
           </Footer>
         </Layout>

@@ -24,6 +24,9 @@ class Navigation extends React.Component {
                 <Button icon="redo"/>
               </Menu.Item>
               <Menu.Item key="3">
+                <Button icon="eye"/>
+              </Menu.Item>
+              <Menu.Item key="4">
                 <Button icon="fullscreen"/>
               </Menu.Item>
             </Menu>
