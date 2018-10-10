@@ -13,12 +13,18 @@ class MainScreen extends Component {
           <Navigation/>
           <Layout>
             <Content style={{ padding: '0 50px' }}>
-              <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>Home</Breadcrumb.Item>
-                <Breadcrumb.Item>List</Breadcrumb.Item>
-                <Breadcrumb.Item>App</Breadcrumb.Item>
+              <div className="section-title-container">
+                <div className="section-title">
+                  <h3>Introduction (30 seconds)</h3>
+                </div>
+              </div>
+              <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+                Insert Konva Stage
+              </div>
+              <Breadcrumb separator=">" style={{ margin: '16px 0' }}>
+                <Breadcrumb.Item>NUS BLAST! Showcase</Breadcrumb.Item>
+                <Breadcrumb.Item>Introduction (30 seconds)</Breadcrumb.Item>
               </Breadcrumb>
-              <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>Content</div>
             </Content>
             <Sider width={200}>
               <Menu
