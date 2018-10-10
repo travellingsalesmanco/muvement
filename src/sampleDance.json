@@ -1,0 +1,56 @@
+{
+  "testDanceID": {
+    "name": "The Best Dance",
+    "dancers": ["Bob", "Marley", "And", "Me"],
+    "stageDim": {
+      "width": 9.60,
+      "height": 5.18
+    },
+    "frames": [
+      {
+        "name": "Introduction",
+        "numSeconds": 30,
+        "dancers": [
+          {
+            "name": "Bob",
+            "position": "TBC"
+          },
+          {
+            "name": "Marley",
+            "position": "TBC"
+          },
+          {
+            "name": "And",
+            "position": "TBC"
+          }
+        ],
+        "musicSegment": "TBC"
+      },
+      {
+        "name": "Arrow part and 2 triangles",
+        "numSeconds": 30,
+        "dancers": [
+          {
+            "name": "Bob",
+            "position": "TBC"
+          },
+          {
+            "name": "Marley",
+            "position": "TBC"
+          },
+          {
+            "name": "And",
+            "position": "TBC"
+          },
+          {
+            "name": "Me",
+            "position": "TBC"
+          }
+        ],
+        "musicSegment": "TBC"
+      }
+    ],
+    "gridDim": "TBC",
+    "music": "TBC"
+  }
+}
