@@ -29,7 +29,7 @@ class MainScreen extends Component {
         <Layout className="body">
           <Navigation/>
           <Layout className="contents">
-            <Content style={{ padding: '0 50px' }}>
+            <Content>
               <div className="section-title-container">
                 <div className="section-title">
                   <h3>Introduction (30 seconds)</h3>
@@ -46,7 +46,7 @@ class MainScreen extends Component {
             <Sider width={200} className="sider">
               <Menu
                 mode="inline"
-                style={{ height: '100%', borderRight: 0 }}
+                className="sider-menu"
                 theme="dark"
                 onClick={this.showDrawer}
               >

@@ -4,6 +4,9 @@
 .contents {
     background-color: #191919;
 }
+.contents .ant-layout-content {
+    padding: 0 50px;
+}
 .section-title-container {
     display: -webkit-flex; /* Safari */
     -webkit-align-items: center; /* Safari 7.0+ */
@@ -36,6 +39,10 @@
 }
 .sider .ant-menu-inline > .ant-menu-item {
     height: 75px;
+}
+.sider .sider-menu {
+    height: 100%;
+    border-right: 0;
 }
 .sider ul {
     display: flex;
