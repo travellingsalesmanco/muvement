@@ -2,15 +2,36 @@ import {Breadcrumb, Layout, Menu, Button, Drawer} from 'antd';
 import React, {Component, Fragment} from 'react';
 import './MainScreen.css';
 import Navigation from "./Navigation";
+import {Stage, Layer, Circle} from 'react-konva'
+import StageCanvas from "./StageCanvas";
 
 class MainScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       placement: 'right',
-      visible: false
+      visible: false,
+      stageWidth: 500,
+      stageHeight: 500
     }
   }
+
+  componentDidMount() {
+    this.checkSize();
+    window.addEventListener("resize", this.checkSize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.checkSize);
+  }
+
+  checkSize = () => {
+    this.setState({
+      stageWidth: this.container.offsetWidth,
+      stageHeight: this.container.offsetHeight
+    });
+  };
+
   showDrawer = (item) => {
     console.log(item);
     this.setState({
@@ -22,8 +43,9 @@ class MainScreen extends Component {
       visible: false,
     });
   };
+
   render() {
-    const { Content, Sider, Footer } = Layout;
+    const {Content, Sider, Footer} = Layout;
     return (
       <Fragment>
         <Layout className="body">
@@ -35,8 +57,13 @@ class MainScreen extends Component {
                   <h3>Introduction (30 seconds)</h3>
                 </div>
               </div>
-              <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
-                Insert Konva Stage
+              <div
+                style={{background: '#000', width: '100%', height: '50%'}}
+                ref={node => {
+                  this.container = node;
+                }}
+              >
+              <StageCanvas width={this.state.stageWidth} height={this.state.stageHeight}/>
               </div>
               <Breadcrumb separator=">" className="breadcrumb">
                 <Breadcrumb.Item>NUS BLAST! Showcase</Breadcrumb.Item>
@@ -55,23 +82,23 @@ class MainScreen extends Component {
                   <p>Performers</p>
                 </Menu.Item>
                 <Menu.Item key="2">
-                  <Button shape="circle" icon="file-add" />
+                  <Button shape="circle" icon="file-add"/>
                   <p>Add Formation</p>
                 </Menu.Item>
                 <Menu.Item key="3">
-                  <Button shape="circle" icon="customer-service" />
+                  <Button shape="circle" icon="customer-service"/>
                   <p>Add Music</p>
                 </Menu.Item>
                 <Menu.Item key="4">
-                  <Button shape="circle" icon="border-inner" />
+                  <Button shape="circle" icon="border-inner"/>
                   <p>Stage Dimension</p>
                 </Menu.Item>
                 <Menu.Item key="5">
-                  <Button shape="circle" icon="left" />
+                  <Button shape="circle" icon="left"/>
                   <p>Previous</p>
                 </Menu.Item>
                 <Menu.Item key="6">
-                  <Button shape="circle" icon="right" />
+                  <Button shape="circle" icon="right"/>
                   <p>Next</p>
                 </Menu.Item>
               </Menu>
