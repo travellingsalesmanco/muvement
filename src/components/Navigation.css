@@ -1,0 +1,28 @@
+.nav-bar {
+    display: flex;
+    background-color: #001529;
+}
+.nav-bar .title {
+    flex: 1;
+    text-align: center;
+}
+.nav-bar ul {
+    float: right;
+    line-height: 64px;
+}
+.nav-bar li {
+    padding: 0;
+}
+.nav-bar .ant-btn {
+    background-color: transparent;
+    border-color: transparent;
+    color: #fff;
+    font-size: 20px;
+}
+.right-container .ant-menu-item .anticon {
+    margin-right: 0;
+    font-size: 20px;
+}
+.right-container .ant-menu.ant-menu-dark .ant-menu-item-selected {
+    background-color: transparent;
+}

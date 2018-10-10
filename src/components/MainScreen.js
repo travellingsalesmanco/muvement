@@ -1,5 +1,7 @@
-import {Breadcrumb, Icon, Layout, Menu} from 'antd';
+import {Breadcrumb, Icon, Layout, Menu, Button, Affix} from 'antd';
 import React, {Component, Fragment} from 'react';
+import './MainScreen.css';
+import Navigation from "./Navigation";
 
 class MainScreen extends Component {
   render() {
@@ -8,18 +10,7 @@ class MainScreen extends Component {
     return (
       <Fragment>
         <Layout className="layout" style={{ height: '100vh' }}>
-          <Header>
-            <Menu
-              theme="dark"
-              mode="horizontal"
-              defaultSelectedKeys={['2']}
-              style={{ lineHeight: '64px' }}
-            >
-              <Menu.Item key="1">nav 1</Menu.Item>
-              <Menu.Item key="2">nav 2</Menu.Item>
-              <Menu.Item key="3">nav 3</Menu.Item>
-            </Menu>
-          </Header>
+          <Navigation/>
           <Layout>
             <Content style={{ padding: '0 50px' }}>
               <Breadcrumb style={{ margin: '16px 0' }}>
