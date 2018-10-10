@@ -1,12 +1,29 @@
-import {Breadcrumb, Icon, Layout, Menu, Button, Affix} from 'antd';
+import {Breadcrumb, Layout, Menu, Button, Drawer} from 'antd';
 import React, {Component, Fragment} from 'react';
 import './MainScreen.css';
 import Navigation from "./Navigation";
 
 class MainScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      placement: 'right',
+      visible: false
+    }
+  }
+  showDrawer = (item) => {
+    console.log(item);
+    this.setState({
+      visible: true,
+    });
+  };
+  onClose = () => {
+    this.setState({
+      visible: false,
+    });
+  };
   render() {
-    const { Header, Content, Sider, Footer } = Layout;
-    const { SubMenu } = Menu;
+    const { Content, Sider, Footer } = Layout;
     return (
       <Fragment>
         <Layout className="body">
@@ -31,9 +48,10 @@ class MainScreen extends Component {
                 mode="inline"
                 style={{ height: '100%', borderRight: 0 }}
                 theme="dark"
+                onClick={this.showDrawer}
               >
                 <Menu.Item key="1">
-                  <Button shape="circle" icon="user-add" />
+                  <Button shape="circle" icon="user-add"/>
                   <p>Performers</p>
                 </Menu.Item>
                 <Menu.Item key="2">
@@ -46,7 +64,7 @@ class MainScreen extends Component {
                 </Menu.Item>
                 <Menu.Item key="4">
                   <Button shape="circle" icon="border-inner" />
-                  <p>Stage Dimensions</p>
+                  <p>Stage Dimension</p>
                 </Menu.Item>
                 <Menu.Item key="5">
                   <Button shape="circle" icon="left" />
@@ -58,6 +76,18 @@ class MainScreen extends Component {
                 </Menu.Item>
               </Menu>
             </Sider>
+            <Drawer
+              title="Drawer"
+              placement={this.state.placement}
+              closable={true}
+              onClose={this.onClose}
+              visible={this.state.visible}
+              mask={false}
+            >
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+            </Drawer>
           </Layout>
           <Footer className="footer">
             Muvement© 2018. Made with <span role="img" aria-label="Love">❤️</span>by TSCo.

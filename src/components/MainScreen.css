@@ -63,3 +63,24 @@
     text-align: center;
     color: #fff;
 }
+.ant-drawer-right .ant-drawer-content-wrapper {
+    height: calc(100% - 64px - 69px);
+    margin: 64px 0;
+}
+.ant-drawer-content-wrapper {
+    width: 200px;
+}
+.ant-drawer-content {
+    background: #191919;
+}
+.ant-drawer-header {
+    background: #191919;
+    border-radius: 0;
+    border-bottom: 0;
+}
+.ant-drawer-title {
+    color: #fff;
+}
+.ant-drawer-body {
+    color: #fff;
+}
