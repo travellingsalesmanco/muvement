@@ -11,8 +11,8 @@ class MainScreen extends Component {
     this.state = {
       placement: 'right',
       visible: false,
-      stageWidth: 500,
-      stageHeight: 500
+      stageWidth: 100,
+      stageHeight: 100
     }
   }
 
@@ -20,16 +20,21 @@ class MainScreen extends Component {
     this.checkSize();
     window.addEventListener("resize", this.checkSize);
   }
+  componentDidUpdate() {
+    this.checkSize();
+  }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.checkSize);
   }
 
   checkSize = () => {
-    this.setState({
-      stageWidth: this.container.offsetWidth,
-      stageHeight: this.container.offsetHeight
-    });
+    if (this.state.stageWidth !== this.container.offsetWidth || this.state.stageHeight !== this.container.offsetHeight) {
+      this.setState({
+        stageWidth: this.container.offsetWidth,
+        stageHeight: this.container.offsetHeight
+      });
+    }
   };
 
   showDrawer = (item) => {
@@ -51,14 +56,14 @@ class MainScreen extends Component {
         <Layout className="body">
           <Navigation/>
           <Layout className="contents">
-            <Content>
+            <Content style={{display: "flex", flexDirection: "column"}}>
               <div className="section-title-container">
                 <div className="section-title">
                   <h3>Introduction (30 seconds)</h3>
                 </div>
               </div>
               <div
-                style={{background: '#000', width: '100%', height: '50%'}}
+                style={{background: '#000', flex: 1}}
                 ref={node => {
                   this.container = node;
                 }}
