@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Circle, Layer, Stage} from "react-konva";
+import {Circle, Layer, Line, Rect, Stage} from "react-konva";
 import {calculateStageDimensions, generateGrid} from "./stageUtils";
 
 class StageCanvas extends Component {
@@ -14,25 +14,25 @@ class StageCanvas extends Component {
       dancers: [
         {
           name: "Bob",
-          position: [500, 450]
+          position: [0.5, 0.5]
         },
         {
           name: "Marley",
-          position: [600, 450]
+          position: [0.1, 0.1]
         },
         {
           name: "And",
-          position: [500, 550]
+          position: [0.9, 0.9]
         },
         {
           name: "Me",
-          position: [600, 550]
+          position: [0.1, 0.9]
+        },
+        {
+          name: "John",
+          position: [0.9, 0.1]
         }
-      ],
-      scale: Math.min(
-        this.props.width / 1000,
-        this.props.height / 1000
-      )
+      ]
     }
   }
 
@@ -67,8 +67,8 @@ class StageCanvas extends Component {
             <Circle
               key={key}
               radius={10}
-              x={dancer.position[0]}
-              y={dancer.position[1]}
+              x={dancer.position[0] * stageRect.width + stageRect.tl.x}
+              y={dancer.position[1] * stageRect.height + stageRect.tl.y}
               fill={'#24c6dc'}
               draggable
             />
