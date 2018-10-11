@@ -5,6 +5,7 @@ import {calculateStageDimensions, generateGrid} from "./stageUtils";
 class StageCanvas extends Component {
   constructor(props) {
     super(props);
+    // To be passed in as props
     this.state = {
       dimensions: {
         width: 9.6,
@@ -32,7 +33,8 @@ class StageCanvas extends Component {
           name: "John",
           position: [0.9, 0.1]
         }
-      ]
+      ],
+      isDancerSelected: [false, false, false, false, false]
     };
     this.nameLabels = [];
   }
@@ -44,6 +46,49 @@ class StageCanvas extends Component {
       })
     });
   }
+
+  handleDragEnd = (e, key, stageRect) => {
+    console.log(e);
+    let dancerDot = e.target.children[0];
+    console.log("OLD POSITION: " + this.state.dancers[key].position);
+    console.log("NEW POSITION: " + [
+      this.getRelativeX(dancerDot.getAbsolutePosition().x, stageRect),
+      this.getRelativeY(dancerDot.getAbsolutePosition().y, stageRect)
+    ]);
+    let newDancers = this.state.dancers.slice();
+    newDancers[key].position = [
+      this.getRelativeX(dancerDot.getAbsolutePosition().x, stageRect),
+      this.getRelativeY(dancerDot.getAbsolutePosition().y, stageRect)
+    ];
+    this.setState({
+      dancers: newDancers
+    });
+  };
+
+  handleSelect = (e, key) => {
+    e.cancelBubble = true;
+    let newDancerSelection = this.state.isDancerSelected.slice();
+    newDancerSelection[key] = !newDancerSelection[key];
+    this.setState({
+      isDancerSelected: newDancerSelection
+    });
+  };
+
+  getAbsoluteX = (origX, stageRect) => {
+    return origX * stageRect.width + stageRect.tl.x;
+  };
+
+  getAbsoluteY = (origY, stageRect) => {
+    return origY * stageRect.height + stageRect.tl.y;
+  };
+
+  getRelativeX = (origX, stageRect) => {
+    return (origX - stageRect.tl.x) / stageRect.width;
+  };
+
+  getRelativeY = (origY, stageRect) => {
+    return (origY - stageRect.tl.y) / stageRect.height;
+  };
 
   render() {
     const CIRCLE_RADIUS = 15;
@@ -71,13 +116,6 @@ class StageCanvas extends Component {
       </Layer>
     );
 
-    let absoluteX = (origX) => {
-      return origX * stageRect.width + stageRect.tl.x;
-    };
-
-    let absoluteY = (origY) => {
-      return origY * stageRect.height + stageRect.tl.y;
-    };
 
     return (
       <Stage preventDefault={true} width={canvasWidth} height={canvasHeight}>
@@ -87,29 +125,31 @@ class StageCanvas extends Component {
           {this.state.dancers.map((dancer, key) => (
             <Group
               key={key}
-              radius={10}
-              fill={'#24c6dc'}
+              x={this.getAbsoluteX(dancer.position[0], stageRect)}
+              y={this.getAbsoluteY(dancer.position[1], stageRect)}
               draggable
+              onDragEnd={(e) => this.handleDragEnd(e, key, stageRect)}
             >
               <Circle
-                x={absoluteX(dancer.position[0])}
-                y={absoluteY(dancer.position[1])}
                 fill={'#24c6dc'}
                 radius={CIRCLE_RADIUS}
               />
               <Text
-                x={absoluteX(dancer.position[0]) - CIRCLE_RADIUS}
-                y={absoluteY(dancer.position[1]) - CIRCLE_RADIUS}
+                x={-CIRCLE_RADIUS}
+                y={-CIRCLE_RADIUS}
                 width={CIRCLE_RADIUS * 2}
                 height={CIRCLE_RADIUS * 2}
                 align={'center'}
                 verticalAlign={'middle'}
                 fill={'white'}
                 text={key + 1}
+                onDblClick={(e) => this.handleSelect(e, key)}
+                onDblTap={(e) => this.handleSelect(e, key)}
               />
               <Label
-                x={absoluteX(dancer.position[0]) - (this.state.labelWidth ? (this.state.labelWidth[key] + ICON_SIZE) / 2 : 50)}
-                y={absoluteY(dancer.position[1]) - CIRCLE_RADIUS * 2 - FONT_SIZE - TEXT_PADDING * 2}
+                x={-(this.state.labelWidth ? (this.state.labelWidth[key] + ICON_SIZE) / 2 : 50)}
+                y={-CIRCLE_RADIUS * 2 - FONT_SIZE - TEXT_PADDING * 2}
+                visible={this.state.isDancerSelected[key]}
               >
                 <Tag
                   fill={'#24c6dc'}
@@ -146,7 +186,6 @@ class StageCanvas extends Component {
                 />
               </Label>
             </Group>
-
           ))}
         </Layer>
       </Stage>
