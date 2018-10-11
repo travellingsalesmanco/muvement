@@ -20,6 +20,7 @@ class MainScreen extends Component {
     this.checkSize();
     window.addEventListener("resize", this.checkSize);
   }
+
   componentDidUpdate() {
     this.checkSize();
   }
@@ -68,7 +69,7 @@ class MainScreen extends Component {
                   this.container = node;
                 }}
               >
-              <StageCanvas width={this.state.stageWidth} height={this.state.stageHeight}/>
+                <StageCanvas width={this.state.stageWidth} height={this.state.stageHeight}/>
               </div>
               <Breadcrumb separator=">" className="breadcrumb">
                 <Breadcrumb.Item>NUS BLAST! Showcase</Breadcrumb.Item>
