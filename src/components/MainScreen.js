@@ -116,9 +116,6 @@ class MainScreen extends Component {
               <p>Some contents...</p>
             </Drawer>
           </Layout>
-          <Footer className="footer">
-            Muvement© 2018. Made with <span role="img" aria-label="Love">❤️</span>by TSCo.
-          </Footer>
         </Layout>
       </Fragment>
     );
