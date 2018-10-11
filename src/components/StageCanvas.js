@@ -42,6 +42,9 @@ class StageCanvas extends Component {
 
   render() {
     const CIRCLE_RADIUS = 15;
+    const ICON_SIZE = 26;
+    const FONT_SIZE = 20;
+    const TEXT_PADDING = 10;
     return (
       <Stage preventDefault={true} width={this.props.width} height={this.props.height}
              scaleX={this.state.scale}
@@ -69,9 +72,8 @@ class StageCanvas extends Component {
                 text={key + 1}
               />
               <Label
-                // TODO: fix magic numbers around label size
-                x={dancer.position[0] - (this.state.labelWidth ? (this.state.labelWidth[key] + 20) / 2 : 50)}
-                y={dancer.position[1] - CIRCLE_RADIUS * 2 - 40}
+                x={dancer.position[0] - (this.state.labelWidth ? (this.state.labelWidth[key] + ICON_SIZE) / 2 : 50)}
+                y={dancer.position[1] - CIRCLE_RADIUS * 2 - FONT_SIZE - TEXT_PADDING * 2}
               >
                 <Tag
                   fill={'#24c6dc'}
@@ -80,26 +82,27 @@ class StageCanvas extends Component {
                 />
                 {this.state.labelWidth ?
                   <Text
-                    width={this.state.labelWidth ? this.state.labelWidth[key] + 20 : 100}
+                    width={this.state.labelWidth ? this.state.labelWidth[key] + ICON_SIZE + 10 : 100}
                     fill={'white'}
                     text={dancer.name}
-                    fontSize={20}
-                    padding={10}
+                    fontSize={FONT_SIZE}
+                    padding={TEXT_PADDING}
                     align={'left'}
                   />
                   :
+                  // Used in initial render to calculate size of text box before addition of icon
                   <Text
                     ref={ref => (this.nameLabels[key] = ref)}
                     fill={'white'}
                     text={dancer.name}
-                    fontSize={20}
-                    padding={15}
+                    fontSize={FONT_SIZE}
+                    padding={TEXT_PADDING}
                     align={'left'}
                   />
                 }
                 <Path
-                  x={this.state.labelWidth ? this.state.labelWidth[key] - 10 : 80}
-                  y={7}
+                  x={this.state.labelWidth ? this.state.labelWidth[key] : 80}
+                  y={(FONT_SIZE + TEXT_PADDING * 2 - ICON_SIZE) / 2}
                   data={'M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 464c-118.7 0-216-96.1-216-216 0-118.7 96.1-216 216-216 118.7 0 216 96.1 216 216 0 118.7-96.1 216-216 216zm94.8-285.3L281.5 256l69.3 69.3c4.7 4.7 4.7 12.3 0 17l-8.5 8.5c-4.7 4.7-12.3 4.7-17 0L256 281.5l-69.3 69.3c-4.7 4.7-12.3 4.7-17 0l-8.5-8.5c-4.7-4.7-4.7-12.3 0-17l69.3-69.3-69.3-69.3c-4.7-4.7-4.7-12.3 0-17l8.5-8.5c4.7-4.7 12.3-4.7 17 0l69.3 69.3 69.3-69.3c4.7-4.7 12.3-4.7 17 0l8.5 8.5c4.6 4.7 4.6 12.3 0 17z'}
                   fill={'white'}
                   scaleX={0.05}
