@@ -92,7 +92,7 @@ class StageCanvas extends Component {
   render() {
     const CIRCLE_RADIUS = 15;
     const ICON_SIZE = 26;
-    const FONT_SIZE = 20;
+    const FONT_SIZE = 15;
     const TEXT_PADDING = 10;
     // Canvas dimensions
     let {width: canvasWidth, height: canvasHeight} = this.props;
