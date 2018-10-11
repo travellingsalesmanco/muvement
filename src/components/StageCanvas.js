@@ -48,17 +48,16 @@ class StageCanvas extends Component {
   }
 
   handleDragEnd = (e, key, stageRect) => {
-    console.log(e);
-    let dancerDot = e.target.children[0];
+    e.cancelBubble = true;
     console.log("OLD POSITION: " + this.state.dancers[key].position);
     console.log("NEW POSITION: " + [
-      this.getRelativeX(dancerDot.getAbsolutePosition().x, stageRect),
-      this.getRelativeY(dancerDot.getAbsolutePosition().y, stageRect)
+      this.getRelativeX(e.target.x(), stageRect),
+      this.getRelativeY(e.target.y(), stageRect)
     ]);
     let newDancers = this.state.dancers.slice();
     newDancers[key].position = [
-      this.getRelativeX(dancerDot.getAbsolutePosition().x, stageRect),
-      this.getRelativeY(dancerDot.getAbsolutePosition().y, stageRect)
+      this.getRelativeX(e.target.x(), stageRect),
+      this.getRelativeY(e.target.y(), stageRect)
     ];
     this.setState({
       dancers: newDancers
