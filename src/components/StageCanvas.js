@@ -14,22 +14,27 @@ class StageCanvas extends Component {
       },
       dancers: [
         {
+          id: 1,
           name: "Bob",
           position: [0.5, 0.5]
         },
         {
+          id: 2,
           name: "Marley",
           position: [0.1, 0.1]
         },
         {
+          id: 3,
           name: "And",
           position: [0.9, 0.9]
         },
         {
+          id: 4,
           name: "Me",
           position: [0.1, 0.9]
         },
         {
+          id: 5,
           name: "John",
           position: [0.9, 0.1]
         }
@@ -70,6 +75,21 @@ class StageCanvas extends Component {
     newDancerSelection[key] = !newDancerSelection[key];
     this.setState({
       isDancerSelected: newDancerSelection
+    });
+  };
+
+  // TODO: Handle width issues to remaining nodes when deleting, might be shifted out to parent component
+  handleRemove = (e, key) => {
+    e.cancelBubble = true;
+    let newDancers = this.state.dancers.filter((dancer, dancerKey) => {
+      return dancerKey !== key;
+    });
+    let newDancerSelection = this.state.isDancerSelected.filter((isSelected, dancerKey) => {
+      return dancerKey !== key;
+    });
+    this.setState({
+      dancers: newDancers,
+      isDancerSelected: newDancerSelection,
     });
   };
 
@@ -141,7 +161,7 @@ class StageCanvas extends Component {
                 align={'center'}
                 verticalAlign={'middle'}
                 fill={'white'}
-                text={key + 1}
+                text={dancer.id}
                 onDblClick={(e) => this.handleSelect(e, key)}
                 onDblTap={(e) => this.handleSelect(e, key)}
               />
@@ -182,6 +202,8 @@ class StageCanvas extends Component {
                   fill={'white'}
                   scaleX={0.05}
                   scaleY={0.05}
+                  onClick={(e) => this.handleRemove(e, key)}
+                  onTap={(e) => this.handleRemove(e, key)}
                 />
               </Label>
             </Group>
