@@ -2,7 +2,7 @@ import {Breadcrumb, Layout, Menu, Button, Drawer} from 'antd';
 import React, {Component, Fragment} from 'react';
 import './MainScreen.css';
 import Navigation from "./Navigation";
-import {Stage, Layer, Circle} from 'react-konva'
+import SidePanel from "./SidePanel";
 import StageCanvas from "./StageCanvas";
 
 class MainScreen extends Component {
@@ -11,8 +11,9 @@ class MainScreen extends Component {
     this.state = {
       placement: 'right',
       visible: false,
-      stageWidth: 500,
-      stageHeight: 500
+      stageWidth: 100,
+      stageHeight: 100,
+      sidePanelID: 0,
     }
   }
 
@@ -21,49 +22,59 @@ class MainScreen extends Component {
     window.addEventListener("resize", this.checkSize);
   }
 
+  componentDidUpdate() {
+    this.checkSize();
+  }
+
   componentWillUnmount() {
     window.removeEventListener("resize", this.checkSize);
   }
 
   checkSize = () => {
-    this.setState({
-      stageWidth: this.container.offsetWidth,
-      stageHeight: this.container.offsetHeight
-    });
+    if (this.state.stageWidth !== this.container.offsetWidth || this.state.stageHeight !== this.container.offsetHeight) {
+      this.setState({
+        stageWidth: this.container.offsetWidth,
+        stageHeight: this.container.offsetHeight
+      });
+    }
   };
 
   showDrawer = (item) => {
-    console.log(item);
-    this.setState({
-      visible: true,
-    });
+    console.log(item.key);
+    if (item.key === "1" || item.key === "4") {
+      this.setState({
+        visible: true,
+        sidePanelID: parseInt(item.key),
+      });
+    }
   };
   onClose = () => {
     this.setState({
       visible: false,
+      sidePanelID: 0
     });
   };
 
   render() {
-    const {Content, Sider, Footer} = Layout;
+    const {Content, Sider } = Layout;
     return (
       <Fragment>
         <Layout className="body">
           <Navigation/>
           <Layout className="contents">
-            <Content>
+            <Content style={{display: "flex", flexDirection: "column"}}>
               <div className="section-title-container">
                 <div className="section-title">
                   <h3>Introduction (30 seconds)</h3>
                 </div>
               </div>
               <div
-                style={{background: '#000', width: '100%', height: '50%'}}
+                style={{background: '#000', flex: 1}}
                 ref={node => {
                   this.container = node;
                 }}
               >
-              <StageCanvas width={this.state.stageWidth} height={this.state.stageHeight}/>
+                <StageCanvas width={this.state.stageWidth} height={this.state.stageHeight}/>
               </div>
               <Breadcrumb separator=">" className="breadcrumb">
                 <Breadcrumb.Item>NUS BLAST! Showcase</Breadcrumb.Item>
@@ -103,22 +114,15 @@ class MainScreen extends Component {
                 </Menu.Item>
               </Menu>
             </Sider>
-            <Drawer
-              title="Drawer"
+            <SidePanel
               placement={this.state.placement}
               closable={true}
               onClose={this.onClose}
               visible={this.state.visible}
               mask={false}
-            >
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-            </Drawer>
+              id={this.state.sidePanelID}
+            />
           </Layout>
-          <Footer className="footer">
-            Muvement© 2018. Made with <span role="img" aria-label="Love">❤️</span>by TSCo.
-          </Footer>
         </Layout>
       </Fragment>
     );
