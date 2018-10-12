@@ -89,27 +89,27 @@ class MainScreen extends Component {
                 onClick={this.showDrawer}
               >
                 <Menu.Item key="1">
-                  <Button shape="circle" icon="user-add"/>
+                  <Button shape="circle" icon="user-add" style={{ color: '#24C6DC' }}/>
                   <p>Performers</p>
                 </Menu.Item>
                 <Menu.Item key="2">
-                  <Button shape="circle" icon="file-add"/>
+                  <Button shape="circle" icon="file-add" style={{ color: '#24C6DC' }}/>
                   <p>Add Formation</p>
                 </Menu.Item>
                 <Menu.Item key="3">
-                  <Button shape="circle" icon="customer-service"/>
+                  <Button shape="circle" icon="customer-service" style={{ color: '#24C6DC' }}/>
                   <p>Add Music</p>
                 </Menu.Item>
                 <Menu.Item key="4">
-                  <Button shape="circle" icon="border-inner"/>
+                  <Button shape="circle" icon="border-inner" style={{ color: '#24C6DC' }}/>
                   <p>Stage Dimension</p>
                 </Menu.Item>
                 <Menu.Item key="5">
-                  <Button shape="circle" icon="left"/>
+                  <Button shape="circle" icon="left"style={{ color: '#24C6DC' }} />
                   <p>Previous</p>
                 </Menu.Item>
                 <Menu.Item key="6">
-                  <Button shape="circle" icon="right"/>
+                  <Button shape="circle" icon="right" style={{ color: '#24C6DC' }}/>
                   <p>Next</p>
                 </Menu.Item>
               </Menu>

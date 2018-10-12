@@ -9,14 +9,14 @@ class Navigation extends React.Component {
       <Header>
         <div className="nav-bar">
           <div className="back-button">
-            <Button icon="left"/>
+            <Button style={{ fontSize: '25px' }} icon="left"/>
           </div>
           <div className="title">
-            {/* TODO: Make responsive design not collapse title text */}
             <h3 style={{ color: '#fff'}}>NUS BLAST! SHOWCASE</h3>
           </div>
           <div className="right-container">
-            <Menu mode="horizontal" theme="dark">
+            <Menu className="navbar-icon" mode="horizontal" theme="dark">
+            {/* TODO: Make the size of the icon bigger */}
               <Menu.Item key="1">
                 <Button icon="undo" ghost/>
               </Menu.Item>

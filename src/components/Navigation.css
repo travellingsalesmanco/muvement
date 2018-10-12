@@ -5,9 +5,17 @@
     display: flex;
     background-color: #131313;
 }
-.nav-bar .title {
+
+.nav-bar .title{
+    font-family: Futura-Bold;
+    font-size: 2vw;
+    text-shadow: 0px 0px 35px white;
     flex: 1;
     text-align: center;
+}
+
+.nav-bar-icon{
+    font-size:30px;
 }
 .nav-bar ul {
     float: right;

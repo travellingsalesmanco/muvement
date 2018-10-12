@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Futura-Medium';
+  src: url('../fonts/Futura-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Futura-Bold';
+  src: url('../fonts/Futura-Bold.ttf');
+}
+
 .body {
     height: 100vh;
     background-image: url("../img/EditBackground.png");
@@ -18,19 +28,25 @@
     justify-content: center;
 }
 .section-title {
-    border-radius: 20px;
-    border: 2px solid #00a2b6;
+    border-radius: 50px;
+    border: 2px solid #514A9D;
+    box-shadow: 0px 0px 50px  #514A9D;
     text-align: center;
-    padding: 0 3em;
+    padding: 0.5em 5em;
     margin: 2rem 0;
+    position: relative;
 }
+
 .section-title h3 {
+    font-family: Futura-Medium;
+    font-size: 1.3vw;
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
     color: #fff;
 }
 .contents .breadcrumb {
     margin: 16px 0;
+    font-family: "Futura-Medium";
 }
 .contents .ant-breadcrumb,
 .contents .ant-breadcrumb-separator,
@@ -38,8 +54,8 @@
     color: #fff;
 }
 .sider .ant-menu-dark {
-    background: linear-gradient(to bottom, #313131 -20%, #000000 110%);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+    background: linear-gradient(to bottom, #313131 -55%, #000000 130%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
 
 }
 .sider .ant-menu-inline > .ant-menu-item {
@@ -62,10 +78,13 @@
 }
 .sider li p {
     margin-bottom: 0;
+    font-family: "Futura-Medium";
+    font-size: 1vw;
 }
+
 .sider .ant-menu-item .anticon {
     margin-right: 0;
-    font-size: 18px;
+    font-size: 20px;
 }
 .sider .ant-menu.ant-menu-dark .ant-menu-item-selected {
     background-color: transparent;
