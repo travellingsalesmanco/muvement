@@ -2,7 +2,7 @@ import {Breadcrumb, Layout, Menu, Button, Drawer} from 'antd';
 import React, {Component, Fragment} from 'react';
 import './MainScreen.css';
 import Navigation from "./Navigation";
-import {Stage, Layer, Circle} from 'react-konva'
+import SidePanel from "./SidePanel";
 import StageCanvas from "./StageCanvas";
 
 class MainScreen extends Component {
@@ -12,7 +12,8 @@ class MainScreen extends Component {
       placement: 'right',
       visible: false,
       stageWidth: 100,
-      stageHeight: 100
+      stageHeight: 100,
+      sidePanelID: 0,
     }
   }
 
@@ -39,19 +40,23 @@ class MainScreen extends Component {
   };
 
   showDrawer = (item) => {
-    console.log(item);
-    this.setState({
-      visible: true,
-    });
+    console.log(item.key);
+    if (item.key === "1" || item.key === "4") {
+      this.setState({
+        visible: true,
+        sidePanelID: parseInt(item.key),
+      });
+    }
   };
   onClose = () => {
     this.setState({
       visible: false,
+      sidePanelID: 0
     });
   };
 
   render() {
-    const {Content, Sider, Footer} = Layout;
+    const {Content, Sider } = Layout;
     return (
       <Fragment>
         <Layout className="body">
@@ -109,18 +114,14 @@ class MainScreen extends Component {
                 </Menu.Item>
               </Menu>
             </Sider>
-            <Drawer
-              title="Drawer"
+            <SidePanel
               placement={this.state.placement}
               closable={true}
               onClose={this.onClose}
               visible={this.state.visible}
               mask={false}
-            >
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-            </Drawer>
+              id={this.state.sidePanelID}
+            />
           </Layout>
         </Layout>
       </Fragment>
