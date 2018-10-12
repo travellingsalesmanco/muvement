@@ -121,6 +121,7 @@ class FrameScreen extends Component {
               visible={this.state.visible}
               mask={false}
               id={this.state.sidePanelID}
+              width={200}
             />
           </Layout>
         </Layout>

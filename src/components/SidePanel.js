@@ -1,5 +1,6 @@
 import {Drawer} from "antd";
 import React from 'react';
+import './SidePanel.css';
 
 class Title extends React.Component {
   render() {
@@ -42,6 +43,7 @@ class SidePanel extends React.Component {
         onClose={this.props.onClose}
         visible={this.props.visible}
         mask={this.props.mask}
+        width={this.props.width}
       >
         {
           this.props.id === 1 && performers
