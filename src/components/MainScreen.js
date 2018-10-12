@@ -1,4 +1,4 @@
-import {Breadcrumb, Layout, Menu, Button, Drawer} from 'antd';
+import {Breadcrumb, Layout, Menu, Button} from 'antd';
 import React, {Component, Fragment} from 'react';
 import './MainScreen.css';
 import Navigation from "./Navigation";
@@ -56,7 +56,7 @@ class MainScreen extends Component {
   };
 
   render() {
-    const {Content, Sider } = Layout;
+    const {Content, Sider} = Layout;
     return (
       <Fragment>
         <Layout className="body">
