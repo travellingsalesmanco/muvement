@@ -1,0 +1,34 @@
+.ant-drawer-right .ant-drawer-content-wrapper {
+  height: calc(100% - 64px);
+  margin-top: 64px;
+}
+
+.ant-drawer-right.ant-drawer-open {
+  width: 0;
+}
+
+.ant-drawer-content-wrapper {
+  width: 200px;
+}
+
+.ant-drawer-content {
+  background: #191919;
+}
+
+.ant-drawer-header {
+  background: #191919;
+  border-radius: 0;
+  border-bottom: 0;
+}
+
+.ant-drawer-title {
+  color: #fff;
+}
+
+.ant-drawer-body {
+  color: #fff;
+}
+
+.ant-drawer-close {
+  color: #fff;
+}
