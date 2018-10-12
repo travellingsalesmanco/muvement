@@ -18,7 +18,7 @@ class Navigation extends React.Component {
             <Menu className="navbar-icon" mode="horizontal" theme="dark">
             {/* TODO: Make the size of the icon bigger */}
               <Menu.Item key="1">
-                <Button icon="undo" ghost/>
+                <Button className="navbar-button" icon="undo" ghost/>
               </Menu.Item>
               <Menu.Item key="2">
                 <Button icon="redo"/>

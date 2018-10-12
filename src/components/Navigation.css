@@ -1,5 +1,6 @@
 .ant-layout-header {
   background: #131313;
+  padding: 0 15px;
 }
 
 .nav-bar {
@@ -15,8 +16,8 @@
 }
 
 .nav-bar ul {
-  float: right;
-  line-height: 64px;
+  text-align: right;
+  line-height: 68px;
 }
 
 .nav-bar li {
@@ -36,7 +37,7 @@
 
 .right-container .ant-menu-item .anticon {
   margin-right: 0;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .right-container .ant-menu.ant-menu-dark .ant-menu-item-selected {

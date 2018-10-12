@@ -89,27 +89,27 @@ class FrameScreen extends Component {
                 onClick={this.showDrawer}
               >
                 <Menu.Item key="1">
-                  <Button shape="circle" icon="user-add" style={{ color: '#24C6DC' }}/>
+                  <Button className="sider-button" shape="circle" icon="user-add"/>
                   <p>Performers</p>
                 </Menu.Item>
                 <Menu.Item key="2">
-                  <Button shape="circle" icon="file-add" style={{ color: '#24C6DC' }}/>
+                  <Button className="sider-button"  shape="circle" icon="file-add"/>
                   <p>Add Formation</p>
                 </Menu.Item>
                 <Menu.Item key="3">
-                  <Button shape="circle" icon="customer-service" style={{ color: '#24C6DC' }}/>
+                  <Button className="sider-button"  shape="circle" icon="customer-service"/>
                   <p>Add Music</p>
                 </Menu.Item>
                 <Menu.Item key="4">
-                  <Button shape="circle" icon="border-inner" style={{ color: '#24C6DC' }}/>
+                  <Button className="sider-button"  shape="circle" icon="border-inner"/>
                   <p>Stage Dimension</p>
                 </Menu.Item>
                 <Menu.Item key="5">
-                  <Button shape="circle" icon="left"style={{ color: '#24C6DC' }} />
+                  <Button className="sider-button"  shape="circle" icon="left"/>
                   <p>Previous</p>
                 </Menu.Item>
                 <Menu.Item key="6">
-                  <Button shape="circle" icon="right" style={{ color: '#24C6DC' }}/>
+                  <Button className="sider-button"  shape="circle" icon="right" />
                   <p>Next</p>
                 </Menu.Item>
               </Menu>
