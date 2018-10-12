@@ -4,7 +4,6 @@
 
 .nav-bar {
   display: flex;
-  background-color: #131313;
 }
 
 .nav-bar .title {
@@ -41,10 +40,5 @@
 }
 
 .right-container .ant-menu.ant-menu-dark .ant-menu-item-selected {
-<<<<<<< HEAD
     background-color: transparent;
 }
-=======
-  background-color: transparent;
-}
->>>>>>> 292a65195b354b0cb86df0e7807422fea3ef8dc4
