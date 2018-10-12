@@ -71,8 +71,8 @@
     color: #fff;
 }
 .ant-drawer-right .ant-drawer-content-wrapper {
-    height: calc(100% - 64px - 69px);
-    margin: 64px 0;
+    height: calc(100% - 64px);
+    margin-top: 64px;
 }
 .ant-drawer-content-wrapper {
     width: 200px;
