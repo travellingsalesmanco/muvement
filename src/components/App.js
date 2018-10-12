@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import MainScreen from "./MainScreen";
+import FrameScreen from "./FrameScreen";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <MainScreen/>
+        <FrameScreen/>
       </div>
     );
   }

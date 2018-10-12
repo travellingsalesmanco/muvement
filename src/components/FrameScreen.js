@@ -1,11 +1,11 @@
 import {Breadcrumb, Layout, Menu, Button} from 'antd';
 import React, {Component, Fragment} from 'react';
-import './MainScreen.css';
+import './FrameScreen.css';
 import Navigation from "./Navigation";
 import SidePanel from "./SidePanel";
 import StageCanvas from "./StageCanvas";
 
-class MainScreen extends Component {
+class FrameScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -129,4 +129,4 @@ class MainScreen extends Component {
   }
 }
 
-export default MainScreen;
+export default FrameScreen;
