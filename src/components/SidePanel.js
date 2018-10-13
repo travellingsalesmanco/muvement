@@ -1,4 +1,4 @@
-import {Button, Col, Drawer, Icon, Row} from "antd";
+import {Button, Drawer, Icon} from "antd";
 import React from 'react';
 import './SidePanel.css';
 import PerformerItem from "./PerformerItem";
