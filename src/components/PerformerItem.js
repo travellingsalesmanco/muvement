@@ -2,14 +2,26 @@ import React from 'react';
 import {Row, Col, Icon} from "antd";
 
 class PerformerItem extends React.Component {
-  render() {
+
+  removeDancer(key) {
     // TODO: Remove dancer through redux on click of icon
+    console.log("Remove dancer: " + key);
+  }
+
+  addDancer(key) {
+    // TODO: Add dancer through redux on click of name
+    console.log("Add dancer to stage: " + key);
+  }
+
+  render() {
+
     return (
       <Row>
-        <Col span={3}>{this.props.id}.</Col>
-        <Col span={15}>{this.props.name}</Col>
+        <Col span={18} onClick={() => this.addDancer(this.props.id)}>
+          {this.props.id + 1}. {this.props.name}
+        </Col>
         <Col span={6}>
-          {this.props.editable && <Icon type="minus" theme="outlined"/>}
+          {this.props.editable && <Icon type="minus" theme="outlined" onClick={() => this.removeDancer(this.props.id)}/>}
         </Col>
       </Row>
     );

@@ -68,7 +68,7 @@ class SidePanel extends React.Component {
       drawerDisplay = (
         <div>
           {this.state.dancers.map((dancer, key) => {
-            return <PerformerItem id={key} name={dancer} editable={this.state.editPerformers}/>
+            return <PerformerItem key={key} id={key} name={dancer} editable={this.state.editPerformers}/>
           })}
           <Button type={"dashed"} icon="user-add" ghost block>Add Performer</Button>
           <Button type={"dashed"} icon="tool" ghost block onClick={this.handleEditToggle}>Edit Performers</Button>
