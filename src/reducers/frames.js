@@ -8,7 +8,7 @@ import {
   REMOVE_FRAME,
   RENAME_DANCER,
   RENAME_FRAME
-} from "../constants/actions";
+} from "../constants/actionTypes";
 import {defaultFrame} from "../constants/defaults";
 
 const frameReducer = (state = defaultFrame, action) => {
@@ -89,23 +89,11 @@ export default (state = [], action) => {
     case RENAME_DANCER: {
       return state.map(frame => frameReducer(frame, action))
     }
-
-    // Single frame edit operations
-    case ADD_DANCER_TO_FRAME:
-    case REMOVE_DANCER_FROM_FRAME:
-    case MOVE_DANCER:
-    case RENAME_FRAME:
-    case EDIT_FRAME_DURATION: {
-      const {index: frameIdx, ...prunedAction} = action;
-      return state.map((frame, idx) => {
-        if (idx === frameIdx) {
-          return frameReducer(frame, prunedAction);
-        } else {
-          return frame;
-        }
-      });
-    }
     default:
+      if (action.frameId) {
+        const {frameId, ...prunedAction} = action;
+        return state.map((frame, idx) => idx === frameId ? frameReducer(frame, prunedAction) : frame);
+      }
       return state;
   }
 };
