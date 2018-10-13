@@ -7,12 +7,11 @@ import StageDimForm from "./StageDimForm";
 class Title extends React.Component {
   render() {
     const performerTitle = (
-      <Row type="flex" justify="center">
-        <Col span={5}>
-          <Icon type="user-add" theme="outlined"/>
-        </Col>
-        <Col span={15}><p>Performers</p></Col>
-      </Row>
+      <div>
+        <Icon type="user-add" theme="outlined"/>
+        <span>Performers</span>
+      </div>
+
     );
 
     const stageDimTitle = (
@@ -60,7 +59,6 @@ class SidePanel extends React.Component {
       editPerformers: !this.state.editPerformers
     })
   };
-
 
 
   // TODO: CSS to prettify list
