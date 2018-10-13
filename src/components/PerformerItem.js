@@ -2,10 +2,6 @@ import React from 'react';
 import {Row, Col, Icon} from "antd";
 
 class PerformerItem extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     // TODO: Remove dancer through redux on click of icon
     return (
