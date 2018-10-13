@@ -9,3 +9,41 @@ export const defaultStageDim = {
   gridSize: 0.05,
   units: 'm'
 };
+export const dummyDance = {
+  name: "NUS Blast! Showcase",
+  dimensions: {
+    width: 9.6,
+    height: 5.18,
+    gridSize: 0.05,
+    unit: 'm'
+  },
+  dancers: ["Bob", "Marley", "And", "Me", "John"],
+  frames: [
+    {
+      name: "Introduction",
+      numSeconds: 30,
+      dancers: [
+        {
+          name: "Bob",
+          position: [0.5, 0.5]
+        },
+        {
+          name: "Marley",
+          position: [0.1, 0.1]
+        },
+        {
+          name: "And",
+          position: [0.9, 0.9]
+        },
+        {
+          name: "Me",
+          position: [0.1, 0.9]
+        },
+        {
+          name: "John",
+          position: [0.9, 0.1]
+        }
+      ]
+    }
+  ]
+};

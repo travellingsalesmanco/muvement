@@ -2,7 +2,7 @@ import {combineReducers} from 'redux'
 import dancers from './dancers'
 import frames from './frames'
 import {ADD_DANCE, EDIT_STAGE_DIMENSIONS, REMOVE_DANCE, RENAME_DANCE} from '../constants/actionTypes';
-import {defaultStageDim} from "../constants/defaults";
+import {defaultStageDim, dummyDance} from '../constants/defaults';
 
 const danceNameReducer = (state = "", action) => {
   switch (action.type) {
@@ -34,7 +34,8 @@ const danceReducer = combineReducers({
 });
 
 // Dances
-export default (state = [], action) => {
+// TODO: Remove dummy dance when deploying
+export default (state = [dummyDance], action) => {
   switch (action.type) {
     case ADD_DANCE: {
       const {payload: danceToAdd} = action;
