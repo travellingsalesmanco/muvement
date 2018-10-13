@@ -1,4 +1,4 @@
-import {ADD_DANCER, REMOVE_DANCER, RENAME_DANCER} from "../constants/actions";
+import {ADD_DANCER, REMOVE_DANCER, RENAME_DANCER} from "../constants/actionTypes";
 
 // Dancers reducer
 export default (state = [], action) => {
