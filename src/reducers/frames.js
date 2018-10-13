@@ -90,7 +90,7 @@ export default (state = [], action) => {
       return state.map(frame => frameReducer(frame, action))
     }
     default:
-      if (action.frameId) {
+      if (action.frameId !== null || action.frameId !== undefined) {
         const {frameId, ...prunedAction} = action;
         return state.map((frame, idx) => idx === frameId ? frameReducer(frame, prunedAction) : frame);
       }

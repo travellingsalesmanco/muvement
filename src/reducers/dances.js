@@ -50,7 +50,7 @@ export default (state = [dummyDance], action) => {
       return dances;
     }
     default:
-      if (action.danceId) {
+      if (action.danceId !== null || action.danceId !== undefined) {
         const {danceId, ...prunedAction} = action;
         return state.map((dance, idx) => idx === danceId ? danceReducer(dance, prunedAction) : dance);
       }
