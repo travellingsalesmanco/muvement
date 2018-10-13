@@ -1,13 +1,19 @@
 import {Button, Form, InputNumber} from "antd";
 import React from 'react';
+import {editStageDimensions} from "../actions/danceActions"
+import {connect} from 'react-redux'
 
 class StageDimForm extends React.Component {
-  // TODO: update redux via action
   handleDimChange = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        this.props.dispatch(editStageDimensions(this.props.danceId, {
+          width: values.stageWidth,
+          height: values.stageHeight,
+          gridSize: values.gridSize
+        }))
       } else {
         console.log('Error: ', err);
       }
@@ -32,6 +38,13 @@ class StageDimForm extends React.Component {
             <InputNumber min={0.01} precision={2}/>
           )}
         </Form.Item>
+        < Form.Item label={'Grid Size'}>
+          {getFieldDecorator('gridSize', {
+            initialValue: this.props.gridSize
+          })(
+            <InputNumber min={0.01} precision={2}/>
+          )}
+        </Form.Item>
         <Form.Item>
           <Button type={"dashed"} htmlType={'submit'} ghost block>Apply</Button>
         </Form.Item>
@@ -40,6 +53,13 @@ class StageDimForm extends React.Component {
   }
 }
 
+const mapStateToProps = function (state, ownProps) {
+  return {
+    height: state.dances[ownProps.danceId].dimensions.height,
+    width: state.dances[ownProps.danceId].dimensions.width,
+    gridSize: state.dances[ownProps.danceId].dimensions.gridSize,
+  }
+};
 
-export default Form.create()(StageDimForm);
+export default connect(mapStateToProps)(Form.create()(StageDimForm));
 

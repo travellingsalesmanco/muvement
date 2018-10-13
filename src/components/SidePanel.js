@@ -77,7 +77,7 @@ class SidePanel extends React.Component {
     } else if (this.props.id === 4) {
       drawerDisplay = (
         <div>
-          <StageDimForm height={this.state.stageDim.height} width={this.state.stageDim.width}/>
+          <StageDimForm danceId={0}/>
         </div>
       )
     }
