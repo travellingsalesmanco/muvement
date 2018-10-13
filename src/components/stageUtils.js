@@ -68,3 +68,11 @@ export function generateGrid(canvasWidth, canvasHeight, gridSize) {
   }
   return lines;
 }
+
+export function snapToGrid(x, y, canvasWidth, canvasHeight, gridSize) {
+  let centerX = canvasWidth / 2;
+  let centerY = canvasHeight / 2;
+  let gridLineX = Math.round((x - centerX) / gridSize);
+  let gridLineY = Math.round((y - centerY) / gridSize);
+  return {x: gridLineX * gridSize + centerX, y: gridLineY * gridSize + centerY}
+}
