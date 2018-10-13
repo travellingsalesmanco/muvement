@@ -8,8 +8,8 @@ import {
   REMOVE_FRAME,
   RENAME_DANCER,
   RENAME_FRAME
-} from "../constants/actionTypes";
-import {defaultFrame} from "../constants/defaults";
+} from '../constants/actionTypes';
+import {defaultFrame} from '../constants/defaults';
 
 const frameReducer = (state = defaultFrame, action) => {
   switch (action.type) {

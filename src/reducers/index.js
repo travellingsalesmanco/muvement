@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import dances from 'src/reducers/dances'
+import dances from './dances'
 
 const rootReducer = combineReducers({
   dances

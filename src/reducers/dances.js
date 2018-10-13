@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
-import dancers from 'src/reducers/dancers'
-import frames from 'src/reducers/frames'
-import {ADD_DANCE, EDIT_STAGE_DIMENSIONS, REMOVE_DANCE, RENAME_DANCE} from "../constants/actionTypes";
+import dancers from './dancers'
+import frames from './frames'
+import {ADD_DANCE, EDIT_STAGE_DIMENSIONS, REMOVE_DANCE, RENAME_DANCE} from '../constants/actionTypes';
 import {defaultStageDim} from "../constants/defaults";
 
 const danceNameReducer = (state = "", action) => {
