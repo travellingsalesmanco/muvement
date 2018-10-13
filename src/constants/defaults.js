@@ -9,6 +9,9 @@ export const defaultStageDim = {
   gridSize: 0.05,
   units: 'm'
 };
+export const defaultUI = {
+  activeDance: 0
+};
 export const dummyDance = {
   name: "NUS Blast! Showcase",
   dimensions: {
