@@ -2,6 +2,7 @@ import {Button, Col, Drawer, Icon, Row} from "antd";
 import React from 'react';
 import './SidePanel.css';
 import PerformerItem from "./PerformerItem";
+import StageDimForm from "./StageDimForm";
 
 class Title extends React.Component {
   render() {
@@ -46,7 +47,11 @@ class SidePanel extends React.Component {
         "And",
         "Me"
       ],
-      editPerformers: false
+      editPerformers: false,
+      stageDim: {
+        width: 9.60,
+        height: 5.18
+      }
     };
   }
 
@@ -56,19 +61,29 @@ class SidePanel extends React.Component {
     })
   };
 
+
+
   // TODO: CSS to prettify list
   render() {
-    const AddPerformersButton = (
-      <Button type={"dashed"} icon="user-add" ghost block>Add Performer</Button>
-    );
-    const EditPerformersButton = (
-      <Button type={"dashed"} icon="tool" ghost block onClick={this.handleEditToggle}>Edit Performers</Button>
-    );
-    const dancerList = (
-      this.state.dancers.map((dancer, key) => {
-        return <PerformerItem id={key} name={dancer} editable={this.state.editPerformers}/>
-      })
-    );
+    let drawerDisplay;
+    if (this.props.id === 1) {
+      drawerDisplay = (
+        <div>
+          {this.state.dancers.map((dancer, key) => {
+            return <PerformerItem id={key} name={dancer} editable={this.state.editPerformers}/>
+          })}
+          <Button type={"dashed"} icon="user-add" ghost block>Add Performer</Button>
+          <Button type={"dashed"} icon="tool" ghost block onClick={this.handleEditToggle}>Edit Performers</Button>
+        </div>
+      )
+    } else if (this.props.id === 4) {
+      drawerDisplay = (
+        <div>
+          <StageDimForm height={this.state.stageDim.height} width={this.state.stageDim.width}/>
+        </div>
+      )
+    }
+
     return (
       <Drawer
         title={<Title id={this.props.id}/>}
@@ -79,15 +94,7 @@ class SidePanel extends React.Component {
         mask={this.props.mask}
         width={this.props.width}
       >
-        {
-          this.props.id === 1 && (
-            <div>
-              {dancerList}
-              {AddPerformersButton}
-              {EditPerformersButton}
-            </div>
-          )
-        }
+        {drawerDisplay}
       </Drawer>
     );
   }
