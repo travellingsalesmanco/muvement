@@ -1,56 +1,61 @@
 {
   "testDanceID": {
     "name": "The Best Dance",
-    "dancers": ["Bob", "Marley", "And", "Me"],
     "stageDim": {
       "width": 9.60,
-      "height": 5.18
+      "height": 5.18,
+      "gridSize": 0.5,
+      "units": "m"
     },
+    "dancers": ["Bob", "Marley", "And", "Me"],
     "frames": [
-      {
-        "name": "Introduction",
-        "numSeconds": 30,
-        "dancers": [
-          {
-            "name": "Bob",
-            "position": "TBC"
-          },
-          {
-            "name": "Marley",
-            "position": "TBC"
-          },
-          {
-            "name": "And",
-            "position": "TBC"
-          }
-        ],
-        "musicSegment": "TBC"
-      },
-      {
-        "name": "Arrow part and 2 triangles",
-        "numSeconds": 30,
-        "dancers": [
-          {
-            "name": "Bob",
-            "position": "TBC"
-          },
-          {
-            "name": "Marley",
-            "position": "TBC"
-          },
-          {
-            "name": "And",
-            "position": "TBC"
-          },
-          {
-            "name": "Me",
-            "position": "TBC"
-          }
-        ],
-        "musicSegment": "TBC"
-      }
-    ],
-    "gridDim": "TBC",
-    "music": "TBC"
+        {
+          "name": "Introduction",
+          "numSeconds": 30,
+          "dancers": [
+            {
+              "name": "Bob",
+              "position": [
+                0.1,
+                0.9
+              ]
+            },
+            {
+              "name": "Marley",
+              "position": [
+                0.1,
+                0.5
+              ]
+            },
+            {
+              "name": "Me",
+              "position": [
+                0.5,
+                0.5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Arrow part and 2 triangles",
+          "numSeconds": 30,
+          "dancers": [
+            {
+              "name": "And",
+              "position": [
+                0.1,
+                0.5
+              ]
+            },
+            {
+              "name": "Marley",
+              "position": [
+                0.5,
+                0.5
+              ]
+            }
+          ]
+        }
+    ]
   }
 }
