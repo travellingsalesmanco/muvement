@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
-import dancers from 'dancers'
-import frames from 'frames'
-import {ADD_DANCE, EDIT_STAGE_DIMENSIONS, REMOVE_DANCE, RENAME_DANCE} from "../constants/actions";
+import dancers from 'src/reducers/dancers'
+import frames from 'src/reducers/frames'
+import {ADD_DANCE, EDIT_STAGE_DIMENSIONS, REMOVE_DANCE, RENAME_DANCE} from "../constants/actionTypes";
 import {defaultStageDim} from "../constants/defaults";
 
 const danceNameReducer = (state = "", action) => {
@@ -49,6 +49,10 @@ export default (state = [], action) => {
       return dances;
     }
     default:
-      return state.map(dance => danceReducer(dance, action))
+      if (action.danceId) {
+        const {danceId, ...prunedAction} = action;
+        return state.map((dance, idx) => idx === danceId ? danceReducer(dance, prunedAction) : dance);
+      }
+      return state;
   }
 }
