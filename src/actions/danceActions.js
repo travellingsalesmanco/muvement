@@ -1,12 +1,12 @@
-import {ADD_DANCER, EDIT_STAGE_DIMENSIONS} from "../constants/actionTypes";
+import {ADD_DANCER, EDIT_STAGE_DIMENSIONS, REMOVE_DANCER} from "../constants/actionTypes";
 
-function isDuplicateDancer(danceId, name, state) {
+function containsDancer(danceId, name, state) {
   return state.dances[danceId].dancers.includes(name);
 }
 
 export function addDancer(danceId, name) {
   return (dispatch, getState) => {
-    if (!isDuplicateDancer(danceId, name, getState())) {
+    if (!containsDancer(danceId, name, getState())) {
       dispatch({
         type: ADD_DANCER,
         danceId: danceId,
@@ -14,6 +14,20 @@ export function addDancer(danceId, name) {
       })
     } else {
       console.log("[ERROR] Duplicate dancer name")
+    }
+  }
+}
+
+export function removeDancer(danceId, name) {
+  return (dispatch, getState) => {
+    if (containsDancer(danceId, name, getState())) {
+      dispatch({
+        type: REMOVE_DANCER,
+        danceId: danceId,
+        payload: name
+      })
+    } else {
+      console.log("[ERROR] Dancer does not exist")
     }
   }
 }
