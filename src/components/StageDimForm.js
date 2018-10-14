@@ -13,7 +13,7 @@ class StageDimForm extends React.Component {
           width: values.stageWidth,
           height: values.stageHeight,
           gridSize: values.gridSize
-        }))
+        }));
       } else {
         console.log('Error: ', err);
       }
@@ -23,32 +23,34 @@ class StageDimForm extends React.Component {
   render() {
     const {getFieldDecorator} = this.props.form;
     return (
-      <Form layout={"vertical"} onSubmit={this.handleDimChange}>
-        <Form.Item label={'Height'}>
-          {getFieldDecorator('stageHeight', {
-            initialValue: this.props.height
-          })(
-            <InputNumber min={0.01} precision={2}/>
-          )}
-        </Form.Item>
-        < Form.Item label={'Width'}>
-          {getFieldDecorator('stageWidth', {
-            initialValue: this.props.width
-          })(
-            <InputNumber min={0.01} precision={2}/>
-          )}
-        </Form.Item>
-        < Form.Item label={'Grid Size'}>
-          {getFieldDecorator('gridSize', {
-            initialValue: this.props.gridSize
-          })(
-            <InputNumber min={0.01} precision={2}/>
-          )}
-        </Form.Item>
-        <Form.Item>
-          <Button type={"dashed"} htmlType={'submit'} ghost block>Apply</Button>
-        </Form.Item>
-      </Form>
+      <div>
+        <Form layout={"vertical"} onSubmit={this.handleDimChange}>
+          <Form.Item label={'Height'}>
+            {getFieldDecorator('stageHeight', {
+              initialValue: this.props.height
+            })(
+              <InputNumber min={0.01} precision={2}/>
+            )}
+          </Form.Item>
+          < Form.Item label={'Width'}>
+            {getFieldDecorator('stageWidth', {
+              initialValue: this.props.width
+            })(
+              <InputNumber min={0.01} precision={2}/>
+            )}
+          </Form.Item>
+          < Form.Item label={'Grid Size'}>
+            {getFieldDecorator('gridSize', {
+              initialValue: this.props.gridSize
+            })(
+              <InputNumber min={0.01} precision={2}/>
+            )}
+          </Form.Item>
+          <Form.Item>
+            <Button type={"dashed"} htmlType={'submit'} ghost block>Apply</Button>
+          </Form.Item>
+        </Form>
+      </div>
     );
   }
 }
@@ -58,6 +60,7 @@ const mapStateToProps = function (state) {
     height: state.dances[state.UI.activeDance].stageDim.height,
     width: state.dances[state.UI.activeDance].stageDim.width,
     gridSize: state.dances[state.UI.activeDance].stageDim.gridSize,
+    danceId: state.UI.activeDance
   }
 };
 

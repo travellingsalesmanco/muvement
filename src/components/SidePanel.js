@@ -1,7 +1,7 @@
 import {Button, Drawer, Icon} from "antd";
 import React from 'react';
 import './SidePanel.css';
-import PerformerItem from "./PerformerItem";
+import PerformerList from "./PerformerList";
 import StageDimForm from "./StageDimForm";
 
 class Title extends React.Component {
@@ -36,50 +36,17 @@ class Title extends React.Component {
 
 
 class SidePanel extends React.Component {
-  constructor(props) {
-    super(props);
-    // TODO: Take performer list or stage dims from redux state
-    this.state = {
-      dancers: [
-        "Bob",
-        "Marley",
-        "And",
-        "Me"
-      ],
-      editPerformers: false,
-      stageDim: {
-        width: 9.60,
-        height: 5.18
-      }
-    };
-  }
 
-  handleEditToggle = () => {
-    this.setState({
-      editPerformers: !this.state.editPerformers
-    })
-  };
+
 
 
   // TODO: CSS to prettify list
   render() {
     let drawerDisplay;
     if (this.props.id === 1) {
-      drawerDisplay = (
-        <div>
-          {this.state.dancers.map((dancer, key) => {
-            return <PerformerItem key={key} id={key} name={dancer} editable={this.state.editPerformers}/>
-          })}
-          <Button type={"dashed"} icon="user-add" ghost block>Add Performer</Button>
-          <Button type={"dashed"} icon="tool" ghost block onClick={this.handleEditToggle}>Edit Performers</Button>
-        </div>
-      )
+      drawerDisplay = <PerformerList />
     } else if (this.props.id === 4) {
-      drawerDisplay = (
-        <div>
-          <StageDimForm danceId={0}/>
-        </div>
-      )
+      drawerDisplay = <StageDimForm/>
     }
 
     return (
