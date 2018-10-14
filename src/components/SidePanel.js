@@ -1,4 +1,4 @@
-import {Button, Drawer, Icon} from "antd";
+import {Drawer} from "antd";
 import React from 'react';
 import './SidePanel.css';
 import BorderInnerIcon from "../icons/BorderInnerIcon";
