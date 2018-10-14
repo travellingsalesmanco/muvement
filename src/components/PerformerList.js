@@ -40,21 +40,19 @@ class PerformerList extends React.Component {
 
   handleRemoval = () => {
     // TODO: make bulk action
-    this.state.toRemove.map((dancer) => {
+    this.state.toRemove.forEach((dancer) => {
       console.log("Remove dancer: " + dancer);
       this.props.dispatch(removeDancer(this.props.danceId, dancer));
     });
     this.handleCancelAction();
-    return true;
   };
 
   handleAddition = (nameArr) => {
     // TODO: make bulk action
-    nameArr.map((dancer) => {
+    nameArr.forEach((dancer) => {
       console.log("Add dancer: " + dancer);
       this.props.dispatch(addDancer(this.props.danceId, dancer))
     });
-    return true;
   };
 
   markDancerForRemoval(name) {
