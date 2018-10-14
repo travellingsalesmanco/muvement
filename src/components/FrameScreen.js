@@ -1,5 +1,5 @@
-import {Breadcrumb, Button, Layout, Menu} from 'antd';
-import React, {Component, Fragment} from 'react';
+import { Breadcrumb, Button, Layout, Menu } from 'antd';
+import React, { Component, Fragment } from 'react';
 import './FrameScreen.css';
 import BorderInnerIcon from "../icons/BorderInnerIcon";
 import FileAddIcon from "../icons/FileAddIcon";
@@ -11,7 +11,7 @@ import UserAddIcon from "../icons/UserAddIcon";
 import Navigation from "./Navigation";
 import SidePanel from "./SidePanel";
 import StageCanvas from "./StageCanvas";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -64,7 +64,7 @@ class FrameScreen extends Component {
   };
 
   render() {
-    const {Content, Sider} = Layout;
+    const { Content, Sider } = Layout;
     return (
       <Fragment>
         <Layout className="body">
@@ -73,22 +73,22 @@ class FrameScreen extends Component {
             endColor="#514a9d"
             idCSS="cool-gradient"
           />
-          <Navigation title={this.props.danceName}/>
+          <Navigation title={this.props.danceName} />
           <Layout className="contents">
-            <Content style={{display: "flex", flexDirection: "column"}}>
+            <Content style={{ display: "flex", flexDirection: "column" }}>
               <div className="section-title-container">
                 <div className="section-title">
                   <h3>{this.props.frameName} ({this.props.frameNumSeconds} seconds)</h3>
                 </div>
               </div>
               <div
-                style={{background: '#000', flex: 1}}
+                style={{ background: '#000', flex: 1 }}
                 ref={node => {
                   this.container = node;
                 }}
               >
                 <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
-                             height={this.state.stageHeight}/>
+                  height={this.state.stageHeight} />
               </div>
               <Breadcrumb separator=">" className="breadcrumb">
                 <Breadcrumb.Item>{this.props.danceName}</Breadcrumb.Item>
@@ -105,37 +105,37 @@ class FrameScreen extends Component {
               >
                 <Menu.Item key="1">
                   <Button className="sider-button" shape="circle">
-                    <UserAddIcon style={{fontSize: '34px'}}/>
+                    <UserAddIcon style={{ fontSize: '34px' }} />
                   </Button>
                   <p>Performers</p>
                 </Menu.Item>
                 <Menu.Item key="2">
                   <Button className="sider-button" shape="circle">
-                    <FileAddIcon/>
+                    <FileAddIcon />
                   </Button>
                   <p>Add Formation</p>
                 </Menu.Item>
                 <Menu.Item key="3">
                   <Button className="sider-button" shape="circle">
-                    <HeadphoneIcon/>
+                    <HeadphoneIcon />
                   </Button>
                   <p>Add Music</p>
                 </Menu.Item>
                 <Menu.Item key="4">
                   <Button className="sider-button" shape="circle">
-                    <BorderInnerIcon/>
+                    <BorderInnerIcon />
                   </Button>
                   <p>Stage Dimension</p>
                 </Menu.Item>
                 <Menu.Item key="5">
                   <Button className="sider-button" shape="circle">
-                    <LeftArrowIcon/>
+                    <LeftArrowIcon />
                   </Button>
                   <p>Previous</p>
                 </Menu.Item>
                 <Menu.Item key="6">
                   <Button className="sider-button" shape="circle">
-                    <RightArrowIcon/>
+                    <RightArrowIcon />
                   </Button>
                   <p>Next</p>
                 </Menu.Item>
