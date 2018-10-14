@@ -14,7 +14,7 @@ export function addDancerToFrame(danceId, frameId, name) {
         payload: {
           name: name,
           // Default position when added to stage
-          position: [0, 0]
+          position: [0.5, 0.5]
         }
       })
     } else {
