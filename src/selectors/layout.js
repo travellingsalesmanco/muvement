@@ -26,7 +26,7 @@ export const makeGridLayoutSelector = () => {
   return createSelector(
     [getCanvasWidthFromProp, getCanvasHeightFromProp, getGridSize],
     (canvasWidth, canvasHeight, gridSize) => {
-      return generateGrid(canvasWidth, canvasHeight, 0.05 * canvasWidth);
+      return generateGrid(canvasWidth, canvasHeight, gridSize * canvasWidth);
     }
   )
 };
