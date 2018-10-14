@@ -2,6 +2,7 @@ import {Button, Form, InputNumber} from "antd";
 import React from 'react';
 import {editStageDimensions} from "../actions/danceActions"
 import {connect} from 'react-redux'
+import './StageDimForm.css';
 
 class StageDimForm extends React.Component {
   handleDimChange = (e) => {
@@ -23,7 +24,7 @@ class StageDimForm extends React.Component {
   render() {
     const {getFieldDecorator} = this.props.form;
     return (
-      <div>
+      <div id="stage-dim">
         <Form layout={"vertical"} onSubmit={this.handleDimChange}>
           <Form.Item label={'Height'}>
             {getFieldDecorator('stageHeight', {
@@ -32,14 +33,14 @@ class StageDimForm extends React.Component {
               <InputNumber min={0.01} precision={2}/>
             )}
           </Form.Item>
-          < Form.Item label={'Width'}>
+          <Form.Item label={'Width'}>
             {getFieldDecorator('stageWidth', {
               initialValue: this.props.width
             })(
               <InputNumber min={0.01} precision={2}/>
             )}
           </Form.Item>
-          < Form.Item label={'Grid Size'}>
+          <Form.Item label={'Grid Size'}>
             {getFieldDecorator('gridSize', {
               initialValue: this.props.gridSize
             })(
@@ -47,7 +48,7 @@ class StageDimForm extends React.Component {
             )}
           </Form.Item>
           <Form.Item>
-            <Button type={"dashed"} htmlType={'submit'} ghost block>Apply</Button>
+            <Button type={"default"} htmlType={'submit'} block>APPLY</Button>
           </Form.Item>
         </Form>
       </div>

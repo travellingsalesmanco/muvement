@@ -1,45 +1,15 @@
 import React, {Component} from 'react';
 import {Circle, Layer, Stage, Line, Rect, Group, Text, Label, Tag, Path} from "react-konva";
-import {calculateStageDimensions, generateGrid} from "./stageUtils";
+import {connect} from 'react-redux'
+import {makeGridLayoutSelector, makeStageLayoutSelector} from "../selectors/layout";
+import {removeDancerFromFrame, moveDancer} from "../actions/frameActions"
 
 class StageCanvas extends Component {
   constructor(props) {
     super(props);
     // To be passed in as props
     this.state = {
-      dimensions: {
-        width: 9.6,
-        height: 5.18,
-        unit: 'm'
-      },
-      dancers: [
-        {
-          id: 1,
-          name: "Bob",
-          position: [0.5, 0.5]
-        },
-        {
-          id: 2,
-          name: "Marley",
-          position: [0.1, 0.1]
-        },
-        {
-          id: 3,
-          name: "And",
-          position: [0.9, 0.9]
-        },
-        {
-          id: 4,
-          name: "Me",
-          position: [0.1, 0.9]
-        },
-        {
-          id: 5,
-          name: "John",
-          position: [0.9, 0.1]
-        }
-      ],
-      isDancerSelected: [false, false, false, false, false]
+      isDancerSelected: this.props.dancers.map(() => false)
     };
     this.nameLabels = [];
   }
@@ -52,21 +22,16 @@ class StageCanvas extends Component {
     });
   }
 
-  handleDragEnd = (e, key, stageRect) => {
+  handleDragEnd = (e, key) => {
     e.cancelBubble = true;
-    console.log("OLD POSITION: " + this.state.dancers[key].position);
-    console.log("NEW POSITION: " + [
-      this.getRelativeX(e.target.x(), stageRect),
-      this.getRelativeY(e.target.y(), stageRect)
-    ]);
-    let newDancers = this.state.dancers.slice();
-    newDancers[key].position = [
-      this.getRelativeX(e.target.x(), stageRect),
-      this.getRelativeY(e.target.y(), stageRect)
+    let targetDancer = this.props.dancers[key].name;
+    let newDancerPosition = [
+      this.getRelativeX(e.target.x()),
+      this.getRelativeY(e.target.y())
     ];
-    this.setState({
-      dancers: newDancers
-    });
+    console.log("OLD POSITION: " + this.props.dancers[key].position);
+    console.log("NEW POSITION: " + newDancerPosition);
+    this.props.dispatch(moveDancer(this.props.danceId, this.props.frameId, targetDancer, newDancerPosition));
   };
 
   handleSelect = (e, key) => {
@@ -81,31 +46,28 @@ class StageCanvas extends Component {
   // TODO: Handle width issues to remaining nodes when deleting, might be shifted out to parent component
   handleRemove = (e, key) => {
     e.cancelBubble = true;
-    let newDancers = this.state.dancers.filter((dancer, dancerKey) => {
-      return dancerKey !== key;
-    });
-    let newDancerSelection = this.state.isDancerSelected.filter((isSelected, dancerKey) => {
-      return dancerKey !== key;
-    });
-    this.setState({
-      dancers: newDancers,
-      isDancerSelected: newDancerSelection,
-    });
+    let targetDancer = this.props.dancers[key].name;
+    console.log("Remove dancer: " + targetDancer);
+    this.props.dispatch(removeDancerFromFrame(this.props.danceId, this.props.frameId, targetDancer));
   };
 
-  getAbsoluteX = (origX, stageRect) => {
+  getAbsoluteX = (origX) => {
+    let stageRect = this.props.stageLayout;
     return origX * stageRect.width + stageRect.tl.x;
   };
 
-  getAbsoluteY = (origY, stageRect) => {
+  getAbsoluteY = (origY) => {
+    let stageRect = this.props.stageLayout;
     return origY * stageRect.height + stageRect.tl.y;
   };
 
-  getRelativeX = (origX, stageRect) => {
+  getRelativeX = (origX) => {
+    let stageRect = this.props.stageLayout;
     return (origX - stageRect.tl.x) / stageRect.width;
   };
 
-  getRelativeY = (origY, stageRect) => {
+  getRelativeY = (origY) => {
+    let stageRect = this.props.stageLayout;
     return (origY - stageRect.tl.y) / stageRect.height;
   };
 
@@ -116,14 +78,13 @@ class StageCanvas extends Component {
     const TEXT_PADDING = 10;
     // Canvas dimensions
     let {width: canvasWidth, height: canvasHeight} = this.props;
-    let stageRect = calculateStageDimensions(canvasWidth, canvasHeight,
-      this.state.dimensions.width, this.state.dimensions.height, 0.05);
+    let stageRect = this.props.stageLayout;
     console.log("Stage: ", canvasWidth, canvasHeight);
 
     let gridLayer = (
       <Layer>
         {
-          generateGrid(canvasWidth, canvasHeight, 0.05 * canvasWidth)
+          this.props.gridLayout
             .map((points, key) => <Line key={key} points={points} stroke={"#514a9d"} opacity={0.5}/>)
         }
       </Layer>
@@ -141,13 +102,13 @@ class StageCanvas extends Component {
         {gridLayer}
         {stageLayer}
         <Layer>
-          {this.state.dancers.map((dancer, key) => (
+          {this.props.dancers.map((dancer, key) => (
             <Group
               key={key}
-              x={this.getAbsoluteX(dancer.position[0], stageRect)}
-              y={this.getAbsoluteY(dancer.position[1], stageRect)}
+              x={this.getAbsoluteX(dancer.position[0])}
+              y={this.getAbsoluteY(dancer.position[1])}
               draggable
-              onDragEnd={(e) => this.handleDragEnd(e, key, stageRect)}
+              onDragEnd={(e) => this.handleDragEnd(e, key)}
             >
               <Circle
                 fill={'#24c6dc'}
@@ -214,4 +175,27 @@ class StageCanvas extends Component {
   }
 }
 
-export default StageCanvas;
+// If the mapStateToProps argument supplied to connect returns a function instead of an object, it will be used
+// to create an individual mapStateToProps function for each instance of the container.
+// https://github.com/reduxjs/reselect#sharing-selectors-with-props-across-multiple-component-instances
+
+const makeMapStateToProps = () => {
+  const getStageLayout = makeStageLayoutSelector();
+  const getGridLayout = makeGridLayoutSelector();
+  return (state, props) => {
+    let dancers = state.dances[props.danceId].dancers;
+    return {
+      stageLayout: getStageLayout(state, props),
+      gridLayout: getGridLayout(state, props),
+      dancers: state.dances[props.danceId].frames[props.frameId].dancers.map((dancer) => {
+        let id = dancers.indexOf(dancer.name);
+        return {
+          ...dancer,
+          id: id + 1
+        }
+      })
+    }
+  }
+};
+
+export default connect(makeMapStateToProps)(StageCanvas);

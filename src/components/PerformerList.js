@@ -55,7 +55,7 @@ class PerformerList extends React.Component {
           return (
             <Row key={key}>
               <Col span={18} onClick={() => this.addDancerToFrame(dancer)}>
-                <span style={this.isActiveDancerStyle(dancer)}>{key + 1}. {dancer}</span>
+                <span id="dancer-item" style={this.isActiveDancerStyle(dancer)}>{key + 1}. {dancer}</span>
               </Col>
               <Col span={6}>
                 {this.state.editPerformers &&

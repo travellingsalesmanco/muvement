@@ -74,5 +74,8 @@ export function snapToGrid(x, y, canvasWidth, canvasHeight, gridSize) {
   let centerY = canvasHeight / 2;
   let gridLineX = Math.round((x - centerX) / gridSize);
   let gridLineY = Math.round((y - centerY) / gridSize);
-  return {x: gridLineX * gridSize + centerX, y: gridLineY * gridSize + centerY}
+  return {
+    x: gridLineX * gridSize + centerX,
+    y: gridLineY * gridSize + centerY
+  }
 }
