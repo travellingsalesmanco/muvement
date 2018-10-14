@@ -17,3 +17,8 @@
 #performer-list .ant-row {
   margin: 5px 0;
 }
+
+#performer-list .anticon-minus:hover,
+#dancer-item:hover {
+  cursor: pointer;
+}
