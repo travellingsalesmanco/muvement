@@ -22,12 +22,12 @@ class StageCanvas extends Component {
     });
   }
 
-  handleDragEnd = (e, key, stageRect) => {
+  handleDragEnd = (e, key) => {
     e.cancelBubble = true;
     let targetDancer = this.props.dancers[key].name;
     let newDancerPosition = [
-      this.getRelativeX(e.target.x(), stageRect),
-      this.getRelativeY(e.target.y(), stageRect)
+      this.getRelativeX(e.target.x()),
+      this.getRelativeY(e.target.y())
     ];
     console.log("OLD POSITION: " + this.props.dancers[key].position);
     console.log("NEW POSITION: " + newDancerPosition);
@@ -51,19 +51,23 @@ class StageCanvas extends Component {
     this.props.dispatch(removeDancerFromFrame(this.props.danceId, this.props.frameId, targetDancer));
   };
 
-  getAbsoluteX = (origX, stageRect) => {
+  getAbsoluteX = (origX) => {
+    let stageRect = this.props.stageLayout;
     return origX * stageRect.width + stageRect.tl.x;
   };
 
-  getAbsoluteY = (origY, stageRect) => {
+  getAbsoluteY = (origY) => {
+    let stageRect = this.props.stageLayout;
     return origY * stageRect.height + stageRect.tl.y;
   };
 
-  getRelativeX = (origX, stageRect) => {
+  getRelativeX = (origX) => {
+    let stageRect = this.props.stageLayout;
     return (origX - stageRect.tl.x) / stageRect.width;
   };
 
-  getRelativeY = (origY, stageRect) => {
+  getRelativeY = (origY) => {
+    let stageRect = this.props.stageLayout;
     return (origY - stageRect.tl.y) / stageRect.height;
   };
 
@@ -101,10 +105,10 @@ class StageCanvas extends Component {
           {this.props.dancers.map((dancer, key) => (
             <Group
               key={key}
-              x={this.getAbsoluteX(dancer.position[0], stageRect)}
-              y={this.getAbsoluteY(dancer.position[1], stageRect)}
+              x={this.getAbsoluteX(dancer.position[0])}
+              y={this.getAbsoluteY(dancer.position[1])}
               draggable
-              onDragEnd={(e) => this.handleDragEnd(e, key, stageRect)}
+              onDragEnd={(e) => this.handleDragEnd(e, key)}
             >
               <Circle
                 fill={'#24c6dc'}
