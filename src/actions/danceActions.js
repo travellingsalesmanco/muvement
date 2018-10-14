@@ -20,9 +20,9 @@ export function addDancer(danceId, name) {
 
 export function editStageDimensions(danceId, toEdit) {
   return dispatch => {
-    if (toEdit.width && toEdit.width <= 0
-      || toEdit.height && toEdit.height <= 0
-      || toEdit.gridSize && toEdit.gridSize < 0) {
+    if ((toEdit.width && toEdit.width <= 0)
+      || (toEdit.height && toEdit.height <= 0)
+      || (toEdit.gridSize && toEdit.gridSize < 0)) {
       console.log("[ERROR] Dimensions must be greater than 0")
     } else {
       dispatch({
