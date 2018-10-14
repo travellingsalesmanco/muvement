@@ -77,11 +77,14 @@
   height: 200px;
   margin-top: 40px;
   border-radius: 15px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
   overflow: hidden;
+}
 
+.ant-formation-card-cover img {
+  object-fit: cover;
+  object-position: top;
+  height: 100%;
+  width: 100%;
 }
 
 .ant-card-body {

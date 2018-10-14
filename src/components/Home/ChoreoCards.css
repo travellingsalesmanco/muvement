@@ -25,10 +25,15 @@
 
 .ant-card-cover {
   height: 250px;
-  background-position: center center;
-  background-repeat: no-repeat;
   overflow: hidden;
   border-radius: 5px;
+}
+
+.ant-card-cover img {
+  object-fit: cover;
+  object-position: top;
+  height: 100%;
+  width: 100%;
 }
 
 .ant-card-body {
