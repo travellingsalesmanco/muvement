@@ -1,0 +1,123 @@
+.choreo-homescreen-body{
+    height: 100vh;
+    background-image: url(" ../../img/FormationsOverviewBackground.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.choreo-homescreen-contents {
+  background-color: transparent;
+}
+
+.ant-layout-sider-children {
+    background: linear-gradient(to bottom, #313131 -15%, #000000 140%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
+}
+
+.choreo-picture-card-cover{
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 100px;
+    height: 60vh;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.add-choreo-pic-icon {
+  font-size: 55px;
+}
+.add-choreo-pic {
+  width: 80%;
+  margin: 10vh auto 30px auto;
+  height: 45vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background: #000000;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+.new-formation {
+  height: 200px;
+  margin-top: 40px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #24C6DC -30%, #514A9D 100%);
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+.add-formation-title{
+    position: absolute;
+    top: 10;
+    bottom: 40px;
+    font-family: "Futura-Medium";
+    color: white;
+    font-size: 15px;
+}
+
+.add-formation-icon{
+    color: white;
+    font-size: 45px;
+}
+
+.formation-card {
+  margin: 15px 0;
+}
+
+.ant-formation-card-cover {
+  height: 200px;
+  margin-top: 40px;
+  border-radius: 15px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+
+}
+
+.ant-card-body {
+  padding: 0;
+}
+
+.ant-card {
+  border-radius: 5px;
+  background: transparent;
+}
+
+.formation-name {
+  color: #fff;
+  font-family: 'Futura-Medium';
+  padding-top: 10px;
+}
+
+
+.performance-date{
+   text-align: center;
+   margin-top: 10px;
+}
+
+.ant-calendar-picker{
+    width: 80%;
+}
+
+input.ant-calendar-picker-input.ant-input{
+    font-family: "Futura-Medium";
+    font-size: 1.3em;
+    border: transparent;
+    background: transparent;
+    border-bottom: 2px solid white;
+}
+
+.ant-calendar-picker-icon{
+    color: white;
+    font-size: 1.3em;
+}
