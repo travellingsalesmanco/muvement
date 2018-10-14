@@ -53,11 +53,11 @@ class StageDimForm extends React.Component {
   }
 }
 
-const mapStateToProps = function (state, ownProps) {
+const mapStateToProps = function (state) {
   return {
-    height: state.dances[ownProps.danceId].dimensions.height,
-    width: state.dances[ownProps.danceId].dimensions.width,
-    gridSize: state.dances[ownProps.danceId].dimensions.gridSize,
+    height: state.dances[state.UI.activeDance].stageDim.height,
+    width: state.dances[state.UI.activeDance].stageDim.width,
+    gridSize: state.dances[state.UI.activeDance].stageDim.gridSize,
   }
 };
 
