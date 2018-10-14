@@ -1,8 +1,8 @@
 import React from 'react';
 import {Row, Col, Card, Icon} from 'antd';
 import './ChoreoCards.css';
-import FileAddIcon from "../GradientIcons/FileAddIcon";
-import GradientSVG from '../GradientIcons/GradientSVG';
+import FileAddIcon from "../../icons/FileAddIcon";
+import GradientSVG from '../../icons/GradientSVG';
 
 class ChoreoCards extends React.Component {
   clickHandler = () => {
