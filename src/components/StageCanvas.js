@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Circle, Layer, Stage, Line, Rect, Group, Text, Label, Tag, Path} from "react-konva";
-import {calculateStageDimensions, generateGrid} from "./stageUtils";
 import {connect} from 'react-redux'
 import {makeGridLayoutSelector, makeStageLayoutSelector} from "../selectors/layout";
 
