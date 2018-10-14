@@ -118,6 +118,7 @@ input.ant-calendar-picker-input.ant-input{
     border: transparent;
     background: transparent;
     border-bottom: 2px solid white;
+    border-radius: 0;
 }
 
 .ant-calendar-picker-icon{
