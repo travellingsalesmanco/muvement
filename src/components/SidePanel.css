@@ -28,6 +28,7 @@
 
 .ant-drawer-body {
   color: #fff;
+  padding: 0 24px;
 }
 
 .ant-drawer-close {

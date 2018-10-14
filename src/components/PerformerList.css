@@ -13,3 +13,7 @@
   border-radius: 20px;
   margin: 5px 0;
 }
+
+#performer-list .ant-row {
+  margin: 5px 0;
+}
