@@ -1,21 +1,40 @@
 import React from 'react';
-import {Row, Col, Icon, Button} from "antd";
-import {removeDancer} from "../actions/danceActions"
-import {addDancerToFrame} from "../actions/frameActions"
-import {connect} from 'react-redux';
+import { Row, Col, Icon, Button } from "antd";
+import { removeDancer } from "../actions/danceActions"
+import { addDancerToFrame } from "../actions/frameActions"
+import { connect } from 'react-redux';
 import './PerformerList.css';
+import AddPerformerForm from "./AddPerformerForm";
 
 class PerformerList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editPerformers: false
+      editPerformers: false,
+      addPerformer: false,
+      toRemove: [],
+      toAdd: ""
     };
   }
 
-  handleEditToggle = () => {
+  handleSetToggle = () => {
     this.setState({
-      editPerformers: !this.state.editPerformers
+      editPerformers: true,
+      addPerformer: false
+    })
+  };
+
+  handleSetAdd = () => {
+    this.setState({
+      addPerformer: true,
+      editPerformers: false
+    })
+  };
+
+  handleCancelAction = () => {
+    this.setState({
+      addPerformer: false,
+      editPerformers: false
     })
   };
 
@@ -42,9 +61,9 @@ class PerformerList extends React.Component {
   // TODO : move this to proper css
   isActiveDancerStyle(name) {
     if (this.props.activeDancers.includes(name)) {
-      return {color: '#24c6dc'}
+      return { color: '#24c6dc' }
     } else {
-      return {color: 'white'}
+      return { color: 'white' }
     }
   }
 
@@ -59,12 +78,22 @@ class PerformerList extends React.Component {
               </Col>
               <Col span={6}>
                 {this.state.editPerformers &&
-                <Icon type="minus" theme="outlined" onClick={() => this.removeDancer(dancer)}/>}
+                <Icon type="minus" theme="outlined" onClick={() => this.removeDancer(dancer)} />}
               </Col>
             </Row>)
         })}
-        <Button className="add-performer-button" type={"default"} icon="user-add" ghost block>Add Performer</Button>
-        <Button type={"default"} icon="edit" ghost block onClick={this.handleEditToggle}>Edit Performers</Button>
+        {!this.state.editPerformers &&
+        <AddPerformerForm nextId={this.props.dancers.length} signalAdd={this.handleSetAdd.bind(this)} signalCancel={this.handleCancelAction.bind(this)} />
+        }
+        {!this.state.addPerformer && !this.state.editPerformers &&
+        <Button type={"default"} icon="edit" ghost block onClick={this.handleSetToggle}>Edit Performers</Button>
+        }
+        {this.state.editPerformers && (
+          <div>
+            <Button type={"default"} block onClick={this.handleCancelAction}>APPLY</Button>
+            <Button type={"default"} block onClick={this.handleCancelAction}>CANCEL</Button>
+          </div>
+        )}
       </div>
     );
   }
