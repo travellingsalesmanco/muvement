@@ -102,6 +102,10 @@ button.sider-button {
   color: rgb(36, 198, 220);
 }
 
+.sider .ant-btn > .anticon {
+  line-height: 0;
+}
+
 .sider .ant-menu.ant-menu-dark .ant-menu-item-selected {
   background-color: transparent;
 }
