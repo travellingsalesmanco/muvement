@@ -67,12 +67,12 @@ class FrameScreen extends Component {
     const {Content, Sider} = Layout;
     return (
       <Fragment>
-        <GradientSVG
-          startColor="#24c6dc"
-          endColor="#514a9d"
-          idCSS="cool-gradient"
-        />
         <Layout className="body">
+          <GradientSVG
+            startColor="#24c6dc"
+            endColor="#514a9d"
+            idCSS="cool-gradient"
+          />
           <Navigation title={this.props.danceName}/>
           <Layout className="contents">
             <Content style={{display: "flex", flexDirection: "column"}}>
