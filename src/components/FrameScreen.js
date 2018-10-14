@@ -1,9 +1,10 @@
-import {Breadcrumb, Layout, Menu, Button} from 'antd';
+import {Breadcrumb, Button, Layout, Menu} from 'antd';
 import React, {Component, Fragment} from 'react';
 import './FrameScreen.css';
 import Navigation from "./Navigation";
 import SidePanel from "./SidePanel";
 import StageCanvas from "./StageCanvas";
+import {connect} from "react-redux";
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -93,23 +94,23 @@ class FrameScreen extends Component {
                   <p>Performers</p>
                 </Menu.Item>
                 <Menu.Item key="2">
-                  <Button className="sider-button"  shape="circle" icon="file-add"/>
+                  <Button className="sider-button" shape="circle" icon="file-add"/>
                   <p>Add Formation</p>
                 </Menu.Item>
                 <Menu.Item key="3">
-                  <Button className="sider-button"  shape="circle" icon="customer-service"/>
+                  <Button className="sider-button" shape="circle" icon="customer-service"/>
                   <p>Add Music</p>
                 </Menu.Item>
                 <Menu.Item key="4">
-                  <Button className="sider-button"  shape="circle" icon="border-inner"/>
+                  <Button className="sider-button" shape="circle" icon="border-inner"/>
                   <p>Stage Dimension</p>
                 </Menu.Item>
                 <Menu.Item key="5">
-                  <Button className="sider-button"  shape="circle" icon="left"/>
+                  <Button className="sider-button" shape="circle" icon="left"/>
                   <p>Previous</p>
                 </Menu.Item>
                 <Menu.Item key="6">
-                  <Button className="sider-button"  shape="circle" icon="right" />
+                  <Button className="sider-button" shape="circle" icon="right"/>
                   <p>Next</p>
                 </Menu.Item>
               </Menu>
