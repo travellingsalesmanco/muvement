@@ -14,7 +14,7 @@ export const defaultUI = {
 };
 export const dummyDance = {
   name: "NUS Blast! Showcase",
-  dimensions: {
+  stageDim: {
     width: 9.6,
     height: 5.18,
     gridSize: 0.05,
