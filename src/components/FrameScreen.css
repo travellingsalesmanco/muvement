@@ -60,6 +60,10 @@
   height: 120px;
 }
 
+.sider .ant-menu-inline .ant-menu-item:not(:last-child) {
+  margin-bottom: 4px;
+}
+
 .sider .sider-menu {
   height: 100%;
   border-right: 0;
@@ -85,9 +89,11 @@ button.sider-button {
 }
 
 .sider li p {
+  margin-top: 5px;
   margin-bottom: 0;
   font-family: "Futura-Medium";
   font-size: 1vw;
+  line-height: initial;
 }
 
 .sider .ant-menu-item .anticon {
