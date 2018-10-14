@@ -12,7 +12,7 @@ class Navigation extends React.Component {
             <Button style={{ fontSize: '25px' }} icon="left"/>
           </div>
           <div className="title">
-            <h3 style={{ color: '#fff'}}>NUS BLAST! SHOWCASE</h3>
+            <h3 style={{ color: '#fff'}}>{this.props.title}</h3>
           </div>
           <div className="right-container">
             <Menu className="navbar-icon" mode="horizontal" theme="dark">

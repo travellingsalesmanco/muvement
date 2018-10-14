@@ -60,12 +60,12 @@ class FrameScreen extends Component {
     return (
       <Fragment>
         <Layout className="body">
-          <Navigation/>
+          <Navigation title={this.props.danceName}/>
           <Layout className="contents">
             <Content style={{display: "flex", flexDirection: "column"}}>
               <div className="section-title-container">
                 <div className="section-title">
-                  <h3>Introduction (30 seconds)</h3>
+                  <h3>{this.props.frameName} ({this.props.frameNumSeconds} seconds)</h3>
                 </div>
               </div>
               <div
@@ -77,8 +77,8 @@ class FrameScreen extends Component {
                 <StageCanvas width={this.state.stageWidth} height={this.state.stageHeight}/>
               </div>
               <Breadcrumb separator=">" className="breadcrumb">
-                <Breadcrumb.Item>NUS BLAST! Showcase</Breadcrumb.Item>
-                <Breadcrumb.Item>Introduction (30 seconds)</Breadcrumb.Item>
+                <Breadcrumb.Item>{this.props.danceName}</Breadcrumb.Item>
+                <Breadcrumb.Item>{this.props.frameName} ({this.props.frameNumSeconds} seconds)</Breadcrumb.Item>
               </Breadcrumb>
             </Content>
             <Sider width={200} className="sider">
@@ -130,4 +130,16 @@ class FrameScreen extends Component {
   }
 }
 
-export default FrameScreen;
+function mapStateToProps(state) {
+  const activeDance = state.dances[state.UI.activeDance];
+  const activeFrame = activeDance.frames[state.UI.activeFrame];
+  return {
+    danceId: state.UI.activeDance,
+    frameId: state.UI.activeFrame,
+    danceName: activeDance.name,
+    frameName: activeFrame.name,
+    frameNumSeconds: activeFrame.numSeconds
+  }
+}
+
+export default connect(mapStateToProps)(FrameScreen);
