@@ -1,4 +1,4 @@
-import {SWITCH_ACTIVE_DANCE} from "../constants/actionTypes";
+import {SWITCH_ACTIVE_DANCE, SWITCH_ACTIVE_FRAME} from "../constants/actionTypes";
 import {defaultUI} from "../constants/defaults";
 
 export default (state = defaultUI, action) => {
@@ -7,7 +7,15 @@ export default (state = defaultUI, action) => {
       const {payload: danceId} = action;
       return {
         ...state,
-        activeDance: danceId
+        activeDance: danceId,
+        activeFrame: 0 // Need to reset active frame as well
+      }
+    }
+    case SWITCH_ACTIVE_FRAME: {
+      const {payload: frameId} = action;
+      return {
+        ...state,
+        activeFrame: frameId
       }
     }
     default:
