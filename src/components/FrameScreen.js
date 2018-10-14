@@ -104,7 +104,7 @@ class FrameScreen extends Component {
               >
                 <Menu.Item key="1">
                   <Button className="sider-button" shape="circle">
-                    <UserAddIcon/>
+                    <UserAddIcon style={{fontSize: '34px'}}/>
                   </Button>
                   <p>Performers</p>
                 </Menu.Item>
