@@ -10,8 +10,8 @@ class Title extends React.Component {
   render() {
     const performerTitle = (
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <UserAddIcon style={{ fontSize: '30px' }}/>
-        <span style={{fontFamily: 'Futura-Bold'}}>PERFORMERS</span>
+        <UserAddIcon style={{ fontSize: '34px' }}/>
+        <span style={{fontFamily: 'Futura-Bold', marginLeft: '5px'}}>PERFORMERS</span>
       </div>
     );
 
