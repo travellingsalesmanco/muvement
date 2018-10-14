@@ -1,5 +1,6 @@
 .ant-layout-header {
   background: #131313;
+  height: 10%;
 }
 
 .nav-bar {
@@ -36,7 +37,7 @@
 
 .right-container .ant-menu-item .anticon {
   margin-right: 0;
-  font-size: 30px;
+  font-size: 23px;
 }
 
 .right-container .ant-menu.ant-menu-dark .ant-menu-item-selected {
