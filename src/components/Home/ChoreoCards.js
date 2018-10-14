@@ -11,7 +11,7 @@ class ChoreoCards extends React.Component {
   render() {
     const data = this.props.data.slice();
     // Prepend "New Card" to start of array of cards
-    data.unshift("New Choreography");
+    data.unshift({ name: "New Choreography" });
     return (
       <div>
         <GradientSVG
@@ -41,7 +41,7 @@ class ChoreoCards extends React.Component {
                             </div>
                         }
                       <div className="description">
-                        <span>{card}</span>
+                        <span>{card.name}</span>
                         <div className="description">
                           <span id="card-date">20 Oct 2018</span>
                           <Icon type="share-alt" theme="outlined" style={{fontSize: '20px'}}/>
@@ -62,7 +62,7 @@ class ChoreoCards extends React.Component {
                               <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
                             </div>
                             <div className="description">
-                              <span>{data[index + 1]}</span>
+                              <span>{data[index + 1].name}</span>
                               <div className="description">
                                 <span id="card-date">20 Oct 2018</span>
                                 <Icon type="share-alt" theme="outlined" style={{fontSize: '20px'}}/>

@@ -9,7 +9,7 @@ class FormationPreviewCards extends React.Component {
     render() {
       const data = this.props.data.slice();
       // Prepend "New FormationCard" to start of array of cards
-      data.unshift("");
+      data.unshift({ name: "" });
       return (
           <div>
           {
@@ -35,7 +35,7 @@ class FormationPreviewCards extends React.Component {
                               </div>
                           }
                         <div className="formation-name">
-                          <span>{card}</span>
+                          <span>{card.name}</span>
                         </div>
                       </Card>
                     </Col>
@@ -53,7 +53,7 @@ class FormationPreviewCards extends React.Component {
                                 <img alt="Cover" className="formation-image"  src="https://www.allkpop.com/upload/2018/09/af_org/01133025/red-velvet.jpg"/>
                               </div>
                               <div className="formation-name">
-                                <span>{data[index + 1]}</span>
+                                <span>{data[index + 1].name}</span>
                               </div>
                             </Card>
                           </Col>

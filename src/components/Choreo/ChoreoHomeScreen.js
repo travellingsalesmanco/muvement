@@ -1,6 +1,7 @@
 import React from 'react';
 import './ChoreoHomeScreen.css';
 import {Button, Layout, Menu, Row, Col, DatePicker} from 'antd';
+import connect from "react-redux/es/connect/connect";
 import ChoreoPicture from "./ChoreoPicture";
 import FormationPreviewCards from "./FormationPreviewCards";
 
@@ -75,7 +76,8 @@ class ChoreoHomeScreen extends React.Component {
         </Header>
         <Layout className="choreo-homescreen-contents">
         <Content style={{display: "flex", flexDirection: "column"}}>
-            <FormationPreviewCards data={["1. Introduction (30 seconds)", "2. Straight Line"]} />
+            {/*<FormationPreviewCards data={["1. Introduction (30 seconds)", "2. Straight Line"]} />*/}
+            <FormationPreviewCards data={this.props.frames} />
         </Content>
         <Sider
         width="400px">
@@ -109,4 +111,11 @@ class ChoreoHomeScreen extends React.Component {
   }
 }
 
-export default ChoreoHomeScreen;
+const mapStateToProps = state => {
+  console.log(state.dances[state.UI.activeDance]);
+  return {
+    frames: state.dances[state.UI.activeDance].frames
+  }
+};
+
+export default connect(mapStateToProps)(ChoreoHomeScreen);
