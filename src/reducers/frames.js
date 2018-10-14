@@ -68,7 +68,7 @@ const frameReducer = (state = defaultFrame, action) => {
 };
 
 // Frames reducer
-export default (state = [], action) => {
+export default (state = [defaultFrame], action) => {
   switch (action.type) {
 
     case ADD_FRAME: {
