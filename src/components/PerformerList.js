@@ -3,6 +3,7 @@ import {Row, Col, Icon, Button} from "antd";
 import {removeDancer} from "../actions/danceActions"
 import {addDancerToFrame} from "../actions/frameActions"
 import {connect} from 'react-redux';
+import './PerformerList.css';
 
 class PerformerList extends React.Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class PerformerList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="performer-list">
         {this.props.dancers.map((dancer, key) => {
           return (
             <Row key={key}>
@@ -62,8 +63,8 @@ class PerformerList extends React.Component {
               </Col>
             </Row>)
         })}
-        <Button type={"dashed"} icon="user-add" ghost block onClick={this.addDancer}>Add Performer</Button>
-        <Button type={"dashed"} icon="tool" ghost block onClick={this.handleEditToggle}>Edit Performers</Button>
+        <Button type={"default"} icon="user-add" ghost block>Add Performer</Button>
+        <Button type={"default"} icon="edit" ghost block onClick={this.handleEditToggle}>Edit Performers</Button>
       </div>
     );
   }

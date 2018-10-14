@@ -1,15 +1,16 @@
 import {Button, Drawer, Icon} from "antd";
 import React from 'react';
 import './SidePanel.css';
+import UserAddIcon from "../icons/UserAddIcon";
 import PerformerList from "./PerformerList";
 import StageDimForm from "./StageDimForm";
 
 class Title extends React.Component {
   render() {
     const performerTitle = (
-      <div>
-        <Icon type="user-add" theme="outlined"/>
-        <span>Performers</span>
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <UserAddIcon style={{ fontSize: '30px' }}/>
+        <span style={{fontFamily: 'Futura-Bold'}}>PERFORMERS</span>
       </div>
 
     );

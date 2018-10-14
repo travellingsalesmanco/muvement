@@ -1,0 +1,15 @@
+#performer-list .ant-btn-background-ghost {
+  border-color: #514a9d;
+  color: #514a9d;
+}
+
+#performer-list .ant-btn:hover,
+#performer-list .ant-btn:focus {
+  border-color: #6e5bcb;
+  color: #6e5bcb;
+}
+
+#performer-list .ant-btn {
+  border-radius: 20px;
+  margin: 5px 0;
+}
