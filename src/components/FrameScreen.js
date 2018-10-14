@@ -100,6 +100,7 @@ class FrameScreen extends Component {
                 className="sider-menu"
                 theme="dark"
                 onClick={this.showDrawer}
+                inlineIndent={16}
               >
                 <Menu.Item key="1">
                   <Button className="sider-button" shape="circle">
