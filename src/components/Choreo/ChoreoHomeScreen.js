@@ -2,6 +2,8 @@ import React from 'react';
 import './ChoreoHomeScreen.css';
 import {Button, Layout, Menu, Row, Col, DatePicker} from 'antd';
 import connect from "react-redux/es/connect/connect";
+import {BrowserRouter as Route} from "react-router-dom";
+import FrameScreen from "../FrameScreen";
 import ChoreoPicture from "./ChoreoPicture";
 import FormationPreviewCards from "./FormationPreviewCards";
 
@@ -60,7 +62,7 @@ class ChoreoHomeScreen extends React.Component {
         <Header>
           <div className="nav-bar">
               <div className="back-button">
-                <Button style={{ fontSize: '25px' }} icon="left"/>
+                <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.goBack()}/>
               </div>
             <div className="title">
               <h3 style={{ color: '#fff'}}>NUS BLAST! SHOWCASE</h3>
@@ -77,7 +79,7 @@ class ChoreoHomeScreen extends React.Component {
         <Layout className="choreo-homescreen-contents">
         <Content style={{display: "flex", flexDirection: "column"}}>
             {/*<FormationPreviewCards data={["1. Introduction (30 seconds)", "2. Straight Line"]} />*/}
-            <FormationPreviewCards data={this.props.frames} />
+          <FormationPreviewCards data={this.props.frames} match={this.props.match}/>
         </Content>
         <Sider
         width="400px">

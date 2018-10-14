@@ -3,6 +3,8 @@ import {Row, Col, Card, Icon} from 'antd';
 import './ChoreoCards.css';
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from '../../icons/GradientSVG';
+import {BrowserRouter as Route, BrowserRouter as Link, withRouter} from "react-router-dom";
+import ChoreoHomeScreen from "../Choreo/ChoreoHomeScreen";
 
 class ChoreoCards extends React.Component {
   clickHandler = () => {
@@ -12,6 +14,7 @@ class ChoreoCards extends React.Component {
     const data = this.props.data.slice();
     // Prepend "New Card" to start of array of cards
     data.unshift({ name: "New Choreography" });
+    console.log(this.props.match);
     return (
       <div>
         <GradientSVG
@@ -29,16 +32,16 @@ class ChoreoCards extends React.Component {
                       hoverable
                       bordered={false}
                       className="choreo-card"
-                      onClick={this.clickHandler}
                     >
                         {
                           index === 0
                           ? <div className="new-choreo">
                               <FileAddIcon className="new-choreo-icon"/>
                             </div>
-                          : <div className="ant-card-cover">
-                              <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
-                            </div>
+                          :
+                              <div className="ant-card-cover">
+                                <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
+                              </div>
                         }
                       <div className="description">
                         <span>{card.name}</span>
@@ -57,10 +60,12 @@ class ChoreoCards extends React.Component {
                             hoverable
                             bordered={false}
                             className="choreo-card"
+                            onClick={() => this.props.history.push(`/choreo/${index + 1}`)}
                           >
-                            <div className="ant-card-cover">
-                              <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
-                            </div>
+                              <div className="ant-card-cover">
+                                <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
+                              </div>
+
                             <div className="description">
                               <span>{data[index + 1].name}</span>
                               <div className="description">
@@ -72,7 +77,6 @@ class ChoreoCards extends React.Component {
                         </Col>
                       : <Col span={10}/>
                   }
-
                 </Row>
               );
             }
@@ -83,4 +87,4 @@ class ChoreoCards extends React.Component {
   }
 }
 
-export default ChoreoCards;
+export default withRouter(ChoreoCards);

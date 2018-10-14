@@ -1,6 +1,7 @@
 import React from 'react';
 import {Row, Col, Card, Icon} from 'antd';
 import './ChoreoHomeScreen.css';
+import {BrowserRouter as Link, withRouter} from "react-router-dom";
 
 class FormationPreviewCards extends React.Component {
     clickHandler = () => {
@@ -10,6 +11,7 @@ class FormationPreviewCards extends React.Component {
       const data = this.props.data.slice();
       // Prepend "New FormationCard" to start of array of cards
       data.unshift({ name: "" });
+      console.log(this.props.match);
       return (
           <div>
           {
@@ -48,6 +50,7 @@ class FormationPreviewCards extends React.Component {
                               hoverable
                               bordered={false}
                               className="formation-card"
+                              onClick={() => this.props.history.push(`${this.props.match.url}/frame/${index + 1}`)}
                             >
                               <div className="ant-formation-card-cover">
                                 <img alt="Cover" className="formation-image"  src="https://www.allkpop.com/upload/2018/09/af_org/01133025/red-velvet.jpg"/>
@@ -64,9 +67,9 @@ class FormationPreviewCards extends React.Component {
               }
             })
         }
-        </div>
+          </div>
       );
     }
 }
 
-export default FormationPreviewCards;
+export default withRouter(FormationPreviewCards);

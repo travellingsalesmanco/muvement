@@ -8,11 +8,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Switch>
-          <Route exact path="/" component={FrameScreen}/>
-          <Route path="/home" component={HomeScreen}/>
-          <Route path="/choreo" component={ChoreoHomeScreen}/>
-        </Switch>
+        {/*<Switch>*/}
+          <Route exact path="/" component={HomeScreen}/>
+          <Route exact path={`/choreo/:choreoId`} component={ChoreoHomeScreen} />
+          <Route path={`/choreo/:choreoId/frame/:frameId`} component={FrameScreen} />
+        {/*</Switch>*/}
       </div>
     );
   }

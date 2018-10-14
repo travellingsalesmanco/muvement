@@ -24,7 +24,7 @@ class HomeScreen extends React.Component {
         </Header>
         <Content>
           {/*<ChoreoCards data={["Red Velvet", "Black Pink", "Ikon", "Travelling Salesman"]}/>*/}
-          <ChoreoCards data={this.props.dances}/>
+          <ChoreoCards data={this.props.dances} match={this.props.match}/>
         </Content>
       </Layout>
     );
