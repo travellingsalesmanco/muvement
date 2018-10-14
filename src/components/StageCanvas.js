@@ -122,7 +122,7 @@ class StageCanvas extends Component {
                 align={'center'}
                 verticalAlign={'middle'}
                 fill={'white'}
-                text={key + 1}
+                text={dancer.id}
                 onDblClick={(e) => this.handleSelect(e, key)}
                 onDblTap={(e) => this.handleSelect(e, key)}
               />
@@ -183,10 +183,17 @@ const makeMapStateToProps = () => {
   const getStageLayout = makeStageLayoutSelector();
   const getGridLayout = makeGridLayoutSelector();
   return (state, props) => {
+    let dancers = state.dances[props.danceId].dancers;
     return {
       stageLayout: getStageLayout(state, props),
       gridLayout: getGridLayout(state, props),
-      dancers: state.dances[props.danceId].frames[props.frameId].dancers
+      dancers: state.dances[props.danceId].frames[props.frameId].dancers.map((dancer) => {
+        let id = dancers.indexOf(dancer.name);
+        return {
+          ...dancer,
+          id: id + 1
+        }
+      })
     }
   }
 };
