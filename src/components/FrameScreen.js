@@ -87,7 +87,8 @@ class FrameScreen extends Component {
                   this.container = node;
                 }}
               >
-                <StageCanvas width={this.state.stageWidth} height={this.state.stageHeight}/>
+                <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
+                             height={this.state.stageHeight}/>
               </div>
               <Breadcrumb separator=">" className="breadcrumb">
                 <Breadcrumb.Item>{this.props.danceName}</Breadcrumb.Item>

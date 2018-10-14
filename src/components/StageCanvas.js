@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Circle, Layer, Stage, Line, Rect, Group, Text, Label, Tag, Path} from "react-konva";
 import {calculateStageDimensions, generateGrid} from "./stageUtils";
+import {connect} from 'react-redux'
+import {makeGridLayoutSelector, makeStageLayoutSelector} from "../selectors/layout";
 
 class StageCanvas extends Component {
   constructor(props) {
@@ -116,14 +118,13 @@ class StageCanvas extends Component {
     const TEXT_PADDING = 10;
     // Canvas dimensions
     let {width: canvasWidth, height: canvasHeight} = this.props;
-    let stageRect = calculateStageDimensions(canvasWidth, canvasHeight,
-      this.state.dimensions.width, this.state.dimensions.height, 0.05);
+    let stageRect = this.props.stageLayout;
     console.log("Stage: ", canvasWidth, canvasHeight);
 
     let gridLayer = (
       <Layer>
         {
-          generateGrid(canvasWidth, canvasHeight, 0.05 * canvasWidth)
+          this.props.gridLayout
             .map((points, key) => <Line key={key} points={points} stroke={"#514a9d"} opacity={0.5}/>)
         }
       </Layer>
@@ -214,4 +215,19 @@ class StageCanvas extends Component {
   }
 }
 
-export default StageCanvas;
+// If the mapStateToProps argument supplied to connect returns a function instead of an object, it will be used
+// to create an individual mapStateToProps function for each instance of the container.
+// https://github.com/reduxjs/reselect#sharing-selectors-with-props-across-multiple-component-instances
+
+const makeMapStateToProps = () => {
+  const getStageLayout = makeStageLayoutSelector();
+  const getGridLayout = makeGridLayoutSelector();
+  return (state, props) => {
+    return {
+      stageLayout: getStageLayout(state, props),
+      gridLayout: getGridLayout(state, props)
+    }
+  }
+};
+
+export default connect(makeMapStateToProps)(StageCanvas);
