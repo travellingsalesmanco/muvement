@@ -63,7 +63,7 @@ class PerformerList extends React.Component {
               </Col>
             </Row>)
         })}
-        <Button type={"default"} icon="user-add" ghost block>Add Performer</Button>
+        <Button className="add-performer-button" type={"default"} icon="user-add" ghost block>Add Performer</Button>
         <Button type={"default"} icon="edit" ghost block onClick={this.handleEditToggle}>Edit Performers</Button>
       </div>
     );

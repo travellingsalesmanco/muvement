@@ -1,4 +1,4 @@
-import {Drawer} from "antd";
+import {Drawer, Button} from "antd";
 import React from 'react';
 import './SidePanel.css';
 import BorderInnerIcon from "../icons/BorderInnerIcon";
@@ -10,14 +10,14 @@ class Title extends React.Component {
   render() {
     const performerTitle = (
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <UserAddIcon style={{ fontSize: '34px' }}/>
+        <UserAddIcon className="side-panel-icon" style={{ fontSize: '34px' }}/>
         <span style={{fontFamily: 'Futura-Bold', marginLeft: '5px'}}>PERFORMERS</span>
       </div>
     );
 
     const stageDimTitle = (
       <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <BorderInnerIcon style={{ fontSize: '30px' }}/>
+        <BorderInnerIcon className="side-panel-icon"  style={{ fontSize: '30px' }}/>
         <span style={{fontFamily: 'Futura-Bold', marginLeft: '10px'}}>STAGE DIMENSION</span>
       </div>
     );

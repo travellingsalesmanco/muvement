@@ -19,6 +19,7 @@
 
 #stage-dim .ant-input-number-input {
   padding: 0;
+  font-family: "Futura-Medium";
 }
 
 #stage-dim .ant-input-number-focused {
@@ -36,5 +37,6 @@
   border-radius: 20px;
   font-family: 'Futura-Medium';
   border-color: #24c6dc;
+  background: transparent;
   color: #24c6dc;
 }
