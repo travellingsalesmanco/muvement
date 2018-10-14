@@ -1,0 +1,40 @@
+#stage-dim .ant-form-vertical .ant-form-item-label {
+  font-family: 'Futura-Medium';
+}
+
+#stage-dim .ant-form-item-label label {
+  color: #fff;
+}
+
+#stage-dim .ant-input-number {
+  color: #fff;
+  background-color: transparent;
+  border-radius: 0;
+  width: 100%;
+  border-bottom: 1px solid #d9d9d9;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+#stage-dim .ant-input-number-input {
+  padding: 0;
+}
+
+#stage-dim .ant-input-number-focused {
+  box-shadow: none;
+}
+
+#stage-dim .ant-btn:hover,
+#stage-dim .ant-btn:focus {
+  border-color: #26e8ff;
+  background-color: #26e8ff;
+  color: #fff;
+}
+
+#stage-dim .ant-btn {
+  border-radius: 20px;
+  font-family: 'Futura-Medium';
+  border-color: #24c6dc;
+  color: #24c6dc;
+}

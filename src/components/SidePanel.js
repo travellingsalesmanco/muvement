@@ -1,6 +1,7 @@
 import {Button, Drawer, Icon} from "antd";
 import React from 'react';
 import './SidePanel.css';
+import BorderInnerIcon from "../icons/BorderInnerIcon";
 import UserAddIcon from "../icons/UserAddIcon";
 import PerformerList from "./PerformerList";
 import StageDimForm from "./StageDimForm";
@@ -12,11 +13,13 @@ class Title extends React.Component {
         <UserAddIcon style={{ fontSize: '30px' }}/>
         <span style={{fontFamily: 'Futura-Bold'}}>PERFORMERS</span>
       </div>
-
     );
 
     const stageDimTitle = (
-      <p>Stage Dimension</p>
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <BorderInnerIcon style={{ fontSize: '30px' }}/>
+        <span style={{fontFamily: 'Futura-Bold', marginLeft: '10px'}}>STAGE DIMENSION</span>
+      </div>
     );
     const sampleTitle = (
       <p>Drawer</p>
@@ -37,11 +40,6 @@ class Title extends React.Component {
 
 
 class SidePanel extends React.Component {
-
-
-
-
-  // TODO: CSS to prettify list
   render() {
     let drawerDisplay;
     if (this.props.id === 1) {
