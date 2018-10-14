@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Icon, Button } from "antd";
-import { removeDancer } from "../actions/danceActions"
+import { removeDancer, addDancer } from "../actions/danceActions"
 import { addDancerToFrame } from "../actions/frameActions"
 import { connect } from 'react-redux';
 import './PerformerList.css';
@@ -13,7 +13,6 @@ class PerformerList extends React.Component {
       editPerformers: false,
       addPerformer: false,
       toRemove: [],
-      toAdd: ""
     };
   }
 
@@ -34,22 +33,37 @@ class PerformerList extends React.Component {
   handleCancelAction = () => {
     this.setState({
       addPerformer: false,
-      editPerformers: false
+      editPerformers: false,
+      toRemove: []
     })
   };
 
-  removeDancer(name) {
-    console.log("Remove dancer: " + name);
-    this.props.dispatch(removeDancer(this.props.danceId, name));
-  }
+  handleRemoval = () => {
+    // TODO: make bulk action
+    this.state.toRemove.map((dancer) => {
+      console.log("Remove dancer: " + dancer);
+      this.props.dispatch(removeDancer(this.props.danceId, dancer));
+    });
+    this.handleCancelAction();
+    return true;
+  };
 
-  addDancer(name) {
-    // TODO: Add dancer through redux (mechanism to be decided)
-    console.log("Add dancer to stage: " + name);
+  handleAddition = (nameArr) => {
+    // TODO: make bulk action
+    nameArr.map((dancer) => {
+      console.log("Add dancer: " + dancer);
+      this.props.dispatch(addDancer(this.props.danceId, dancer))
+    });
+    return true;
+  };
+
+  markDancerForRemoval(name) {
+    this.setState({
+      toRemove: [...this.state.toRemove, name]
+    })
   }
 
   addDancerToFrame(name) {
-    // TODO: Add dancer to frame through redux on click of name
     if (!this.props.activeDancers.includes(name)) {
       console.log("Add dancer to frame: " + name);
       this.props.dispatch(addDancerToFrame(this.props.danceId, this.props.frameId, name));
@@ -71,6 +85,9 @@ class PerformerList extends React.Component {
     return (
       <div id="performer-list">
         {this.props.dancers.map((dancer, key) => {
+          if (this.state.toRemove.includes(dancer)) {
+            return null;
+          }
           return (
             <Row key={key}>
               <Col span={18} onClick={() => this.addDancerToFrame(dancer)}>
@@ -78,19 +95,23 @@ class PerformerList extends React.Component {
               </Col>
               <Col span={6}>
                 {this.state.editPerformers &&
-                <Icon type="minus" theme="outlined" onClick={() => this.removeDancer(dancer)} />}
+                <Icon type="minus" theme="outlined" onClick={() => this.markDancerForRemoval(dancer)} />}
               </Col>
             </Row>)
         })}
         {!this.state.editPerformers &&
-        <AddPerformerForm nextId={this.props.dancers.length} signalAdd={this.handleSetAdd.bind(this)} signalCancel={this.handleCancelAction.bind(this)} />
+        <AddPerformerForm nextId={this.props.dancers.length + 1}
+                          handleSetAdd={this.handleSetAdd.bind(this)}
+                          handleCancelAction={this.handleCancelAction.bind(this)}
+                          handleAddition={this.handleAddition.bind(this)}
+        />
         }
         {!this.state.addPerformer && !this.state.editPerformers &&
         <Button type={"default"} icon="edit" ghost block onClick={this.handleSetToggle}>Edit Performers</Button>
         }
         {this.state.editPerformers && (
           <div>
-            <Button type={"default"} block onClick={this.handleCancelAction}>APPLY</Button>
+            <Button type={"default"} block onClick={this.handleRemoval}>APPLY</Button>
             <Button type={"default"} block onClick={this.handleCancelAction}>CANCEL</Button>
           </div>
         )}

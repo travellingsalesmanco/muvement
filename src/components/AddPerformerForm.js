@@ -32,7 +32,7 @@ class AddPerformerForm extends React.Component {
     const nextKeys = keys.concat(this.state.nextKey);
     // Notify parent that adding is beginning
     if (this.state.nextKey === 0) {
-      this.props.signalAdd();
+      this.props.handleSetAdd();
     }
     this.setState({
       nextKey: this.state.nextKey + 1
@@ -47,7 +47,7 @@ class AddPerformerForm extends React.Component {
   clearAll = () => {
     const { form } = this.props;
     // Notify parent that adding is cancelled
-    this.props.signalCancel();
+    this.props.handleCancelAction();
     form.setFieldsValue({
       keys: []
     });
@@ -61,6 +61,8 @@ class AddPerformerForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        this.props.handleAddition(values.names);
+        this.clearAll();
       }
     });
   };
