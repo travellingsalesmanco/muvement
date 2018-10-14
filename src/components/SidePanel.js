@@ -1,4 +1,4 @@
-import {Drawer, Button} from "antd";
+import { Drawer } from "antd";
 import React from 'react';
 import './SidePanel.css';
 import BorderInnerIcon from "../icons/BorderInnerIcon";
@@ -9,16 +9,16 @@ import StageDimForm from "./StageDimForm";
 class Title extends React.Component {
   render() {
     const performerTitle = (
-      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <UserAddIcon className="side-panel-icon" style={{ fontSize: '34px' }}/>
-        <span style={{fontFamily: 'Futura-Bold', marginLeft: '5px'}}>PERFORMERS</span>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <UserAddIcon className="side-panel-icon" style={{ fontSize: '34px' }} />
+        <span style={{ fontFamily: 'Futura-Bold', marginLeft: '5px' }}>PERFORMERS</span>
       </div>
     );
 
     const stageDimTitle = (
-      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <BorderInnerIcon className="side-panel-icon"  style={{ fontSize: '30px' }}/>
-        <span style={{fontFamily: 'Futura-Bold', marginLeft: '10px'}}>STAGE DIMENSION</span>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <BorderInnerIcon className="side-panel-icon" style={{ fontSize: '30px' }} />
+        <span style={{ fontFamily: 'Futura-Bold', marginLeft: '10px' }}>STAGE DIMENSION</span>
       </div>
     );
     const sampleTitle = (
@@ -45,12 +45,12 @@ class SidePanel extends React.Component {
     if (this.props.id === 1) {
       drawerDisplay = <PerformerList />
     } else if (this.props.id === 4) {
-      drawerDisplay = <StageDimForm/>
+      drawerDisplay = <StageDimForm />
     }
 
     return (
       <Drawer
-        title={<Title id={this.props.id}/>}
+        title={<Title id={this.props.id} />}
         placement={this.props.placement}
         closable={this.props.closable}
         onClose={this.props.onClose}
