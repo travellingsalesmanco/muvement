@@ -71,17 +71,18 @@ class DancerDotsLayer extends PureComponent {
     return (
       <Layer>
         {this.props.dancersLayout.map((dancerLayout) => {
+          const boundPos = this.bindWithinCanvas(dancerLayout.position);
           return (
             <Group
               key={dancerLayout.name}
-              x={dancerLayout.position.x}
-              y={dancerLayout.position.y}
+              x={boundPos.x}
+              y={boundPos.y}
               draggable={editable}
               dragBoundFunc={this.bindWithinCanvas}
               onDragEnd={(e) => this.handleDragEnd(e, dancerLayout.name)}
             >
               <DancerDot radius={CIRCLE_RADIUS} number={dancerLayout.id}
-                name={dancerLayout.name} onSelect={editable ? this.handleSelect: undefined} />
+                name={dancerLayout.name} onSelect={editable ? this.handleSelect : undefined} />
               {
                 editable && dancerLayout.selected
                   ? <DancerLabel name={dancerLayout.name} handleRemove={this.handleRemove} />
