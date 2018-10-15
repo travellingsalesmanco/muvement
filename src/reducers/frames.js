@@ -72,9 +72,9 @@ export default (state = [defaultFrame], action) => {
   switch (action.type) {
 
     case ADD_FRAME: {
-      const {payload: addAt} = action;
+      const { payload: index } = action;
       let frames = state.slice();
-      frames.splice(addAt, 0, defaultFrame);
+      frames.splice(index, 0, defaultFrame);
       return frames;
     }
     case REMOVE_FRAME: {
