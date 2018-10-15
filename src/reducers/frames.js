@@ -9,12 +9,12 @@ import {
   RENAME_DANCER,
   RENAME_FRAME
 } from '../constants/actionTypes';
-import {defaultFrame} from '../constants/defaults';
+import { defaultFrame } from '../constants/defaults';
 
 const frameReducer = (state = defaultFrame, action) => {
   switch (action.type) {
     case ADD_DANCER_TO_FRAME: {
-      const {payload: newDancerWithPos} = action;
+      const { payload: newDancerWithPos } = action;
       return {
         ...state,
         dancers: [...state.dancers, newDancerWithPos]
@@ -22,14 +22,14 @@ const frameReducer = (state = defaultFrame, action) => {
     }
     case REMOVE_DANCER:
     case REMOVE_DANCER_FROM_FRAME: {
-      const {payload: dancerName} = action;
+      const { payload: dancerName } = action;
       return {
         ...state,
         dancers: state.dancers.filter(dancer => dancer.name !== dancerName)
       };
     }
     case MOVE_DANCER: {
-      const {payload: newDancerWithPos} = action;
+      const { payload: newDancerWithPos } = action;
       let newFrameDancers = state.dancers.filter(dancer => dancer.name !== newDancerWithPos.name);
       newFrameDancers.push(newDancerWithPos);
       return {
@@ -38,25 +38,25 @@ const frameReducer = (state = defaultFrame, action) => {
       };
     }
     case RENAME_DANCER: {
-      const {oldName, newName} = action.payload;
+      const { oldName, newName } = action.payload;
       return {
         ...state,
         dancers: state.dancers.map(
           dancer => dancer.name === oldName ?
-            {...dancer, name: newName} :
+            { ...dancer, name: newName } :
             dancer
         )
       }
     }
     case RENAME_FRAME: {
-      const {payload: newName} = action;
+      const { payload: newName } = action;
       return {
         ...state,
         name: newName
       }
     }
     case EDIT_FRAME_DURATION: {
-      const {payload: newDuration} = action;
+      const { payload: newDuration } = action;
       return {
         ...state,
         duration: newDuration
@@ -78,7 +78,7 @@ export default (state = [defaultFrame], action) => {
       return frames;
     }
     case REMOVE_FRAME: {
-      const {payload: indexToRemove} = action;
+      const { payload: indexToRemove } = action;
       let frames = state.slice();
       frames.splice(indexToRemove, 1);
       return frames;
@@ -91,7 +91,7 @@ export default (state = [defaultFrame], action) => {
     }
     default:
       if (action.frameId !== null && action.frameId !== undefined) {
-        const {frameId, ...prunedAction} = action;
+        const { frameId, ...prunedAction } = action;
         return state.map((frame, idx) => idx === frameId ? frameReducer(frame, prunedAction) : frame);
       }
       return state;
