@@ -69,6 +69,36 @@ export function generateGrid(canvasWidth, canvasHeight, gridSize) {
   return lines;
 }
 
+export function relativeToAbsoluteX(origX, rect) {
+  return origX * rect.width + rect.tl.x;
+};
+
+export function relativeToAbsoluteY(origY, rect) {
+  return origY * rect.height + rect.tl.y;
+}
+
+export function absoluteToRelativeX(origX, rect) {
+  return (origX - rect.tl.x) / rect.width;
+};
+
+export function absoluteToRelativeY(origY, rect) {
+  return (origY - rect.tl.y) / rect.height;
+};
+
+export function relativeToAbsolutePoint([x, y], rect) {
+  return {
+    x: relativeToAbsoluteX(x, rect),
+    y: relativeToAbsoluteY(y, rect)
+  }
+}
+
+export function absoluteToRelativePoint({x, y}, rect) {
+  return [
+    absoluteToRelativeX(x, rect),
+    absoluteToRelativeY(y, rect)
+  ]
+}
+
 export function snapToGrid(x, y, canvasWidth, canvasHeight, gridSize) {
   let centerX = canvasWidth / 2;
   let centerY = canvasHeight / 2;
