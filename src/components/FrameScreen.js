@@ -58,7 +58,6 @@ class FrameScreen extends Component {
         sidePanelID: parseInt(item.key),
       });
     } else if (item.key === "2") {
-      console.log("Current: " + this.props.frameId);
       this.props.dispatch(addFrame(this.props.danceId, this.props.frameId + 1));
       this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId + 1))
     }

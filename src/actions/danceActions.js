@@ -67,7 +67,6 @@ export function addFrame(danceId, frameId) {
 }
 
 export function gotoFrame(danceId, targetFrameId) {
-  console.log("GOTO: " + targetFrameId);
   return (dispatch, getState) => {
     // checks if frame is correct
     if (!hasFrame(danceId, targetFrameId, getState())) {
