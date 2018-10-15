@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Row, Col, Icon, Button } from "antd";
 import { removeDancers, addDancers } from "../actions/danceActions"
 import { addDancerToFrame } from "../actions/frameActions"
@@ -10,7 +10,7 @@ class PerformerList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editPerformers: false,
+      removePerformers: false,
       addPerformer: false,
       toRemove: [],
     };
@@ -18,7 +18,7 @@ class PerformerList extends React.Component {
 
   handleSetToggle = () => {
     this.setState({
-      editPerformers: true,
+      removePerformers: true,
       addPerformer: false
     })
   };
@@ -26,14 +26,14 @@ class PerformerList extends React.Component {
   handleSetAdd = () => {
     this.setState({
       addPerformer: true,
-      editPerformers: false
+      removePerformers: false
     })
   };
 
   handleCancelAction = () => {
     this.setState({
       addPerformer: false,
-      editPerformers: false,
+      removePerformers: false,
       toRemove: []
     })
   };
@@ -84,26 +84,26 @@ class PerformerList extends React.Component {
                 <span id="dancer-item" style={this.isActiveDancerStyle(dancer)}>{key + 1}. {dancer}</span>
               </Col>
               <Col span={6}>
-                {this.state.editPerformers &&
+                {this.state.removePerformers &&
                 <Icon type="minus" theme="outlined" onClick={() => this.markDancerForRemoval(dancer)} />}
               </Col>
             </Row>)
         })}
-        {!this.state.editPerformers &&
+        {!this.state.removePerformers &&
         <AddPerformerForm nextId={this.props.dancers.length + 1}
                           handleSetAdd={this.handleSetAdd.bind(this)}
                           handleCancelAction={this.handleCancelAction.bind(this)}
                           handleAddition={this.handleAddition.bind(this)}
         />
         }
-        {!this.state.addPerformer && !this.state.editPerformers &&
-        <Button type={"default"} icon="edit" ghost block onClick={this.handleSetToggle}>Edit Performers</Button>
+        {!this.state.addPerformer && !this.state.removePerformers &&
+        <Button type={"default"} icon="user-delete" ghost block onClick={this.handleSetToggle}>Remove Performers</Button>
         }
-        {this.state.editPerformers && (
-          <div>
+        {this.state.removePerformers && (
+          <Fragment>
             <Button type={"default"} block onClick={this.handleRemoval}>APPLY</Button>
             <Button type={"default"} block onClick={this.handleCancelAction}>CANCEL</Button>
-          </div>
+          </Fragment>
         )}
       </div>
     );
