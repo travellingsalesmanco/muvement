@@ -48,8 +48,8 @@ class DancerDotsLayer extends PureComponent {
     e.cancelBubble = true;
     const targetDancer = this.props.dancers[key].name;
     const newDancerPosition = [
-      absoluteToRelativeX(e.target.x(), this.props.stageLayout),
-      absoluteToRelativeY(e.target.y(), this.props.stageLayout)
+      absoluteToRelativeX(e.target.x(), this.props.stageRect),
+      absoluteToRelativeY(e.target.y(), this.props.stageRect)
     ];
     this.props.dispatch(moveDancer(this.props.danceId, this.props.frameId, targetDancer, newDancerPosition));
   };
@@ -73,7 +73,7 @@ class DancerDotsLayer extends PureComponent {
 
   render() {
     console.log(this.props.width, this.props.height);
-    const { stageLayout, editable } = this.props;
+    const { stageRect, editable } = this.props;
 
     const CIRCLE_RADIUS = 15;
     const ICON_SIZE = 26;
@@ -82,7 +82,7 @@ class DancerDotsLayer extends PureComponent {
     return (
       <Layer>
         {this.props.dancers.map((dancer, key) => {
-          const layout = relativeToAbsolutePoint(dancer.position, stageLayout);
+          const layout = relativeToAbsolutePoint(dancer.position, stageRect);
           return (
             <Group
               key={key}

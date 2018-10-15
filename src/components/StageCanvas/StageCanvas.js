@@ -13,10 +13,10 @@ class StageCanvas extends PureComponent {
     console.log("Stage: ", width, height);
     return (
       <Stage preventDefault={true} width={width} height={height}>
-        <GridLayer danceId={danceId} width={width} height={height} />
-        <StageLayer layout={stageLayout} />
+        <GridLayer grid={stageLayout.grid} />
+        <StageLayer layout={stageLayout.stageRect} />
         <DancerDotsLayer danceId={danceId} frameId={frameId}
-          width={width} height={height} stageLayout={stageLayout}
+          width={width} height={height} stageRect={stageLayout.stageRect}
           editable={editable} />
       </Stage>
     );

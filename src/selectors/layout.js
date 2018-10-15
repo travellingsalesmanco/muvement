@@ -5,25 +5,16 @@ import { calculateStageDimensions, generateGrid } from "../components/stageUtils
 const getCanvasWidthFromProp = (_, props) => props.width;
 const getCanvasHeightFromProp = (_, props) => props.height;
 const getStageDim = (state, props) => state.dances[props.danceId].stageDim;
-const getStageHeight = (state, props) => getStageDim(state, props).height;
-const getStageWidth = (state, props) => getStageDim(state, props).width;
-const getGridSize = (state, props) => getStageDim(state, props).gridSize;
-
 
 export const makeStageLayoutSelector = () => {
   return createSelector(
-    [getCanvasWidthFromProp, getCanvasHeightFromProp, getStageWidth, getStageHeight],
-    (canvasWidth, canvasHeight, stageWidth, stageHeight) => {
-      return calculateStageDimensions(canvasWidth, canvasHeight, stageWidth, stageHeight, 0.05);
-    }
-  )
-};
-
-export const makeGridLayoutSelector = () => {
-  return createSelector(
-    [getCanvasWidthFromProp, getCanvasHeightFromProp, getGridSize],
-    (canvasWidth, canvasHeight, gridSize) => {
-      return generateGrid(canvasWidth, canvasHeight, gridSize * canvasWidth);
+    [getCanvasWidthFromProp, getCanvasHeightFromProp, getStageDim],
+    (canvasWidth, canvasHeight, { width: stageWidth, height: stageHeight, gridSize }) => {
+      const stageRect = calculateStageDimensions(canvasWidth, canvasHeight, stageWidth, stageHeight, 0.05);
+      return {
+        stageRect: stageRect,
+        grid: generateGrid(canvasWidth, canvasHeight, gridSize * (stageRect.width / stageWidth)),
+      }
     }
   )
 };
