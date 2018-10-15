@@ -1,5 +1,5 @@
-import { Breadcrumb, Button, Layout, Menu, Input } from 'antd';
-import React, { Component, Fragment } from 'react';
+import {Breadcrumb, Button, Layout, Menu, Input} from 'antd';
+import React, {Component, Fragment} from 'react';
 import './FrameScreen.css';
 import BorderInnerIcon from "../icons/BorderInnerIcon";
 import FileAddIcon from "../icons/FileAddIcon";
@@ -11,8 +11,9 @@ import UserAddIcon from "../icons/UserAddIcon";
 import Navigation from "./Navigation";
 import SidePanel from "./SidePanel";
 import StageCanvas from "./StageCanvas";
-import { connect } from "react-redux";
-import { renameFrame } from "../actions/frameActions"
+import {connect} from "react-redux";
+import {renameFrame} from "../actions/frameActions"
+import {addFrame, gotoFrame} from "../actions/danceActions";
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -49,13 +50,17 @@ class FrameScreen extends Component {
     }
   };
 
-  showDrawer = (item) => {
+  handleMenuClick = (item) => {
     console.log(item.key);
     if (item.key === "1" || item.key === "4") {
       this.setState({
         visible: true,
         sidePanelID: parseInt(item.key),
       });
+    } else if (item.key === "2") {
+      console.log("Current: " + this.props.frameId);
+      this.props.dispatch(addFrame(this.props.danceId, this.props.frameId + 1));
+      this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId + 1))
     }
   };
   onClose = () => {
@@ -87,17 +92,17 @@ class FrameScreen extends Component {
             endColor="#514a9d"
             idCSS="cool-gradient"
           />
-          <Navigation title={this.props.danceName} history={this.props.history}/>
+          <Navigation title={this.props.danceName} history={this.props.history} />
           <Layout className="contents">
             <Content style={{ display: "flex", flexDirection: "column" }}>
               <div className="section-title-container">
                 <div className="section-title">
                   <div className="section-title-inner">
                     <Input
-                        placeholder="Enter formation name"
-                        value={this.props.frameName}
-                        onChange={this.handleEditName}
-                        onPressEnter={this.handleEditNameConfirm}
+                      placeholder="Enter formation name"
+                      value={this.props.frameName}
+                      onChange={this.handleEditName}
+                      onPressEnter={this.handleEditNameConfirm}
                     />
                   </div>
                 </div>
@@ -109,7 +114,7 @@ class FrameScreen extends Component {
                 }}
               >
                 <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
-                  height={this.state.stageHeight} />
+                             height={this.state.stageHeight} />
               </div>
               <Breadcrumb separator=">" className="breadcrumb">
                 <Breadcrumb.Item>{this.props.danceName}</Breadcrumb.Item>
@@ -121,7 +126,7 @@ class FrameScreen extends Component {
                 mode="inline"
                 className="sider-menu"
                 theme="dark"
-                onClick={this.showDrawer}
+                onClick={this.handleMenuClick}
                 inlineIndent={16}
               >
                 <Menu.Item key="1">
