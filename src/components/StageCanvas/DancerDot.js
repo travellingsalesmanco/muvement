@@ -20,8 +20,8 @@ class DancerDot extends PureComponent {
           verticalAlign={'middle'}
           fill={'white'}
           text={number}
-          onDblClick={(e) => onSelect(e, name)}
-          onDblTap={(e) => onSelect(e, name)}
+          onClick={(e) => onSelect(e, name)}
+          onTap={(e) => onSelect(e, name)}
         />
       </Fragment>
     );
