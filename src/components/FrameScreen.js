@@ -13,7 +13,7 @@ import SidePanel from "./SidePanel";
 import StageCanvas from "./StageCanvas/StageCanvas";
 import {connect} from "react-redux";
 import {renameFrame} from "../actions/frameActions"
-import {addFrame, gotoFrame} from "../actions/danceActions";
+import {addAndSetActiveFrame, gotoFrame} from "../actions/danceActions";
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -58,8 +58,7 @@ class FrameScreen extends Component {
         sidePanelID: parseInt(item.key),
       });
     } else if (item.key === "2") {
-      this.props.dispatch(addFrame(this.props.danceId, this.props.frameId + 1));
-      this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId + 1));
+      this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.frameId + 1));
     } else if (item.key === "5") {
       this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId - 1));
     } else if (item.key === "6") {

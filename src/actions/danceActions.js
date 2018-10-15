@@ -1,4 +1,10 @@
-import {ADD_DANCER, EDIT_STAGE_DIMENSIONS, REMOVE_DANCER, ADD_FRAME, SWITCH_ACTIVE_FRAME} from "../constants/actionTypes";
+import {
+  ADD_DANCER,
+  EDIT_STAGE_DIMENSIONS,
+  REMOVE_DANCER,
+  ADD_FRAME,
+  SWITCH_ACTIVE_FRAME
+} from "../constants/actionTypes";
 
 function containsDancer(danceId, name, state) {
   return state.dances[danceId].dancers.includes(name);
@@ -8,31 +14,35 @@ function hasFrame(danceId, frameId, state) {
   return frameId >= 0 && frameId < state.dances[danceId].frames.length
 }
 
-export function addDancer(danceId, name) {
+export function addDancers(danceId, names) {
   return (dispatch, getState) => {
-    if (!containsDancer(danceId, name, getState())) {
-      dispatch({
-        type: ADD_DANCER,
-        danceId: danceId,
-        payload: name
-      })
-    } else {
-      console.log("[ERROR] Duplicate dancer name")
-    }
+    names.forEach((name) => {
+      if (!containsDancer(danceId, name, getState())) {
+        dispatch({
+          type: ADD_DANCER,
+          danceId: danceId,
+          payload: name
+        })
+      } else {
+        console.log("[ERROR] Duplicate dancer name")
+      }
+    });
   }
 }
 
-export function removeDancer(danceId, name) {
+export function removeDancers(danceId, names) {
   return (dispatch, getState) => {
-    if (containsDancer(danceId, name, getState())) {
-      dispatch({
-        type: REMOVE_DANCER,
-        danceId: danceId,
-        payload: name
-      })
-    } else {
-      console.log("[ERROR] Dancer does not exist")
-    }
+    names.forEach((name) => {
+      if (containsDancer(danceId, name, getState())) {
+        dispatch({
+          type: REMOVE_DANCER,
+          danceId: danceId,
+          payload: name
+        })
+      } else {
+        console.log("[ERROR] Dancer does not exist")
+      }
+    });
   }
 }
 
@@ -52,14 +62,18 @@ export function editStageDimensions(danceId, toEdit) {
   }
 }
 
-export function addFrame(danceId, frameId) {
+export function addAndSetActiveFrame(danceId, frameId) {
   return dispatch => {
-    if (frameId < 0 ) {
+    if (frameId < 0) {
       console.log("[ERROR] Index cannot be negative")
     } else {
       dispatch({
         type: ADD_FRAME,
         danceId: danceId,
+        payload: frameId
+      });
+      dispatch({
+        type: SWITCH_ACTIVE_FRAME,
         payload: frameId
       })
     }

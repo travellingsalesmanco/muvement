@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Icon, Button } from "antd";
-import { removeDancer, addDancer } from "../actions/danceActions"
+import { removeDancers, addDancers } from "../actions/danceActions"
 import { addDancerToFrame } from "../actions/frameActions"
 import { connect } from 'react-redux';
 import './PerformerList.css';
@@ -39,20 +39,12 @@ class PerformerList extends React.Component {
   };
 
   handleRemoval = () => {
-    // TODO: make bulk action
-    this.state.toRemove.forEach((dancer) => {
-      console.log("Remove dancer: " + dancer);
-      this.props.dispatch(removeDancer(this.props.danceId, dancer));
-    });
+    this.props.dispatch(removeDancers(this.props.danceId, this.state.toRemove));
     this.handleCancelAction();
   };
 
   handleAddition = (nameArr) => {
-    // TODO: make bulk action
-    nameArr.forEach((dancer) => {
-      console.log("Add dancer: " + dancer);
-      this.props.dispatch(addDancer(this.props.danceId, dancer))
-    });
+    this.props.dispatch(addDancers(this.props.danceId, nameArr));
   };
 
   markDancerForRemoval(name) {
