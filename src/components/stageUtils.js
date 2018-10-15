@@ -11,6 +11,16 @@
  * @param padding The (percentage) amount to padding to add to the stage (w.r.t. the canvas)
  */
 export function calculateStageDimensions(canvasWidth, canvasHeight, stageWidth, stageHeight, padding) {
+  if (canvasWidth === 0 || canvasHeight === 0 || stageWidth === 0 || stageHeight === 0) {
+    return {
+      width: 0,
+      height: 0,
+      tl: {
+        x: 0,
+        y: 0
+      }
+    }
+  }
   const paddedScale = 1 - 2 * padding; // The scaling to apply on a dimension to achieve padding
   // Aspect ratios
   let canvasAspect = canvasWidth / canvasHeight;
@@ -45,6 +55,9 @@ export function calculateStageDimensions(canvasWidth, canvasHeight, stageWidth, 
  * @returns {Array} of line coordinates
  */
 export function generateGrid(canvasWidth, canvasHeight, gridSize) {
+  if (canvasWidth === 0 || canvasHeight === 0 || gridSize === 0) {
+    return [];
+  }
   let lines = [];
   let centerX = canvasWidth / 2;
   let centerY = canvasHeight / 2;
@@ -78,10 +91,16 @@ export function relativeToAbsoluteY(origY, rect) {
 }
 
 export function absoluteToRelativeX(origX, rect) {
+  if (rect.width === 0) {
+    return 0;
+  }
   return (origX - rect.tl.x) / rect.width;
 };
 
 export function absoluteToRelativeY(origY, rect) {
+  if (rect.height === 0) {
+    return 0;
+  }
   return (origY - rect.tl.y) / rect.height;
 };
 
@@ -92,7 +111,7 @@ export function relativeToAbsolutePoint([x, y], rect) {
   }
 }
 
-export function absoluteToRelativePoint({x, y}, rect) {
+export function absoluteToRelativePoint({ x, y }, rect) {
   return [
     absoluteToRelativeX(x, rect),
     absoluteToRelativeY(y, rect)
