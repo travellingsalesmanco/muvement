@@ -1,4 +1,4 @@
-import { Breadcrumb, Button, Layout, Menu } from 'antd';
+import { Breadcrumb, Button, Layout, Menu, Input } from 'antd';
 import React, { Component, Fragment } from 'react';
 import './FrameScreen.css';
 import BorderInnerIcon from "../icons/BorderInnerIcon";
@@ -12,6 +12,7 @@ import Navigation from "./Navigation";
 import SidePanel from "./SidePanel";
 import StageCanvas from "./StageCanvas";
 import { connect } from "react-redux";
+import { renameFrame } from "../actions/frameActions"
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class FrameScreen extends Component {
       stageWidth: 100,
       stageHeight: 100,
       sidePanelID: 0,
+      frameName: '',
     }
   }
 
@@ -63,6 +65,18 @@ class FrameScreen extends Component {
     });
   };
 
+  handleEditName = e => {
+    this.setState({
+      frameName: e.target.value,
+    }, () => {
+      this.props.dispatch(renameFrame(this.props.danceId, this.props.frameId, this.state.frameName));
+    });
+  };
+
+  handleEditNameConfirm = e => {
+    e.target.blur();
+  };
+
   render() {
     const { Content, Sider } = Layout;
     return (
@@ -79,7 +93,12 @@ class FrameScreen extends Component {
               <div className="section-title-container">
                 <div className="section-title">
                   <div className="section-title-inner">
-                    <h3>{this.props.frameName} ({this.props.frameNumSeconds} seconds)</h3>
+                    <Input
+                        placeholder="Enter formation name"
+                        value={this.props.frameName}
+                        onChange={this.handleEditName}
+                        onPressEnter={this.handleEditNameConfirm}
+                    />
                   </div>
                 </div>
               </div>
