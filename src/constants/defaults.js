@@ -4,9 +4,9 @@ export const defaultFrame = {
   dancers: []
 };
 export const defaultStageDim = {
-  width: 5,
-  height: 8,
-  gridSize: 0.05,
+  width: 9.6,
+  height: 5.18,
+  gridSize: 0.5,
   units: 'm'
 };
 export const defaultUI = {
@@ -16,12 +16,7 @@ export const defaultUI = {
 };
 export const dummyDance = {
   name: "NUS Blast! Showcase",
-  stageDim: {
-    width: 9.6,
-    height: 5.18,
-    gridSize: 0.05,
-    unit: 'm'
-  },
+  stageDim: defaultStageDim,
   dancers: ["Bob", "Marley", "And", "Me", "John"],
   frames: [
     {
