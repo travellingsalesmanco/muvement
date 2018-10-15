@@ -10,7 +10,7 @@ import RightArrowIcon from "../icons/RightArrowIcon";
 import UserAddIcon from "../icons/UserAddIcon";
 import Navigation from "./Navigation";
 import SidePanel from "./SidePanel";
-import StageCanvas from "./StageCanvas";
+import StageCanvas from "./StageCanvas/StageCanvas";
 import {connect} from "react-redux";
 import {renameFrame} from "../actions/frameActions"
 import {addFrame, gotoFrame} from "../actions/danceActions";
