@@ -15,21 +15,13 @@ class DancerDotsLayer extends PureComponent {
     this.state = {
       selectedDancer: null
     };
-    this.nameLabels = [];
+
     this.handleDragEnd = this.handleDragEnd.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.bindWithinCanvas = this.bindWithinCanvas.bind(this)
   }
-
-  componentDidMount() {
-    this.setState({
-      labelWidth: this.nameLabels.map(textLabel => {
-        return textLabel.getWidth()
-      })
-    });
-  }
-
+  
   bindWithinCanvas(pos) {
     let newX = pos.x;
     let newY = pos.y;
