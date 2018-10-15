@@ -5,6 +5,8 @@ import { calculateStageDimensions, generateGrid } from "../components/stageUtils
 const getCanvasWidthFromProp = (_, props) => props.width;
 const getCanvasHeightFromProp = (_, props) => props.height;
 const getStageDim = (state, props) => state.dances[props.danceId].stageDim;
+const getDancers = (state, props) => state.dances[props.danceId].dancers;
+const getFrameDancers = (state, props) => state.dances[props.danceId].frames[props.frameId].dancers;
 
 export const makeStageLayoutSelector = () => {
   return createSelector(
@@ -18,3 +20,17 @@ export const makeStageLayoutSelector = () => {
     }
   )
 };
+
+export const makeDancerLayoutSelector = () => {
+  return createSelector(
+    [getDancers, getFrameDancers],
+    (dancers, frameDancers) => frameDancers.map(
+      (dancer) => {
+        return {
+          ...dancer,
+          id: dancers.indexOf(dancer.name) + 1
+        }
+      }
+    )
+  )
+}

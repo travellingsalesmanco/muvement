@@ -5,6 +5,7 @@ import { moveDancer, removeDancerFromFrame } from '../../actions/frameActions';
 import { absoluteToRelativeX, absoluteToRelativeY, relativeToAbsolutePoint } from '../stageUtils';
 import DancerDot from './DancerDot';
 import DancerLabel from './DancerLabel';
+import { makeDancerLayoutSelector } from '../../selectors/layout';
 
 
 class DancerDotsLayer extends PureComponent {
@@ -103,16 +104,12 @@ class DancerDotsLayer extends PureComponent {
 }
 
 
-const mapStateToProps = (state, props) => {
-  let dancers = state.dances[props.danceId].dancers;
-  return {
-    dancers: state.dances[props.danceId].frames[props.frameId].dancers.map((dancer) => {
-      let id = dancers.indexOf(dancer.name);
-      return {
-        ...dancer,
-        id: id + 1
-      }
-    })
+const makeMapStateToProps = () => {
+  const getDancerLayout = makeDancerLayoutSelector();
+  return (state, props) => {
+    return {
+      dancers: getDancerLayout(state, props)
+    }
   }
 };
-export default connect(mapStateToProps)(DancerDotsLayer);
+export default connect(makeMapStateToProps)(DancerDotsLayer);
