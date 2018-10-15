@@ -3,7 +3,8 @@ import { Circle, Text } from 'react-konva';
 
 class DancerDot extends PureComponent {
   render() {
-    const { radius, number, onSelect } = this.props;
+    const { radius, number, name, onSelect } = this.props;
+    console.log(name, " dot rendered");
     return (
       <Fragment>
         <Circle
@@ -19,8 +20,8 @@ class DancerDot extends PureComponent {
           verticalAlign={'middle'}
           fill={'white'}
           text={number}
-          onDblClick={onSelect}
-          onDblTap={onSelect}
+          onDblClick={(e) => onSelect(e, name)}
+          onDblTap={(e) => onSelect(e, name)}
         />
       </Fragment>
     );

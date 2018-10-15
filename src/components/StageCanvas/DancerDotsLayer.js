@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Group, Layer } from 'react-konva';
 import { connect } from 'react-redux';
 import { moveDancer, removeDancerFromFrame } from '../../actions/frameActions';
+import { DESELECT_DANCER, SELECT_DANCER } from '../../constants/actionTypes';
 import { makeDancersLayoutSelector } from '../../selectors/layout';
 import { absoluteToRelativeX, absoluteToRelativeY } from '../stageUtils';
 import DancerDot from './DancerDot';
@@ -15,7 +16,10 @@ class DancerDotsLayer extends PureComponent {
       selectedDancer: null
     };
     this.nameLabels = [];
-
+    this.handleDragEnd = this.handleDragEnd.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
+    this.bindWithinCanvas = this.bindWithinCanvas.bind(this)
   }
 
   componentDidMount() {
@@ -45,53 +49,52 @@ class DancerDotsLayer extends PureComponent {
     }
   }
 
-  handleDragEnd = (e, key) => {
+  handleDragEnd(e, dancerName) {
     e.cancelBubble = true;
-    const targetDancer = this.props.dancersLayout[key].name;
     const newDancerPosition = [
       absoluteToRelativeX(e.target.x(), this.props.stageRect),
       absoluteToRelativeY(e.target.y(), this.props.stageRect)
     ];
-    this.props.dispatch(moveDancer(this.props.danceId, this.props.frameId, targetDancer, newDancerPosition));
+    this.props.dispatch(moveDancer(this.props.danceId, this.props.frameId, dancerName, newDancerPosition));
   };
 
-  handleSelect = (e, key) => {
+  handleSelect(e, dancerName) {
     e.cancelBubble = true;
-    let newDancerSelection = this.state.isDancerSelected.slice();
-    newDancerSelection[key] = !newDancerSelection[key];
-    this.setState({
-      isDancerSelected: newDancerSelection
-    });
+    if (this.props.selectedDancers.includes(dancerName)) {
+      this.props.dispatch({ type: DESELECT_DANCER, payload: dancerName })
+    } else {
+      this.props.dispatch({ type: SELECT_DANCER, payload: dancerName })
+    }
   };
 
-  // TODO: Handle width issues to remaining nodes when deleting, might be shifted out to parent component
-  handleRemove = (e, key) => {
+  handleRemove(e, dancerName) {
     e.cancelBubble = true;
-    let targetDancer = this.props.dancersLayout[key].name;
-    console.log("Remove dancer: " + targetDancer);
-    this.props.dispatch(removeDancerFromFrame(this.props.danceId, this.props.frameId, targetDancer));
+    console.log("Remove dancer: " + dancerName);
+    this.props.dispatch(removeDancerFromFrame(this.props.danceId, this.props.frameId, dancerName));
   };
 
   render() {
     const { editable } = this.props;
     const CIRCLE_RADIUS = 15;
-    const ICON_SIZE = 26;
-    const FONT_SIZE = 15;
-    const TEXT_PADDING = 10;
     return (
       <Layer>
-        {this.props.dancersLayout.map((dancerLayout, key) => {
+        {this.props.dancersLayout.map((dancerLayout) => {
           return (
             <Group
-              key={key}
+              key={dancerLayout.name}
               x={dancerLayout.position.x}
               y={dancerLayout.position.y}
               draggable={editable}
-              dragBoundFunc={(pos) => this.bindWithinCanvas(pos)}
-              onDragEnd={(e) => this.handleDragEnd(e, key)}
+              dragBoundFunc={this.bindWithinCanvas}
+              onDragEnd={(e) => this.handleDragEnd(e, dancerLayout.name)}
             >
-              <DancerDot radius={CIRCLE_RADIUS} number={dancerLayout.id} onSelect={(e) => this.handleSelect(e, key)} />
-              <DancerLabel />
+              <DancerDot radius={CIRCLE_RADIUS} number={dancerLayout.id}
+                name={dancerLayout.name} onSelect={editable ? this.handleSelect: undefined} />
+              {
+                editable && dancerLayout.selected
+                  ? <DancerLabel name={dancerLayout.name} handleRemove={this.handleRemove} />
+                  : null
+              }
             </Group>
           )
         })}
@@ -105,7 +108,8 @@ const makeMapStateToProps = () => {
   const getDancersLayout = makeDancersLayoutSelector();
   return (state, props) => {
     return {
-      dancersLayout: getDancersLayout(state, props)
+      dancersLayout: getDancersLayout(state, props),
+      selectedDancers: state.UI.selectedDancers
     }
   }
 };
