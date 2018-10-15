@@ -3,7 +3,7 @@ import { Layer, Rect } from 'react-konva';
 
 class StageLayer extends PureComponent {
   render() {
-    console.log("stage rendered")
+    console.log("stage rendered");
     const { layout } = this.props;
     return (
       <Layer>

@@ -16,9 +16,9 @@ class DancerDotsLayer extends PureComponent {
       selectedDancer: null
     };
     this.nameLabels = [];
-    this.handleDragEnd = this.handleDragEnd.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
-    this.handleSelect = this.handleSelect.bind(this)
+    this.handleDragEnd = this.handleDragEnd.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     this.bindWithinCanvas = this.bindWithinCanvas.bind(this)
   }
 
@@ -32,7 +32,7 @@ class DancerDotsLayer extends PureComponent {
 
   bindWithinCanvas(pos) {
     let newX = pos.x;
-    let newY = pos.y
+    let newY = pos.y;
     if (pos.x < 0) {
       newX = 0;
     } else if (pos.x > this.props.width) {
