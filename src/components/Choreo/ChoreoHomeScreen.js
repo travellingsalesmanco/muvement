@@ -65,7 +65,7 @@ class ChoreoHomeScreen extends React.Component {
                 <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.goBack()}/>
               </div>
             <div className="title">
-              <h3 style={{ color: '#fff'}}>NUS BLAST! SHOWCASE</h3>
+              <h3 style={{ color: '#fff'}}>{this.props.name}</h3>
             </div>
             <div className="right-container">
               <Menu mode="horizontal" theme="dark">
@@ -116,7 +116,8 @@ class ChoreoHomeScreen extends React.Component {
 const mapStateToProps = state => {
   console.log(state.dances[state.UI.activeDance]);
   return {
-    frames: state.dances[state.UI.activeDance].frames
+    frames: state.dances[state.UI.activeDance].frames,
+    name: state.dances[state.UI.activeDance].name
   }
 };
 
