@@ -1,7 +1,11 @@
-import {ADD_DANCER, EDIT_STAGE_DIMENSIONS, REMOVE_DANCER} from "../constants/actionTypes";
+import {ADD_DANCER, EDIT_STAGE_DIMENSIONS, REMOVE_DANCER, ADD_FRAME, SWITCH_ACTIVE_FRAME} from "../constants/actionTypes";
 
 function containsDancer(danceId, name, state) {
   return state.dances[danceId].dancers.includes(name);
+}
+
+function hasFrame(danceId, frameId, state) {
+  return frameId >= 0 && frameId < state.dances[danceId].frames.length
 }
 
 export function addDancer(danceId, name) {
@@ -43,6 +47,35 @@ export function editStageDimensions(danceId, toEdit) {
         type: EDIT_STAGE_DIMENSIONS,
         danceId: danceId,
         payload: toEdit
+      })
+    }
+  }
+}
+
+export function addFrame(danceId, frameId) {
+  return dispatch => {
+    if (frameId < 0 ) {
+      console.log("[ERROR] Index cannot be negative")
+    } else {
+      dispatch({
+        type: ADD_FRAME,
+        danceId: danceId,
+        payload: frameId
+      })
+    }
+  }
+}
+
+export function gotoFrame(danceId, targetFrameId) {
+  console.log("GOTO: " + targetFrameId);
+  return (dispatch, getState) => {
+    // checks if frame is correct
+    if (!hasFrame(danceId, targetFrameId, getState())) {
+      console.log("[ERROR] Index out of bounds")
+    } else {
+      dispatch({
+        type: SWITCH_ACTIVE_FRAME,
+        payload: targetFrameId
       })
     }
   }
