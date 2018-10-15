@@ -11,7 +11,8 @@ export const defaultStageDim = {
 };
 export const defaultUI = {
   activeDance: 0,
-  activeFrame: 0
+  activeFrame: 0,
+  selectedDancers: []
 };
 export const dummyDance = {
   name: "NUS Blast! Showcase",

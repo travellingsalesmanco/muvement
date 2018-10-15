@@ -1,10 +1,10 @@
-import {SWITCH_ACTIVE_DANCE, SWITCH_ACTIVE_FRAME} from "../constants/actionTypes";
-import {defaultUI} from "../constants/defaults";
+import { CLEAR_DANCER_SELECTION, DESELECT_DANCER, SELECT_DANCER, SWITCH_ACTIVE_DANCE, SWITCH_ACTIVE_FRAME } from "../constants/actionTypes";
+import { defaultUI } from "../constants/defaults";
 
 export default (state = defaultUI, action) => {
   switch (action.type) {
     case SWITCH_ACTIVE_DANCE: {
-      const {payload: danceId} = action;
+      const { payload: danceId } = action;
       return {
         ...state,
         activeDance: danceId,
@@ -12,12 +12,33 @@ export default (state = defaultUI, action) => {
       }
     }
     case SWITCH_ACTIVE_FRAME: {
-      const {payload: frameId} = action;
+      const { payload: frameId } = action;
       return {
         ...state,
         activeFrame: frameId
       }
     }
+    case SELECT_DANCER: {
+      const { payload: dancerName } = action;
+      return {
+        ...state,
+        selectedDancers: [...state.selectedDancers, dancerName]
+      }
+    }
+    case DESELECT_DANCER: {
+      const { payload: dancerName } = action;
+      return {
+        ...state,
+        selectedDancers: state.selectedDancers.filter(name => name !== dancerName)
+      }
+    }
+    case CLEAR_DANCER_SELECTION: {
+      return {
+        ...state,
+        selectedDancers: []
+      }
+    }
+
     default:
       return state;
   }
