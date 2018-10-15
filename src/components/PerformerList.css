@@ -27,6 +27,6 @@
   cursor: pointer;
 }
 
-.anticon-user-add, .anticon-edit{
+.anticon-user-add, .anticon-user-delete{
   font-size: 20px;
 }

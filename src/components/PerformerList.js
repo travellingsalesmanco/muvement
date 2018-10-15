@@ -16,7 +16,7 @@ class PerformerList extends React.Component {
     };
   }
 
-  handleSetToggle = () => {
+  handleRemoveToggle = () => {
     this.setState({
       removePerformers: true,
       addPerformer: false
@@ -72,39 +72,58 @@ class PerformerList extends React.Component {
   }
 
   render() {
+    let performerListDisplay;
+    if (this.state.removePerformers) {
+      // Removal state
+      performerListDisplay =
+        <Fragment>
+          {this.props.dancers.map((dancer, key) => {
+            if (this.state.toRemove.includes(dancer)) {
+              return null;
+            }
+            return (
+              <Row key={key}>
+                <Col span={18} onClick={() => this.addDancerToFrame(dancer)}>
+                  <span id="dancer-item" style={this.isActiveDancerStyle(dancer)}>{key + 1}. {dancer}</span>
+                </Col>
+                <Col span={6}>
+                  <Icon type="minus" theme="outlined" onClick={() => this.markDancerForRemoval(dancer)} />
+                </Col>
+              </Row>)
+          })}
+          <Button type={"default"} block onClick={this.handleRemoval}>APPLY</Button>
+          <Button type={"default"} block onClick={this.handleCancelAction}>CANCEL</Button>
+        </Fragment>
+    } else {
+      // Default or add performer state
+      performerListDisplay =
+        <Fragment>
+          {this.props.dancers.map((dancer, key) => {
+            if (this.state.toRemove.includes(dancer)) {
+              return null;
+            }
+            return (
+              <Row key={key}>
+                <Col span={18} onClick={() => this.addDancerToFrame(dancer)}>
+                  <span id="dancer-item" style={this.isActiveDancerStyle(dancer)}>{key + 1}. {dancer}</span>
+                </Col>
+              </Row>)
+          })}
+          <AddPerformerForm
+            nextId={this.props.dancers.length + 1}
+            handleSetAdd={this.handleSetAdd.bind(this)}
+            handleCancelAction={this.handleCancelAction.bind(this)}
+            handleAddition={this.handleAddition.bind(this)}
+          />
+          {!this.state.addPerformer &&
+          <Button type={"default"} icon="user-delete" ghost block
+                  onClick={this.handleRemoveToggle}>Edit Performers</Button>
+          }
+        </Fragment>
+    }
     return (
       <div id="performer-list">
-        {this.props.dancers.map((dancer, key) => {
-          if (this.state.toRemove.includes(dancer)) {
-            return null;
-          }
-          return (
-            <Row key={key}>
-              <Col span={18} onClick={() => this.addDancerToFrame(dancer)}>
-                <span id="dancer-item" style={this.isActiveDancerStyle(dancer)}>{key + 1}. {dancer}</span>
-              </Col>
-              <Col span={6}>
-                {this.state.removePerformers &&
-                <Icon type="minus" theme="outlined" onClick={() => this.markDancerForRemoval(dancer)} />}
-              </Col>
-            </Row>)
-        })}
-        {!this.state.removePerformers &&
-        <AddPerformerForm nextId={this.props.dancers.length + 1}
-                          handleSetAdd={this.handleSetAdd.bind(this)}
-                          handleCancelAction={this.handleCancelAction.bind(this)}
-                          handleAddition={this.handleAddition.bind(this)}
-        />
-        }
-        {!this.state.addPerformer && !this.state.removePerformers &&
-        <Button type={"default"} icon="user-delete" ghost block onClick={this.handleSetToggle}>Remove Performers</Button>
-        }
-        {this.state.removePerformers && (
-          <Fragment>
-            <Button type={"default"} block onClick={this.handleRemoval}>APPLY</Button>
-            <Button type={"default"} block onClick={this.handleCancelAction}>CANCEL</Button>
-          </Fragment>
-        )}
+        {performerListDisplay}
       </div>
     );
   }
