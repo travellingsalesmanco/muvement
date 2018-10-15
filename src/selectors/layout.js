@@ -1,12 +1,15 @@
 import { createSelector } from 'reselect';
-import { calculateStageDimensions, generateGrid } from "../components/stageUtils";
+import { calculateStageDimensions, generateGrid, relativeToAbsolutePoint } from "../components/stageUtils";
 
 // Simple retrieval selectors (no transformations), no need to memoize
 const getCanvasWidthFromProp = (_, props) => props.width;
 const getCanvasHeightFromProp = (_, props) => props.height;
+const getStageRectFromProp = (_, props) => props.stageRect;
+
 const getStageDim = (state, props) => state.dances[props.danceId].stageDim;
 const getDancers = (state, props) => state.dances[props.danceId].dancers;
 const getFrameDancers = (state, props) => state.dances[props.danceId].frames[props.frameId].dancers;
+
 
 export const makeStageLayoutSelector = () => {
   return createSelector(
@@ -21,13 +24,14 @@ export const makeStageLayoutSelector = () => {
   )
 };
 
-export const makeDancerLayoutSelector = () => {
+export const makeDancersLayoutSelector = () => {
   return createSelector(
-    [getDancers, getFrameDancers],
-    (dancers, frameDancers) => frameDancers.map(
+    [getDancers, getFrameDancers, getStageRectFromProp],
+    (dancers, frameDancers, stageRect) => frameDancers.map(
       (dancer) => {
         return {
           ...dancer,
+          position: relativeToAbsolutePoint(dancer.position, stageRect),
           id: dancers.indexOf(dancer.name) + 1
         }
       }
