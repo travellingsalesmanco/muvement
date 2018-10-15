@@ -23,12 +23,19 @@
 
 .section-title {
     border-radius: 50px;
-    border: 2px solid #514A9D;
-    box-shadow: 0px 0px 50px  #514A9D;
-    text-align: center;
-    padding: 0.5em 5em;
+    /*border: 2px solid #514A9D;*/
+    box-shadow: 0px 0px 20px  #514A9D;
     margin: 2rem 0;
     position: relative;
+    padding: 2px 2px;
+    background-image: linear-gradient(to right, #24c6dc, #514a9d);
+}
+
+.section-title-inner {
+  background: #131313;
+  text-align: center;
+  padding: 0.5em 5em;
+  border-radius: 50px;
 }
 
 .section-title h3 {
