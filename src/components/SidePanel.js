@@ -21,9 +21,6 @@ class Title extends React.Component {
         <span style={{ fontFamily: 'Futura-Bold', marginLeft: '10px' }}>STAGE DIMENSION</span>
       </div>
     );
-    const sampleTitle = (
-      <p>Drawer</p>
-    );
     return (
       <div>
         {
@@ -31,7 +28,7 @@ class Title extends React.Component {
             ? performerTitle
             : this.props.id === 4
             ? stageDimTitle
-            : sampleTitle
+            : null
         }
       </div>
     );
