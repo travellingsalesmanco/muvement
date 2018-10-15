@@ -9,6 +9,7 @@ const getStageRectFromProp = (_, props) => props.stageRect;
 const getStageDim = (state, props) => state.dances[props.danceId].stageDim;
 const getDancers = (state, props) => state.dances[props.danceId].dancers;
 const getFrameDancers = (state, props) => state.dances[props.danceId].frames[props.frameId].dancers;
+const getSelectedDancers = (state, props) => state.UI.selectedDancers;
 
 
 export const makeStageLayoutSelector = () => {
@@ -26,13 +27,14 @@ export const makeStageLayoutSelector = () => {
 
 export const makeDancersLayoutSelector = () => {
   return createSelector(
-    [getDancers, getFrameDancers, getStageRectFromProp],
-    (dancers, frameDancers, stageRect) => frameDancers.map(
+    [getDancers, getFrameDancers, getSelectedDancers, getStageRectFromProp],
+    (dancers, frameDancers, selectedDancers, stageRect) => frameDancers.map(
       (dancer) => {
         return {
           ...dancer,
           position: relativeToAbsolutePoint(dancer.position, stageRect),
-          id: dancers.indexOf(dancer.name) + 1
+          id: dancers.indexOf(dancer.name) + 1,
+          selected: selectedDancers.includes(dancer.name)
         }
       }
     )
