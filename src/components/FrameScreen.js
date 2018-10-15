@@ -59,7 +59,11 @@ class FrameScreen extends Component {
       });
     } else if (item.key === "2") {
       this.props.dispatch(addFrame(this.props.danceId, this.props.frameId + 1));
-      this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId + 1))
+      this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId + 1));
+    } else if (item.key === "5") {
+      this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId - 1));
+    } else if (item.key === "6") {
+      this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId + 1));
     }
   };
   onClose = () => {
