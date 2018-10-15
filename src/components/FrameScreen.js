@@ -78,7 +78,9 @@ class FrameScreen extends Component {
             <Content style={{ display: "flex", flexDirection: "column" }}>
               <div className="section-title-container">
                 <div className="section-title">
-                  <h3>{this.props.frameName} ({this.props.frameNumSeconds} seconds)</h3>
+                  <div className="section-title-inner">
+                    <h3>{this.props.frameName} ({this.props.frameNumSeconds} seconds)</h3>
+                  </div>
                 </div>
               </div>
               <div
