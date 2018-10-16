@@ -9,6 +9,7 @@ class FormationPreviewCards extends React.Component {
     clickHandler = (index) => {
       if (index === 0) {
         this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.lastFrameIndex + 1));
+        this.props.history.push(`${this.props.match.url}/frame`)
       } else {
         this.props.history.push(`${this.props.match.url}/frame`)
       }
