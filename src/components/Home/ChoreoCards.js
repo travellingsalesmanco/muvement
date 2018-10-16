@@ -1,20 +1,41 @@
 import React from 'react';
-import {Row, Col, Card, Icon} from 'antd';
+import {Row, Col, Card, Icon, Modal, Input, Button} from 'antd';
 import './ChoreoCards.css';
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from '../../icons/GradientSVG';
-import {BrowserRouter as Route, BrowserRouter as Link, withRouter} from "react-router-dom";
-import ChoreoHomeScreen from "../Choreo/ChoreoHomeScreen";
+import {withRouter} from "react-router-dom";
 
 class ChoreoCards extends React.Component {
-  clickHandler = () => {
-    console.log("clicked")
+  state = {
+    modalVisible: false,
+    newChoreoName: ''
+  };
+
+  setModalVisible(modalVisible) {
+    this.setState({ modalVisible });
+  }
+
+  clickHandler = (index) => {
+    if (index === 0) { // because new-choreo is prepended
+      this.setModalVisible(true);
+    } else {
+      this.props.history.push(`/choreo/${index - 1}`)
+    }
+  };
+
+  handleNewChoreo = e => {
+    this.setState({
+      newChoreoName: e.target.value,
+    });
+  };
+
+  handleNewChoreoConfirm = () => {
+
   };
   render() {
     const data = this.props.data.slice();
     // Prepend "New Card" to start of array of cards
     data.unshift({ name: "New Choreography" });
-    console.log(this.props.match);
     return (
       <div>
         <GradientSVG
@@ -32,6 +53,7 @@ class ChoreoCards extends React.Component {
                       hoverable
                       bordered={false}
                       className="choreo-card"
+                      onClick={() => this.clickHandler(index)}
                     >
                         {
                           index === 0
@@ -60,7 +82,7 @@ class ChoreoCards extends React.Component {
                             hoverable
                             bordered={false}
                             className="choreo-card"
-                            onClick={() => this.props.history.push(`/choreo/${index + 1}`)}
+                            onClick={() => this.props.history.push(`/choreo/${index}`)}
                           >
                               <div className="ant-card-cover">
                                 <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
@@ -82,6 +104,25 @@ class ChoreoCards extends React.Component {
             }
           })
         }
+        <Modal
+          centered
+          visible={this.state.modalVisible}
+          onOk={() => this.setModalVisible(false)}
+          onCancel={() => this.setModalVisible(false)}
+          footer={null}
+          className="new-choreo-modal"
+        >
+          <div className="new-choreo-modal-inner">
+            <h3>NEW STAGE NAME</h3>
+            <Input
+              placeholder="Enter formation name"
+              value={this.state.newChoreoName}
+              onChange={this.handleNewChoreo}
+              onPressEnter={this.handleNewChoreoConfirm}
+            />
+            <Button block>START</Button>
+          </div>
+        </Modal>
       </div>
     );
   }

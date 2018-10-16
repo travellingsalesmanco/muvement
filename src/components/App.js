@@ -11,7 +11,7 @@ class App extends Component {
         {/*<Switch>*/}
           <Route exact path="/" component={HomeScreen}/>
           <Route exact path={`/choreo/:choreoId`} component={ChoreoHomeScreen} />
-          <Route path={`/choreo/:choreoId/frame/:frameId`} component={FrameScreen} />
+          <Route path={`/choreo/:choreoId/frame`} component={FrameScreen} />
         {/*</Switch>*/}
       </div>
     );

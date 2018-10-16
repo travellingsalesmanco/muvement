@@ -53,3 +53,48 @@
   color: #fff;
   font-family: 'Futura-Medium';
 }
+
+.new-choreo-modal .ant-modal-content {
+  /*border: 5px solid #24c6dc;*/
+  padding: 2px 2px;
+  background-image: linear-gradient(to right, #24c6dc, #514a9d);
+  border-radius: 15px;
+}
+
+.new-choreo-modal .ant-modal-close {
+  color: #fff;
+}
+
+.new-choreo-modal .ant-modal-body {
+  padding: 0;
+}
+
+.new-choreo-modal-inner {
+  background: #131313;
+  padding: 24px;
+  border-radius: 15px;
+  color: #fff;
+  text-align: center;
+}
+
+.new-choreo-modal-inner h3 {
+  font-family: 'Futura-Bold', Arial, sans-serif;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.new-choreo-modal-inner .ant-input {
+  background-image: linear-gradient(to right, #24c6dc, #514a9d);
+  border: 0;
+  color: #fff;
+  font-family: 'Futura-Medium', Arial, sans-serif;
+  border-radius: 15px;
+}
+
+.new-choreo-modal-inner > button {
+  border-radius: 15px;
+  margin-top: 20px;
+  border: 2px solid #24c6dc;
+  font-family: 'Futura-Medium', Arial, sans-serif;
+  color: #24c6dc;
+}
