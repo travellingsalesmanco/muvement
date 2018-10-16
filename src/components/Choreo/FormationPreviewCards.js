@@ -1,11 +1,17 @@
 import React from 'react';
 import {Row, Col, Card, Icon} from 'antd';
 import './ChoreoHomeScreen.css';
-import {BrowserRouter as Link, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
+import {connect} from 'react-redux';
+import {addAndSetActiveFrame} from "../../actions/danceActions";
 
 class FormationPreviewCards extends React.Component {
-    clickHandler = () => {
-      console.log("clicked")
+    clickHandler = (index) => {
+      if (index === 0) {
+        this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.lastFrameIndex + 1));
+      } else {
+        this.props.history.push(`${this.props.match.url}/frame`)
+      }
     };
     render() {
       const data = this.props.data.slice();
@@ -24,7 +30,7 @@ class FormationPreviewCards extends React.Component {
                         hoverable
                         bordered={false}
                         className="formation-card"
-                        onClick={this.clickHandler}
+                        onClick={() => this.clickHandler(index)}
                       >
                           {
                             index === 0
@@ -50,7 +56,7 @@ class FormationPreviewCards extends React.Component {
                               hoverable
                               bordered={false}
                               className="formation-card"
-                              onClick={() => this.props.history.push(`${this.props.match.url}/frame/${index + 1}`)}
+                              onClick={() => this.props.history.push(`${this.props.match.url}/frame`)}
                             >
                               <div className="ant-formation-card-cover">
                                 <img alt="Cover" className="formation-image"  src="https://www.allkpop.com/upload/2018/09/af_org/01133025/red-velvet.jpg"/>
@@ -72,4 +78,12 @@ class FormationPreviewCards extends React.Component {
     }
 }
 
-export default withRouter(FormationPreviewCards);
+function mapStateToProps(state) {
+  const activeDance = state.dances[state.UI.activeDance];
+  return {
+    danceId: state.UI.activeDance,
+    lastFrameIndex: activeDance.frames.length - 1,
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(FormationPreviewCards));
