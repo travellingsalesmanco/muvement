@@ -3,8 +3,9 @@ import {
   EDIT_STAGE_DIMENSIONS,
   REMOVE_DANCER,
   ADD_FRAME,
-  SWITCH_ACTIVE_FRAME
+  SWITCH_ACTIVE_FRAME, ADD_DANCE, SWITCH_ACTIVE_DANCE
 } from "../constants/actionTypes";
+import {defaultStageDim} from "../constants/defaults";
 
 function containsDancer(danceId, name, state) {
   return state.dances[danceId].dancers.includes(name);
@@ -12,6 +13,29 @@ function containsDancer(danceId, name, state) {
 
 function hasFrame(danceId, frameId, state) {
   return frameId >= 0 && frameId < state.dances[danceId].frames.length
+}
+
+function hasDance(danceId, state) {
+  return danceId >= 0 && danceId < state.dances.length
+}
+
+export function addDance(danceName, names) {
+  return (dispatch, getState) => {
+    const newDance = {
+      name: danceName,
+      stageDim: defaultStageDim,
+      dancers: names,
+      frames: []
+    };
+    dispatch({
+      type: ADD_DANCE,
+      payload: newDance
+    })
+    dispatch({
+      type: SWITCH_ACTIVE_DANCE,
+      payload: getState().dances.length - 1
+    })
+  }
 }
 
 export function addDancers(danceId, names) {
@@ -89,6 +113,20 @@ export function gotoFrame(danceId, targetFrameId) {
       dispatch({
         type: SWITCH_ACTIVE_FRAME,
         payload: targetFrameId
+      })
+    }
+  }
+}
+
+export function gotoDance(danceId) {
+  return (dispatch, getState) => {
+    // checks if frame is correct
+    if (!hasDance(danceId, getState())) {
+      console.log("[ERROR] Index out of bounds")
+    } else {
+      dispatch({
+        type: SWITCH_ACTIVE_DANCE,
+        payload: danceId
       })
     }
   }

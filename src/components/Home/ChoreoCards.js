@@ -1,41 +1,27 @@
 import React from 'react';
 import {Row, Col, Card, Icon, Modal, Input, Button} from 'antd';
 import './ChoreoCards.css';
+import connect from "react-redux/es/connect/connect";
+import {gotoDance} from "../../actions/danceActions";
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from '../../icons/GradientSVG';
 import {withRouter} from "react-router-dom";
 
 class ChoreoCards extends React.Component {
-  state = {
-    modalVisible: false,
-    newChoreoName: ''
-  };
-
-  setModalVisible(modalVisible) {
-    this.setState({ modalVisible });
-  }
-
   clickHandler = (index) => {
     if (index === 0) { // because new-choreo is prepended
-      this.setModalVisible(true);
+      this.props.setModalVisible(true);
     } else {
-      this.props.history.push(`/choreo/${index - 1}`)
+      this.props.dispatch(gotoDance(index - 1));
+      this.props.history.push(`/choreo/${index - 1}`);
     }
   };
 
-  handleNewChoreo = e => {
-    this.setState({
-      newChoreoName: e.target.value,
-    });
-  };
-
-  handleNewChoreoConfirm = () => {
-
-  };
   render() {
     const data = this.props.data.slice();
     // Prepend "New Card" to start of array of cards
     data.unshift({ name: "New Choreography" });
+    console.log(data);
     return (
       <div>
         <GradientSVG
@@ -82,7 +68,7 @@ class ChoreoCards extends React.Component {
                             hoverable
                             bordered={false}
                             className="choreo-card"
-                            onClick={() => this.props.history.push(`/choreo/${index}`)}
+                            onClick={() => this.clickHandler(index + 1)}
                           >
                               <div className="ant-card-cover">
                                 <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
@@ -104,29 +90,14 @@ class ChoreoCards extends React.Component {
             }
           })
         }
-        <Modal
-          centered
-          visible={this.state.modalVisible}
-          onOk={() => this.setModalVisible(false)}
-          onCancel={() => this.setModalVisible(false)}
-          footer={null}
-          className="new-choreo-modal"
-        >
-          <div className="new-choreo-modal-inner">
-            <h3>NEW STAGE NAME</h3>
-            <Input
-              className = "new-choreo-name"
-              placeholder="Enter formation name"
-              value={this.state.newChoreoName}
-              onChange={this.handleNewChoreo}
-              onPressEnter={this.handleNewChoreoConfirm}
-            />
-            <Button className="new-choreo-startbutton" block>START</Button>
-          </div>
-        </Modal>
       </div>
     );
   }
 }
 
-export default withRouter(ChoreoCards);
+const mapStateToProps = state => {
+  return {
+  }
+};
+
+export default withRouter(connect(mapStateToProps)(ChoreoCards));

@@ -1,31 +1,60 @@
 import React from 'react';
-import {Button, Layout, Menu} from 'antd';
-import ChoreoCards from "./ChoreoCards";
+import {Button, Input, Layout, Modal} from 'antd';
+import AddPerformerScreen from "./AddPerformerScreen";
 import {connect} from 'react-redux';
+import ChoreoListScreen from "./ChoreoListScreen";
 
 class HomeScreen extends React.Component {
+  state = {
+    addChoreoState: false,
+    modalVisible: false,
+    newChoreoName: ''
+  };
+
+  setModalVisible = (modalVisible) => {
+    this.setState({ modalVisible });
+  };
+
+  handleNewChoreoName = e => {
+    this.setState({
+      newChoreoName: e.target.value,
+    });
+  };
+
+  handleNewChoreo = () => {
+    if (this.state.newChoreoName !== '') {
+      this.setState({
+        addChoreoState: true,
+        modalVisible: false,
+      });
+    }
+  };
+
   render() {
-    const {Header, Content} = Layout;
     return (
       <Layout className="body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
-        <Header>
-          <div className="nav-bar">
-            <div className="title">
-              <h3 style={{ color: '#fff'}}>CHOREOGRAPHY</h3>
-            </div>
-            <div className="right-container">
-              <Menu mode="horizontal" theme="dark">
-                <Menu.Item key="1">
-                  <Button icon="setting" ghost/>
-                </Menu.Item>
-              </Menu>
-            </div>
+        {
+          this.state.addChoreoState
+            ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}/>
+            : <ChoreoListScreen setModalVisible={this.setModalVisible}/>
+        }
+        <Modal
+          centered
+          visible={this.state.modalVisible}
+          onCancel={() => this.setModalVisible(false)}
+          footer={null}
+          className="new-choreo-modal"
+        >
+          <div className="new-choreo-modal-inner">
+            <h3>NEW STAGE NAME</h3>
+            <Input
+              placeholder="Enter formation name"
+              value={this.state.newChoreoName}
+              onChange={this.handleNewChoreoName}
+            />
+            <Button block onClick={this.handleNewChoreo}>START</Button>
           </div>
-        </Header>
-        <Content>
-          {/*<ChoreoCards data={["Red Velvet", "Black Pink", "Ikon", "Travelling Salesman"]}/>*/}
-          <ChoreoCards data={this.props.dances} match={this.props.match}/>
-        </Content>
+        </Modal>
       </Layout>
     );
   }
