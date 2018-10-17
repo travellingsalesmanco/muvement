@@ -115,12 +115,13 @@ class ChoreoCards extends React.Component {
           <div className="new-choreo-modal-inner">
             <h3>NEW STAGE NAME</h3>
             <Input
+              className = "new-choreo-name"
               placeholder="Enter formation name"
               value={this.state.newChoreoName}
               onChange={this.handleNewChoreo}
               onPressEnter={this.handleNewChoreoConfirm}
             />
-            <Button block>START</Button>
+            <Button className="new-choreo-startbutton" block>START</Button>
           </div>
         </Modal>
       </div>
