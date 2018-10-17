@@ -46,12 +46,14 @@
 }
 
 .description {
+  margin-top: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   color: #fff;
   font-family: 'Futura-Medium';
+  font-size: 14px;
 }
 
 .new-choreo-modal .ant-modal-content {
@@ -86,7 +88,6 @@
 .new-choreo-modal-inner .ant-input {
   background-image: linear-gradient(to right, #24c6dc, #514a9d);
   border: 0;
-  color: #fff;
   font-family: 'Futura-Medium', Arial, sans-serif;
   font-size: 18px;
   text-align: center;

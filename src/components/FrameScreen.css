@@ -79,7 +79,7 @@
 }
 
 .sider .ant-menu-inline > .ant-menu-item {
-  height: 120px;
+  height: 100px;
 }
 
 .sider .ant-menu-inline .ant-menu-item:not(:last-child) {

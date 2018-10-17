@@ -82,7 +82,7 @@ class ChoreoHomeScreen extends React.Component {
           <FormationPreviewCards data={this.props.frames} match={this.props.match}/>
         </Content>
         <Sider
-        width="400px">
+        width="350px">
             <ChoreoPicture />
             <div className="performance-date">
                 <DatePicker

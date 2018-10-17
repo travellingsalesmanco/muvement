@@ -26,7 +26,7 @@
 }
 
 .add-choreo-pic-icon {
-  font-size: 55px;
+  font-size: 45px;
 }
 .add-choreo-pic {
   width: 80%;
@@ -71,7 +71,7 @@
 .add-formation-title{
     position: absolute;
     top: 10;
-    bottom: 40px;
+    bottom: 50px;
     font-family: "Futura-Medium";
     color: white;
     font-size: 15px;
@@ -131,7 +131,6 @@ input.ant-calendar-picker-input.ant-input{
     border: transparent;
     background: transparent;
     border-bottom: 2px solid white;
-    border-radius: 0;
 }
 
 .ant-calendar-picker-icon{
