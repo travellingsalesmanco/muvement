@@ -137,3 +137,35 @@ input.ant-calendar-picker-input.ant-input{
     color: white;
     font-size: 1.3em;
 }
+
+.choreo-homescreen-tabs{
+    text-align: center;
+    margin: 50px auto 30px auto;
+    border: 2px solid #24C6DC;
+    border-radius: 30px;
+    height: 44px;
+    width: 80%;
+    padding: 0px;
+}
+
+.choreo-homescreen-activebutton {
+    background-color: #24C6DC;
+    border: none;
+    width: 50%;
+    height: 40px;
+    border-radius: 30px;
+    color: white;
+    font-family: "Futura-Bold";
+    padding: 0px;
+}
+
+.choreo-homescreen-inactivebutton {
+    background-color: transparent;
+    border: transparent;
+    width: 50%;
+    height: 40px;
+    border-radius: 30px;
+    color: white;
+    font-family: "Futura-Bold";
+    padding: 0px;
+}

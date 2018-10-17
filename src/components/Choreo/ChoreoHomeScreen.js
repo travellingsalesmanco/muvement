@@ -12,6 +12,7 @@ class ChoreoHomeScreen extends React.Component {
       startValue: null,
       endValue: null,
       endOpen: false,
+      isButtonActive: 1
     };
 
     disabledStartDate = (startValue) => {
@@ -54,6 +55,10 @@ class ChoreoHomeScreen extends React.Component {
       this.setState({ endOpen: open });
     }
 
+    buttonClick = (number) => {
+        this.setState({isButtonActive: number});
+    }
+
   render() {
     const {Header, Content, Sider} = Layout;
     const { startValue, endValue, endOpen } = this.state;
@@ -83,6 +88,13 @@ class ChoreoHomeScreen extends React.Component {
         </Content>
         <Sider
         width="350px">
+        <div class="choreo-homescreen-tabs">
+                <button className ={this.state.isButtonActive === 1 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
+                        onClick={() => this.buttonClick(1)}>ABOUT</button>
+
+                <button  className = {this.state.isButtonActive === 2 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
+                        onClick={() => this.buttonClick(2)}>PERFORMERS</button>
+        </div>
             <ChoreoPicture />
             <div className="performance-date">
                 <DatePicker
