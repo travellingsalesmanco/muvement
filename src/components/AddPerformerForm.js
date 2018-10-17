@@ -1,5 +1,6 @@
 import { Form, Input, Icon, Button } from 'antd';
 import React from 'react';
+import './AddPerformerForm.css';
 
 const FormItem = Form.Item;
 
@@ -75,9 +76,16 @@ class AddPerformerForm extends React.Component {
     const formItems = keys.map((k, index) => {
       return (
         <FormItem
+          className="performer-input-item"
           label={index + nextId}
           required={false}
           key={k}
+          labelCol={{
+            span: 4
+          }}
+          wrapperCol={{
+            span: 20
+          }}
         >
           {getFieldDecorator(`names[${k}]`, {
             validateTrigger: ['onChange', 'onBlur'],
@@ -87,10 +95,11 @@ class AddPerformerForm extends React.Component {
               message: "Please input performer's name or delete this field.",
             }],
           })(
-            <Input placeholder="Enter name" width={"60%"} />
+            <Input className={"performer-input"} placeholder="Enter name" />
           )}
           {keys.length > 1 ? (
             <Icon
+              className="cancel-performer"
               type="minus"
               theme="outlined"
               disabled={keys.length === 1}
@@ -101,7 +110,10 @@ class AddPerformerForm extends React.Component {
       );
     });
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form
+        layout={"horizontal"}
+        onSubmit={this.handleSubmit}
+      >
         {formItems}
         <Button className="add-performer-button" type={"default"} icon="user-add" ghost block onClick={this.add}>Add
           Performer</Button>
