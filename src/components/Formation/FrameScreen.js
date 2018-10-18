@@ -94,7 +94,7 @@ class FrameScreen extends Component {
             endColor="#514a9d"
             idCSS="cool-gradient"
           />
-          <Navigation title={this.props.danceName} history={this.props.history} />
+          <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId}/>
           <Layout className="contents">
             <Content style={{ display: "flex", flexDirection: "column" }}>
               <div className="section-title-container">

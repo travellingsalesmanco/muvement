@@ -9,7 +9,7 @@ class Navigation extends React.Component {
       <Header>
         <div className="nav-bar">
           <div className="back-button">
-            <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.goBack()}/>
+            <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.push(`/choreo/${this.props.danceId}`)}/>
           </div>
           <div className="title">
             <h3 style={{ color: '#fff'}}>{this.props.title}</h3>
