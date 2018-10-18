@@ -1,5 +1,5 @@
-import {Breadcrumb, Button, Layout, Menu, Input} from 'antd';
-import React, {Component, Fragment} from 'react';
+import { Breadcrumb, Button, Layout, Menu, Input } from 'antd';
+import React, { Component, Fragment } from 'react';
 import './FrameScreen.css';
 import BorderInnerIcon from "../../icons/BorderInnerIcon";
 import FileAddIcon from "../../icons/FileAddIcon";
@@ -11,9 +11,9 @@ import UserAddIcon from "../../icons/UserAddIcon";
 import Navigation from "./Navigation";
 import SidePanel from "./SidePanel";
 import StageCanvas from "../StageCanvas/StageCanvas";
-import {connect} from "react-redux";
-import {renameFrame} from "../../actions/frameActions"
-import {addAndSetActiveFrame, gotoFrame} from "../../actions/danceActions";
+import { connect } from "react-redux";
+import { renameFrame } from "../../actions/frameActions"
+import { addAndSetActiveFrame, gotoFrame } from "../../actions/danceActions";
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -116,7 +116,7 @@ class FrameScreen extends Component {
                 }}
               >
                 <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
-                  height={this.state.stageHeight} editable />
+                  height={this.state.stageHeight} editable withGrid />
               </div>
               <Breadcrumb separator=">" className="breadcrumb">
                 <Breadcrumb.Item>{this.props.danceName}</Breadcrumb.Item>
