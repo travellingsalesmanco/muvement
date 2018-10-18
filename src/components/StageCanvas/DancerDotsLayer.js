@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { moveDancer, removeDancerFromFrame } from '../../actions/frameActions';
 import { DESELECT_DANCER, SELECT_DANCER } from '../../constants/actionTypes';
 import { makeDancersLayoutSelector } from '../../selectors/layout';
-import { absoluteToRelativeX, absoluteToRelativeY } from '../../lib/stageUtils';
+import { absoluteToRelativeX, absoluteToRelativeY, generateDotRadius } from '../../lib/stageUtils';
 import DancerDot from './DancerDot';
 import DancerLabel from './DancerLabel';
 
@@ -66,11 +66,10 @@ class DancerDotsLayer extends PureComponent {
   };
 
   render() {
-    const { editable } = this.props;
-    const CIRCLE_RADIUS = 15;
+    const { dotRadius, dancersLayout, editable } = this.props;
     return (
       <Layer>
-        {this.props.dancersLayout.map((dancerLayout) => {
+        {dancersLayout.map((dancerLayout) => {
           const boundPos = this.bindWithinCanvas(dancerLayout.position);
           return (
             <Group
@@ -81,7 +80,7 @@ class DancerDotsLayer extends PureComponent {
               dragBoundFunc={this.bindWithinCanvas}
               onDragEnd={(e) => this.handleDragEnd(e, dancerLayout.name)}
             >
-              <DancerDot radius={CIRCLE_RADIUS} number={dancerLayout.id}
+              <DancerDot radius={dotRadius} number={dancerLayout.id}
                 name={dancerLayout.name} onSelect={editable ? this.handleSelect : undefined} />
               {
                 editable && dancerLayout.selected
@@ -102,7 +101,8 @@ const makeMapStateToProps = () => {
   return (state, props) => {
     return {
       dancersLayout: getDancersLayout(state, props),
-      selectedDancers: state.UI.selectedDancers
+      selectedDancers: state.UI.selectedDancers,
+      dotRadius: generateDotRadius(props.width, props.height)
     }
   }
 };

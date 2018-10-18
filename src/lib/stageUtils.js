@@ -128,3 +128,8 @@ export function snapToGrid(x, y, canvasWidth, canvasHeight, gridSize) {
     y: gridLineY * gridSize + centerY
   }
 }
+
+export function generateDotRadius(canvasWidth, canvasHeight) {
+  const longEdge = canvasWidth > canvasHeight ? canvasWidth : canvasHeight;
+  return Math.min(longEdge * 0.02, 15)
+}
