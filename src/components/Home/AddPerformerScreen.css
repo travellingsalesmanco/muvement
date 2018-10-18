@@ -19,7 +19,7 @@
   box-shadow: 0px 0px 20px  #514A9D;
   border: 0;
   color: #fff;
-  font-family: 'Futura-Bold', Arial, sans-serif;
+  font-family: 'Sen-Bold', Arial, sans-serif;
 }
 
 .performer-field {
@@ -31,7 +31,7 @@
 }
 
 .add-performer-container .ant-input {
-  font-family: 'Futura-Medium', Arial, sans-serif;
+  font-family: 'Sen-Black', Arial, sans-serif;
   font-size: 16px;
   background-color: transparent;
   border-bottom: 2px solid #514a9d;

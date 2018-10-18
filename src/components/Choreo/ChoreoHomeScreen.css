@@ -71,7 +71,7 @@
     position: absolute;
     top: 10;
     bottom: 50px;
-    font-family: "Futura-Medium";
+    font-family: "Sen-Black";
     color: white;
     font-size: 15px;
 }
@@ -111,7 +111,7 @@
 
 .formation-name {
   color: #fff;
-  font-family: 'Futura-Medium';
+  font-family: 'Sen-Black';
   padding-top: 10px;
 }
 
@@ -126,7 +126,7 @@
 }
 
 input.ant-calendar-picker-input.ant-input{
-    font-family: "Futura-Medium";
+    font-family: "Sen-Black";
     font-size: 1.3em;
     border: transparent;
     background: transparent;
@@ -155,7 +155,7 @@ input.ant-calendar-picker-input.ant-input{
     height: 40px;
     border-radius: 30px;
     color: white;
-    font-family: "Futura-Bold";
+    font-family: "Sen-Bold";
     padding: 0px;
 }
 
@@ -166,6 +166,6 @@ input.ant-calendar-picker-input.ant-input{
     height: 40px;
     border-radius: 30px;
     color: white;
-    font-family: "Futura-Bold";
+    font-family: "Sen-Bold";
     padding: 0px;
 }

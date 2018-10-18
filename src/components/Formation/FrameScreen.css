@@ -42,7 +42,7 @@
   border: 0;
   color: #fff;
   background-color: transparent;
-  font-family: 'Futura-Medium';
+  font-family: 'Sen-Black';
   text-align: center;
   font-size: 1rem;
 }
@@ -54,7 +54,7 @@
 }
 
 .section-title h3 {
-    font-family: 'Futura-Medium';
+    font-family: 'Sen-Black';
     font-size: 0.875rem;
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
@@ -63,7 +63,7 @@
 
 .contents .breadcrumb {
   margin: 16px 0;
-  font-family: "Futura-Medium";
+  font-family: "Sen-Regular";
 }
 
 .contents .ant-breadcrumb,
@@ -113,7 +113,7 @@ button.sider-button {
 .sider li p {
   margin-top: 5px;
   margin-bottom: 0;
-  font-family: "Futura-Medium";
+  font-family: "Sen-Black";
   font-size: 0.75rem;
   line-height: initial;
 }

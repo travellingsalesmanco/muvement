@@ -1,5 +1,5 @@
 #stage-dim .ant-form-vertical .ant-form-item-label {
-  font-family: 'Futura-Medium';
+  font-family: 'Sen-Medium';
 }
 
 #stage-dim .ant-form-item-label label {
@@ -19,7 +19,7 @@
 
 #stage-dim .ant-input-number-input {
   padding: 0;
-  font-family: "Futura-Medium";
+  font-family: "Sen-Medium";
 }
 
 #stage-dim .ant-input-number-focused {
@@ -35,7 +35,7 @@
 
 #stage-dim .ant-btn {
   border-radius: 20px;
-  font-family: 'Futura-Medium';
+  font-family: 'Sen-Medium';
   border-color: #24c6dc;
   background: transparent;
   color: #24c6dc;
