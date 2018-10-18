@@ -14,17 +14,21 @@
   margin: 10px 0;
 }
 
-#performer-list .add-performer-button{
-  margin-top: 50px;
-}
-
 #performer-list .ant-row {
   margin: 5px 0;
 }
 
 #performer-list .anticon-minus:hover,
-#dancer-item:hover {
+#performer-list .anticon-plus:hover {
   cursor: pointer;
+}
+
+.add-performer {
+  color: #ffffff;
+}
+
+.cancel-performer {
+  color: #24C6DC;
 }
 
 .anticon-user-add, .anticon-user-delete{
