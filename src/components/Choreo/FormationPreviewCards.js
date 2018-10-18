@@ -95,7 +95,7 @@ class FormationPreviewCards extends React.Component {
                               onClick={() => this.clickHandler(index + 1)}
                             >
                               <div className="ant-formation-card-cover">
-                                <div style={{ flex: 1 }}>
+                                <div style={{ flex: 1, pointerEvents: "None" }}>
                                   <StageCanvas danceId={this.props.danceId} frameId={index+1-1} width={this.state.stageWidth}
                                                height={this.state.stageHeight}/>
                                 </div>
