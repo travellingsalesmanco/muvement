@@ -4,7 +4,7 @@ import { removeDancers, addDancers } from "../../actions/danceActions"
 import { addDancerToFrame } from "../../actions/frameActions"
 import { connect } from 'react-redux';
 import './PerformerList.css';
-import AddPerformerForm from "./Formation/AddPerformerForm";
+import AddPerformerForm from "./AddPerformerForm";
 
 class PerformerList extends React.Component {
   constructor(props) {

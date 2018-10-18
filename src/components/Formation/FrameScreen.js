@@ -1,19 +1,19 @@
 import {Breadcrumb, Button, Layout, Menu, Input} from 'antd';
 import React, {Component, Fragment} from 'react';
 import './FrameScreen.css';
-import BorderInnerIcon from "../icons/BorderInnerIcon";
-import FileAddIcon from "../icons/FileAddIcon";
-import GradientSVG from "../icons/GradientSVG";
-import HeadphoneIcon from "../icons/HeadphoneIcon";
-import LeftArrowIcon from "../icons/LeftArrowIcon";
-import RightArrowIcon from "../icons/RightArrowIcon";
-import UserAddIcon from "../icons/UserAddIcon";
+import BorderInnerIcon from "../../icons/BorderInnerIcon";
+import FileAddIcon from "../../icons/FileAddIcon";
+import GradientSVG from "../../icons/GradientSVG";
+import HeadphoneIcon from "../../icons/HeadphoneIcon";
+import LeftArrowIcon from "../../icons/LeftArrowIcon";
+import RightArrowIcon from "../../icons/RightArrowIcon";
+import UserAddIcon from "../../icons/UserAddIcon";
 import Navigation from "./Navigation";
 import SidePanel from "./SidePanel";
-import StageCanvas from "./StageCanvas/StageCanvas";
+import StageCanvas from "../StageCanvas/StageCanvas";
 import {connect} from "react-redux";
-import {renameFrame} from "../actions/frameActions"
-import {addAndSetActiveFrame, gotoFrame} from "../actions/danceActions";
+import {renameFrame} from "../../actions/frameActions"
+import {addAndSetActiveFrame, gotoFrame} from "../../actions/danceActions";
 
 class FrameScreen extends Component {
   constructor(props) {
