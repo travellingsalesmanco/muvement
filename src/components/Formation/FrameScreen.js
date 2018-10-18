@@ -1,6 +1,8 @@
-import { Breadcrumb, Button, Layout, Menu, Input } from 'antd';
+import { Breadcrumb, Button, Input, Layout, Menu } from 'antd';
 import React, { Component, Fragment } from 'react';
-import './FrameScreen.css';
+import { connect } from "react-redux";
+import { addAndSetActiveFrame, gotoFrame } from "../../actions/danceActions";
+import { renameFrame } from "../../actions/frameActions";
 import BorderInnerIcon from "../../icons/BorderInnerIcon";
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from "../../icons/GradientSVG";
@@ -8,12 +10,10 @@ import HeadphoneIcon from "../../icons/HeadphoneIcon";
 import LeftArrowIcon from "../../icons/LeftArrowIcon";
 import RightArrowIcon from "../../icons/RightArrowIcon";
 import UserAddIcon from "../../icons/UserAddIcon";
+import StageCanvas from "../StageCanvas/StageCanvas";
+import './FrameScreen.css';
 import Navigation from "./Navigation";
 import SidePanel from "./SidePanel";
-import StageCanvas from "../StageCanvas/StageCanvas";
-import { connect } from "react-redux";
-import { renameFrame } from "../../actions/frameActions"
-import { addAndSetActiveFrame, gotoFrame } from "../../actions/danceActions";
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -42,7 +42,9 @@ class FrameScreen extends Component {
   }
 
   checkSize = () => {
-    if (this.state.stageWidth !== this.container.offsetWidth || this.state.stageHeight !== this.container.offsetHeight) {
+    if (this.state.stageWidth !== this.container.offsetWidth
+      || this.state.stageHeight !== this.container.offsetHeight) {
+
       this.setState({
         stageWidth: this.container.offsetWidth,
         stageHeight: this.container.offsetHeight
@@ -94,7 +96,7 @@ class FrameScreen extends Component {
             endColor="#514a9d"
             idCSS="cool-gradient"
           />
-          <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId}/>
+          <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
           <Layout className="contents">
             <Content style={{ display: "flex", flexDirection: "column" }}>
               <div className="section-title-container">

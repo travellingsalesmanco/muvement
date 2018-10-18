@@ -10,7 +10,7 @@ class StageCanvas extends PureComponent {
   render() {
     const { danceId, frameId, width, height, editable, stageLayout, withGrid } = this.props;
     // Canvas dimensions
-    console.log("Stage: ", width, height);
+    // console.log("Stage: ", width, height);
     return (
       <Stage preventDefault={true} width={width} height={height}>
         {withGrid ? <GridLayer grid={stageLayout.grid} /> : null}

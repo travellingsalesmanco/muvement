@@ -18,7 +18,7 @@ class DancerLabel extends PureComponent {
 
   render() {
     const { name, handleRemove } = this.props;
-    console.log(name, " label rendered");
+    // console.log(name, " label rendered");
     const radius = 15;
     const iconSize = 26;
     const fontSize = 15;

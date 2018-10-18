@@ -3,7 +3,7 @@ import { Layer, Line } from 'react-konva';
 
 class GridLayer extends PureComponent {
   render() {
-    console.log("grid rendered");
+    // console.log("grid rendered");
     return (
       <Layer>
         {
