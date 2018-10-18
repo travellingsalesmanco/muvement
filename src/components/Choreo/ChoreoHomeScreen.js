@@ -84,7 +84,7 @@ class ChoreoHomeScreen extends React.Component {
         <Layout className="choreo-homescreen-contents">
         <Content style={{display: "flex", flexDirection: "column"}}>
             {/*<FormationPreviewCards data={["1. Introduction (30 seconds)", "2. Straight Line"]} />*/}
-          <FormationPreviewCards data={this.props.frames} match={this.props.match}/>
+          <FormationPreviewCards frames={this.props.frames} match={this.props.match} danceId={this.props.danceId}/>
         </Content>
         <Sider
         width="350px">
@@ -129,7 +129,8 @@ const mapStateToProps = state => {
   console.log(state.dances[state.UI.activeDance]);
   return {
     frames: state.dances[state.UI.activeDance].frames,
-    name: state.dances[state.UI.activeDance].name
+    name: state.dances[state.UI.activeDance].name,
+    danceId: state.UI.activeDance
   }
 };
 

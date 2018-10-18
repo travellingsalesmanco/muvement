@@ -4,8 +4,16 @@ import './ChoreoHomeScreen.css';
 import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
 import {addAndSetActiveFrame, gotoFrame} from "../../actions/danceActions";
+import StageCanvas from "../StageCanvas/StageCanvas";
 
 class FormationPreviewCards extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stageWidth: 100,
+      stageHeight: 100,
+    }
+  }
     clickHandler = (index) => {
       if (index === 0) {
         this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.lastFrameIndex + 1));
@@ -15,14 +23,35 @@ class FormationPreviewCards extends React.Component {
         this.props.history.push(`${this.props.match.url}/frame`)
       }
     };
+    componentDidMount() {
+      this.checkSize();
+      window.addEventListener("resize", this.checkSize);
+    }
+
+    componentDidUpdate() {
+      this.checkSize();
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener("resize", this.checkSize);
+    }
+
+    checkSize = () => {
+      if (this.state.stageWidth !== this.container.offsetWidth || this.state.stageHeight !== this.container.offsetHeight) {
+        this.setState({
+          stageWidth: this.container.offsetWidth,
+          stageHeight: this.container.offsetHeight
+        });
+      }
+    };
     render() {
-      const data = this.props.data.slice();
+      const frames = this.props.frames.slice();
       // Prepend "New FormationCard" to start of array of cards
-      data.unshift({ name: "" });
+      frames.unshift({ name: "" });
       return (
           <div>
           {
-            data.map((card, index) => {
+            frames.map((formation, index) => {
               if (index % 2 === 0) {
                 return (
                   <Row gutter={60} type='flex' justify='center' key={index}>
@@ -35,22 +64,28 @@ class FormationPreviewCards extends React.Component {
                       >
                           {
                             index === 0
-                            ? <div className="new-formation">
+                            ? <div className="new-formation"
+                                   ref={node => {
+                                     this.container = node;
+                                   }}>
                                 <Icon type="file-add" className="add-formation-icon"/>
                                 <span className="add-formation-title"> Add Formation </span>
                               </div>
                             : <div className="ant-formation-card-cover">
-                                <img alt="Cover" className="formation-image" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
+                                <div style={{ flex: 1 }}>
+                                  <StageCanvas danceId={this.props.danceId} frameId={index - 1} width={this.state.stageWidth}
+                                               height={this.state.stageHeight}/>
+                                </div>
                               </div>
                           }
                         <div className="formation-name">
-                          <span>{card.name}</span>
+                          <span>{formation.name}</span>
                         </div>
                       </Card>
                     </Col>
 
                     {
-                      data[index + 1]
+                      frames[index + 1]
                         ?
                           <Col span={11}>
                             <Card
@@ -60,10 +95,13 @@ class FormationPreviewCards extends React.Component {
                               onClick={() => this.clickHandler(index + 1)}
                             >
                               <div className="ant-formation-card-cover">
-                                <img alt="Cover" className="formation-image"  src="https://www.allkpop.com/upload/2018/09/af_org/01133025/red-velvet.jpg"/>
+                                <div style={{ flex: 1 }}>
+                                  <StageCanvas danceId={this.props.danceId} frameId={index+1-1} width={this.state.stageWidth}
+                                               height={this.state.stageHeight}/>
+                                </div>
                               </div>
                               <div className="formation-name">
-                                <span>{data[index + 1].name}</span>
+                                <span>{frames[index + 1].name}</span>
                               </div>
                             </Card>
                           </Col>
