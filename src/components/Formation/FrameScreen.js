@@ -13,6 +13,7 @@ import UserAddIcon from "../../icons/UserAddIcon";
 import StageCanvas from "../StageCanvas/StageCanvas";
 import './FrameScreen.css';
 import Navigation from "./Navigation";
+import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 
 class FrameScreen extends Component {
@@ -67,6 +68,22 @@ class FrameScreen extends Component {
       this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId + 1));
     }
   };
+
+  handleEditPerformer = () => {
+    this.setState({
+      visible: true,
+      sidePanelID: 1,
+    });
+  };
+
+  handleAddFormation = () => {
+    this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.frameId + 1));
+  };
+
+  handleEditTimeline = () => {
+
+  };
+
   onClose = () => {
     this.setState({
       visible: false,
@@ -126,50 +143,18 @@ class FrameScreen extends Component {
               </Breadcrumb>
             </Content>
             <Sider width={200} className="sider">
-              <Menu
-                mode="inline"
-                className="sider-menu"
-                theme="dark"
-                onClick={this.handleMenuClick}
-                inlineIndent={16}
-              >
-                <Menu.Item key="1">
-                  <Button className="sider-button" shape="circle">
-                    <UserAddIcon style={{ fontSize: '34px' }} />
-                  </Button>
-                  <p>Performers</p>
-                </Menu.Item>
-                <Menu.Item key="2">
-                  <Button className="sider-button" shape="circle">
-                    <FileAddIcon />
-                  </Button>
-                  <p>Add Formation</p>
-                </Menu.Item>
-                <Menu.Item key="3">
-                  <Button className="sider-button" shape="circle">
-                    <HeadphoneIcon />
-                  </Button>
-                  <p>Add Music</p>
-                </Menu.Item>
-                <Menu.Item key="4">
-                  <Button className="sider-button" shape="circle">
-                    <BorderInnerIcon />
-                  </Button>
-                  <p>Stage Dimension</p>
-                </Menu.Item>
-                <Menu.Item key="5">
-                  <Button className="sider-button" shape="circle">
-                    <LeftArrowIcon />
-                  </Button>
-                  <p>Previous</p>
-                </Menu.Item>
-                <Menu.Item key="6">
-                  <Button className="sider-button" shape="circle">
-                    <RightArrowIcon />
-                  </Button>
-                  <p>Next</p>
-                </Menu.Item>
-              </Menu>
+              <div className="button-container">
+                <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
+                  <UserAddIcon />
+                </Button>
+                <Button className="sider-button" shape="circle" onClick={this.handleAddFormation}>
+                  <FileAddIcon />
+                </Button>
+                <Button className="sider-button" shape="circle" onClick={this.handleEditTimeline}>
+                  <HeadphoneIcon />
+                </Button>
+              </div>
+              <PreviewSlideList/>
             </Sider>
             <SidePanel
               placement={this.state.placement}
