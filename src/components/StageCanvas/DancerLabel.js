@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Circle, Label, Path, Tag, Text } from 'react-konva';
+import { Text } from 'react-konva';
 
 class DancerLabel extends PureComponent {
   constructor(props) {

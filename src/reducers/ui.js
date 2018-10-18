@@ -1,10 +1,10 @@
 import {
   CLEAR_DANCER_SELECTION,
   DESELECT_DANCER,
-  SELECT_DANCER, SET_LABELS_VIEW,
+  SELECT_DANCER,
+  SET_LABELS_VIEW,
   SWITCH_ACTIVE_DANCE,
   SWITCH_ACTIVE_FRAME,
-  TOGGLE_LABELS
 } from "../constants/actionTypes";
 import { defaultUI } from "../constants/defaults";
 
