@@ -72,11 +72,11 @@ class FormationPreviewCards extends React.Component {
                             <span className="add-formation-title"> Add Formation </span>
                           </div>
                           : <div className="ant-formation-card-cover">
-                            <div style={{ flex: 1 }}>
-                              <StageCanvas danceId={this.props.danceId} frameId={index - 1} width={this.state.stageWidth}
-                                height={this.state.stageHeight} />
+                              <div style={{ flex: 1, pointerEvents: "None" }}>
+                                <StageCanvas danceId={this.props.danceId} frameId={index - 1} width={this.state.stageWidth}
+                                  height={this.state.stageHeight} />
+                              </div>
                             </div>
-                          </div>
                       }
                       <div className="formation-name">
                         <span>{formation.name}</span>
