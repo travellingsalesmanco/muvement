@@ -24,6 +24,10 @@
   padding: 0;
 }
 
+.nav-bar-button{
+  padding: 1px 8px 2px 8px;
+}
+
 .nav-bar .ant-btn {
   background-color: transparent;
   border-color: transparent;

@@ -1,6 +1,8 @@
 import React from "react";
 import {Button, Layout, Menu} from "antd";
 import './Navigation.css';
+import RedoIcon from "../../icons/RedoIcon";
+import UndoIcon from "../../icons/UndoIcon";
 
 class Navigation extends React.Component {
   render() {
@@ -18,10 +20,16 @@ class Navigation extends React.Component {
             <Menu className="navbar-icon" mode="horizontal" theme="dark">
             {/* TODO: Make the size of the icon bigger */}
               <Menu.Item key="1">
-                <Button className="navbar-button" icon="undo" ghost/>
+                <Button className="nav-bar-button">
+                  <UndoIcon/>
+                </Button>
+                {/*<Button className="navbar-button" icon="undo" ghost/>*/}
               </Menu.Item>
               <Menu.Item key="2">
-                <Button icon="redo"/>
+                <Button className="nav-bar-button">
+                  <RedoIcon/>
+                </Button>
+                {/*<Button icon="redo"/>*/}
               </Menu.Item>
               <Menu.Item key="3">
                 <Button icon="eye"/>
