@@ -21,19 +21,22 @@ class DancerDotsLayer extends PureComponent {
     this.handleSelect = this.handleSelect.bind(this);
     this.bindWithinCanvas = this.bindWithinCanvas.bind(this)
   }
-  
+
   bindWithinCanvas(pos) {
-    let newX = pos.x;
-    let newY = pos.y;
-    if (pos.x < 0) {
-      newX = 0;
-    } else if (pos.x > this.props.width) {
-      newX = this.props.width;
+    const maxX = this.props.width - this.props.dotRadius;
+    const maxY = this.props.height - this.props.dotRadius;
+    const minX = this.props.dotRadius;
+    const minY = this.props.dotRadius;
+    let { x: newX, y: newY } = pos;
+    if (pos.x < minX) {
+      newX = minX;
+    } else if (pos.x > maxX ) {
+      newX = maxX;
     }
-    if (pos.y < 0) {
-      newY = 0;
-    } else if (pos.y > this.props.height) {
-      newY = this.props.height;
+    if (pos.y < minY) {
+      newY = minY;
+    } else if (pos.y > maxY) {
+      newY = maxY;
     }
     return {
       x: newX,
