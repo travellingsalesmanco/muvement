@@ -42,7 +42,7 @@
   border: 0;
   color: #fff;
   background-color: transparent;
-  font-family: 'Sen-Black';
+  font-family: 'Sen-Bold';
   text-align: center;
   font-size: 1.2rem;
 }
@@ -145,4 +145,8 @@
   background: #131313;
   text-align: center;
   color: #fff;
+}
+
+.framescreen-stage{
+    margin-bottom: 40px;
 }

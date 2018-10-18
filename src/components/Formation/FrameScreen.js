@@ -129,6 +129,7 @@ class FrameScreen extends Component {
                 </div>
               </div>
               <div
+                className="framescreen-stage"
                 style={{ background: '#000', flex: 1, overflow: "hidden"}}
                 ref={node => {
                   this.container = node;
@@ -137,10 +138,6 @@ class FrameScreen extends Component {
                 <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
                   height={this.state.stageHeight} editable withGrid />
               </div>
-              <Breadcrumb separator=">" className="breadcrumb">
-                <Breadcrumb.Item>{this.props.danceName}</Breadcrumb.Item>
-                <Breadcrumb.Item>{this.props.frameName} ({this.props.frameNumSeconds} seconds)</Breadcrumb.Item>
-              </Breadcrumb>
             </Content>
             <Sider width={200} className="sider">
               <div className="button-container">
