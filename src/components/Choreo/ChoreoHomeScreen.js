@@ -3,7 +3,7 @@ import './ChoreoHomeScreen.css';
 import {Button, Layout, Menu, Row, Col, DatePicker} from 'antd';
 import connect from "react-redux/es/connect/connect";
 import {BrowserRouter as Route} from "react-router-dom";
-import FrameScreen from "../FrameScreen";
+import FrameScreen from "../Formation/FrameScreen";
 import ChoreoPicture from "./ChoreoPicture";
 import FormationPreviewCards from "./FormationPreviewCards";
 

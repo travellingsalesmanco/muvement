@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { moveDancer, removeDancerFromFrame } from '../../actions/frameActions';
 import { DESELECT_DANCER, SELECT_DANCER } from '../../constants/actionTypes';
 import { makeDancersLayoutSelector } from '../../selectors/layout';
-import { absoluteToRelativeX, absoluteToRelativeY } from '../stageUtils';
+import { absoluteToRelativeX, absoluteToRelativeY } from '../../lib/stageUtils';
 import DancerDot from './DancerDot';
 import DancerLabel from './DancerLabel';
 

@@ -1,6 +1,6 @@
 import {Button, Form, InputNumber} from "antd";
 import React from 'react';
-import {editStageDimensions} from "../actions/danceActions"
+import {editStageDimensions} from "../../actions/danceActions"
 import {connect} from 'react-redux'
 import './StageDimForm.css';
 

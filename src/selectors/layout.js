@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { calculateStageDimensions, generateGrid, relativeToAbsolutePoint } from "../components/stageUtils";
+import { calculateStageDimensions, generateGrid, relativeToAbsolutePoint } from "../lib/stageUtils";
 
 // Simple retrieval selectors (no transformations), no need to memoize
 const getCanvasWidthFromProp = (_, props) => props.width;

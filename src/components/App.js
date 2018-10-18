@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import FrameScreen from "./FrameScreen";
+import FrameScreen from "./Formation/FrameScreen";
 import { Route, Switch } from "react-router-dom";
 import HomeScreen from "./Home/HomeScreen";
 import ChoreoHomeScreen from "./Choreo/ChoreoHomeScreen";

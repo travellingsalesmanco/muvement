@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { Row, Col, Icon, Button } from "antd";
-import { removeDancers, addDancers } from "../actions/danceActions"
-import { addDancerToFrame } from "../actions/frameActions"
+import { removeDancers, addDancers } from "../../actions/danceActions"
+import { addDancerToFrame } from "../../actions/frameActions"
 import { connect } from 'react-redux';
 import './PerformerList.css';
-import AddPerformerForm from "./AddPerformerForm";
+import AddPerformerForm from "./Formation/AddPerformerForm";
 
 class PerformerList extends React.Component {
   constructor(props) {

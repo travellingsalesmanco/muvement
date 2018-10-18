@@ -3,7 +3,7 @@ import React from 'react';
 import './SidePanel.css';
 import BorderInnerIcon from "../icons/BorderInnerIcon";
 import UserAddIcon from "../icons/UserAddIcon";
-import PerformerList from "./PerformerList";
+import PerformerList from "./Formation/PerformerList";
 import StageDimForm from "./StageDimForm";
 
 class Title extends React.Component {
