@@ -26,29 +26,26 @@ class StageDimForm extends React.Component {
     return (
       <div id="stage-dim">
         <Form layout={"vertical"} onSubmit={this.handleDimChange}>
-          <Form.Item label={'Height'}>
+          <Form.Item className="stage-dim-value" label={'Height'}>
             {getFieldDecorator('stageHeight', {
               initialValue: this.props.height
             })(
               <InputNumber min={0.01} precision={2}/>
             )}
           </Form.Item>
-          <Form.Item label={'Width'}>
+          <Form.Item  className="stage-dim-value" label={'Width'}>
             {getFieldDecorator('stageWidth', {
               initialValue: this.props.width
             })(
               <InputNumber min={0.01} precision={2}/>
             )}
           </Form.Item>
-          <Form.Item label={'Grid Size'}>
+          <Form.Item  className="stage-dim-value"  label={'Grid Size'}>
             {getFieldDecorator('gridSize', {
               initialValue: this.props.gridSize
             })(
               <InputNumber min={0.01} precision={2}/>
             )}
-          </Form.Item>
-          <Form.Item>
-            <Button type={"default"} htmlType={'submit'} block>APPLY</Button>
           </Form.Item>
         </Form>
       </div>
@@ -66,4 +63,3 @@ const mapStateToProps = function (state) {
 };
 
 export default connect(mapStateToProps)(Form.create()(StageDimForm));
-

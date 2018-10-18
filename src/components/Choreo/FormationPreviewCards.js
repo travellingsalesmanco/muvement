@@ -69,7 +69,7 @@ class FormationPreviewCards extends React.Component {
                               this.container = node;
                             }}>
                             <Icon type="file-add" className="add-formation-icon" />
-                            <span className="add-formation-title"> Add Formation </span>
+                            <span className="add-formation-title"> ADD FORMATION </span>
                           </div>
                           : <div className="ant-formation-card-cover">
                               <div style={{ flex: 1, pointerEvents: "None" }}>
