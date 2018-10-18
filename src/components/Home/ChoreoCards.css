@@ -52,7 +52,7 @@
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  font-family: 'Futura-Medium';
+  font-family: 'Sen-Bold';
   font-size: 14px;
 }
 
@@ -80,15 +80,15 @@
 }
 
 .new-choreo-modal-inner h3 {
-  font-family: 'Futura-Bold', Arial, sans-serif;
+  font-family: 'Sen-Black', Arial, sans-serif;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .new-choreo-modal-inner .ant-input {
   background-image: linear-gradient(to right, #24c6dc, #514a9d);
   border: 0;
-  font-family: 'Futura-Medium', Arial, sans-serif;
+  font-family: 'Sen-Regular', Arial, sans-serif;
   font-size: 18px;
   text-align: center;
   border-radius: 50px;
@@ -106,7 +106,7 @@
   margin-top: 30px;
   margin-bottom: 40px;
   border: 2px solid #24c6dc;
-  font-family: 'Futura-Bold', Arial, sans-serif;
+  font-family: 'Sen-Black', Arial, sans-serif;
   color: #24c6dc;
   background: transparent;
   width: 400px;
