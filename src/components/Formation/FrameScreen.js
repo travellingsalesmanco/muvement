@@ -145,7 +145,7 @@ class FrameScreen extends Component {
             <Sider width={200} className="sider">
               <div className="button-container">
                 <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
-                  <UserAddIcon />
+                  <UserAddIcon style={{ fontSize: '20px'}}/>
                 </Button>
                 <Button className="sider-button" shape="circle" onClick={this.handleAddFormation}>
                   <FileAddIcon />
