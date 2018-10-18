@@ -44,7 +44,7 @@
   background-color: transparent;
   font-family: 'Sen-Black';
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .section-title .ant-input:focus,
@@ -109,13 +109,13 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #b5b5b5;
+  padding: 30px 0 30px 0;
+  border-bottom: 1px solid #514a9d;
 }
 
 .sider-button {
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     box-shadow: 0px 0px 15px  white;
 }
 

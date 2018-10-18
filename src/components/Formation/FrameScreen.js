@@ -129,7 +129,7 @@ class FrameScreen extends Component {
                 </div>
               </div>
               <div
-                style={{ background: '#000', flex: 1, overflow: "hidden" }}
+                style={{ background: '#000', flex: 1, overflow: "hidden"}}
                 ref={node => {
                   this.container = node;
                 }}
@@ -145,13 +145,13 @@ class FrameScreen extends Component {
             <Sider width={200} className="sider">
               <div className="button-container">
                 <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
-                  <UserAddIcon style={{ fontSize: '20px'}}/>
+                  <UserAddIcon style={{ fontSize: '33px'}}/>
                 </Button>
                 <Button className="sider-button" shape="circle" onClick={this.handleAddFormation}>
-                  <FileAddIcon />
+                  <FileAddIcon style={{ fontSize: '25px'}} />
                 </Button>
                 <Button className="sider-button" shape="circle" onClick={this.handleEditTimeline}>
-                  <HeadphoneIcon />
+                  <HeadphoneIcon style={{ fontSize: '25px'}}/>
                 </Button>
               </div>
               <PreviewSlideList/>

@@ -45,7 +45,7 @@ class PreviewSlideList extends React.Component {
   render() {
     return (
       <div className="slide-list">
-        <h3 className="slide-list-title">All formations</h3>
+        <h3 className="slide-list-title">All Formations</h3>
           {
             this.props.frames.map((frame, index) => (
               <div className={ index === this.props.activeFrameId ? "slide-outer linear-gradient-bg" : "slide-outer"}
