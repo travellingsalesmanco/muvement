@@ -3,9 +3,9 @@ import {
   EDIT_STAGE_DIMENSIONS,
   REMOVE_DANCER,
   ADD_FRAME,
-  SWITCH_ACTIVE_FRAME, ADD_DANCE, SWITCH_ACTIVE_DANCE
+  SWITCH_ACTIVE_FRAME, ADD_DANCE, SWITCH_ACTIVE_DANCE, SET_LABELS_VIEW
 } from "../constants/actionTypes";
-import {defaultStageDim} from "../constants/defaults";
+import { defaultStageDim } from "../constants/defaults";
 
 function containsDancer(danceId, name, state) {
   return state.dances[danceId].dancers.includes(name);
@@ -129,5 +129,15 @@ export function gotoDance(danceId) {
         payload: danceId
       })
     }
+  }
+}
+
+export function toggleLabels() {
+  return (dispatch, getState) => {
+    console.log("TOGGLE");
+    dispatch({
+      type: SET_LABELS_VIEW,
+      payload: !getState().UI.showLabels
+    })
   }
 }

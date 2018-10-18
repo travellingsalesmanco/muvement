@@ -69,7 +69,7 @@ class DancerDotsLayer extends PureComponent {
   };
 
   render() {
-    const { dotRadius, dancersLayout, editable } = this.props;
+    const { dotRadius, dancersLayout, editable, showLabels } = this.props;
     return (
       <Layer>
         {dancersLayout.map((dancerLayout) => {
@@ -86,7 +86,7 @@ class DancerDotsLayer extends PureComponent {
               <DancerDot radius={dotRadius} number={dancerLayout.id}
                 name={dancerLayout.name} onSelect={editable ? this.handleSelect : undefined} />
               {
-                editable && dancerLayout.selected
+                editable && showLabels
                   ? <DancerLabel name={dancerLayout.name} handleRemove={this.handleRemove} />
                   : null
               }
@@ -105,7 +105,8 @@ const makeMapStateToProps = () => {
     return {
       dancersLayout: getDancersLayout(state, props),
       selectedDancers: state.UI.selectedDancers,
-      dotRadius: generateDotRadius(props.width, props.height)
+      dotRadius: generateDotRadius(props.width, props.height),
+      showLabels: state.UI.showLabels
     }
   }
 };
