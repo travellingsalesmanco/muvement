@@ -11,7 +11,7 @@ class ChoreoListScreen extends React.Component {
         <Header>
           <div className="nav-bar">
             <div className="title">
-              <h3 style={{ color: '#fff'}}>CHOREOGRAPHY</h3>
+              <h3 style={{ color: '#fff'}}>DASHBOARD</h3>
             </div>
             <div className="right-container">
               <Menu mode="horizontal" theme="dark">
