@@ -88,7 +88,7 @@ class ChoreoHomeScreen extends React.Component {
         </Content>
         <Sider
         width="350px">
-        <div class="choreo-homescreen-tabs">
+        <div className="choreo-homescreen-tabs">
                 <button className ={this.state.isButtonActive === 1 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
                         onClick={() => this.buttonClick(1)}>ABOUT</button>
 
