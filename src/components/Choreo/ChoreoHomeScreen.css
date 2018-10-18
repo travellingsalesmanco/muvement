@@ -57,7 +57,6 @@
 
 .new-formation {
   height: 200px;
-  margin-top: 40px;
   border-radius: 15px;
   display: flex;
   justify-content: center;
@@ -83,12 +82,11 @@
 }
 
 .formation-card {
-  margin: 15px 0;
+  margin: 30px 0;
 }
 
 .ant-formation-card-cover {
   height: 200px;
-  margin-top: 40px;
   border-radius: 15px;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.35);
