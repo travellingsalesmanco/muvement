@@ -110,7 +110,7 @@ class FrameScreen extends Component {
                 </div>
               </div>
               <div
-                style={{ background: '#000', flex: 1 }}
+                style={{ background: '#000', flex: 1, overflow: "hidden" }}
                 ref={node => {
                   this.container = node;
                 }}
