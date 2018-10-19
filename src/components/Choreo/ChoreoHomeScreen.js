@@ -7,6 +7,7 @@ import FrameScreen from "../Formation/FrameScreen";
 import ChoreoPicture from "./ChoreoPicture";
 import StageDimForm from "../Formation/StageDimForm";
 import FormationPreviewCards from "./FormationPreviewCards";
+import PerformerList from "../Formation/PerformerList";
 
 class ChoreoHomeScreen extends React.Component {
     state = {
@@ -97,9 +98,18 @@ class ChoreoHomeScreen extends React.Component {
                 <button  className = {this.state.isButtonActive === 2 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
                         onClick={() => this.buttonClick(2)}>PERFORMERS</button>
         </div>
-            <ChoreoPicture />
-            <h2 class="stagedim-title">STAGE DIMENSION</h2>
-            <StageDimForm />
+        {
+            this.state.isButtonActive === 1
+            ? <div>
+                <ChoreoPicture />
+                <h2 class="stagedim-title">STAGE DIMENSION</h2>
+                <StageDimForm />
+              </div>
+            : <div className="edit-performers">
+                <Button className="edit-performers-button" icon="edit" ghost block>EDIT PERFORMERS</Button>
+            </div>
+        }
+
         </Sider>
       </Layout>
       </Layout>

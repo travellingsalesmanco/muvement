@@ -68,7 +68,7 @@ class PerformerList extends React.Component {
               </Col>
             </Row>)
         })}
-        <Button type={"default"} icon="user-delete" ghost block>Edit Performers</Button>
+        
       </div>
     )
   }

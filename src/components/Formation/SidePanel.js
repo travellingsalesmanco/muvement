@@ -11,7 +11,7 @@ class Title extends React.Component {
     const performerTitle = (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <UserAddIcon className="side-panel-icon" style={{ fontSize: '34px' }} />
-        <span style={{ fontFamily: 'Sen-Bold', marginLeft: '5px' }}>PERFORMERS</span>
+        <span style={{ fontFamily: 'Sen-Black', marginLeft: '5px' }}>PERFORMERS</span>
       </div>
     );
 

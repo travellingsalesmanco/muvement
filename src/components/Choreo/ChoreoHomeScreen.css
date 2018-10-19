@@ -169,3 +169,17 @@ button.ant-btn.backbutton.ant-btn-icon-only{
     padding-left: 40px;
     font-family: Sen-Black;
 }
+
+.edit-performers {
+    text-align: center;
+}
+
+.edit-performers-button{
+    width: 80%;
+    height: 44px;
+    border: 1px solid #24C6DC;
+    border-radius: 50px;
+    font-family: Sen-Black;
+    color: #24C6DC;
+    font-size: 1.2em;
+}
