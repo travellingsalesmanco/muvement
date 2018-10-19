@@ -24,7 +24,7 @@ class LandingPage extends React.Component {
             <Content style={{display: "flex", flexDirection: "column"}}>
                 <Row>
                     <Col className="muvement-name-img"span={12}>
-                        <img src={Name} width="300" height="300" alt="muvement name"/>
+                        <object data={Name} width="300" height="300" alt="muvement name"/>
                         <p className="muvement-desc">Create and visualise your formation <br /> without pen and paper</p>
                         <Button className="landing-signup-button">LETS GET CREATIVE</Button>
                     </Col>

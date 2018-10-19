@@ -26,6 +26,7 @@ class SignUp extends React.Component {
         <div className="auth-signup">
             <Button className="auth-signup-button" type="primary" htmlType="submit">SIGN UP</Button>
         </div>
+        <p className="auth-text">Have an account? Log in </p>
      </div>
 
     );
