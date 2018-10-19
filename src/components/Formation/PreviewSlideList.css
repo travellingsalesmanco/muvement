@@ -34,3 +34,9 @@
   height: calc(100vh - 234px);
   position: relative;
 }
+
+.slide-list .react-draggable-dragging {
+  background: linear-gradient(to bottom, #24c6dc, #514a9d);
+  position: relative;
+  z-index: 10;
+}
