@@ -23,7 +23,7 @@ class LogIn extends React.Component {
             <Col span={8} className="divider"></Col>
         </Row>
         <div className="auth-signup">
-            <Button className="auth-signup-button" type="primary" htmlType="submit">SIGN UP</Button>
+            <Button className="auth-signup-button" type="primary" htmlType="submit">LOG IN</Button>
         </div>
         <p className="auth-text">Do not have an account? Sign Up </p>
      </div>

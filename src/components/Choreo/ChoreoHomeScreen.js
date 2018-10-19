@@ -7,6 +7,7 @@ import FrameScreen from "../Formation/FrameScreen";
 import ChoreoPicture from "./ChoreoPicture";
 import StageDimForm from "../Formation/StageDimForm";
 import FormationPreviewCards from "./FormationPreviewCards";
+import EditIcon from "../../icons/EditIcon";
 
 class ChoreoHomeScreen extends React.Component {
   state = {
@@ -77,7 +78,10 @@ class ChoreoHomeScreen extends React.Component {
             </div>
             <div className="right-container">
               <Menu mode="horizontal" theme="dark">
-                <Menu.Item key="1">
+                  <Menu.Item key="1">
+                     <Button icon="edit" ghost/>
+                  </Menu.Item>
+                <Menu.Item key="2">
                   <Button icon="setting" ghost/>
                 </Menu.Item>
               </Menu>
