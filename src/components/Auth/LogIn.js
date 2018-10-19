@@ -3,7 +3,6 @@ import './Auth.css';
 import {Button, Layout, Menu, Row, Col} from 'antd';
 import connect from "react-redux/es/connect/connect";
 import {BrowserRouter as Route} from "react-router-dom";
-import GridImage from  "../../img/grid-image.svg";
 
 class LogIn extends React.Component {
 
