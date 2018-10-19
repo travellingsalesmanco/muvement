@@ -6,6 +6,8 @@ import ChoreoHomeScreen from "./Choreo/ChoreoHomeScreen";
 import LandingPageScreen from "./LandingPage/LandingPage";
 import SignUpScreen from "./Auth/SignUp";
 import LogInScreen from "./Auth/LogIn";
+import ResetPwScreen from "./Auth/ResetPassword";
+import ForgetPwScreen from "./Auth/ForgetPassword";
 
 class App extends Component {
   render() {
@@ -16,6 +18,8 @@ class App extends Component {
           <Route exact path="/landing" component={LandingPageScreen}/>
           <Route exact path="/signup" component={SignUpScreen}/>
           <Route exact path="/login" component={LogInScreen}/>
+          <Route exact path="/resetpassword" component={ResetPwScreen}/>
+          <Route exact path="/forgetpassword" component={ForgetPwScreen}/>
           <Route exact path={`/choreo/:choreoId`} component={ChoreoHomeScreen} />
           <Route path={`/choreo/:choreoId/frame`} component={FrameScreen} />
 

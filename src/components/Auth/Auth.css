@@ -1,3 +1,7 @@
+.auth-header{
+    background: black;
+}
+
 .auth-background{
     height: 100vh;
     background-image: url("../../img/SplashScreenBackground.png");
@@ -65,4 +69,19 @@
     font-size: 1.3em;
     border: none;
     box-shadow: 0px 0px 15px  #514A9D;
+}
+
+button.auth-backbutton {
+    background: transparent;
+    border: transparent;
+    color: white;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.auth-backbutton-desc{
+    color: white;
+    font-size: 16px;
+    display: inline-flex;
+    vertical-align: middle;
 }
