@@ -1,11 +1,15 @@
 import {
+  ADD_DANCE,
   ADD_DANCER,
+  ADD_FRAME,
   EDIT_STAGE_DIMENSIONS,
   REMOVE_DANCER,
-  ADD_FRAME,
-  SWITCH_ACTIVE_FRAME, ADD_DANCE, SWITCH_ACTIVE_DANCE, SET_LABELS_VIEW
+  REORDER_FRAME,
+  SET_LABELS_VIEW,
+  SWITCH_ACTIVE_DANCE,
+  SWITCH_ACTIVE_FRAME
 } from "../constants/actionTypes";
-import { defaultStageDim } from "../constants/defaults";
+import {defaultStageDim} from "../constants/defaults";
 
 function containsDancer(danceId, name, state) {
   return state.dances[danceId].dancers.includes(name);
@@ -139,5 +143,26 @@ export function toggleLabels() {
       type: SET_LABELS_VIEW,
       payload: !getState().UI.showLabels
     })
+  }
+}
+
+export function reorderAndFocusFrame(danceId, fromIndex, toIndex) {
+  return (dispatch, getState) => {
+    if (hasFrame(danceId, fromIndex, getState()) && hasFrame(danceId, toIndex, getState())) {
+      dispatch({
+        type: REORDER_FRAME,
+        danceId: danceId,
+        payload: {
+          fromIndex: fromIndex,
+          toIndex: toIndex
+        }
+      })
+      dispatch({
+        type: SWITCH_ACTIVE_FRAME,
+        payload: toIndex
+      })
+    } else {
+      console.log("[ERROR] Index out of bounds")
+    }
   }
 }
