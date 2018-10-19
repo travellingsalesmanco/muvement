@@ -7,7 +7,8 @@ import {
   REMOVE_DANCER_FROM_FRAME,
   REMOVE_FRAME,
   RENAME_DANCER,
-  RENAME_FRAME
+  RENAME_FRAME,
+  REORDER_FRAME
 } from '../constants/actionTypes';
 import { defaultFrame } from '../constants/defaults';
 
@@ -81,6 +82,14 @@ export default (state = [defaultFrame], action) => {
       const { payload: indexToRemove } = action;
       let frames = state.slice();
       frames.splice(indexToRemove, 1);
+      return frames;
+    }
+    case REORDER_FRAME: {
+      const { fromIndex, toIndex } = action.payload;
+      let frames = state.slice();
+      const toMove = frames[fromIndex];
+      state.splice(fromIndex, 1);
+      state.splice(toIndex, 0, toMove);
       return frames;
     }
 
