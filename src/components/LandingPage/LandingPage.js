@@ -4,7 +4,7 @@ import {Button, Layout, Menu, Row, Col} from 'antd';
 import connect from "react-redux/es/connect/connect";
 import {BrowserRouter as Route} from "react-router-dom";
 import Logo from  "../../img/m-logo.svg";
-import Name from  "../../img/muvement-logo.svg";
+import Name from  "../../img/MuvementLogo.png";
 import GridImage from  "../../img/grid-image.svg";
 
 class LandingPage extends React.Component {
@@ -24,7 +24,7 @@ class LandingPage extends React.Component {
             <Content style={{display: "flex", flexDirection: "column"}}>
                 <Row>
                     <Col className="muvement-name-img"span={12}>
-                        <object data={Name} width="300" height="300" alt="muvement name"/>
+                        <img src={Name} width="250" height="180" alt="muvement name"/>
                         <p className="muvement-desc">Create and visualise your formation <br /> without pen and paper</p>
                         <Button className="landing-signup-button">LETS GET CREATIVE</Button>
                     </Col>

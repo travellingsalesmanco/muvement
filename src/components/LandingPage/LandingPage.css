@@ -26,9 +26,11 @@
 
 .muvement-name-img {
   text-align: center;
+  padding-top: 5%;
 }
 
 .muvement-desc {
+  padding-top: 5%;
   color: white;
   font-size: 13px;
 }
