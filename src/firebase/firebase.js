@@ -17,7 +17,7 @@ if (!firebase.apps.length) {
 }
 
 // Create firebase service instances
-const firestore = firebase.firestore();
+const db = firebase.firestore();
 const auth = firebase.auth();
 const storage = firebase.storage();
 
@@ -32,7 +32,7 @@ auth.useDeviceLanguage();
 
 
 export {
-  firestore,
+  db,
   auth,
   googleProvider,
   facebookProvider,

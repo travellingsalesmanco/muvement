@@ -26,7 +26,6 @@ export const doPasswordUpdate = (password) => {
 
 // Google Methods
 
-
 export const googleSignIn = () => {
   return auth.signInWithPopup(googleProvider);
 };
