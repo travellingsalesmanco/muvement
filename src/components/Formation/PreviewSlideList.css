@@ -1,5 +1,6 @@
 .slide-outer {
   padding: 10px;
+  line-height: 20px;
 }
 
 .linear-gradient-bg {
@@ -30,5 +31,6 @@
 
 .slide-list {
   overflow-y: scroll;
-  height: calc(100vh - 170px);
+  height: calc(100vh - 234px);
+  position: relative;
 }
