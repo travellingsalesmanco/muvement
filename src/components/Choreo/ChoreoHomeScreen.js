@@ -7,7 +7,6 @@ import FrameScreen from "../Formation/FrameScreen";
 import ChoreoPicture from "./ChoreoPicture";
 import StageDimForm from "../Formation/StageDimForm";
 import FormationPreviewCards from "./FormationPreviewCards";
-import PerformerList from "../Formation/PerformerList";
 
 class ChoreoHomeScreen extends React.Component {
   state = {
