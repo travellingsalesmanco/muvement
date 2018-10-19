@@ -1,0 +1,68 @@
+.auth-background{
+    height: 100vh;
+    background-image: url("../../img/SplashScreenBackground.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.auth-title{
+    color: white;
+    font-family: Sen-Black;
+    text-align: center;
+    font-size: 2.2rem;
+    padding-top: 5%;
+}
+
+.auth-text{
+    color: white;
+    text-align: center;
+    padding-top: 3%;
+}
+
+.auth-buttons{
+    text-align: center;
+    padding: 5px;
+}
+
+.fb-login-button{
+    border-radius: 20px;
+    background-color: #304D96;
+    color: white;
+    border: none;
+    margin: 20px;
+    width: 20%;
+    height: 40px;
+}
+
+.google-login-button{
+    border-radius: 20px;
+    color: #6A6A6A;
+    border: none;
+    margin: 20px;
+    width: 20%;
+    height: 40px;
+}
+
+.divider{
+    border-bottom: 1px solid white;
+    height: 20px;
+}
+
+.auth-signup {
+    text-align: center;
+}
+
+.auth-signup-button {
+    background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 30%;
+    height: 50px;
+    border-radius: 40px;
+    color: white;
+    font-family: Sen-Bold;
+    font-size: 1.3em;
+    border: none;
+    box-shadow: 0px 0px 15px  #514A9D;
+}
