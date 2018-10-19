@@ -89,10 +89,6 @@ class PreviewSlideList extends React.Component {
     }
   };
 
-  handleClick = (index) => {
-    this.props.dispatch(gotoFrame(this.props.danceId, index));
-  };
-
   handleDrag = (index, e, ui) => {
     const {x, y} = this.state.slidePos[index];
     const newSlidePos = this.state.slidePos.slice();
@@ -142,7 +138,6 @@ class PreviewSlideList extends React.Component {
                 onStop={() => this.handleDragStop(index)}
               >
                 <div className={index === this.props.activeFrameId ? "slide-outer linear-gradient-bg" : "slide-outer"}
-                     onClick={() => this.handleClick(index)}
                      ref={node=>{
                        if (index === 0) {
                          this.slide = node;
