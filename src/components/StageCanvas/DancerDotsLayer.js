@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { moveDancer, removeDancerFromFrame } from '../../actions/frameActions';
 import { DESELECT_DANCER, SELECT_DANCER } from '../../constants/actionTypes';
 import { makeDancersLayoutSelector } from '../../selectors/layout';
-import { absoluteToRelativeX, absoluteToRelativeY } from '../../lib/stageUtils';
+import { absoluteToRelativeX, absoluteToRelativeY, generateDotRadius } from '../../lib/stageUtils';
 import DancerDot from './DancerDot';
 import DancerLabel from './DancerLabel';
 
@@ -21,19 +21,22 @@ class DancerDotsLayer extends PureComponent {
     this.handleSelect = this.handleSelect.bind(this);
     this.bindWithinCanvas = this.bindWithinCanvas.bind(this)
   }
-  
+
   bindWithinCanvas(pos) {
-    let newX = pos.x;
-    let newY = pos.y;
-    if (pos.x < 0) {
-      newX = 0;
-    } else if (pos.x > this.props.width) {
-      newX = this.props.width;
+    const maxX = this.props.width - this.props.dotRadius;
+    const maxY = this.props.height - this.props.dotRadius;
+    const minX = this.props.dotRadius;
+    const minY = this.props.dotRadius;
+    let { x: newX, y: newY } = pos;
+    if (pos.x < minX) {
+      newX = minX;
+    } else if (pos.x > maxX ) {
+      newX = maxX;
     }
-    if (pos.y < 0) {
-      newY = 0;
-    } else if (pos.y > this.props.height) {
-      newY = this.props.height;
+    if (pos.y < minY) {
+      newY = minY;
+    } else if (pos.y > maxY) {
+      newY = maxY;
     }
     return {
       x: newX,
@@ -66,11 +69,10 @@ class DancerDotsLayer extends PureComponent {
   };
 
   render() {
-    const { editable } = this.props;
-    const CIRCLE_RADIUS = 15;
+    const { dotRadius, dancersLayout, editable, showLabels } = this.props;
     return (
       <Layer>
-        {this.props.dancersLayout.map((dancerLayout) => {
+        {dancersLayout.map((dancerLayout) => {
           const boundPos = this.bindWithinCanvas(dancerLayout.position);
           return (
             <Group
@@ -81,10 +83,10 @@ class DancerDotsLayer extends PureComponent {
               dragBoundFunc={this.bindWithinCanvas}
               onDragEnd={(e) => this.handleDragEnd(e, dancerLayout.name)}
             >
-              <DancerDot radius={CIRCLE_RADIUS} number={dancerLayout.id}
+              <DancerDot radius={dotRadius} number={dancerLayout.id}
                 name={dancerLayout.name} onSelect={editable ? this.handleSelect : undefined} />
               {
-                editable && dancerLayout.selected
+                editable && showLabels
                   ? <DancerLabel name={dancerLayout.name} handleRemove={this.handleRemove} />
                   : null
               }
@@ -102,7 +104,9 @@ const makeMapStateToProps = () => {
   return (state, props) => {
     return {
       dancersLayout: getDancersLayout(state, props),
-      selectedDancers: state.UI.selectedDancers
+      selectedDancers: state.UI.selectedDancers,
+      dotRadius: generateDotRadius(props.width, props.height),
+      showLabels: state.UI.showLabels
     }
   }
 };

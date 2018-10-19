@@ -1,6 +1,8 @@
-import {Breadcrumb, Button, Layout, Menu, Input} from 'antd';
-import React, {Component, Fragment} from 'react';
-import './FrameScreen.css';
+import { Breadcrumb, Button, Input, Layout, Menu } from 'antd';
+import React, { Component, Fragment } from 'react';
+import { connect } from "react-redux";
+import { addAndSetActiveFrame, gotoFrame } from "../../actions/danceActions";
+import { renameFrame } from "../../actions/frameActions";
 import BorderInnerIcon from "../../icons/BorderInnerIcon";
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from "../../icons/GradientSVG";
@@ -8,12 +10,11 @@ import HeadphoneIcon from "../../icons/HeadphoneIcon";
 import LeftArrowIcon from "../../icons/LeftArrowIcon";
 import RightArrowIcon from "../../icons/RightArrowIcon";
 import UserAddIcon from "../../icons/UserAddIcon";
-import Navigation from "./Navigation";
-import SidePanel from "./SidePanel";
 import StageCanvas from "../StageCanvas/StageCanvas";
-import {connect} from "react-redux";
-import {renameFrame} from "../../actions/frameActions"
-import {addAndSetActiveFrame, gotoFrame} from "../../actions/danceActions";
+import './FrameScreen.css';
+import Navigation from "./Navigation";
+import PreviewSlideList from "./PreviewSlideList";
+import SidePanel from "./SidePanel";
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -42,7 +43,9 @@ class FrameScreen extends Component {
   }
 
   checkSize = () => {
-    if (this.state.stageWidth !== this.container.offsetWidth || this.state.stageHeight !== this.container.offsetHeight) {
+    if (this.state.stageWidth !== this.container.offsetWidth
+      || this.state.stageHeight !== this.container.offsetHeight) {
+
       this.setState({
         stageWidth: this.container.offsetWidth,
         stageHeight: this.container.offsetHeight
@@ -65,6 +68,22 @@ class FrameScreen extends Component {
       this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId + 1));
     }
   };
+
+  handleEditPerformer = () => {
+    this.setState({
+      visible: true,
+      sidePanelID: 1,
+    });
+  };
+
+  handleAddFormation = () => {
+    this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.frameId + 1));
+  };
+
+  handleEditTimeline = () => {
+
+  };
+
   onClose = () => {
     this.setState({
       visible: false,
@@ -94,7 +113,7 @@ class FrameScreen extends Component {
             endColor="#514a9d"
             idCSS="cool-gradient"
           />
-          <Navigation title={this.props.danceName} history={this.props.history} />
+          <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
           <Layout className="contents">
             <Content style={{ display: "flex", flexDirection: "column" }}>
               <div className="section-title-container">
@@ -110,64 +129,29 @@ class FrameScreen extends Component {
                 </div>
               </div>
               <div
-                style={{ background: '#000', flex: 1 }}
+                className="framescreen-stage"
+                style={{ background: '#000', flex: 1, overflow: "hidden"}}
                 ref={node => {
                   this.container = node;
                 }}
               >
                 <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
-                  height={this.state.stageHeight} editable />
+                  height={this.state.stageHeight} editable withGrid />
               </div>
-              <Breadcrumb separator=">" className="breadcrumb">
-                <Breadcrumb.Item>{this.props.danceName}</Breadcrumb.Item>
-                <Breadcrumb.Item>{this.props.frameName} ({this.props.frameNumSeconds} seconds)</Breadcrumb.Item>
-              </Breadcrumb>
             </Content>
             <Sider width={200} className="sider">
-              <Menu
-                mode="inline"
-                className="sider-menu"
-                theme="dark"
-                onClick={this.handleMenuClick}
-                inlineIndent={16}
-              >
-                <Menu.Item key="1">
-                  <Button className="sider-button" shape="circle">
-                    <UserAddIcon style={{ fontSize: '34px' }} />
-                  </Button>
-                  <p>Performers</p>
-                </Menu.Item>
-                <Menu.Item key="2">
-                  <Button className="sider-button" shape="circle">
-                    <FileAddIcon />
-                  </Button>
-                  <p>Add Formation</p>
-                </Menu.Item>
-                <Menu.Item key="3">
-                  <Button className="sider-button" shape="circle">
-                    <HeadphoneIcon />
-                  </Button>
-                  <p>Add Music</p>
-                </Menu.Item>
-                <Menu.Item key="4">
-                  <Button className="sider-button" shape="circle">
-                    <BorderInnerIcon />
-                  </Button>
-                  <p>Stage Dimension</p>
-                </Menu.Item>
-                <Menu.Item key="5">
-                  <Button className="sider-button" shape="circle">
-                    <LeftArrowIcon />
-                  </Button>
-                  <p>Previous</p>
-                </Menu.Item>
-                <Menu.Item key="6">
-                  <Button className="sider-button" shape="circle">
-                    <RightArrowIcon />
-                  </Button>
-                  <p>Next</p>
-                </Menu.Item>
-              </Menu>
+              <div className="button-container">
+                <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
+                  <UserAddIcon style={{ fontSize: '33px'}}/>
+                </Button>
+                <Button className="sider-button" shape="circle" onClick={this.handleAddFormation}>
+                  <FileAddIcon style={{ fontSize: '25px'}} />
+                </Button>
+                <Button className="sider-button" shape="circle" onClick={this.handleEditTimeline}>
+                  <HeadphoneIcon style={{ fontSize: '25px'}}/>
+                </Button>
+              </div>
+              <PreviewSlideList/>
             </Sider>
             <SidePanel
               placement={this.state.placement}

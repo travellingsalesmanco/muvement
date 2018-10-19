@@ -7,7 +7,8 @@ import {
   REMOVE_DANCER_FROM_FRAME,
   REMOVE_FRAME,
   RENAME_DANCER,
-  RENAME_FRAME
+  RENAME_FRAME,
+  REORDER_FRAME
 } from '../constants/actionTypes';
 import { defaultFrame } from '../constants/defaults';
 
@@ -70,7 +71,6 @@ const frameReducer = (state = defaultFrame, action) => {
 // Frames reducer
 export default (state = [defaultFrame], action) => {
   switch (action.type) {
-
     case ADD_FRAME: {
       const { payload: index } = action;
       let frames = state.slice();
@@ -83,12 +83,21 @@ export default (state = [defaultFrame], action) => {
       frames.splice(indexToRemove, 1);
       return frames;
     }
+    case REORDER_FRAME: {
+      const { fromIndex, toIndex } = action.payload;
+      let frames = state.slice();
+      const toMove = frames[fromIndex];
+      state.splice(fromIndex, 1);
+      state.splice(toIndex, 0, toMove);
+      return frames;
+    }
 
-    // All frame edit operations
+    // Operations applied to all frames
     case REMOVE_DANCER:
     case RENAME_DANCER: {
       return state.map(frame => frameReducer(frame, action))
     }
+    // Operations applied to a single frame
     default:
       if (action.frameId !== null && action.frameId !== undefined) {
         const { frameId, ...prunedAction } = action;

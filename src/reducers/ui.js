@@ -1,4 +1,11 @@
-import { CLEAR_DANCER_SELECTION, DESELECT_DANCER, SELECT_DANCER, SWITCH_ACTIVE_DANCE, SWITCH_ACTIVE_FRAME } from "../constants/actionTypes";
+import {
+  CLEAR_DANCER_SELECTION,
+  DESELECT_DANCER,
+  SELECT_DANCER,
+  SET_LABELS_VIEW,
+  SWITCH_ACTIVE_DANCE,
+  SWITCH_ACTIVE_FRAME,
+} from "../constants/actionTypes";
 import { defaultUI } from "../constants/defaults";
 
 export default (state = defaultUI, action) => {
@@ -36,6 +43,13 @@ export default (state = defaultUI, action) => {
       return {
         ...state,
         selectedDancers: []
+      }
+    }
+    case SET_LABELS_VIEW: {
+      const { payload: labelState } = action;
+      return {
+        ...state,
+        showLabels: labelState
       }
     }
 

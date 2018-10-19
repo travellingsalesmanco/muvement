@@ -1,0 +1,34 @@
+.slide-outer {
+  padding: 10px;
+}
+
+.linear-gradient-bg {
+  background-image: linear-gradient(to bottom, #24c6dc, #514a9d);
+}
+
+.stage-wrapper {
+  padding: 5px;
+  background: #1b1b1b;
+  border-radius: 5px;
+}
+
+.stage-container {
+  flex: 1;
+  pointer-events: none;
+}
+
+.slide-title {
+  color: #fff;
+}
+
+.slide-list-title {
+  color: #fff;
+  margin: 20px 0 20px 10px;
+  font-family: Sen-Bold;
+
+}
+
+.slide-list {
+  overflow-y: scroll;
+  height: calc(100vh - 170px);
+}

@@ -1,9 +1,13 @@
-#stage-dim .ant-form-vertical .ant-form-item-label {
-  font-family: 'Futura-Medium';
+#stage-dim {
+    width: 75%;
+    margin: 0 auto;
 }
 
-#stage-dim .ant-form-item-label label {
+#stage-dim h3 {
   color: #fff;
+  font-size: 16px;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 
 #stage-dim .ant-input-number {
@@ -15,17 +19,18 @@
   border-top: 0;
   border-left: 0;
   border-right: 0;
+  font-size: 1.5em;
 }
 
 #stage-dim .ant-input-number-input {
   padding: 0;
-  font-family: "Futura-Medium";
+  font-family: "Sen-Regular";
 }
 
 #stage-dim .ant-input-number-focused {
   box-shadow: none;
 }
-
+/*
 #stage-dim .ant-btn:hover,
 #stage-dim .ant-btn:focus {
   border-color: #26e8ff;
@@ -35,8 +40,8 @@
 
 #stage-dim .ant-btn {
   border-radius: 20px;
-  font-family: 'Futura-Medium';
+  font-family: 'Sen-Regular';
   border-color: #24c6dc;
   background: transparent;
   color: #24c6dc;
-}
+} */

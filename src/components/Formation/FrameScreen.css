@@ -42,9 +42,9 @@
   border: 0;
   color: #fff;
   background-color: transparent;
-  font-family: 'Futura-Medium';
+  font-family: 'Sen-Bold';
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .section-title .ant-input:focus,
@@ -54,7 +54,7 @@
 }
 
 .section-title h3 {
-    font-family: 'Futura-Medium';
+    font-family: 'Sen-Black';
     font-size: 0.875rem;
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
@@ -63,7 +63,7 @@
 
 .contents .breadcrumb {
   margin: 16px 0;
-  font-family: "Futura-Medium";
+  font-family: "Sen-Regular";
 }
 
 .contents .ant-breadcrumb,
@@ -104,16 +104,25 @@
   justify-content: center;
 }
 
-button.sider-button {
-    height: 50px;
-    width: 50px;
+.sider .button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 30px 0 30px 0;
+  border-bottom: 1px solid #514a9d;
+}
+
+.sider-button {
+    height: 45px;
+    width: 45px;
     box-shadow: 0px 0px 15px  white;
 }
 
 .sider li p {
   margin-top: 5px;
   margin-bottom: 0;
-  font-family: "Futura-Medium";
+  font-family: "Sen-Black";
   font-size: 0.75rem;
   line-height: initial;
 }
@@ -136,4 +145,8 @@ button.sider-button {
   background: #131313;
   text-align: center;
   color: #fff;
+}
+
+.framescreen-stage{
+    margin-bottom: 40px;
 }

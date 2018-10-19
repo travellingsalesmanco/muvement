@@ -5,6 +5,7 @@ import connect from "react-redux/es/connect/connect";
 import {BrowserRouter as Route} from "react-router-dom";
 import FrameScreen from "../Formation/FrameScreen";
 import ChoreoPicture from "./ChoreoPicture";
+import StageDimForm from "../Formation/StageDimForm";
 import FormationPreviewCards from "./FormationPreviewCards";
 
 class ChoreoHomeScreen extends React.Component {
@@ -66,8 +67,9 @@ class ChoreoHomeScreen extends React.Component {
       <Layout className="choreo-homescreen-body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
         <Header>
           <div className="nav-bar">
-              <div className="back-button">
-                <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.goBack()}/>
+              <div >
+                <Button className="backbutton" style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.push('/')}/>
+                <span className="backbutton-desc">Dashboard</span>
               </div>
             <div className="title">
               <h3 style={{ color: '#fff'}}>{this.props.name}</h3>
@@ -84,11 +86,11 @@ class ChoreoHomeScreen extends React.Component {
         <Layout className="choreo-homescreen-contents">
         <Content style={{display: "flex", flexDirection: "column"}}>
             {/*<FormationPreviewCards data={["1. Introduction (30 seconds)", "2. Straight Line"]} />*/}
-          <FormationPreviewCards data={this.props.frames} match={this.props.match}/>
+          <FormationPreviewCards frames={this.props.frames} match={this.props.match} danceId={this.props.danceId}/>
         </Content>
         <Sider
         width="350px">
-        <div class="choreo-homescreen-tabs">
+        <div className="choreo-homescreen-tabs">
                 <button className ={this.state.isButtonActive === 1 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
                         onClick={() => this.buttonClick(1)}>ABOUT</button>
 
@@ -96,28 +98,8 @@ class ChoreoHomeScreen extends React.Component {
                         onClick={() => this.buttonClick(2)}>PERFORMERS</button>
         </div>
             <ChoreoPicture />
-            <div className="performance-date">
-                <DatePicker
-                  disabledDate={this.disabledStartDate}
-                  format="DD/MM/YYYY"
-                  value={startValue}
-                  placeholder="Start Date of Performance"
-                  onChange={this.onStartChange}
-                  onOpenChange={this.handleStartOpenChange}
-                />
-            </div>
-            <div className="performance-date">
-                <DatePicker
-                  disabledDate={this.disabledEndDate}
-                  className = "performance-date"
-                  format="DD/MM/YYYY"
-                  value={endValue}
-                  placeholder="End Date of Performance"
-                  onChange={this.onEndChange}
-                  open={endOpen}
-                  onOpenChange={this.handleEndOpenChange}
-                />
-            </div>
+            <h2 class="stagedim-title">STAGE DIMENSION</h2>
+            <StageDimForm />
         </Sider>
       </Layout>
       </Layout>
@@ -129,7 +111,8 @@ const mapStateToProps = state => {
   console.log(state.dances[state.UI.activeDance]);
   return {
     frames: state.dances[state.UI.activeDance].frames,
-    name: state.dances[state.UI.activeDance].name
+    name: state.dances[state.UI.activeDance].name,
+    danceId: state.UI.activeDance
   }
 };
 

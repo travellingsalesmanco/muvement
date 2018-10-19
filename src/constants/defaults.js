@@ -12,6 +12,7 @@ export const defaultStageDim = {
 export const defaultUI = {
   activeDance: 0,
   activeFrame: 0,
+  showLabels: true,
   selectedDancers: []
 };
 export const dummyDance = {

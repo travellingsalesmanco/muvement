@@ -20,7 +20,7 @@ class ChoreoCards extends React.Component {
   render() {
     const data = this.props.data.slice();
     // Prepend "New Card" to start of array of cards
-    data.unshift({ name: "New Choreography" });
+    data.unshift({ name: "" });
     console.log(data);
     return (
       <div>
@@ -30,7 +30,7 @@ class ChoreoCards extends React.Component {
           idCSS="cool-gradient"
         />
         {
-          data.map((card, index) => {
+          data.map((choreo, index) => {
             if (index % 2 === 0) {
               return (
                 <Row gutter={72} type='flex' justify='center' key={index}>
@@ -45,19 +45,23 @@ class ChoreoCards extends React.Component {
                           index === 0
                           ? <div className="new-choreo">
                               <FileAddIcon className="new-choreo-icon"/>
+                              <span class="add-choreo-title"> CREATE A NEW STAGE </span>
                             </div>
                           :
+                             <div>
                               <div className="ant-card-cover">
                                 <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
                               </div>
+                              <div className="description">
+                                <span>{choreo.name}</span>
+                                <div className="description-inner">
+                                  <span id="card-date">{choreo.frames.length} formations</span>
+                                  <Icon type="share-alt" theme="outlined" style={{fontSize: '20px'}}/>
+                                </div>
+                              </div>
+                          </div>
                         }
-                      <div className="description">
-                        <span>{card.name}</span>
-                        <div className="description">
-                          <span id="card-date">20 Oct 2018</span>
-                          <Icon type="share-alt" theme="outlined" style={{fontSize: '20px'}}/>
-                        </div>
-                      </div>
+
                     </Card>
                   </Col>
                   {
@@ -76,8 +80,8 @@ class ChoreoCards extends React.Component {
 
                             <div className="description">
                               <span>{data[index + 1].name}</span>
-                              <div className="description">
-                                <span id="card-date">20 Oct 2018</span>
+                              <div className="description-inner">
+                                <span id="card-date">{data[index + 1].frames.length} formations</span>
                                 <Icon type="share-alt" theme="outlined" style={{fontSize: '20px'}}/>
                               </div>
                             </div>
