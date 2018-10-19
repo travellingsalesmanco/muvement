@@ -64,7 +64,7 @@ class ChoreoHomeScreen extends React.Component {
     const {Header, Content, Sider} = Layout;
     const {startValue, endValue, endOpen} = this.state;
     return (
-      <Layout className="choreo-homescreen-body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
+      <Layout className="choreo-homescreen-body">
         <Header>
           <div className="nav-bar">
             <div>
