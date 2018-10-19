@@ -4,6 +4,7 @@ import {Button, Layout, Menu, Row, Col} from 'antd';
 import connect from "react-redux/es/connect/connect";
 import {BrowserRouter as Route} from "react-router-dom";
 import GridImage from  "../../img/grid-image.svg";
+import { auth } from "../../firebase";
 
 class SignUp extends React.Component {
 
@@ -13,8 +14,8 @@ class SignUp extends React.Component {
         <h1 className="auth-title">SIGN UP</h1>
         <p className="auth-text">Continue With</p>
         <div className="auth-buttons">
-            <Button className="fb-login-button">FACEBOOK</Button>
-            <Button className="google-login-button">GOOGLE</Button>
+            <Button className="fb-login-button" onClick={auth.facebookSignIn}>FACEBOOK</Button>
+            <Button className="google-login-button" onClick={auth.googleSignIn}>GOOGLE</Button>
         </div>
         <Row>
             <Col span={8} className="divider"></Col>
