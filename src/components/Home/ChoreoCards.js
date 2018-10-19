@@ -30,7 +30,7 @@ class ChoreoCards extends React.Component {
           idCSS="cool-gradient"
         />
         {
-          data.map((card, index) => {
+          data.map((choreo, index) => {
             if (index % 2 === 0) {
               return (
                 <Row gutter={72} type='flex' justify='center' key={index}>
@@ -53,9 +53,9 @@ class ChoreoCards extends React.Component {
                                 <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
                               </div>
                               <div className="description">
-                                <span>{card.name}</span>
+                                <span>{choreo.name}</span>
                                 <div className="description-inner">
-                                  <span id="card-date">30 formations</span>
+                                  <span id="card-date">{choreo.frames.length} formations</span>
                                   <Icon type="share-alt" theme="outlined" style={{fontSize: '20px'}}/>
                                 </div>
                               </div>
@@ -81,7 +81,7 @@ class ChoreoCards extends React.Component {
                             <div className="description">
                               <span>{data[index + 1].name}</span>
                               <div className="description-inner">
-                                <span id="card-date">12 formations</span>
+                                <span id="card-date">{data[index + 1].frames.length} formations</span>
                                 <Icon type="share-alt" theme="outlined" style={{fontSize: '20px'}}/>
                               </div>
                             </div>
