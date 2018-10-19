@@ -1,53 +1,44 @@
-import {Button, Form, InputNumber} from "antd";
+import { InputNumber } from "antd";
 import React from 'react';
-import {editStageDimensions} from "../../actions/danceActions"
-import {connect} from 'react-redux'
+import { editStageDimensions } from "../../actions/danceActions"
+import { connect } from 'react-redux'
 import './StageDimForm.css';
 
 class StageDimForm extends React.Component {
-  handleDimChange = (e) => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-        this.props.dispatch(editStageDimensions(this.props.danceId, {
-          width: values.stageWidth,
-          height: values.stageHeight,
-          gridSize: values.gridSize
-        }));
-      } else {
-        console.log('Error: ', err);
-      }
-    });
+
+  handleWidthChange = value => {
+    if (value >= 0) {
+      this.props.dispatch(editStageDimensions(this.props.danceId, {
+        width: value
+      }));
+    }
+  };
+
+  handleHeightChange = value => {
+    if (value >= 0) {
+      this.props.dispatch(editStageDimensions(this.props.danceId, {
+        height: value
+      }));
+    }
+  };
+
+  handleGridSizeChange = value => {
+    if (value >= 0) {
+      this.props.dispatch(editStageDimensions(this.props.danceId, {
+        gridSize: value
+      }));
+    }
   };
 
   render() {
-    const {getFieldDecorator} = this.props.form;
     return (
       <div id="stage-dim">
-        <Form layout={"vertical"} onSubmit={this.handleDimChange}>
-          <Form.Item className="stage-dim-value" label={'Height'}>
-            {getFieldDecorator('stageHeight', {
-              initialValue: this.props.height
-            })(
-              <InputNumber min={0.01} precision={2}/>
-            )}
-          </Form.Item>
-          <Form.Item  className="stage-dim-value" label={'Width'}>
-            {getFieldDecorator('stageWidth', {
-              initialValue: this.props.width
-            })(
-              <InputNumber min={0.01} precision={2}/>
-            )}
-          </Form.Item>
-          <Form.Item  className="stage-dim-value"  label={'Grid Size'}>
-            {getFieldDecorator('gridSize', {
-              initialValue: this.props.gridSize
-            })(
-              <InputNumber min={0.01} precision={2}/>
-            )}
-          </Form.Item>
-        </Form>
+        <h3>Height</h3>
+        <InputNumber min={0.50} precision={2} defaultValue={this.props.height} onChange={this.handleHeightChange}/>
+        <h3>Width</h3>
+        <InputNumber min={0.50} precision={2} defaultValue={this.props.width} onChange={this.handleWidthChange}/>
+        <h3>Grid Size</h3>
+        <InputNumber min={0.50} precision={2} defaultValue={this.props.gridSize} onChange={this.handleGridSizeChange}/>
       </div>
     );
   }
@@ -62,4 +53,4 @@ const mapStateToProps = function (state) {
   }
 };
 
-export default connect(mapStateToProps)(Form.create()(StageDimForm));
+export default connect(mapStateToProps)(StageDimForm);

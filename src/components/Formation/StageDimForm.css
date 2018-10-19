@@ -3,18 +3,11 @@
     margin: 0 auto;
 }
 
-.ant-form-vertical .ant-form-item{
-    padding-bottom: 0px;
-}
-
-#stage-dim .ant-form-vertical .ant-form-item-label {
-  font-family: 'Sen-Regular';
-  width: 90%;
-}
-
-#stage-dim .ant-form-item-label label {
+#stage-dim h3 {
   color: #fff;
   font-size: 16px;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 
 #stage-dim .ant-input-number {
