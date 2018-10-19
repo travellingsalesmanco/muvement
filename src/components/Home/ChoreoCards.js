@@ -54,7 +54,7 @@ class ChoreoCards extends React.Component {
                               </div>
                               <div className="description">
                                 <span>{card.name}</span>
-                                <div className="description">
+                                <div className="description-inner">
                                   <span id="card-date">30 formations</span>
                                   <Icon type="share-alt" theme="outlined" style={{fontSize: '20px'}}/>
                                 </div>
@@ -80,7 +80,7 @@ class ChoreoCards extends React.Component {
 
                             <div className="description">
                               <span>{data[index + 1].name}</span>
-                              <div className="description">
+                              <div className="description-inner">
                                 <span id="card-date">12 formations</span>
                                 <Icon type="share-alt" theme="outlined" style={{fontSize: '20px'}}/>
                               </div>

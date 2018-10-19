@@ -58,6 +58,16 @@
   font-size: 16px;
 }
 
+.description-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-family: 'Sen-Bold';
+  font-size: 16px;
+}
+
 .new-choreo-modal .ant-modal-content {
   /*border: 5px solid #24c6dc;*/
   padding: 2px 2px;
