@@ -95,25 +95,23 @@ class ChoreoHomeScreen extends React.Component {
             <div className="choreo-homescreen-tabs">
               <button
                 className={this.state.isButtonActive === 1 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
-                onClick={() => this.buttonClick(1)}>ABOUT
-              </button>
-
-                <button  className = {this.state.isButtonActive === 2 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
-                        onClick={() => this.buttonClick(2)}>PERFORMERS</button>
-        </div>
-        {
-            this.state.isButtonActive === 1
-            ? <div>
-                <ChoreoPicture />
-                <h2 class="stagedim-title">STAGE DIMENSION</h2>
-                <StageDimForm />
-              </div>
-            : <div className="edit-performers">
-                <Button className="edit-performers-button" icon="edit" ghost block>EDIT PERFORMERS</Button>
+                onClick={() => this.buttonClick(1)}>ABOUT</button>
+              <button  className = {this.state.isButtonActive === 2 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
+                      onClick={() => this.buttonClick(2)}>PERFORMERS</button>
             </div>
-        }
-
-        </Sider>
+            {
+                this.state.isButtonActive === 1
+                ? <div>
+                    <ChoreoPicture />
+                    <h2 className="stagedim-title">STAGE DIMENSION</h2>
+                    <StageDimForm />
+                  </div>
+                : <div className="edit-performers">
+                    <Button className="edit-performers-button" icon="edit" ghost block>EDIT PERFORMERS</Button>
+                </div>
+            }
+          </Sider>
+        </Layout>
       </Layout>
     );
   }
