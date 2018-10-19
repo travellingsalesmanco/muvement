@@ -10,70 +10,71 @@ import FormationPreviewCards from "./FormationPreviewCards";
 import PerformerList from "../Formation/PerformerList";
 
 class ChoreoHomeScreen extends React.Component {
-    state = {
-      startValue: null,
-      endValue: null,
-      endOpen: false,
-      isButtonActive: 1
-    };
+  state = {
+    startValue: null,
+    endValue: null,
+    endOpen: false,
+    isButtonActive: 1
+  };
 
-    disabledStartDate = (startValue) => {
-      const endValue = this.state.endValue;
-      if (!startValue || !endValue) {
-        return false;
-      }
-      return startValue.valueOf() > endValue.valueOf();
+  disabledStartDate = (startValue) => {
+    const endValue = this.state.endValue;
+    if (!startValue || !endValue) {
+      return false;
     }
+    return startValue.valueOf() > endValue.valueOf();
+  }
 
-    disabledEndDate = (endValue) => {
-      const startValue = this.state.startValue;
-      if (!endValue || !startValue) {
-        return false;
-      }
-      return endValue.valueOf() <= startValue.valueOf();
+  disabledEndDate = (endValue) => {
+    const startValue = this.state.startValue;
+    if (!endValue || !startValue) {
+      return false;
     }
+    return endValue.valueOf() <= startValue.valueOf();
+  }
 
-    onChange = (field, value) => {
-      this.setState({
-        [field]: value,
-      });
-    }
+  onChange = (field, value) => {
+    this.setState({
+      [field]: value,
+    });
+  }
 
-    onStartChange = (value) => {
-      this.onChange('startValue', value);
-    }
+  onStartChange = (value) => {
+    this.onChange('startValue', value);
+  }
 
-    onEndChange = (value) => {
-      this.onChange('endValue', value);
-    }
+  onEndChange = (value) => {
+    this.onChange('endValue', value);
+  }
 
-    handleStartOpenChange = (open) => {
-      if (!open) {
-        this.setState({ endOpen: true });
-      }
+  handleStartOpenChange = (open) => {
+    if (!open) {
+      this.setState({endOpen: true});
     }
+  }
 
-    handleEndOpenChange = (open) => {
-      this.setState({ endOpen: open });
-    }
+  handleEndOpenChange = (open) => {
+    this.setState({endOpen: open});
+  }
 
-    buttonClick = (number) => {
-        this.setState({isButtonActive: number});
-    }
+  buttonClick = (number) => {
+    this.setState({isButtonActive: number});
+  }
 
   render() {
     const {Header, Content, Sider} = Layout;
-    const { startValue, endValue, endOpen } = this.state;
+    const {startValue, endValue, endOpen} = this.state;
     return (
       <Layout className="choreo-homescreen-body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
         <Header>
           <div className="nav-bar">
-              <div >
-                <Button className="backbutton" style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.push('/')}/>
-                <span className="backbutton-desc">Dashboard</span>
-              </div>
+            <div>
+              <Button className="backbutton" style={{fontSize: '25px'}} icon="left"
+                      onClick={() => this.props.history.push('/')}/>
+              <span className="backbutton-desc">Dashboard</span>
+            </div>
             <div className="title">
-              <h3 style={{ color: '#fff'}}>{this.props.name}</h3>
+              <h3 style={{color: '#fff'}}>{this.props.name}</h3>
             </div>
             <div className="right-container">
               <Menu mode="horizontal" theme="dark">
@@ -85,15 +86,17 @@ class ChoreoHomeScreen extends React.Component {
           </div>
         </Header>
         <Layout className="choreo-homescreen-contents">
-        <Content style={{display: "flex", flexDirection: "column"}}>
+          <Content style={{display: "flex", flexDirection: "column"}}>
             {/*<FormationPreviewCards data={["1. Introduction (30 seconds)", "2. Straight Line"]} />*/}
-          <FormationPreviewCards frames={this.props.frames} match={this.props.match} danceId={this.props.danceId}/>
-        </Content>
-        <Sider
-        width="350px">
-        <div className="choreo-homescreen-tabs">
-                <button className ={this.state.isButtonActive === 1 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
-                        onClick={() => this.buttonClick(1)}>ABOUT</button>
+            <FormationPreviewCards frames={this.props.frames} match={this.props.match} danceId={this.props.danceId}/>
+          </Content>
+          <Sider
+            width="350px">
+            <div className="choreo-homescreen-tabs">
+              <button
+                className={this.state.isButtonActive === 1 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
+                onClick={() => this.buttonClick(1)}>ABOUT
+              </button>
 
                 <button  className = {this.state.isButtonActive === 2 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
                         onClick={() => this.buttonClick(2)}>PERFORMERS</button>
@@ -111,7 +114,6 @@ class ChoreoHomeScreen extends React.Component {
         }
 
         </Sider>
-      </Layout>
       </Layout>
     );
   }
