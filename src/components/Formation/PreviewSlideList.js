@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {gotoFrame, reorderAndFocusFrame} from "../../actions/danceActions";
-import {REORDER_FRAME} from "../../constants/actionTypes";
 import StageCanvas from "../StageCanvas/StageCanvas";
 import './PreviewSlideList.css';
 import Draggable from 'react-draggable';
@@ -53,6 +52,7 @@ class PreviewSlideList extends React.Component {
   };
 
   updateSlidePos = () => {
+    const {origSlidePos, slidePos, slideHeight} = this.state;
     let framesPos = [];
     let currY = 0;
     let initState = false;
@@ -60,17 +60,18 @@ class PreviewSlideList extends React.Component {
     this.props.frames.forEach((frame, index) => {
       // Note: only increases Y-value
       framesPos.push({ x: 0, y: currY});
-      if (this.state.origSlidePos.length === 0) {
+      if (origSlidePos.length === 0 || origSlidePos.length !== this.props.frames.length) {
         initState = true;
-      } else if (this.state.slidePos[index].y !== this.state.origSlidePos[index].y) {
+      } else if (slidePos[index].y !== origSlidePos[index].y) {
         stateChanged = true;
       }
-      currY += this.state.slideHeight;
+      currY += slideHeight;
     });
     if (initState) { // initial render
       this.setState({
         slidePos: framesPos,
-        origSlidePos: framesPos
+        origSlidePos: framesPos,
+        slideListHeight: this.slide.offsetHeight * this.props.frames.length
       })
     }
     if (stateChanged && !this.state.slidePosChanged) { // due to resizing events
@@ -113,6 +114,8 @@ class PreviewSlideList extends React.Component {
       this.setState({
         slideDragEnded: true
       }, () => {
+        console.log("switch", index, toIndex);
+        // Note: even when index === toIndex, this is called to focus on the frame clicked
         this.props.dispatch(reorderAndFocusFrame(this.props.danceId, index, toIndex));
       })
     } else {
