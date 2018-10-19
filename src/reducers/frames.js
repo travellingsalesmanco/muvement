@@ -71,7 +71,6 @@ const frameReducer = (state = defaultFrame, action) => {
 // Frames reducer
 export default (state = [defaultFrame], action) => {
   switch (action.type) {
-
     case ADD_FRAME: {
       const { payload: index } = action;
       let frames = state.slice();
@@ -93,11 +92,12 @@ export default (state = [defaultFrame], action) => {
       return frames;
     }
 
-    // All frame edit operations
+    // Operations applied to all frames
     case REMOVE_DANCER:
     case RENAME_DANCER: {
       return state.map(frame => frameReducer(frame, action))
     }
+    // Operations applied to a single frame
     default:
       if (action.frameId !== null && action.frameId !== undefined) {
         const { frameId, ...prunedAction } = action;
