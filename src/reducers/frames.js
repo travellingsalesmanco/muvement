@@ -87,8 +87,8 @@ export default (state = [defaultFrame], action) => {
       const { fromIndex, toIndex } = action.payload;
       let frames = state.slice();
       const toMove = frames[fromIndex];
-      state.splice(fromIndex, 1);
-      state.splice(toIndex, 0, toMove);
+      frames.splice(fromIndex, 1);
+      frames.splice(toIndex, 0, toMove);
       return frames;
     }
 
