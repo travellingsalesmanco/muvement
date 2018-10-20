@@ -1,8 +1,8 @@
 .choreo-homescreen-body{
-    height: 100vh;
+    height: 100rem;
     background-image: url(" ../../img/FormationsOverviewBackground.png");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 }
 
 .choreo-homescreen-contents {
@@ -11,23 +11,24 @@
 
 .ant-layout-sider-children {
     background: linear-gradient(to bottom, #313131 -15%, #000000 140%);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
+    box-shadow: 0 2em 3em 0 rgba(0, 0, 0, 0.25), 0 2.1em 3.1em 0 rgba(0, 0, 0, 0.20);
 }
 
-.choreo-picture-card-cover{
+/* .choreo-picture-card-cover{
     width: 80%;
     margin: 0 auto;
-    padding-top: 100px;
-    height: 60vh;
+    padding-top: 500em;
+    height: 50em;
     background-position: center center;
     background-repeat: no-repeat;
     overflow: hidden;
     border-radius: 5px;
-}
+} */
 
 .add-choreo-pic-icon {
-  font-size: 45px;
+  font-size: 3rem;
 }
+
 .add-choreo-pic {
   width: 80%;
   margin: 10vh auto 30px auto;
@@ -56,42 +57,42 @@
 }
 
 .new-formation {
-  height: 200px;
+  height: 15em;
   border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(to bottom, #24C6DC -30%, #514A9D 100%);
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 1.5em 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 1.5em 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 1.5em 0px rgba(0,0,0,0.75);
 }
 
 .add-formation-title{
     position: absolute;
-    top: 120px;
+    top: 7em;
     font-family: "Sen-Black";
     color: white;
-    font-size: 18px;
+    font-size: 1.3em;
 }
 
 .add-formation-icon{
     position: absolute;
-    top: 60px;
+    top: 1.5em;
     color: white;
-    font-size: 45px;
+    font-size: 3em;
 }
 
 .formation-card {
-  margin: 30px 0;
+  margin: 2em 0;
 }
 
 .ant-formation-card-cover {
-  height: 200px;
-  border-radius: 15px;
+  height: 15em;
+  border-radius: 1.2em;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.35);
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 1.5em 0px rgba(0,0,0,0.75);
 }
 
 .ant-formation-card-cover img {
@@ -106,15 +107,15 @@
 }
 
 .ant-card {
-  border-radius: 5px;
+  border-radius: 1em;
   background: transparent;
 }
 
 .formation-name {
   color: #fff;
   font-family: 'Sen-Regular';
-  padding-top: 12px;
-  font-size: 15px;
+  padding-top: 1em;
+  font-size: 1.2em;
 }
 
 .choreo-homescreen-tabs{

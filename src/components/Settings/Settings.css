@@ -6,7 +6,7 @@
     height: 100rem;
     background-image: url("../../img/FormationsOverviewBackground.png");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 }
 .settings-navbar{
     display: flex;
