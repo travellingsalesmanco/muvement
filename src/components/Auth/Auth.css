@@ -12,14 +12,15 @@
     background-image: url("../../img/SplashScreenBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position:center;
 }
 
 .auth-title {
     color: white;
     font-family: Sen-Black;
     text-align: center;
-    font-size: 2.2rem;
-    padding-top: 5%;
+    font-size: 3em;
+    padding-top: 2em;
 }
 
 .auth-divider {
@@ -32,13 +33,19 @@
 
 .form-text {
     color: white;
+<<<<<<< refs/remotes/origin/dev
+=======
+    text-align: center;
+    padding-top: 1.5em;
+>>>>>>> Change Auth css
 }
 
 .auth-buttons {
     text-align: center;
-    padding: 5px;
+    padding: 1.5em;
 }
 
+<<<<<<< refs/remotes/origin/dev
 .fb-login-button {
     border-radius: 20px;
     background-color: #304D96;
@@ -56,11 +63,30 @@
     margin: 20px;
     width: 10em;
     height: 40px;
+=======
+.fb-login-button{
+    border-radius: 20em;
+    background-color: #304D96;
+    color: white;
+    border: none;
+    margin: 2em;
+    width: 15em;
+    height: 3em;
+}
+
+.google-login-button{
+    border-radius: 20em;
+    color: #6A6A6A;
+    border: none;
+    margin: 2em;
+    width: 15em;
+    height: 3em;
+>>>>>>> Change Auth css
 }
 
 .divider {
     border-bottom: 1px solid white;
-    height: 20px;
+    height: 2em;
 }
 
 .auth-form {
@@ -81,15 +107,19 @@
     background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px;
-    width: 30%;
-    height: 50px;
-    border-radius: 40px;
+    margin-top: 3em;
+    width: 20em;
+    height: 3em;
+    border-radius: 40em;
     color: white;
     font-family: Sen-Bold;
     font-size: 1.3em;
     border: none;
+<<<<<<< refs/remotes/origin/dev
     box-shadow: 0px 0px 15px #514A9D;
+=======
+    box-shadow: 0 0 1.2em  #514A9D;
+>>>>>>> Change Auth css
 }
 
 button.auth-backbutton {
@@ -102,7 +132,7 @@ button.auth-backbutton {
 
 .auth-backbutton-desc {
     color: white;
-    font-size: 16px;
+    font-size: 1.2em;
     display: inline-flex;
     vertical-align: middle;
 }
@@ -118,4 +148,3 @@ button.auth-backbutton {
     color: #24C6DC;
     text-decoration: underline;
 }
-
