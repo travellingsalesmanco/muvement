@@ -3,6 +3,7 @@ import {Button, Input, Layout, Modal} from 'antd';
 import AddPerformerScreen from "./AddPerformerScreen";
 import {connect} from 'react-redux';
 import ChoreoListScreen from "./ChoreoListScreen";
+import ReactGA from 'react-ga';
 
 class HomeScreen extends React.Component {
   state = {
@@ -10,6 +11,10 @@ class HomeScreen extends React.Component {
     modalVisible: false,
     newChoreoName: ''
   };
+
+  componentDidMount() {
+    ReactGA.pageview('Dashboard');
+  }
 
   setModalVisible = (modalVisible) => {
     this.setState({ modalVisible });

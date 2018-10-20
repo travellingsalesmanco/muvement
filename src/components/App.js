@@ -9,6 +9,11 @@ import LogInScreen from "./Auth/LogIn";
 import ResetPwScreen from "./Auth/ResetPassword";
 import ForgetPwScreen from "./Auth/ForgetPassword";
 import Settings from "./Settings/Settings";
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-125447140-3', {
+  debug: false
+});
 
 class App extends Component {
   render() {
