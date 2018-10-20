@@ -7,8 +7,13 @@ export const doSignOut = () => {
 };
 
 // Email and Password Methods
-export const doCreateUserWithEmailAndPassword = (email, password) => {
-  return auth.createUserWithEmailAndPassword(email, password);
+export const doCreateUserWithEmailAndPassword = (displayName, email, password) => {
+  return auth.createUserWithEmailAndPassword(email, password).then((userCred) => {
+    return userCred.user.updateProfile({
+      displayName: displayName,
+      photoURL: null
+    });
+  });
 };
 
 export const doSignInWithEmailAndPassword = (email, password) => {
