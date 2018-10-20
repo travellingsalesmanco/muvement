@@ -1,72 +1,73 @@
 {
-  "id": "danceId1",
-  "author": {
-    "id": "profileId",
-    "name": "Hyle Kanagami"
-  },
-  "createdAt": "timestamp1",
-  "updatedAt": "timestamp2",
-  "name": "The Best Dance",
-  "published": false,
-  "stageDim": {
-    "width": 9.60,
-    "height": 5.18,
-    "gridSize": 0.5,
-    "units": "m"
-  },
-  "dancers": [
-    "Bob",
-    "Marley",
-    "And",
-    "Me"
-  ],
-  "frames": [
-    {
-      "name": "Introduction",
-      "numSeconds": 30,
-      "dancers": [
-        {
-          "name": "Bob",
-          "position": [
-            0.1,
-            0.9
-          ]
-        },
-        {
-          "name": "Marley",
-          "position": [
-            0.1,
-            0.5
-          ]
-        },
-        {
-          "name": "Me",
-          "position": [
-            0.5,
-            0.5
-          ]
-        }
-      ]
+  "danceId1": {
+    "creator": {
+      "id": "profileId",
+      "name": "Hyle Kanagami"
     },
-    {
-      "name": "Arrow part and 2 triangles",
-      "numSeconds": 30,
-      "dancers": [
-        {
-          "name": "And",
-          "position": [
-            0.1,
-            0.5
-          ]
-        },
-        {
-          "name": "Marley",
-          "position": [
-            0.5,
-            0.5
-          ]
-        }
-      ]
-    }
-  ]
+    "createdAt": "timestamp1",
+    "updatedAt": "timestamp2",
+    "name": "The Best Dance",
+    "published": false,
+    "stageDim": {
+      "width": 9.60,
+      "height": 5.18,
+      "gridSize": 0.5,
+      "units": "m"
+    },
+    "dancers": [
+      "Bob",
+      "Marley",
+      "And",
+      "Me"
+    ],
+    "frames": [
+      {
+        "name": "Introduction",
+        "numSeconds": 30,
+        "dancers": [
+          {
+            "name": "Bob",
+            "position": [
+              0.1,
+              0.9
+            ]
+          },
+          {
+            "name": "Marley",
+            "position": [
+              0.1,
+              0.5
+            ]
+          },
+          {
+            "name": "Me",
+            "position": [
+              0.5,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Arrow part and 2 triangles",
+        "numSeconds": 30,
+        "dancers": [
+          {
+            "name": "And",
+            "position": [
+              0.1,
+              0.5
+            ]
+          },
+          {
+            "name": "Marley",
+            "position": [
+              0.5,
+              0.5
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
