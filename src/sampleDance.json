@@ -1,5 +1,8 @@
 {
   "name": "The Best Dance",
+  "published": false,
+  "creator": "d2n1iofj21ifj2",
+  "timestamp": "<someFirebaseTimestampObject",
   "stageDim": {
     "width": 9.60,
     "height": 5.18,
