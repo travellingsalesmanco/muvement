@@ -48,3 +48,9 @@ export const dummyDance = {
     }
   ]
 };
+export const dummyDances = {
+  byId: {
+    "abcde": dummyDance
+  },
+  myDances: ["abcde"]
+}
