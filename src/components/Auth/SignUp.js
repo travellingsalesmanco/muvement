@@ -1,35 +1,31 @@
 import React from 'react';
 import './Auth.css';
-import {Button, Layout, Menu, Row, Col} from 'antd';
+import { Button, Divider } from 'antd';
 import connect from "react-redux/es/connect/connect";
-import {BrowserRouter as Route} from "react-router-dom";
-import GridImage from  "../../img/grid-image.svg";
+import { BrowserRouter as Route } from "react-router-dom";
+import GridImage from "../../img/grid-image.svg";
 import { auth } from "../../firebase";
+import SignUpForm from "./SignUpForm";
 
 class SignUp extends React.Component {
 
   render() {
     return (
-     <div className="auth-background">
+      <div className="auth-background">
         <h1 className="auth-title">SIGN UP</h1>
         <p className="auth-text">Continue With</p>
         <div className="auth-buttons">
-            <Button className="fb-login-button" onClick={auth.facebookSignIn}>FACEBOOK</Button>
-            <Button className="google-login-button" onClick={auth.googleSignIn}>GOOGLE</Button>
+          <Button className="fb-login-button" onClick={auth.facebookSignIn}>FACEBOOK</Button>
+          <Button className="google-login-button" onClick={auth.googleSignIn}>GOOGLE</Button>
         </div>
-        <Row>
-            <Col span={8} className="divider"></Col>
-            <Col span={8}>
-                <p className="auth-text">Or Create Your Own Account</p>
-            </Col>
-            <Col span={8} className="divider"></Col>
-        </Row>
-        <div className="auth-signup">
-            <Button className="auth-signup-button" type="primary" htmlType="submit">SIGN UP</Button>
+        <div>
+          <Divider className="auth-divider"><span className="divider-text">Or Create Your Own Account</span></Divider>
         </div>
-        <p className="auth-text">Have an account? Log in </p>
-     </div>
-
+        <div className="auth-form">
+          <SignUpForm />
+        </div>
+        <p className="auth-text">Have an account? <a className="form-link" href="">Log in</a></p>
+      </div>
     );
   }
 }

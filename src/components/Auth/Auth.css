@@ -1,15 +1,20 @@
-.auth-header{
+.auth-header {
     background: black;
 }
 
-.auth-background{
+.auth-text {
+    text-align: center;
+    color: white;
+}
+
+.auth-background {
     height: 100vh;
     background-image: url("../../img/SplashScreenBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.auth-title{
+.auth-title {
     color: white;
     font-family: Sen-Black;
     text-align: center;
@@ -17,18 +22,24 @@
     padding-top: 5%;
 }
 
-.auth-text{
+.auth-divider {
     color: white;
-    text-align: center;
-    padding-top: 3%;
 }
 
-.auth-buttons{
+.divider-text {
+    color: white;
+}
+
+.form-text {
+    color: white;
+}
+
+.auth-buttons {
     text-align: center;
     padding: 5px;
 }
 
-.fb-login-button{
+.fb-login-button {
     border-radius: 20px;
     background-color: #304D96;
     color: white;
@@ -38,7 +49,7 @@
     height: 40px;
 }
 
-.google-login-button{
+.google-login-button {
     border-radius: 20px;
     color: #6A6A6A;
     border: none;
@@ -47,13 +58,23 @@
     height: 40px;
 }
 
-.divider{
+.divider {
     border-bottom: 1px solid white;
     height: 20px;
 }
 
-.auth-signup {
+.auth-form {
+    width: 20em;
     text-align: center;
+    margin: auto;
+}
+
+.login-form-button {
+    width: 100%;
+}
+
+.login-form-forgot {
+    display: block;
 }
 
 .auth-signup-button {
@@ -68,7 +89,7 @@
     font-family: Sen-Bold;
     font-size: 1.3em;
     border: none;
-    box-shadow: 0px 0px 15px  #514A9D;
+    box-shadow: 0px 0px 15px #514A9D;
 }
 
 button.auth-backbutton {
@@ -79,9 +100,22 @@ button.auth-backbutton {
     vertical-align: middle;
 }
 
-.auth-backbutton-desc{
+.auth-backbutton-desc {
     color: white;
     font-size: 16px;
     display: inline-flex;
     vertical-align: middle;
 }
+
+.form-link:link,
+.form-link:visited {
+    color: white;
+    text-decoration: underline;
+}
+
+
+.form-link:hover{
+    color: #24C6DC;
+    text-decoration: underline;
+}
+
