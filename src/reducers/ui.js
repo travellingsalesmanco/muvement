@@ -4,6 +4,10 @@ import {
   SELECT_DANCER,
   SET_LABELS_VIEW,
   SWITCH_ACTIVE_FRAME,
+  TIMELINE_ADVANCE,
+  TIMELINE_JUMP,
+  TIMELINE_PLAY,
+  TIMELINE_PAUSE,
 } from "../constants/actionTypes";
 import { defaultUI } from "../constants/defaults";
 
@@ -41,6 +45,32 @@ export default (state = defaultUI, action) => {
       return {
         ...state,
         showLabels: labelState
+      }
+    }
+    case TIMELINE_ADVANCE: {
+      const {payload: numMs} = action;
+      return {
+        ...state,
+        currentTime: state.currentTime + numMs
+      }
+    }
+    case TIMELINE_JUMP: {
+      const {payload: targetMs} = action;
+      return {
+        ...state,
+        currentTime: targetMs
+      }
+    }
+    case TIMELINE_PLAY: {
+      return {
+        ...state,
+        isPlaying: true
+      }
+    }
+    case TIMELINE_PAUSE: {
+      return {
+        ...state,
+        isPlaying: false
       }
     }
 

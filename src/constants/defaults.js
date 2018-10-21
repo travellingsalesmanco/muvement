@@ -15,6 +15,8 @@ export const defaultStageDim = {
   units: 'm'
 };
 export const defaultUI = {
+  isPlaying: false,
+  currentTime: 0,
   activeFrame: 0,
   showLabels: true,
   selectedDancers: []
