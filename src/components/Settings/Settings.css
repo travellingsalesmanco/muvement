@@ -3,10 +3,10 @@
 }
 
 .settings-background{
-    height: 100rem;
+    height: 100%;
     background-image: url("../../img/FormationsOverviewBackground.png");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
 }
 .settings-navbar{
     display: flex;

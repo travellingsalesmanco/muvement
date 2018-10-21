@@ -12,7 +12,7 @@ class Settings extends React.Component {
     const { Header } = Layout;
     const SubMenu = Menu.SubMenu;
     return (
-      <Layout>
+      <Layout style={{height:"100vh"}}>
         <Header className="settings-header">
           <div className="settings-navbar">
             <div>
