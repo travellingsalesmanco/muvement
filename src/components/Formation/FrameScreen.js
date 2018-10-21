@@ -155,6 +155,7 @@ class FrameScreen extends Component {
               <PreviewSlideList danceId={this.props.danceId}/>
             </Sider>
             <SidePanel
+              danceId={this.props.danceId}
               placement={this.state.placement}
               closable={true}
               onClose={this.onClose}
