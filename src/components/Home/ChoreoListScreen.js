@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import ChoreoCardList from "./ChoreoCardList";
 import withAuthorization from "../withAuthorization";
-import { auth } from "../../firebase";
+import { withRouter } from "react-router-dom";
 
 
 class ChoreoListScreen extends React.Component {
@@ -19,7 +19,7 @@ class ChoreoListScreen extends React.Component {
             <div className="right-container">
               <Menu mode="horizontal" theme="dark">
                 <Menu.Item key="1">
-                  <Button icon="setting" onClick={auth.doSignOut} ghost/>
+                  <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost/>
                 </Menu.Item>
               </Menu>
             </div>
@@ -42,4 +42,4 @@ const mapStateToProps = state => {
 // Auth exists
 const authCondition = (authUser) => !!authUser;
 
-export default withAuthorization(authCondition)(connect(mapStateToProps)(ChoreoListScreen));
+export default withAuthorization(authCondition)(withRouter((connect(mapStateToProps)(ChoreoListScreen))));

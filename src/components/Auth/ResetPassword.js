@@ -13,7 +13,7 @@ class ResetPassword extends React.Component {
         <Header className="auth-header">
             <div>
               <Button className="auth-backbutton" style={{fontSize: '25px'}} icon="left"
-                      onClick={() => this.props.history.push('/')}/>
+                      onClick={() => this.props.history.goBack()}/>
               <span className="auth-backbutton-desc">Setting</span>
             </div>
         </Header>

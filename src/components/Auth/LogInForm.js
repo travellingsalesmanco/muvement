@@ -1,6 +1,7 @@
 import { Form, Input, Icon, Button, Checkbox } from 'antd';
 import React from 'react';
 import './Auth.css';
+import Link from "react-router-dom/es/Link";
 
 const FormItem = Form.Item;
 
@@ -36,7 +37,7 @@ class LogInForm extends React.Component {
         </FormItem>
         <FormItem>
           <div>
-            <a className="form-link" href="">Forgot your password?</a>
+            <Link className="form-link" to={`/forgotpassword`}>Forgot your password?</Link>
           </div>
           {getFieldDecorator('remember', {
             valuePropName: 'checked',

@@ -6,6 +6,7 @@ import { BrowserRouter as Route } from "react-router-dom";
 import GridImage from "../../img/grid-image.svg";
 import { auth } from "../../firebase";
 import SignUpForm from "./SignUpForm";
+import Link from "react-router-dom/es/Link";
 
 class SignUp extends React.Component {
 
@@ -24,7 +25,7 @@ class SignUp extends React.Component {
         <div className="auth-form">
           <SignUpForm />
         </div>
-        <p className="auth-text">Have an account? <a className="form-link" href="">Log in</a></p>
+        <p className="auth-text">Have an account? <Link className="form-link" to={`/login`}>Log in</Link></p>
       </div>
     );
   }
