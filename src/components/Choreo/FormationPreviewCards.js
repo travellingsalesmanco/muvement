@@ -1,11 +1,9 @@
+import { Card, Col, Icon, Row } from 'antd';
 import React from 'react';
-import { Row, Col, Card, Icon } from 'antd';
-import './ChoreoHomeScreen.css';
 import { withRouter } from "react-router-dom";
-import { connect } from 'react-redux';
 import { addAndSetActiveFrame, gotoFrame } from "../../actions/danceActions";
 import StageCanvas from "../StageCanvas/StageCanvas";
-import { getDance } from '../../selectors/dance';
+import './ChoreoHomeScreen.css';
 
 class FormationPreviewCards extends React.Component {
   constructor(props) {
@@ -73,11 +71,11 @@ class FormationPreviewCards extends React.Component {
                             <span className="add-formation-title"> ADD FORMATION </span>
                           </div>
                           : <div className="ant-formation-card-cover">
-                              <div style={{ flex: 1, pointerEvents: "None" }}>
-                                <StageCanvas danceId={this.props.danceId} frameId={index - 1} width={this.state.stageWidth}
-                                  height={this.state.stageHeight} />
-                              </div>
+                            <div style={{ flex: 1, pointerEvents: "None" }}>
+                              <StageCanvas danceId={this.props.danceId} frameId={index - 1} width={this.state.stageWidth}
+                                height={this.state.stageHeight} />
                             </div>
+                          </div>
                       }
                       <div className="formation-name">
                         <span>{formation.name}</span>
