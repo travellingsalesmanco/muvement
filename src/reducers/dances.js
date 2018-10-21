@@ -9,7 +9,7 @@ import {
   UNPUBLISH_DANCE
 } from '../constants/actionTypes';
 import { defaultStageDim } from '../constants/defaults';
-import { dummyDances } from '../constants/dummyData';
+import { demoDances } from '../constants/dummyData';
 import dancers from './dancers';
 import frames from './frames';
 
@@ -58,7 +58,7 @@ const danceWithMetaReducer = (state, action) => {
 
 // Dances
 // TODO: Remove dummy dance when deploying
-export default (state = dummyDances, action) => {
+export default (state = demoDances, action) => {
   switch (action.type) {
     case ADD_DANCE: {
       const { danceId, dance } = action.payload;
