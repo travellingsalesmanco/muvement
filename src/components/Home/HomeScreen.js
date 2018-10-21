@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Button, Input, Layout, Modal} from 'antd';
 import AddPerformerScreen from "./AddPerformerScreen";
 import {connect} from 'react-redux';
@@ -37,12 +37,14 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
+      <Fragment>
       <Layout className="body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
         {
           this.state.addChoreoState
             ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}/>
             : <ChoreoListScreen setModalVisible={this.setModalVisible}/>
         }
+      </Layout>
         <Modal
           centered
           visible={this.state.modalVisible}
@@ -60,7 +62,7 @@ class HomeScreen extends React.Component {
             <Button block onClick={this.handleNewChoreo}>START</Button>
           </div>
         </Modal>
-      </Layout>
+      </Fragment>
     );
   }
 }

@@ -1,7 +1,7 @@
 .choreo-homescreen-body {
-  height: 100vh;
+  min-height: 100vh;
   background-image: url(" ../../img/FormationsOverviewBackground.png");
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: cover;
 }
 
@@ -152,9 +152,43 @@
   font-size: 1em;
 }
 
+.mobile-switch-tabs {
+  text-align: center;
+  margin: 2em auto 0 auto;
+  border: 1px solid #a6a6a6;
+  border-radius: 30px;
+  height: 3em;
+  width: 80%;
+  padding: 0px;
+}
+
+.mobile-switch-tabs-active {
+  background-color: #24C6DC;
+  border: none;
+  width: 33.333%;
+  height: 100%;
+  border-radius: 30px;
+  color: white;
+  font-family: "Sen-Bold";
+  padding: 0px;
+  font-size: 1em;
+}
+
+.mobile-switch-tabs-inactive {
+  background-color: transparent;
+  border: none;
+  width: 33.333%;
+  height: 100%;
+  border-radius: 30px;
+  color: white;
+  font-family: "Sen-Bold";
+  padding: 0px;
+  font-size: 1em;
+}
+
 .backbutton-desc {
   color: white;
-  font-size: 16px;
+  font-size: 1rem;
   display: inline-flex;
   vertical-align: middle;
 }

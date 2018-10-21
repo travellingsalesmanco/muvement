@@ -28,7 +28,7 @@ class App extends Component {
           <Route exact path="/forgotpassword" component={ForgotPwScreen}/>
           <Route exact path="/settings" component={Settings}/>
           <Route exact path={`/choreo/:choreoId`} component={ChoreoHomeScreen} />
-          <Route path={`/choreo/:choreoId/frame`} component={FrameScreen} />
+          <Route exact path={`/choreo/:choreoId/frame`} component={FrameScreen} />
 
         {/*</Switch>*/}
       </div>

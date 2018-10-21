@@ -2,15 +2,17 @@ import React from 'react';
 import MediaQuery from 'react-responsive';
 
 const breakpoints = {
+  default: '(min-width: 1024px)',
+  tablet: '(min-width: 768px)',
   desktop: '(min-width: 1025px)',
   tabletLandscape: '(min-width: 768px) and (max-width: 1024px) and (orientation: landscape)',
   tabletPortrait: '(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)',
-  phoneLandscape: '(min-width: 481px) and (max-width: 767px)',
-  phonePortrait: '(min-width: 320px) and (max-width: 480px)'
+  mobileLandscape: '(min-width: 481px) and (max-width: 767px)',
+  mobilePortrait: '(min-width: 320px) and (max-width: 480px)'
 };
 
 export function Breakpoint(props) {
-  const breakpoint = breakpoints[props.name] || breakpoints.desktop;
+  const breakpoint = breakpoints[props.device] || breakpoints.desktop;
   return (
     <MediaQuery {...props } query={breakpoint}>
       {props.children}
@@ -18,9 +20,25 @@ export function Breakpoint(props) {
   );
 }
 
+export function MinDesktop(props) {
+  return (
+    <Breakpoint device='default'>
+      {props.children}
+    </Breakpoint>
+  );
+}
+
+export function MinTablet(props) {
+  return (
+    <Breakpoint device='tablet'>
+      {props.children}
+    </Breakpoint>
+  );
+}
+
 export function Desktop(props) {
   return (
-    <Breakpoint name='desktop'>
+    <Breakpoint device='desktop'>
       {props.children}
     </Breakpoint>
   );
@@ -28,7 +46,7 @@ export function Desktop(props) {
 
 export function TabletLandscape(props) {
   return (
-    <Breakpoint name='tabletLandscape'>
+    <Breakpoint device='tabletLandscape'>
       {props.children}
     </Breakpoint>
   );
@@ -36,23 +54,23 @@ export function TabletLandscape(props) {
 
 export function TabletPortrait(props) {
   return (
-    <Breakpoint name='tabletPortrait'>
+    <Breakpoint device='tabletPortrait'>
       {props.children}
     </Breakpoint>
   );
 }
 
-export function PhoneLandscape(props) {
+export function MobileLandscape(props) {
   return (
-    <Breakpoint name='phoneLandscape'>
+    <Breakpoint device='mobileLandscape'>
       {props.children}
     </Breakpoint>
   );
 }
 
-export function PhonePortrait(props) {
+export function MobilePortrait(props) {
   return (
-    <Breakpoint name='phonePortrait'>
+    <Breakpoint device='mobilePortrait'>
       {props.children}
     </Breakpoint>
   );
