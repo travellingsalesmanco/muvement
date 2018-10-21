@@ -152,7 +152,7 @@ class FrameScreen extends Component {
                   <HeadphoneIcon style={{ fontSize: '25px'}}/>
                 </Button>
               </div>
-              <PreviewSlideList/>
+              <PreviewSlideList danceId={this.props.danceId}/>
             </Sider>
             <SidePanel
               placement={this.state.placement}
@@ -171,10 +171,11 @@ class FrameScreen extends Component {
 }
 
 function mapStateToProps(state, props) {
-  console.log(props.match.params);
-  const dance = getDance(state, props.danceId)
+  const danceId = props.match.params.choreoId;
+  const dance = getDance(state, danceId)
   const activeFrame = dance.frames[state.UI.activeFrame];
   return {
+    danceId: danceId,
     frameId: state.UI.activeFrame,
     danceName: dance.name,
     frameName: activeFrame.name,
