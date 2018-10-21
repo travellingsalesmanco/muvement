@@ -11,6 +11,7 @@ import EditIcon from "../../icons/EditIcon";
 import withAuthorization from "../withAuthorization";
 import { getDance } from '../../selectors/dance';
 import withFireStoreSync from "../withFirestoreSync";
+import PerformerList from "./PerformerList";
 
 class ChoreoHomeScreen extends React.Component {
   state = {
@@ -116,7 +117,7 @@ class ChoreoHomeScreen extends React.Component {
                     <StageDimForm danceId={this.props.danceId} />
                   </div>
                 : <div className="edit-performers">
-                    <Button className="edit-performers-button" icon="edit" ghost block>EDIT PERFORMERS</Button>
+                  <PerformerList danceId={this.props.danceId}/>
                 </div>
             }
           </Sider>
