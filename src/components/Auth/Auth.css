@@ -9,9 +9,9 @@
 
 .auth-background {
     height: 100vh;
-    background-image: url("../../img/SplashScreenBackground.png");
+    background-image: url("../../img/PortraitBackground.png");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
 }
 
 .auth-title {
