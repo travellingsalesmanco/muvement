@@ -64,6 +64,9 @@ class ChoreoHomeScreen extends React.Component {
   }
 
   render() {
+    if (this.props.error) {
+      return <div>Invalid dance</div>
+    }
     const {Header, Content, Sider} = Layout;
     const {startValue, endValue, endOpen} = this.state;
     return (
@@ -125,6 +128,11 @@ class ChoreoHomeScreen extends React.Component {
 const mapStateToProps = (state,props) => {
   const danceId = props.match.params.choreoId
   const dance = getDance(state, danceId)
+  if (dance === undefined) {
+    return {
+      error: true
+    }
+  }
   return {
     frames: dance.frames,
     name: dance.name,
