@@ -6,11 +6,41 @@ import Logo from "../../img/m-logo.svg";
 import Name from "../../img/MuvementLogo.png";
 import './LandingPage.css';
 import { withRouter } from "react-router-dom";
+import StageCanvas from "../StageCanvas/StageCanvas";
 
 class LandingPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stageWidth: 300,
+      stageHeight: 300,
+    }
+  }
+
   componentDidMount() {
     ReactGA.pageview('Landing Page');
+    this.checkSize();
+    window.addEventListener("resize", this.checkSize);
   }
+
+  componentDidUpdate() {
+    this.checkSize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.checkSize);
+  }
+
+  checkSize = () => {
+    if (this.state.stageWidth !== this.container.offsetWidth
+      || this.state.stageHeight !== this.container.offsetHeight) {
+
+      this.setState({
+        stageWidth: this.container.offsetWidth,
+        stageHeight: this.container.offsetHeight
+      });
+    }
+  };
 
   render() {
     const { Header, Content, Sider } = Layout;
@@ -32,7 +62,19 @@ class LandingPage extends React.Component {
             <p className="muvement-desc">Create and visualise your formation <br /> without pen and paper</p>
             <Button className="landing-signup-button" onClick={() => this.props.history.push(`/signup`)}>LETS GET
               CREATIVE</Button>
-            <img className="grid-img" src={GridImage} alt="grid image" />
+            <div
+              className="demo-grid"
+              style={{ flex: 1, overflow: "hidden" }}
+              ref={node => {
+                this.container = node;
+              }}
+            >
+              <StageCanvas danceId={"demo"} frameId={0}
+                           width={this.state.stageWidth}
+                           height={this.state.stageHeight}
+                           withGrid demo />
+            </div>
+            {/*<img className="grid-img" src={GridImage} alt="grid image" />*/}
           </Content>
         </Layout>
       </Layout>

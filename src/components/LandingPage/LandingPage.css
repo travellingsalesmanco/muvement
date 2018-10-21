@@ -54,6 +54,12 @@
   margin: 3.5rem auto;
 }
 
+.demo-grid{
+  margin-bottom: 3em;
+  margin-left: 3em;
+  margin-right: 3em;
+}
+
 .grid-img {
   vertical-align: middle;
   margin-top: 1.2rem;
