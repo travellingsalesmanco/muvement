@@ -47,13 +47,6 @@ export default (state = defaultUI, action) => {
         showLabels: labelState
       }
     }
-    case TIMELINE_ADVANCE: {
-      const {payload: numMs} = action;
-      return {
-        ...state,
-        currentTime: state.currentTime + numMs
-      }
-    }
     case TIMELINE_JUMP: {
       const {payload: targetMs} = action;
       return {
