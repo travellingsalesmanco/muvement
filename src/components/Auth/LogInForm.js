@@ -2,6 +2,8 @@ import { Form, Input, Icon, Button, Checkbox } from 'antd';
 import React from 'react';
 import './Auth.css';
 import Link from "react-router-dom/es/Link";
+import { withRouter } from "react-router-dom";
+import { auth } from "../../firebase";
 
 const FormItem = Form.Item;
 
@@ -12,6 +14,9 @@ class LogInForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        auth.doSignInWithEmailAndPassword(values.email, values.password).then(
+          () => this.props.history.push(`/`)
+        );
       }
     });
   };
@@ -54,4 +59,4 @@ class LogInForm extends React.Component {
   }
 }
 
-export default (Form.create())(LogInForm);
+export default withRouter((Form.create())(LogInForm));

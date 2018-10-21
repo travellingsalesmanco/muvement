@@ -1,5 +1,7 @@
 import { Form, Input, Icon, Button } from 'antd';
 import React from 'react';
+import { withRouter } from "react-router-dom";
+import * as auth from "../../firebase/auth";
 
 
 const FormItem = Form.Item;
@@ -11,6 +13,9 @@ class SignUpForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        auth.doSignUpWithEmailAndPassword(values.username, values.email, values.password).then(
+          () => this.props.history.push(`/`)
+        );
       }
     });
   };
@@ -20,7 +25,7 @@ class SignUpForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem>
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('username', {
             rules: [{ required: true, message: 'Please input your name!' }],
           })(
             <Input prefix={<Icon type="user" />} placeholder="Name" />
@@ -51,4 +56,4 @@ class SignUpForm extends React.Component {
   }
 }
 
-export default (Form.create())(SignUpForm);
+export default withRouter((Form.create())(SignUpForm));
