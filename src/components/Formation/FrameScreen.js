@@ -15,6 +15,7 @@ import './FrameScreen.css';
 import Navigation from "./Navigation";
 import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
+import { getDance } from '../../selectors/dance';
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -169,13 +170,13 @@ class FrameScreen extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const activeDance = state.dances[state.UI.activeDance];
-  const activeFrame = activeDance.frames[state.UI.activeFrame];
+function mapStateToProps(state, props) {
+  console.log(props.match.params);
+  const dance = getDance(state, props.danceId)
+  const activeFrame = dance.frames[state.UI.activeFrame];
   return {
-    danceId: state.UI.activeDance,
     frameId: state.UI.activeFrame,
-    danceName: activeDance.name,
+    danceName: dance.name,
     frameName: activeFrame.name,
     frameNumSeconds: activeFrame.numSeconds
   }

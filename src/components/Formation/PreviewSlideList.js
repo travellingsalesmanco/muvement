@@ -4,6 +4,7 @@ import {gotoFrame, reorderAndFocusFrame} from "../../actions/danceActions";
 import StageCanvas from "../StageCanvas/StageCanvas";
 import './PreviewSlideList.css';
 import Draggable from 'react-draggable';
+import { getDance } from '../../selectors/dance';
 
 class PreviewSlideList extends React.Component {
   constructor(props) {
@@ -169,12 +170,11 @@ class PreviewSlideList extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const activeDance = state.dances[state.UI.activeDance];
+function mapStateToProps(state, props) {
+  const dance = getDance(state, this.props.danceId)
   return {
-    danceId: state.UI.activeDance,
     activeFrameId: state.UI.activeFrame,
-    frames: activeDance.frames
+    frames: dance.frames
   }
 }
 

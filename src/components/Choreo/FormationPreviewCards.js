@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { addAndSetActiveFrame, gotoFrame } from "../../actions/danceActions";
 import StageCanvas from "../StageCanvas/StageCanvas";
+import { getDance } from '../../selectors/dance';
 
 class FormationPreviewCards extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class FormationPreviewCards extends React.Component {
   }
   clickHandler = (index) => {
     if (index === 0) {
-      this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.lastFrameIndex + 1));
+      this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.frames.length));
       this.props.history.push(`${this.props.match.url}/frame`)
     } else {
       this.props.dispatch(gotoFrame(this.props.danceId, index - 1));
@@ -117,12 +118,4 @@ class FormationPreviewCards extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const activeDance = state.dances[state.UI.activeDance];
-  return {
-    danceId: state.UI.activeDance,
-    lastFrameIndex: activeDance.frames.length - 1,
-  }
-}
-
-export default withRouter(connect(mapStateToProps)(FormationPreviewCards));
+export default withRouter(FormationPreviewCards);

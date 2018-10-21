@@ -3,6 +3,7 @@ import React from 'react';
 import { editStageDimensions } from "../../actions/danceActions"
 import { connect } from 'react-redux'
 import './StageDimForm.css';
+import { getDance } from "../../selectors/dance";
 
 class StageDimForm extends React.Component {
 
@@ -44,13 +45,13 @@ class StageDimForm extends React.Component {
   }
 }
 
-const mapStateToProps = function (state) {
+const mapStateToProps = (state, props) => {
+  const dance = getDance(state, props.danceId)
   return {
-    height: state.dances[state.UI.activeDance].stageDim.height,
-    width: state.dances[state.UI.activeDance].stageDim.width,
-    gridSize: state.dances[state.UI.activeDance].stageDim.gridSize,
-    units: state.dances[state.UI.activeDance].stageDim.units,
-    danceId: state.UI.activeDance
+    height: dance.stageDim.height,
+    width: dance.stageDim.width,
+    gridSize: dance.stageDim.gridSize,
+    units: dance.stageDim.units,
   }
 };
 

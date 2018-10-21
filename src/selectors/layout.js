@@ -6,9 +6,9 @@ const getCanvasWidthFromProp = (_, props) => props.width;
 const getCanvasHeightFromProp = (_, props) => props.height;
 const getStageRectFromProp = (_, props) => props.stageRect;
 
-const getStageDim = (state, props) => state.dances[props.danceId].stageDim;
-const getDancers = (state, props) => state.dances[props.danceId].dancers;
-const getFrameDancers = (state, props) => state.dances[props.danceId].frames[props.frameId].dancers;
+const getStageDim = (state, props) => state.dances.byId[props.danceId].stageDim;
+const getDancers = (state, props) => state.dances.byId[props.danceId].dancers;
+const getFrameDancers = (state, props) => state.dances.byId[props.danceId].frames[props.frameId].dancers;
 const getSelectedDancers = (state, props) => state.UI.selectedDancers;
 
 

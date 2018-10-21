@@ -8,6 +8,7 @@ import ChoreoPicture from "./ChoreoPicture";
 import StageDimForm from "../Formation/StageDimForm";
 import FormationPreviewCards from "./FormationPreviewCards";
 import EditIcon from "../../icons/EditIcon";
+import { getDance } from '../../selectors/dance';
 
 class ChoreoHomeScreen extends React.Component {
   state = {
@@ -107,7 +108,7 @@ class ChoreoHomeScreen extends React.Component {
                 ? <div>
                     <ChoreoPicture />
                     <h2 className="stagedim-title">STAGE DIMENSION</h2>
-                    <StageDimForm />
+                    <StageDimForm danceId={this.props.danceId} />
                   </div>
                 : <div className="edit-performers">
                     <Button className="edit-performers-button" icon="edit" ghost block>EDIT PERFORMERS</Button>
@@ -120,12 +121,13 @@ class ChoreoHomeScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log(state.dances[state.UI.activeDance]);
+const mapStateToProps = (state,props) => {
+  const danceId = props.match.params.choreoId
+  const dance = getDance(state, danceId)
   return {
-    frames: state.dances[state.UI.activeDance].frames,
-    name: state.dances[state.UI.activeDance].name,
-    danceId: state.UI.activeDance
+    frames: dance.frames,
+    name: dance.name,
+    danceId: danceId
   }
 };
 

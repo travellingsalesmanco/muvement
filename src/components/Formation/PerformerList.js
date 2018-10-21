@@ -3,6 +3,7 @@ import { Row, Col, Icon, Button } from "antd";
 import { addDancerToFrame, removeDancerFromFrame } from "../../actions/frameActions"
 import { connect } from 'react-redux';
 import './PerformerList.css';
+import { getDance } from '../../selectors/dance';
 
 class PerformerList extends React.Component {
 
@@ -74,14 +75,14 @@ class PerformerList extends React.Component {
   }
 }
 
-const mapStateToProps = function (state) {
+const mapStateToProps = (state, props) => {
   console.log(state);
+  const dance = getDance(state, props.danceId)
   return {
-    dancers: state.dances[state.UI.activeDance].dancers,
-    activeDancers: state.dances[state.UI.activeDance].frames[state.UI.activeFrame].dancers.map((dancer) => {
+    dancers: dance.dancers,
+    activeDancers: dance.frames[state.UI.activeFrame].dancers.map((dancer) => {
       return dancer.name;
     }),
-    danceId: state.UI.activeDance,
     frameId: state.UI.activeFrame
   }
 };
