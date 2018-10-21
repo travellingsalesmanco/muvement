@@ -28,7 +28,7 @@ class LandingPage extends React.Component {
 
         <Layout className="landingpage-contents">
           <Content style={{ display: "flex", flexDirection: "column" }}>
-            <img className="muvement-name-img" src={Name} width="250" height="180" alt="muvement name" />
+            <img className="muvement-name-img" src={Name} alt="muvement name" />
             <p className="muvement-desc">Create and visualise your formation <br /> without pen and paper</p>
             <Button className="landing-signup-button" onClick={() => this.props.history.push(`/signup`)}>LETS GET
               CREATIVE</Button>
