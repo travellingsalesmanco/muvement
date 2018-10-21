@@ -40,6 +40,14 @@ const danceReducer = combineReducers({
   frames
 });
 
+// Copy over metadata (e.g. firebase createdAt timestamps) when updating dance
+const danceWithMetaReducer = (state, action) => {
+  return {
+    ...state,
+    ...danceReducer(state, action)
+  }
+}
+
 // Dances
 // TODO: Remove dummy dance when deploying
 export default (state = dummyDances, action) => {
@@ -71,7 +79,7 @@ export default (state = dummyDances, action) => {
           ...state,
           byId: {
             ...state.byId,
-            [danceId]: danceReducer(state.byId[danceId], prunedAction)
+            [danceId]: danceWithMetaReducer(state.byId[danceId], prunedAction)
           }
         }
       }
