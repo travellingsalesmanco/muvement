@@ -57,4 +57,5 @@
   vertical-align: middle;
   margin-top: 1.2rem;
   text-align: center;
+  box-shadow: 0 2rem 3rem 0 rgba(0, 0, 0, 0.75), 0 2rem 3rem 0 rgba(0, 0, 0, 0.75);
 }
