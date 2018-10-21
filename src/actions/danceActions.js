@@ -1,5 +1,7 @@
 import {
   ADD_DANCE,
+  LOAD_DANCE,
+  REMOVE_DANCE,
   ADD_DANCER,
   ADD_FRAME,
   EDIT_STAGE_DIMENSIONS,
@@ -24,6 +26,26 @@ function hasDance(danceId, state) {
   return getDance(state, danceId) !== undefined;
 }
 
+function ownsDance(danceId, state) {
+  return state.dances.myDances.includes(danceId);
+}
+
+function getLostDances(dances, state) {
+  return state.dances.myDances.filter((danceId) => dances.every((dance) => dance.id !== danceId))
+}
+
+function isNewer(dance, danceId, state) {
+  const currDance = getDance(state, danceId);
+  console.log(currDance);
+  console.log(dance);
+  console.log(danceId);
+  console.log(state);
+  // TODO: remove dummy check when deploy
+  return currDance.updatedAt !== "timestamp2"
+    ? currDance.updatedAt.seconds < dance.updatedAt.seconds
+    : true;
+}
+
 export function addDance(id, dance) {
   return (dispatch) => {
     dispatch({
@@ -36,6 +58,55 @@ export function addDance(id, dance) {
     dispatch({
       type: SWITCH_ACTIVE_DANCE,
       payload: id
+    });
+  }
+}
+
+export function updateDanceIfNewer(id, dance) {
+  return (dispatch, getState) => {
+    if (isNewer(dance, id, getState())) {
+      dispatch({
+        type: LOAD_DANCE,
+        payload: {
+          danceId: id,
+          dance: dance
+        }
+      });
+    }
+  }
+}
+
+export function syncCreatorDances(dances) {
+  return (dispatch, getState) => {
+    // Remove dances no longer tagged under creator in cloud
+    let lostDances = getLostDances(dances, getState());
+    lostDances.forEach((danceId) => {
+      dispatch({
+        type: REMOVE_DANCE,
+        payload: danceId
+      })
+    });
+    dances.forEach((dance) => {
+      if (!hasDance(dance.id, getState())) {
+        // Add dances not on local
+        console.log("ADDING");
+        dispatch({
+          type: ADD_DANCE,
+          payload: {
+            danceId: dance.id,
+            dance: dance.data
+          }
+        });
+      } else if (isNewer(dance.data, dance.id, getState())) {
+        // Update existing dances if newer
+        dispatch({
+          type: LOAD_DANCE,
+          payload: {
+            danceId: dance.id,
+            dance: dance.data
+          }
+        });
+      }
     });
   }
 }
