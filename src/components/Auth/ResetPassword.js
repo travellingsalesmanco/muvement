@@ -18,8 +18,8 @@ class ResetPassword extends React.Component {
             </div>
         </Header>
          <div className="auth-background">
-            <h1 className="auth-title">RESET PASSWORD</h1>
-            <div className="auth-signup">
+            <h1 className="auth-forgetpw-title">RESET PASSWORD</h1>
+            <div>
                 <Button className="auth-signup-button" type="primary" htmlType="submit">SAVE</Button>
             </div>
          </div>

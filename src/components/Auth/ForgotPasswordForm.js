@@ -23,11 +23,11 @@ class ForgotPasswordForm extends React.Component {
           {getFieldDecorator('email', {
             rules: [{ required: true, message: 'Please input your email!' }],
           })(
-            <Input prefix={<Icon type="mail" />} placeholder="Email" />
+            <Input className="auth-input" prefix={<Icon type="mail" />} placeholder="Email" />
           )}
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" htmlType="submit" className="auth-signup-button">
             SEND EMAIL
           </Button>
         </FormItem>

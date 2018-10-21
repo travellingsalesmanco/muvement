@@ -18,8 +18,10 @@ class ForgotPassword extends React.Component {
           </div>
         </Header>
         <div className="auth-background">
-          <h1 className="auth-title">FORGOT YOUR PASSWORD?</h1>
-          <p className="auth-text">We got you! Please enter the email you registered with us.</p>
+          <h1 className="auth-forgetpw-title">FORGOT YOUR PASSWORD?</h1>
+          <div className="auth-forgetpw">
+            <p className="auth-forgetpw-text">We got you! Please enter the email you registered with us.</p>
+          </div>
           <div className="auth-form">
             <ForgotPasswordForm />
           </div>
