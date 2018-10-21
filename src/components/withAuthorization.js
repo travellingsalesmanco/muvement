@@ -13,21 +13,30 @@ const withAuthorization = (authCondition) => (Component) => {
     }
 
     componentDidMount() {
-      firebase.auth.onAuthStateChanged(authUser => {
-        if (!authCondition(authUser)) {
-          this.props.history.push('/landing');
-        }
-        // also ensure user is signed in
+      this.unsubscribe = firebase.auth.onAuthStateChanged(authUser => {
+        // Ensure user is signed in
         authUser
-          ? this.setState({ authUser })
-          : this.setState({ authUser: null });
+          ? this.setState({ authUser }, () => {
+            if (!authCondition(authUser)) {
+              this.props.history.push('/landing');
+            }
+          })
+          : this.setState({ authUser: null }, () => {
+            if (!authCondition(authUser)) {
+              this.props.history.push('/landing');
+            }
+          });
       });
+    }
+
+    componentWillUnmount() {
+      this.unsubscribe();
     }
 
     render() {
       const { authUser } = this.state;
       return (
-          authUser ? <Component {...this.props} /> : null
+        authUser ? <Component {...this.props} /> : null
       );
     }
   }

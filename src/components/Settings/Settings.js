@@ -31,7 +31,8 @@ class Settings extends React.Component {
                      onTitleClick={() => this.props.history.push(`/resetpassword`)}
                      title={<span><Icon type="lock" /><span>Reset Password</span></span>}>
             </SubMenu>
-            <SubMenu key="logout" className="settings-menu-item" onTitleClick={auth.doSignOut}
+            <SubMenu key="logout" className="settings-menu-item"
+                     onTitleClick={() => auth.doSignOut().then(() => this.props.history.push(`/landing`))}
                      title={<span><Icon type="logout" /><span>Logout</span></span>}>
             </SubMenu>
 
