@@ -81,7 +81,9 @@
 }
 
 
-.auth-signup-button {
+.auth-signup-button,
+.auth-signup-button:hover
+.auth-signup-button:focus {
     background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
     margin-left: auto;
     margin-right: auto;
