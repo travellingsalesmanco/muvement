@@ -1,16 +1,17 @@
 .landingpage-contents {
   height: 100vh;
-  background-image: url("../../img/LandingPageBackground.png");
+  background-image: url("../../img/PortraitBackground.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .landingpage-navbar {
   background-color: black;
+  padding: 0em;
 }
 
 .logo {
-  text-align: center;
+  left: 0px;
 }
 
 .landing-login {
@@ -20,16 +21,18 @@
 }
 
 .landing-login-button {
-  width: 120px;
+  width: 80px;
+  height: 1.8rem;
   border-radius: 20px;
 }
 
 .muvement-name-img {
-  text-align: center;
+  margin: 0 auto;
   padding-top: 5%;
 }
 
 .muvement-desc {
+  text-align: center;
   padding-top: 5%;
   color: white;
   font-size: 13px;
@@ -39,19 +42,19 @@
 .landing-signup-button .ant-btn:hover,
 .landing-signup-button .ant-btn:focus {
   background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
-  margin-top: 50px;
-  width: 60%;
-  height: 40px;
-  border-radius: 20px;
+  width: 16rem;
+  height: 3rem;
+  border-radius: 3rem;
   color: white;
   font-family: Sen-Bold;
   font-size: 1.3em;
   border: none;
   box-shadow: 0px 0px 15px #514A9D;
+  margin: 3.5rem auto;
 }
 
 .grid-img {
   vertical-align: middle;
-  height: 90vh;
-  width: 55vw;
+  margin-top: 1.2rem;
+  text-align: center;
 }
