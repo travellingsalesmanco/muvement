@@ -16,6 +16,7 @@ import Navigation from "./Navigation";
 import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 import { getDance } from '../../selectors/dance';
+import withAuthorization from "../withAuthorization";
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -184,4 +185,8 @@ function mapStateToProps(state, props) {
   }
 }
 
-export default connect(mapStateToProps)(FrameScreen);
+// Auth exists
+// TODO: Check if authorized to edit dance
+const authCondition = (authUser) => !!authUser;
+
+export default withAuthorization(authCondition)(connect(mapStateToProps)(FrameScreen));

@@ -2,6 +2,8 @@ import { Button, Layout, Menu } from 'antd';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import ChoreoCardList from "./ChoreoCardList";
+import withAuthorization from "../withAuthorization";
+import { auth } from "../../firebase";
 
 
 class ChoreoListScreen extends React.Component {
@@ -17,7 +19,7 @@ class ChoreoListScreen extends React.Component {
             <div className="right-container">
               <Menu mode="horizontal" theme="dark">
                 <Menu.Item key="1">
-                  <Button icon="setting" ghost />
+                  <Button icon="setting" onClick={auth.doSignOut} ghost/>
                 </Menu.Item>
               </Menu>
             </div>
@@ -37,4 +39,7 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps)(ChoreoListScreen);
+// Auth exists
+const authCondition = (authUser) => !!authUser;
+
+export default withAuthorization(authCondition)(connect(mapStateToProps)(ChoreoListScreen));

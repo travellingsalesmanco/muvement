@@ -8,6 +8,7 @@ import ChoreoPicture from "./ChoreoPicture";
 import StageDimForm from "../Formation/StageDimForm";
 import FormationPreviewCards from "./FormationPreviewCards";
 import EditIcon from "../../icons/EditIcon";
+import withAuthorization from "../withAuthorization";
 import { getDance } from '../../selectors/dance';
 
 class ChoreoHomeScreen extends React.Component {
@@ -131,4 +132,8 @@ const mapStateToProps = (state,props) => {
   }
 };
 
-export default connect(mapStateToProps)(ChoreoHomeScreen);
+// Auth exists
+// TODO: Check if authorized to edit dance
+const authCondition = (authUser) => !!authUser;
+
+export default withAuthorization(authCondition)(connect(mapStateToProps)(ChoreoHomeScreen));
