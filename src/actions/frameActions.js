@@ -1,7 +1,8 @@
 import { ADD_DANCER_TO_FRAME, MOVE_DANCER, REMOVE_DANCER_FROM_FRAME, RENAME_FRAME, DESELECT_DANCER } from "../constants/actionTypes";
+import { getDance } from "../selectors/dance";
 
 function frameContainsDancer(danceId, frameId, name, state) {
-  return state.dances[danceId].frames[frameId].dancers.map(dancer => dancer.name).includes(name);
+  return getDance(state, danceId).frames[frameId].dancers.map(dancer => dancer.name).includes(name);
 }
 
 export function renameFrame(danceId, frameId, name) {
