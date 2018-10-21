@@ -18,7 +18,7 @@ class SignUpForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
+      <Form onSubmit={this.handleSubmit}>
         <FormItem>
           {getFieldDecorator('userName', {
             rules: [{ required: true, message: 'Please input your name!' }],
