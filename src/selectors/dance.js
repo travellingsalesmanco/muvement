@@ -1,0 +1,1 @@
+export const getDance = (state, props) => state.dances.byId[props.danceId];
