@@ -16,8 +16,10 @@ class SignUp extends React.Component {
         <h1 className="auth-title">SIGN UP</h1>
         <p className="auth-text">Continue With</p>
         <div className="auth-buttons">
-          <Button className="fb-login-button" onClick={auth.facebookSignIn}>FACEBOOK</Button>
-          <Button className="google-login-button" onClick={auth.googleSignIn}>GOOGLE</Button>
+          <Button className="fb-login-button"
+                  onClick={() => auth.facebookSignIn().then(() => this.props.history.push(`/`))}>FACEBOOK</Button>
+          <Button className="google-login-button"
+                  onClick={() => auth.googleSignIn().then(() => this.props.history.push(`/`))}>GOOGLE</Button>
         </div>
         <div>
           <Divider className="auth-divider"><span className="divider-text">Or Create Your Own Account</span></Divider>
