@@ -1,5 +1,6 @@
 import { Card, Col, Icon, Row } from 'antd';
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { addAndSetActiveFrame, gotoFrame } from "../../actions/danceActions";
 import StageCanvas from "../StageCanvas/StageCanvas";
@@ -115,5 +116,4 @@ class FormationPreviewCards extends React.Component {
     );
   }
 }
-
-export default withRouter(FormationPreviewCards);
+export default withRouter(connect()(FormationPreviewCards));
