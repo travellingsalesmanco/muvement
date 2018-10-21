@@ -1,6 +1,6 @@
 import React from 'react';
 import './Auth.css';
-import { Button, Divider } from 'antd';
+import { Button, Divider} from 'antd';
 import connect from "react-redux/es/connect/connect";
 import { BrowserRouter as Route, withRouter } from "react-router-dom";
 import LogInForm from "./LogInForm";
@@ -17,6 +17,7 @@ class LogIn extends React.Component {
         <div className="auth-buttons">
           <Button className="fb-login-button"
                   onClick={() => auth.facebookSignIn().then(() => this.props.history.push(`/`))}>FACEBOOK</Button>
+
           <Button className="google-login-button"
                   onClick={() => auth.googleSignIn().then(() => this.props.history.push(`/`))}>GOOGLE</Button>
         </div>

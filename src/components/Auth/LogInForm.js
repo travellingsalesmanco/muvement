@@ -29,14 +29,14 @@ class LogInForm extends React.Component {
           {getFieldDecorator('email', {
             rules: [{ required: true, message: 'Please input your email!' }],
           })(
-            <Input prefix={<Icon type="mail" />} placeholder="Email" />
+            <Input className="auth-input" prefix={<Icon type="mail" />} placeholder="Email" />
           )}
         </FormItem>
         <FormItem>
           {getFieldDecorator('password', {
             rules: [{ required: true, message: 'Please input your password!' }],
           })(
-            <Input prefix={<Icon type="lock" />} type="password"
+            <Input className="auth-input" prefix={<Icon type="lock" />} type="password"
                    placeholder="Password" />
           )}
         </FormItem>
@@ -50,7 +50,7 @@ class LogInForm extends React.Component {
           })(
             <Checkbox><span className="form-text">Remember me</span></Checkbox>
           )}
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" htmlType="submit" className="auth-signup-button">
             LOG IN
           </Button>
         </FormItem>

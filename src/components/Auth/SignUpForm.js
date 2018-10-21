@@ -47,7 +47,7 @@ class SignUpForm extends React.Component {
           )}
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" htmlType="submit" className="auth-signup-button">
             SIGN UP
           </Button>
         </FormItem>
