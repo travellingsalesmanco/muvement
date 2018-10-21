@@ -32,6 +32,21 @@ const MobileSwitchTabs = ({activeButton, handleClick}) => (
   </div>
 );
 
+const DefaultSwitchTabs = ({activeButton, handleClick}) => (
+  <div className="choreo-homescreen-tabs">
+    <button
+      className={activeButton === 1 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
+      onClick={() => handleClick(1)}>
+      ABOUT
+    </button>
+    <button
+      className={activeButton === 2 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
+      onClick={() => handleClick(2)}>
+      PERFORMERS
+    </button>
+  </div>
+);
+
 class ChoreoHomeScreen extends React.Component {
   state = {
     startValue: null,
@@ -102,18 +117,7 @@ class ChoreoHomeScreen extends React.Component {
               <FormationPreviewCards frames={this.props.frames} match={this.props.match} danceId={this.props.danceId}/>
             </Content>
             <Sider width="20rem">
-              <div className="choreo-homescreen-tabs">
-                <button
-                  className={this.state.activeButton === 1 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
-                  onClick={() => this.handleClick(1)}>
-                  ABOUT
-                </button>
-                <button
-                  className={this.state.activeButton === 2 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
-                  onClick={() => this.handleClick(2)}>
-                  PERFORMERS
-                </button>
-              </div>
+              <DefaultSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
               {
                 this.state.activeButton === 1
                   ? <div>
