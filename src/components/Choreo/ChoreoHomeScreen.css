@@ -1,8 +1,8 @@
-.choreo-homescreen-body{
-    height: 100rem;
-    background-image: url(" ../../img/FormationsOverviewBackground.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+.choreo-homescreen-body {
+  height: 100rem;
+  background-image: url(" ../../img/FormationsOverviewBackground.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .choreo-homescreen-contents {
@@ -10,8 +10,8 @@
 }
 
 .ant-layout-sider-children {
-    background: linear-gradient(to bottom, #313131 -15%, #000000 140%);
-    box-shadow: 0 2em 3em 0 rgba(0, 0, 0, 0.25), 0 2.1em 3.1em 0 rgba(0, 0, 0, 0.20);
+  background: linear-gradient(to bottom, #313131 -15%, #000000 140%);
+  box-shadow: 0 2em 3em 0 rgba(0, 0, 0, 0.25), 0 2.1em 3.1em 0 rgba(0, 0, 0, 0.20);
 }
 
 /* .choreo-picture-card-cover{
@@ -38,9 +38,9 @@
   align-items: center;
   border-radius: 5px;
   background: #000000;
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
 .avatar-uploader {
@@ -60,27 +60,27 @@
   height: 15em;
   border-radius: 15px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: linear-gradient(to bottom, #24C6DC -30%, #514A9D 100%);
-  -webkit-box-shadow: 0px 0px 1.5em 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 0px 1.5em 0px rgba(0,0,0,0.75);
-  box-shadow: 0px 0px 1.5em 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 1.5em 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 1.5em 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 1.5em 0px rgba(0, 0, 0, 0.75);
 }
 
-.add-formation-title{
-    position: absolute;
-    top: 7em;
-    font-family: "Sen-Black";
-    color: white;
-    font-size: 1.3em;
+.add-formation-title {
+  text-align: center;
+  top: 7em;
+  font-family: "Sen-Black";
+  color: white;
+  font-size: 1.3em;
 }
 
-.add-formation-icon{
-    position: absolute;
-    top: 1.5em;
-    color: white;
-    font-size: 3em;
+.add-formation-icon {
+  top: 1.5em;
+  color: white;
+  font-size: 3em;
 }
 
 .formation-card {
@@ -92,7 +92,7 @@
   border-radius: 1.2em;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.35);
-  box-shadow: 0px 0px 1.5em 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 1.5em 0px rgba(0, 0, 0, 0.75);
 }
 
 .ant-formation-card-cover img {
@@ -118,69 +118,69 @@
   font-size: 1.2em;
 }
 
-.choreo-homescreen-tabs{
-    text-align: center;
-    margin: 50px auto 30px auto;
-    border: 2px solid #24C6DC;
-    border-radius: 30px;
-    height: 44px;
-    width: 80%;
-    padding: 0px;
+.choreo-homescreen-tabs {
+  text-align: center;
+  margin: 50px auto 30px auto;
+  border: 2px solid #24C6DC;
+  border-radius: 30px;
+  height: 44px;
+  width: 80%;
+  padding: 0px;
 }
 
 .choreo-homescreen-activebutton {
-    background-color: #24C6DC;
-    border: none;
-    width: 50%;
-    height: 40px;
-    border-radius: 30px;
-    color: white;
-    font-family: "Sen-Bold";
-    padding: 0px;
-    font-size: 18px;
+  background-color: #24C6DC;
+  border: none;
+  width: 50%;
+  height: 40px;
+  border-radius: 30px;
+  color: white;
+  font-family: "Sen-Bold";
+  padding: 0px;
+  font-size: 18px;
 }
 
 .choreo-homescreen-inactivebutton {
-    background-color: transparent;
-    border: transparent;
-    width: 50%;
-    height: 40px;
-    border-radius: 30px;
-    color: white;
-    font-family: "Sen-Bold";
-    padding: 0px;
-    font-size: 18px;
+  background-color: transparent;
+  border: transparent;
+  width: 50%;
+  height: 40px;
+  border-radius: 30px;
+  color: white;
+  font-family: "Sen-Bold";
+  padding: 0px;
+  font-size: 18px;
 }
 
-.backbutton-desc{
-    color: white;
-    font-size: 16px;
-    display: inline-flex;
-    vertical-align: middle;
+.backbutton-desc {
+  color: white;
+  font-size: 16px;
+  display: inline-flex;
+  vertical-align: middle;
 }
 
-button.ant-btn.backbutton.ant-btn-icon-only{
-    display: inline-flex;
-    vertical-align: middle;
+button.ant-btn.backbutton.ant-btn-icon-only {
+  display: inline-flex;
+  vertical-align: middle;
 }
 
-.stagedim-title{
-    color: white;
-    padding-top: 30px;
-    padding-left: 40px;
-    font-family: Sen-Black;
+.stagedim-title {
+  color: white;
+  padding-top: 30px;
+  padding-left: 40px;
+  font-family: Sen-Black;
 }
 
 .edit-performers {
-    text-align: center;
+  text-align: center;
 }
 
-.edit-performers-button{
-    width: 80%;
-    height: 44px;
-    border: 1px solid #24C6DC;
-    border-radius: 50px;
-    font-family: Sen-Black;
-    color: #24C6DC;
-    font-size: 1.2em;
+.edit-performers-button {
+  width: 80%;
+  height: 44px;
+  border: 1px solid #24C6DC;
+  border-radius: 50px;
+  font-family: Sen-Black;
+  color: #24C6DC;
+  font-size: 1.2em;
 }
