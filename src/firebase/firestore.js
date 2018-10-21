@@ -17,7 +17,7 @@ export const createDance = (dance) => {
     return docRef.get({ source: "server" }).then((docSnap) => {
       return {
         id: docRef.id,
-        dance: docSnap.data({ serverTimestamps: "estimate" })
+        data: docSnap.data({ serverTimestamps: "estimate" })
       }
     })
   });
@@ -35,7 +35,7 @@ export const getCreatorDances = () => {
       return querySnap.docs.map(docSnap => {
         return {
           id: docSnap.id,
-          dance: docSnap.data({ serverTimestamps: "estimate" })
+          data: docSnap.data({ serverTimestamps: "estimate" })
         }
       });
     });

@@ -40,7 +40,7 @@ class AddPerformerScreen extends React.Component {
         frames: []
       }
     ).then(createdDance => {
-      this.props.dispatch(addDance(createdDance.id, createdDance.dance));
+      this.props.dispatch(addDance(createdDance.id, createdDance.data));
       this.props.history.push(`/choreo/${createdDance.id}`)
     });
   };
