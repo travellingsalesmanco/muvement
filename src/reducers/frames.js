@@ -69,8 +69,8 @@ const frameReducer = (state = defaultFrame, action) => {
       const {payload: newTransition} = action;
       return {
         ...state,
-        transition: {
-          ...state.transition,
+        transitionBefore: {
+          ...state.transitionBefore,
           ...newTransition
         }
       }
@@ -78,7 +78,7 @@ const frameReducer = (state = defaultFrame, action) => {
     case CLEAR_FRAME_TRANSITION: {
       return {
         ...state,
-        transition: {
+        transitionBefore: {
           ...defaultTransition
         }
       }

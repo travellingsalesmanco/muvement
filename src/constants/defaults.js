@@ -1,11 +1,11 @@
 export const defaultTransition = {
-  durationBeforeFrame: 0,
-  durationAfterFrame: 0,
+  duration: 0,
+  midPoint: 0
 }
 export const defaultFrame = {
   name: "",
   numSeconds: 30,
-  transition: defaultTransition,
+  transitionBefore: defaultTransition,
   dancers: []
 };
 export const defaultStageDim = {

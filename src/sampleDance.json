@@ -24,9 +24,9 @@
       {
         "name": "Introduction",
         "numSeconds": 30,
-        "transition": {
-          "durationBeforeFrame": 0,
-          "durationAfterFrame": 0
+        "transitionBefore": {
+          "duration": 0,
+          "midPoint": 0
         },
         "dancers": [
           {
