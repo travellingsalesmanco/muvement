@@ -1,9 +1,11 @@
-import React, {Fragment} from 'react';
-import {Button, Input, Layout, Menu, Icon} from 'antd';
-import {withRouter} from "react-router-dom";
+import React, { Fragment } from 'react';
+import { Button, Input, Layout, Menu, Icon } from 'antd';
+import { withRouter } from "react-router-dom";
 import './AddPerformerScreen.css';
-import {addDance} from "../../actions/danceActions";
-import {connect} from 'react-redux';
+import { addDance } from "../../actions/danceActions";
+import { connect } from 'react-redux';
+import { firestore } from "../../firebase";
+import { defaultStageDim } from "../../constants/defaults";
 
 class AddPerformerScreen extends React.Component {
   state = {
@@ -31,26 +33,34 @@ class AddPerformerScreen extends React.Component {
   };
 
   handleNext = () => {
-    this.props.dispatch(addDance(this.props.choreoName, this.state.names, this.props.maxDanceId + 1));
-    this.props.history.push(`/choreo/${this.props.maxDanceId + 1}`)
+    firestore.createDance({
+        name: this.props.choreoName,
+        stageDim: defaultStageDim,
+        dancers: this.state.names,
+        frames: []
+      }
+    ).then(createdDance => {
+      this.props.dispatch(addDance(createdDance.id, createdDance.dance));
+      this.props.history.push(`/choreo/${createdDance.id}`)
+    });
   };
 
   render() {
-    const {Header, Content} = Layout;
+    const { Header, Content } = Layout;
     return (
       <Fragment>
         <Header>
           <div className="nav-bar">
             <div className="back-button">
-              <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.goBack()}/>
+              <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.goBack()} />
             </div>
             <div className="title">
-              <h3 style={{ color: '#fff'}}>ADD PERFORMERS</h3>
+              <h3 style={{ color: '#fff' }}>ADD PERFORMERS</h3>
             </div>
             <div className="right-container">
               <Menu mode="horizontal" theme="dark">
                 <Menu.Item key="1">
-                  <Button icon="setting" ghost/>
+                  <Button icon="setting" ghost />
                 </Menu.Item>
               </Menu>
             </div>
