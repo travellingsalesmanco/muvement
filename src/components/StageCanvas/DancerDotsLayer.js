@@ -69,7 +69,7 @@ class DancerDotsLayer extends PureComponent {
   };
 
   render() {
-    const { dotRadius, dancersLayout, editable, showLabels } = this.props;
+    const { dotRadius, dancersLayout, editable, showLabels, demo } = this.props;
     return (
       <Layer>
         {dancersLayout.map((dancerLayout) => {
@@ -79,9 +79,9 @@ class DancerDotsLayer extends PureComponent {
               key={dancerLayout.name}
               x={boundPos.x}
               y={boundPos.y}
-              draggable={editable}
+              draggable={editable || demo}
               dragBoundFunc={this.bindWithinCanvas}
-              onDragEnd={(e) => this.handleDragEnd(e, dancerLayout.name)}
+              onDragEnd={(e) => !demo && this.handleDragEnd(e, dancerLayout.name)}
             >
               <DancerDot radius={dotRadius} number={dancerLayout.id}
                 name={dancerLayout.name} onSelect={editable ? this.handleSelect : undefined} />
