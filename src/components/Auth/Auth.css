@@ -32,11 +32,8 @@
 
 .form-text {
     color: white;
-<<<<<<< refs/remotes/origin/dev
-=======
     text-align: center;
     padding-top: 1.5em;
->>>>>>> Change Auth css
 }
 
 .auth-buttons {
@@ -44,25 +41,6 @@
     padding: 1.5em;
 }
 
-<<<<<<< refs/remotes/origin/dev
-.fb-login-button {
-    border-radius: 20px;
-    background-color: #304D96;
-    color: white;
-    border: none;
-    margin: 20px;
-    width: 10em;
-    height: 40px;
-}
-
-.google-login-button {
-    border-radius: 20px;
-    color: #6A6A6A;
-    border: none;
-    margin: 20px;
-    width: 10em;
-    height: 40px;
-=======
 .fb-login-button{
     border-radius: 20em;
     background-color: #304D96;
@@ -80,7 +58,6 @@
     margin: 2em;
     width: 15em;
     height: 3em;
->>>>>>> Change Auth css
 }
 
 .divider {
@@ -114,11 +91,7 @@
     font-family: Sen-Bold;
     font-size: 1.3em;
     border: none;
-<<<<<<< refs/remotes/origin/dev
-    box-shadow: 0px 0px 15px #514A9D;
-=======
     box-shadow: 0 0 1.2em  #514A9D;
->>>>>>> Change Auth css
 }
 
 button.auth-backbutton {
