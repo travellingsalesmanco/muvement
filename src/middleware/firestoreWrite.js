@@ -1,5 +1,4 @@
 import {
-  REMOVE_DANCE,
   RENAME_DANCE,
   PUBLISH_DANCE,
   UNPUBLISH_DANCE,
@@ -19,7 +18,6 @@ import {
 import { firestore } from "../firebase";
 
 const ACTIONS_TO_UPDATE = [
-  REMOVE_DANCE,
   RENAME_DANCE,
   PUBLISH_DANCE,
   UNPUBLISH_DANCE,
