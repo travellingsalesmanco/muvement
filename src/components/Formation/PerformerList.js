@@ -76,7 +76,6 @@ class PerformerList extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-  console.log(state);
   const dance = getDance(state, props.danceId)
   return {
     dancers: dance.dancers,

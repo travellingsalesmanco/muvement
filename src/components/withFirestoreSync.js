@@ -17,7 +17,6 @@ const withFireStoreSync = (withDanceRouteParams) => (Component) => {
     componentDidMount() {
       if (withDanceRouteParams) {
         const danceId = this.props.match.params.choreoId;
-        console.log(danceId);
         // Currently a one-time read, can switch to firestore listener in future for collaborative editing
         return firestore.getDance(danceId).then((dance) => {
           // Dispatch possible update to redux and return component

@@ -3,7 +3,6 @@ import { db, auth, currentTimeStampField } from './firebase';
 // Returns created dance if successful
 export const createDance = (dance) => {
   // Add in creator id
-  console.log(auth.currentUser);
   return db.collection("dances").add({
     ...dance,
     creator: {

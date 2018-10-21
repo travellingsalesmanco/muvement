@@ -36,10 +36,6 @@ function getLostDances(dances, state) {
 
 function isNewer(dance, danceId, state) {
   const currDance = getDance(state, danceId);
-  console.log(currDance);
-  console.log(dance);
-  console.log(danceId);
-  console.log(state);
   // TODO: remove dummy check when deploy
   return currDance.updatedAt !== "timestamp2"
     ? currDance.updatedAt.seconds < dance.updatedAt.seconds
