@@ -116,8 +116,14 @@ class PreviewSlideList extends React.Component {
         slideDragEnded: true
       }, () => {
         console.log("switch", index, toIndex);
-        // Note: even when index === toIndex, this is called to focus on the frame clicked
-        this.props.dispatch(reorderAndFocusFrame(this.props.danceId, index, toIndex));
+
+        if (index === toIndex) {
+          // Same frame, change focus
+          this.props.dispatch(gotoFrame(this.props.danceId, index));
+        } else {
+          // Reorder and change focus
+          this.props.dispatch(reorderAndFocusFrame(this.props.danceId, index, toIndex));
+        }
       })
     } else {
       // no change in slides
