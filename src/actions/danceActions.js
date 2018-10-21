@@ -10,22 +10,24 @@ import {
   SWITCH_ACTIVE_FRAME
 } from "../constants/actionTypes";
 import {defaultStageDim} from "../constants/defaults";
+import { getDance } from "../selectors/dance";
 
 function containsDancer(danceId, name, state) {
-  return state.dances[danceId].dancers.includes(name);
+  return getDance(state,danceId).dancers.includes(name);
 }
 
 function hasFrame(danceId, frameId, state) {
-  return frameId >= 0 && frameId < state.dances[danceId].frames.length
+  return frameId >= 0 && frameId < getDance(state, danceId).frames.length
 }
 
 function hasDance(danceId, state) {
-  return danceId >= 0 && danceId < state.dances.length
+  return getDance(state,danceId) !== undefined;
 }
 
 export function addDance(danceName, names) {
   return (dispatch, getState) => {
     const newDance = {
+      id: (new Date()).getTime(), // TODO: Link up with firebase
       name: danceName,
       stageDim: defaultStageDim,
       dancers: names,
@@ -37,7 +39,7 @@ export function addDance(danceName, names) {
     })
     dispatch({
       type: SWITCH_ACTIVE_DANCE,
-      payload: getState().dances.length - 1
+      payload: newDance.id
     })
   }
 }
@@ -124,9 +126,9 @@ export function gotoFrame(danceId, targetFrameId) {
 
 export function gotoDance(danceId) {
   return (dispatch, getState) => {
-    // checks if frame is correct
+    // checks if dance is correct
     if (!hasDance(danceId, getState())) {
-      console.log("[ERROR] Index out of bounds")
+      console.log("[ERROR] Invalid dance id: ", danceId)
     } else {
       dispatch({
         type: SWITCH_ACTIVE_DANCE,
