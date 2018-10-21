@@ -171,7 +171,7 @@ class PreviewSlideList extends React.Component {
 }
 
 function mapStateToProps(state, props) {
-  const dance = getDance(state, this.props.danceId)
+  const dance = getDance(state, props.danceId)
   return {
     activeFrameId: state.UI.activeFrame,
     frames: dance.frames
