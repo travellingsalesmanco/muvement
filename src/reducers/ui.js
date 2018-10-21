@@ -4,7 +4,6 @@ import {
   SELECT_DANCER,
   SET_LABELS_VIEW,
   SWITCH_ACTIVE_FRAME,
-  TIMELINE_ADVANCE,
   TIMELINE_JUMP,
   TIMELINE_PLAY,
   TIMELINE_PAUSE,
@@ -51,7 +50,7 @@ export default (state = defaultUI, action) => {
       const {payload: targetMs} = action;
       return {
         ...state,
-        currentTime: targetMs
+        elapsedTime: targetMs
       }
     }
     case TIMELINE_PLAY: {
