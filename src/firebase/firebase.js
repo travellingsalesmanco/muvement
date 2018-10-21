@@ -31,8 +31,12 @@ const GOOGLE_SIGN_IN_METHOD = firebase.auth.GoogleAuthProvider.GOOGLE_SIGN_IN_ME
 auth.useDeviceLanguage();
 db.settings({timestampsInSnapshots: true});
 
-const currentTimeStamp = () => {
+const currentTimeStampField = () => {
   return firebase.firestore.FieldValue.serverTimestamp();
+};
+
+const currentTimeStamp = () => {
+  return firebase.firestore.Timestamp.now();
 };
 
 export {
@@ -42,6 +46,7 @@ export {
   facebookProvider,
   FACEBOOK_SIGN_IN_METHOD,
   GOOGLE_SIGN_IN_METHOD,
+  currentTimeStampField,
   currentTimeStamp,
   storage
 };

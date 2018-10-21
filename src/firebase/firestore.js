@@ -1,4 +1,4 @@
-import { db, auth, currentTimeStamp} from './firebase';
+import { db, auth, currentTimeStampField } from './firebase';
 
 // Returns created dance if successful
 export const createDance = (dance) => {
@@ -10,8 +10,8 @@ export const createDance = (dance) => {
       id: auth.currentUser.uid,
       name: auth.currentUser.displayName
     },
-    createdAt: currentTimeStamp(),
-    updatedAt: currentTimeStamp()
+    createdAt: currentTimeStampField(),
+    updatedAt: currentTimeStampField()
   }).then(docRef => {
     // Require updated
     return docRef.get({ source: "server" }).then((docSnap) => {
@@ -23,10 +23,28 @@ export const createDance = (dance) => {
   });
 };
 
+export const getDance = (danceId) => {
+  return db.collection("dances").doc(danceId).get({ source: "server" }).then((docSnap) => {
+    return docSnap.data({ serverTimestamps: "estimate" });
+  })
+};
+
+export const getCreatorDances = () => {
+  return db.collection("dances").where("creator.id", "==", auth.currentUser.uid).get({ source: "server" })
+    .then((querySnap) => {
+      return querySnap.docs.map(docSnap => {
+        return {
+          id: docSnap.id,
+          dance: docSnap.data({ serverTimestamps: "estimate" })
+        }
+      });
+    });
+};
+
 export const updateDance = (danceId, dance) => {
   return db.collection("dances").doc(danceId).set({
     ...dance,
-    updatedAt: currentTimeStamp()
+    updatedAt: currentTimeStampField()
   });
 };
 
