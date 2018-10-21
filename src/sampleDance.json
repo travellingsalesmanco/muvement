@@ -24,6 +24,10 @@
       {
         "name": "Introduction",
         "numSeconds": 30,
+        "transition": {
+          "durationBeforeFrame": 0,
+          "durationAfterFrame": 0
+        },
         "dancers": [
           {
             "name": "Bob",
