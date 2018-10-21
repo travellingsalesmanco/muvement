@@ -1,5 +1,7 @@
 import React from 'react';
 import { firestore } from '../firebase';
+import { syncCreatorDances, updateDanceIfNewer } from "../actions/danceActions";
+import { connect } from "react-redux/";
 
 const withFireStoreSync = (withDanceRouteParams) => (Component) => {
   class CheckAccessAndUpdate extends React.Component {
@@ -17,18 +19,20 @@ const withFireStoreSync = (withDanceRouteParams) => (Component) => {
         const danceId = this.props.match.params.choreoId;
         console.log(danceId);
         // Currently a one-time read, can switch to firestore listener in future for collaborative editing
-        return firestore.getDance(danceId).then(() => {
+        return firestore.getDance(danceId).then((dance) => {
           // Dispatch possible update to redux and return component
+          this.props.dispatch(updateDanceIfNewer(danceId, dance));
           this.setState({ loading: false, error: null });
         }).catch((error) => {
           console.log(error);
-          // Possibly drop local dance if unauth
+          // TODO: Possibly drop local dance if unauth
           this.setState({ loading: false, error: error });
         })
       } else {
         // Currently a one-time read, can switch to firestore listener in future for collaborative editing
-        return firestore.getCreatorDances().then(() => {
+        return firestore.getCreatorDances().then((dances) => {
           // Dispatch possible update(s) to redux and return component
+          this.props.dispatch(syncCreatorDances(dances));
           this.setState({ loading: false, error: null });
         }).catch((error) => {
           console.log(error);
@@ -54,7 +58,7 @@ const withFireStoreSync = (withDanceRouteParams) => (Component) => {
     }
   }
 
-  return CheckAccessAndUpdate;
+  return connect()(CheckAccessAndUpdate);
 };
 
 export default withFireStoreSync;
