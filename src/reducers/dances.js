@@ -71,7 +71,7 @@ export default (state = dummyDances, action) => {
           ...state,
           byId: {
             ...state.byId,
-            danceId: danceReducer(state.byId[danceId], prunedAction)
+            [danceId]: danceReducer(state.byId[danceId], prunedAction)
           }
         }
       }
