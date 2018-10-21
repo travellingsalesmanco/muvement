@@ -21,12 +21,6 @@ class ChoreoHomeScreen extends React.Component {
     isButtonActive: 1
   };
 
-  onChange = (field, value) => {
-    this.setState({
-      [field]: value,
-    });
-  };
-
   buttonClick = (number) => {
     this.setState({isButtonActive: number});
   };
@@ -67,16 +61,17 @@ class ChoreoHomeScreen extends React.Component {
           <Content style={{display: "flex", flexDirection: "column"}}>
             <FormationPreviewCards frames={this.props.frames} match={this.props.match} danceId={this.props.danceId}/>
           </Content>
-          <Sider
-            width="350px">
+          <Sider width="20rem">
             <div className="choreo-homescreen-tabs">
               <button
                 className={this.state.isButtonActive === 1 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
-                onClick={() => this.buttonClick(1)}>ABOUT
+                onClick={() => this.buttonClick(1)}>
+                ABOUT
               </button>
               <button
                 className={this.state.isButtonActive === 2 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
-                onClick={() => this.buttonClick(2)}>PERFORMERS
+                onClick={() => this.buttonClick(2)}>
+                PERFORMERS
               </button>
             </div>
             {
