@@ -2,13 +2,11 @@ import { Card, Icon } from 'antd';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { gotoDance } from '../../actions/danceActions';
 import { getDance } from '../../selectors/dance';
 import './ChoreoCards.css';
 
 class ChoreoCard extends PureComponent {
   clickHandler() {
-    this.props.dispatch(gotoDance(this.props.danceId))
     this.props.history.push(`/choreo/${this.props.danceId}`);
   }
   render() {

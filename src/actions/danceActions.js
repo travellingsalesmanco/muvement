@@ -124,20 +124,6 @@ export function gotoFrame(danceId, targetFrameId) {
   }
 }
 
-export function gotoDance(danceId) {
-  return (dispatch, getState) => {
-    // checks if dance is correct
-    if (!hasDance(danceId, getState())) {
-      console.log("[ERROR] Invalid dance id: ", danceId)
-    } else {
-      dispatch({
-        type: SWITCH_ACTIVE_DANCE,
-        payload: danceId
-      })
-    }
-  }
-}
-
 export function toggleLabels() {
   return (dispatch, getState) => {
     console.log("TOGGLE");
