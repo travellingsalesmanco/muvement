@@ -62,11 +62,11 @@ class DancerDotsLayer extends PureComponent {
     }
   };
 
-  handleRemove(e, dancerName) {
-    e.cancelBubble = true;
-    console.log("Remove dancer: " + dancerName);
-    this.props.dispatch(removeDancerFromFrame(this.props.danceId, this.props.frameId, dancerName));
-  };
+  // handleRemove(e, dancerName) {
+  //   e.cancelBubble = true;
+  //   console.log("Remove dancer: " + dancerName);
+  //   this.props.dispatch(removeDancerFromFrame(this.props.danceId, this.props.frameId, dancerName));
+  // };
 
   render() {
     const { dotRadius, dancersLayout, editable, showLabels, demo } = this.props;
@@ -87,7 +87,7 @@ class DancerDotsLayer extends PureComponent {
                 name={dancerLayout.name} onSelect={editable ? this.handleSelect : undefined} />
               {
                 editable && showLabels
-                  ? <DancerLabel name={dancerLayout.name} handleRemove={this.handleRemove} />
+                  ? <DancerLabel name={dancerLayout.name} />
                   : null
               }
             </Group>

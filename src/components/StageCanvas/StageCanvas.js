@@ -2,22 +2,28 @@ import React, { PureComponent } from 'react';
 import { Stage } from "react-konva";
 import { connect } from 'react-redux';
 import { makeStageLayoutSelector } from '../../selectors/layout';
+import AnimatedDancerDotsLayer from './AnimatedDancerDotsLayer';
 import DancerDotsLayer from './DancerDotsLayer';
 import GridLayer from './GridLayer';
 import StageLayer from './StageLayer';
 
 class StageCanvas extends PureComponent {
   render() {
-    const { danceId, frameId, width, height, editable, stageLayout, withGrid, demo } = this.props;
+    const { danceId, frameId, width, height, editable, stageLayout, withGrid, animated } = this.props;
     // Canvas dimensions
     // console.log("Stage: ", width, height);
     return (
       <Stage preventDefault={true} width={width} height={height}>
         {withGrid ? <GridLayer grid={stageLayout.grid} /> : null}
         <StageLayer layout={stageLayout.stageRect} />
-        <DancerDotsLayer danceId={danceId} frameId={frameId}
-          width={width} height={height} stageRect={stageLayout.stageRect}
-          editable={editable} demo={demo}/>
+        {
+          animated
+            ? <DancerDotsLayer danceId={danceId} frameId={frameId}
+              width={width} height={height} stageRect={stageLayout.stageRect}
+              editable={editable} />
+            : <AnimatedDancerDotsLayer danceId={danceId} frameId={frameId}
+              width={width} height={height} stageRect={stageLayout.stageRect} />
+        }
       </Stage>
     );
   }
