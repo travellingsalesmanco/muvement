@@ -10,6 +10,7 @@ import FormationPreviewCards from "./FormationPreviewCards";
 import EditIcon from "../../icons/EditIcon";
 import withAuthorization from "../withAuthorization";
 import { getDance } from '../../selectors/dance';
+import withFireStoreSync from "../withFirestoreSync";
 
 class ChoreoHomeScreen extends React.Component {
   state = {
@@ -144,4 +145,4 @@ const mapStateToProps = (state,props) => {
 // TODO: Check if authorized to edit dance
 const authCondition = (authUser) => !!authUser;
 
-export default withAuthorization(authCondition)(connect(mapStateToProps)(ChoreoHomeScreen));
+export default withAuthorization(authCondition)(withFireStoreSync(true)((connect(mapStateToProps)(ChoreoHomeScreen))));

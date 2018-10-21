@@ -17,6 +17,7 @@ import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 import { getDance } from '../../selectors/dance';
 import withAuthorization from "../withAuthorization";
+import withFireStoreSync from "../withFirestoreSync";
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -132,28 +133,28 @@ class FrameScreen extends Component {
               </div>
               <div
                 className="framescreen-stage"
-                style={{ background: '#000', flex: 1, overflow: "hidden"}}
+                style={{ background: '#000', flex: 1, overflow: "hidden" }}
                 ref={node => {
                   this.container = node;
                 }}
               >
                 <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
-                  height={this.state.stageHeight} editable withGrid />
+                             height={this.state.stageHeight} editable withGrid />
               </div>
             </Content>
             <Sider width={200} className="sider">
               <div className="button-container">
                 <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
-                  <UserAddIcon style={{ fontSize: '33px'}}/>
+                  <UserAddIcon style={{ fontSize: '33px' }} />
                 </Button>
                 <Button className="sider-button" shape="circle" onClick={this.handleAddFormation}>
-                  <FileAddIcon style={{ fontSize: '25px'}} />
+                  <FileAddIcon style={{ fontSize: '25px' }} />
                 </Button>
                 <Button className="sider-button" shape="circle" onClick={this.handleEditTimeline}>
-                  <HeadphoneIcon style={{ fontSize: '25px'}}/>
+                  <HeadphoneIcon style={{ fontSize: '25px' }} />
                 </Button>
               </div>
-              <PreviewSlideList danceId={this.props.danceId}/>
+              <PreviewSlideList danceId={this.props.danceId} />
             </Sider>
             <SidePanel
               danceId={this.props.danceId}
@@ -189,4 +190,4 @@ function mapStateToProps(state, props) {
 // TODO: Check if authorized to edit dance
 const authCondition = (authUser) => !!authUser;
 
-export default withAuthorization(authCondition)(connect(mapStateToProps)(FrameScreen));
+export default withAuthorization(authCondition)(withFireStoreSync(true)(connect(mapStateToProps)(FrameScreen)));

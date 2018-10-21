@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ChoreoCardList from "./ChoreoCardList";
 import withAuthorization from "../withAuthorization";
 import { withRouter } from "react-router-dom";
+import withFireStoreSync from "../withFirestoreSync";
 
 
 class ChoreoListScreen extends React.Component {
@@ -19,14 +20,15 @@ class ChoreoListScreen extends React.Component {
             <div className="right-container">
               <Menu mode="horizontal" theme="dark">
                 <Menu.Item key="1">
-                  <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost/>
+                  <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
                 </Menu.Item>
               </Menu>
             </div>
           </div>
         </Header>
         <Content>
-          <ChoreoCardList data={this.props.danceIds} match={this.props.match} setModalVisible={this.props.setModalVisible} />
+          <ChoreoCardList data={this.props.danceIds} match={this.props.match}
+                          setModalVisible={this.props.setModalVisible} />
         </Content>
       </Fragment>
     );
@@ -42,4 +44,6 @@ const mapStateToProps = state => {
 // Auth exists
 const authCondition = (authUser) => !!authUser;
 
-export default withAuthorization(authCondition)(withRouter((connect(mapStateToProps)(ChoreoListScreen))));
+export default withAuthorization(authCondition)(
+  withFireStoreSync(false)(withRouter(connect(mapStateToProps)(ChoreoListScreen)))
+);
