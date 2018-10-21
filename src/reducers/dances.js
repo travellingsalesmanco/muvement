@@ -50,7 +50,7 @@ export default (state = dummyDances, action) => {
         ...state,
         byId: {
           ...state.byId,
-          danceId: dance
+          [danceId]: dance
         },
         myDances: [...state.myDances, danceId]
       }

@@ -9,11 +9,11 @@ import {
   SWITCH_ACTIVE_DANCE,
   SWITCH_ACTIVE_FRAME
 } from "../constants/actionTypes";
-import {defaultStageDim} from "../constants/defaults";
+import { defaultStageDim } from "../constants/defaults";
 import { getDance } from "../selectors/dance";
 
 function containsDancer(danceId, name, state) {
-  return getDance(state,danceId).dancers.includes(name);
+  return getDance(state, danceId).dancers.includes(name);
 }
 
 function hasFrame(danceId, frameId, state) {
@@ -21,26 +21,22 @@ function hasFrame(danceId, frameId, state) {
 }
 
 function hasDance(danceId, state) {
-  return getDance(state,danceId) !== undefined;
+  return getDance(state, danceId) !== undefined;
 }
 
-export function addDance(danceName, names) {
-  return (dispatch, getState) => {
-    const newDance = {
-      id: (new Date()).getTime(), // TODO: Link up with firebase
-      name: danceName,
-      stageDim: defaultStageDim,
-      dancers: names,
-      frames: []
-    };
+export function addDance(id, dance) {
+  return (dispatch) => {
     dispatch({
       type: ADD_DANCE,
-      payload: newDance
-    })
+      payload: {
+        danceId: id,
+        dance: dance
+      }
+    });
     dispatch({
       type: SWITCH_ACTIVE_DANCE,
-      payload: newDance.id
-    })
+      payload: id
+    });
   }
 }
 
