@@ -133,3 +133,43 @@ export function generateDotRadius(canvasWidth, canvasHeight) {
   const longEdge = canvasWidth > canvasHeight ? canvasWidth : canvasHeight;
   return Math.min(longEdge * 0.02, 15)
 }
+
+export function straightLineAnimation(startPos, endPos, duration) {
+  if (duration <= 0) {
+    console.log("[WARNING] Invalid duration specified");
+    return () => endPos;
+  }
+  const xPerDuration = (endPos.x - startPos.x) / duration;
+  const yPerDuration = (endPos.y - startPos.y) / duration;
+  // Given a time from 0 to duration, return the expected pos
+  return (time) => {
+    if (time <= 0) {
+      return startPos;
+    } else if (time >= duration) {
+      return endPos;
+    }
+    return {
+      x: startPos.x + xPerDuration * time,
+      y: startPos.y + yPerDuration * time
+    }
+  }
+}
+
+export function straightLineAnimationWithMidPoint(startPos, endPos, midPointDuration, duration) {
+  if (duration <= 0) {
+    console.log("[WARNING] Invalid duration specified");
+    return () => endPos;
+  } else if (midPointDuration <= 0 || midPointDuration >= duration) {
+    console.log("[WARNING] Invalid mid point specified");
+    return straightLineAnimation(startPos, endPos, duration)
+  }
+  const midPoint = {
+    x: (endPos.x + startPos.x) / 2,
+    y: (endPos.y + startPos.y) / 2
+  }
+  const startToMidPoint = straightLineAnimation(startPos, midPoint, midPointDuration);
+  const midPointToEnd = straightLineAnimation(midPoint, endPos, duration - midPointDuration);
+  return (time) => {
+    time <= midPointDuration ? startToMidPoint(time) : midPointToEnd(time);
+  }
+}
