@@ -1,4 +1,5 @@
 export const ADD_DANCE = "ADD_DANCE";
+export const LOAD_DANCE = "LOAD_DANCE";
 export const REMOVE_DANCE = "REMOVE_DANCE";
 export const RENAME_DANCE = "RENAME_DANCE";
 export const PUBLISH_DANCE = "PUBLISH_DANCE"

@@ -1,5 +1,13 @@
 import { combineReducers } from 'redux';
-import { ADD_DANCE, EDIT_STAGE_DIMENSIONS, PUBLISH_DANCE, REMOVE_DANCE, RENAME_DANCE, UNPUBLISH_DANCE } from '../constants/actionTypes';
+import {
+  ADD_DANCE,
+  LOAD_DANCE,
+  EDIT_STAGE_DIMENSIONS,
+  PUBLISH_DANCE,
+  REMOVE_DANCE,
+  RENAME_DANCE,
+  UNPUBLISH_DANCE
+} from '../constants/actionTypes';
 import { defaultStageDim } from '../constants/defaults';
 import { dummyDances } from '../constants/dummyData';
 import dancers from './dancers';
@@ -61,6 +69,17 @@ export default (state = dummyDances, action) => {
           [danceId]: dance
         },
         myDances: [...state.myDances, danceId]
+      }
+    }
+    case LOAD_DANCE: {
+      const { danceId, dance } = action.payload;
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [danceId]: dance
+        },
+        myDances: [...state.myDances]
       }
     }
     case REMOVE_DANCE: {
