@@ -2,7 +2,7 @@
     height: 100rem;
     background-image: url(" ../../img/FormationsOverviewBackground.png");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
 }
 
 .choreo-homescreen-contents {
