@@ -39,7 +39,7 @@ class ChoreoCard extends PureComponent {
 }
 const makeMapStateToProps = () => {
   return (state, props) => {
-    const dance = getDance(state, props)
+    const dance = getDance(state, props.danceId)
     return {
       name: dance.name,
       frameLength: dance.frames.length
