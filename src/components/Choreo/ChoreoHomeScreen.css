@@ -177,10 +177,11 @@ button.ant-btn.backbutton.ant-btn-icon-only {
 
 .edit-performers-button {
   width: 80%;
-  height: 44px;
   border: 1px solid #24C6DC;
   border-radius: 50px;
   font-family: Sen-Black;
   color: #24C6DC;
-  font-size: 1.2em;
+  font-size: 1em;
+  height: 3em;
+  margin-top: 1em;
 }
