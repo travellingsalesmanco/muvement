@@ -18,11 +18,11 @@ class StageCanvas extends PureComponent {
         <StageLayer layout={stageLayout.stageRect} />
         {
           animated
-            ? <DancerDotsLayer danceId={danceId} frameId={frameId}
-              width={width} height={height} stageRect={stageLayout.stageRect}
-              editable={editable} demo={demo} />
-            : <AnimatedDancerDotsLayer danceId={danceId} frameId={frameId}
-              width={width} height={height} stageRect={stageLayout.stageRect} />
+            ? <AnimatedDancerDotsLayer danceId={danceId} frameId={frameId}
+                                       width={width} height={height} stageRect={stageLayout.stageRect} />
+            : <DancerDotsLayer danceId={danceId} frameId={frameId}
+                               width={width} height={height} stageRect={stageLayout.stageRect}
+                               editable={editable} demo={demo} />
         }
       </Stage>
     );
