@@ -80,12 +80,22 @@ class FrameScreen extends Component {
   }
 
   checkSize = () => {
-    if (this.state.stageWidth !== this.container.offsetWidth
-      || this.state.stageHeight !== this.container.offsetHeight) {
+    let container = null
+    if (this.mobilePortraitContainer) {
+      container = this.mobilePortraitContainer
+    } else if (this.mobileLandscapeContainer) {
+      container = this.mobileLandscapeContainer
+    } else if (this.tabletContainer) {
+      container = this.tabletContainer
+    } else {
+      return
+    }
+    if (this.state.stageWidth !== container.offsetWidth
+      || this.state.stageHeight !== container.offsetHeight) {
 
       this.setState({
-        stageWidth: this.container.offsetWidth,
-        stageHeight: this.container.offsetHeight
+        stageWidth: container.offsetWidth,
+        stageHeight: container.offsetHeight
       });
     }
   };
@@ -157,9 +167,9 @@ class FrameScreen extends Component {
                 <SectionTitle mobile={true} frameName={this.props.frameName} handleEditName={this.handleEditName}
                               handleEditNameConfirm={this.handleEditNameConfirm}/>
                 <div style={{height: '15rem', marginBottom: '10px'}}
-                     ref={node => {
-                       this.container = node;
-                     }}>
+                  ref={node => {
+                    this.mobilePortraitContainer = node
+                  }}>
                   <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
                     <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
                                  height={this.state.stageHeight} editable withGrid />
@@ -196,7 +206,7 @@ class FrameScreen extends Component {
             <div
               style={{ background: '#000', flex: 1, overflow: "hidden" }}
               ref={node => {
-                this.container = node;
+                    this.mobileLandscapeContainer = node
               }}
             >
               <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
@@ -221,7 +231,7 @@ class FrameScreen extends Component {
                   className="framescreen-stage"
                   style={{ background: '#000', flex: 1, overflow: "hidden" }}
                   ref={node => {
-                    this.container = node;
+                    this.tabletContainer = node
                   }}
                 >
                   <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
