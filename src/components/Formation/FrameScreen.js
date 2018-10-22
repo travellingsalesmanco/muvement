@@ -16,6 +16,7 @@ import './FrameScreen.css';
 import Navigation from "./Navigation";
 import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
+import Timeline from "./Timeline";
 
 const SectionTitle = ({mobile, frameName, handleEditName, handleEditNameConfirm}) => (
   <div className="section-title-container">
@@ -191,6 +192,7 @@ class FrameScreen extends Component {
                   {
                     activeButton === 3 &&
                     <div>
+                      <Timeline danceId={this.props.danceId}/>
 
                     </div>
                   }
