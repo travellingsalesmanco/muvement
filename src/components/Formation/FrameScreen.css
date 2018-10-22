@@ -10,7 +10,7 @@
 }
 
 .contents .ant-layout-content {
-  padding: 0 50px;
+  padding: 0 2rem;
 }
 
 .section-title-container {
@@ -23,9 +23,8 @@
 
 .section-title {
     border-radius: 50px;
-    /*border: 2px solid #514A9D;*/
     box-shadow: 0px 0px 20px  #514A9D;
-    margin: 2rem 0;
+    /*margin: 2rem 2rem;*/
     position: relative;
     padding: 2px 2px;
     background-image: linear-gradient(to right, #24c6dc, #514a9d);
@@ -109,7 +108,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  padding: 30px 0 30px 0;
+  padding: 1em 0;
   border-bottom: 1px solid #514a9d;
 }
 
@@ -148,5 +147,5 @@
 }
 
 .framescreen-stage{
-    margin-bottom: 40px;
+    margin-bottom: 2rem;
 }

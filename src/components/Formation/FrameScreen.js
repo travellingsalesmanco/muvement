@@ -1,20 +1,57 @@
-import { Breadcrumb, Button, Input, Layout, Menu } from 'antd';
+import { Button, Input, Layout } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import { addAndSetActiveFrame, gotoFrame } from "../../actions/danceActions";
 import { renameFrame } from "../../actions/frameActions";
-import BorderInnerIcon from "../../icons/BorderInnerIcon";
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from "../../icons/GradientSVG";
 import HeadphoneIcon from "../../icons/HeadphoneIcon";
-import LeftArrowIcon from "../../icons/LeftArrowIcon";
-import RightArrowIcon from "../../icons/RightArrowIcon";
 import UserAddIcon from "../../icons/UserAddIcon";
-import StageCanvas from "../StageCanvas/StageCanvas";
+import { getDance } from '../../selectors/dance';
+import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
+import withAuthorization from "../withAuthorization";
+import withFireStoreSync from "../withFirestoreSync";
 import './FrameScreen.css';
 import Navigation from "./Navigation";
 import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
+import Timeline from "./Timeline";
+
+const SectionTitle = ({ mobile, frameName, handleEditName, handleEditNameConfirm }) => (
+  <div className="section-title-container">
+    <div className="section-title" style={{ margin: mobile ? '1rem 2rem' : '2rem' }}>
+      <div className="section-title-inner">
+        <Input
+          placeholder="Enter formation name"
+          value={frameName}
+          onChange={handleEditName}
+          onPressEnter={handleEditNameConfirm}
+        />
+      </div>
+    </div>
+  </div>
+);
+
+const MobileSwitchTabs = ({ activeButton, handleClick }) => (
+  <div className="mobile-switch-tabs" style={{ margin: '0 auto' }}>
+    <button
+      className={activeButton === 1 ? 'mobile-switch-tabs-active' : 'mobile-switch-tabs-inactive'}
+      onClick={() => handleClick(1)}>
+      FORMATION
+    </button>
+    <button
+      className={activeButton === 2 ? 'mobile-switch-tabs-active' : 'mobile-switch-tabs-inactive'}
+      onClick={() => handleClick(2)}>
+      PERFORMERS
+    </button>
+    <button
+      className={activeButton === 3 ? 'mobile-switch-tabs-active' : 'mobile-switch-tabs-inactive'}
+      onClick={() => handleClick(3)}>
+      SHOW
+    </button>
+  </div>
+);
 
 class FrameScreen extends Component {
   constructor(props) {
@@ -22,35 +59,14 @@ class FrameScreen extends Component {
     this.state = {
       placement: 'right',
       visible: false,
-      stageWidth: 100,
-      stageHeight: 100,
       sidePanelID: 0,
       frameName: '',
+      activeButton: 1
     }
   }
 
-  componentDidMount() {
-    this.checkSize();
-    window.addEventListener("resize", this.checkSize);
-  }
-
-  componentDidUpdate() {
-    this.checkSize();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.checkSize);
-  }
-
-  checkSize = () => {
-    if (this.state.stageWidth !== this.container.offsetWidth
-      || this.state.stageHeight !== this.container.offsetHeight) {
-
-      this.setState({
-        stageWidth: this.container.offsetWidth,
-        stageHeight: this.container.offsetHeight
-      });
-    }
+  handleClick = (number) => {
+    this.setState({ activeButton: number });
   };
 
   handleMenuClick = (item) => {
@@ -105,80 +121,120 @@ class FrameScreen extends Component {
 
   render() {
     const { Content, Sider } = Layout;
+    const { activeButton } = this.state;
     return (
       <Fragment>
-        <Layout className="body">
-          <GradientSVG
-            startColor="#24c6dc"
-            endColor="#514a9d"
-            idCSS="cool-gradient"
-          />
-          <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
-          <Layout className="contents">
-            <Content style={{ display: "flex", flexDirection: "column" }}>
-              <div className="section-title-container">
-                <div className="section-title">
-                  <div className="section-title-inner">
-                    <Input
-                      placeholder="Enter formation name"
-                      value={this.props.frameName}
-                      onChange={this.handleEditName}
-                      onPressEnter={this.handleEditNameConfirm}
-                    />
-                  </div>
+        <MobilePortrait>
+          <Layout className="body">
+            <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
+            <Layout style={{ backgroundColor: 'transparent' }}>
+              <Content style={{ display: "flex", flexDirection: "column" }}>
+                <SectionTitle mobile={true} frameName={this.props.frameName} handleEditName={this.handleEditName}
+                  handleEditNameConfirm={this.handleEditNameConfirm} />
+                <div style={{ height: '15rem', marginBottom: '10px' }}>
+                  <ResponsiveStageCanvas danceId={this.props.danceId} frameId={this.props.frameId} editable withGrid />
                 </div>
-              </div>
-              <div
-                className="framescreen-stage"
-                style={{ background: '#000', flex: 1, overflow: "hidden"}}
-                ref={node => {
-                  this.container = node;
-                }}
-              >
-                <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
-                  height={this.state.stageHeight} editable withGrid />
-              </div>
-            </Content>
-            <Sider width={200} className="sider">
-              <div className="button-container">
-                <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
-                  <UserAddIcon style={{ fontSize: '33px'}}/>
-                </Button>
-                <Button className="sider-button" shape="circle" onClick={this.handleAddFormation}>
-                  <FileAddIcon style={{ fontSize: '25px'}} />
-                </Button>
-                <Button className="sider-button" shape="circle" onClick={this.handleEditTimeline}>
-                  <HeadphoneIcon style={{ fontSize: '25px'}}/>
-                </Button>
-              </div>
-              <PreviewSlideList/>
-            </Sider>
-            <SidePanel
-              placement={this.state.placement}
-              closable={true}
-              onClose={this.onClose}
-              visible={this.state.visible}
-              mask={false}
-              id={this.state.sidePanelID}
-              width={200}
-            />
+                <div>
+                  <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
+                  {
+                    activeButton === 1 &&
+                    <div>
+                    </div>
+                  }
+                  {
+                    activeButton === 2 &&
+                    <div>
+
+                    </div>
+                  }
+                  {
+                    activeButton === 3 &&
+                    <div>
+                      <Timeline danceId={this.props.danceId} />
+
+                    </div>
+                  }
+                </div>
+              </Content>
+            </Layout>
           </Layout>
-        </Layout>
+        </MobilePortrait>
+
+        <MobileLandscape>
+          <Layout className="body">
+            <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
+            <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
+              <ResponsiveStageCanvas danceId={this.props.danceId} frameId={this.props.frameId} editable withGrid />
+            </div>
+          </Layout>
+        </MobileLandscape>
+
+        <MinTablet>
+          <Layout className="body">
+            <GradientSVG
+              startColor="#24c6dc"
+              endColor="#514a9d"
+              idCSS="cool-gradient"
+            />
+            <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
+            <Layout className="contents">
+              <Content style={{ display: "flex", flexDirection: "column" }}>
+                <SectionTitle frameName={this.props.frameName} handleEditName={this.handleEditName}
+                  handleEditNameConfirm={this.handleEditNameConfirm} />
+                <div
+                  className="framescreen-stage"
+                  style={{ background: '#000', flex: 1, overflow: "hidden" }}
+                >
+                  <ResponsiveStageCanvas danceId={this.props.danceId} frameId={this.props.frameId} editable withGrid />
+                </div>
+              </Content>
+              <Sider width={'12rem'} className="sider">
+                <div className="button-container">
+                  <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
+                    <UserAddIcon style={{ fontSize: '33px' }} />
+                  </Button>
+                  <Button className="sider-button" shape="circle" onClick={this.handleAddFormation}>
+                    <FileAddIcon style={{ fontSize: '25px' }} />
+                  </Button>
+                  <Button className="sider-button" shape="circle" onClick={this.handleEditTimeline}>
+                    <HeadphoneIcon style={{ fontSize: '25px' }} />
+                  </Button>
+                </div>
+                <PreviewSlideList danceId={this.props.danceId} />
+              </Sider>
+              <SidePanel
+                danceId={this.props.danceId}
+                placement={this.state.placement}
+                closable={true}
+                onClose={this.onClose}
+                visible={this.state.visible}
+                mask={false}
+                id={this.state.sidePanelID}
+                width={200}
+              />
+            </Layout>
+          </Layout>
+        </MinTablet>
       </Fragment>
     );
   }
 }
 
-function mapStateToProps(state) {
-  const activeDance = state.dances[state.UI.activeDance];
-  const activeFrame = activeDance.frames[state.UI.activeFrame];
+function mapStateToProps(state, props) {
+  const danceId = props.match.params.choreoId;
+  const dance = getDance(state, danceId)
+  const activeFrame = dance.frames[state.UI.activeFrame];
   return {
-    danceId: state.UI.activeDance,
+    danceId: danceId,
     frameId: state.UI.activeFrame,
-    danceName: activeDance.name,
+    danceName: dance.name,
     frameName: activeFrame.name,
     frameNumSeconds: activeFrame.numSeconds
   }
 }
 
-export default connect(mapStateToProps)(FrameScreen);
+// Auth exists
+// TODO: Check if authorized to edit dance
+const authCondition = (authUser) => !!authUser;
+
+export default withAuthorization(authCondition)(withFireStoreSync(true)(connect(mapStateToProps)(FrameScreen)));

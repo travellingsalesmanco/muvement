@@ -3,21 +3,17 @@ import {
   DESELECT_DANCER,
   SELECT_DANCER,
   SET_LABELS_VIEW,
-  SWITCH_ACTIVE_DANCE,
   SWITCH_ACTIVE_FRAME,
+  TIMELINE_JUMP,
+  TIMELINE_PLAY,
+  TIMELINE_PAUSE,
+  LOAD_ANIMATED_VIEW,
+  UNLOAD_ANIMATED_VIEW,
 } from "../constants/actionTypes";
 import { defaultUI } from "../constants/defaults";
 
 export default (state = defaultUI, action) => {
   switch (action.type) {
-    case SWITCH_ACTIVE_DANCE: {
-      const { payload: danceId } = action;
-      return {
-        ...state,
-        activeDance: danceId,
-        activeFrame: 0 // Need to reset active frame as well
-      }
-    }
     case SWITCH_ACTIVE_FRAME: {
       const { payload: frameId } = action;
       return {
@@ -50,6 +46,37 @@ export default (state = defaultUI, action) => {
       return {
         ...state,
         showLabels: labelState
+      }
+    }
+    case TIMELINE_JUMP: {
+      const {payload: targetMs} = action;
+      return {
+        ...state,
+        elapsedTime: targetMs
+      }
+    }
+    case TIMELINE_PLAY: {
+      return {
+        ...state,
+        isPlaying: true
+      }
+    }
+    case TIMELINE_PAUSE: {
+      return {
+        ...state,
+        isPlaying: false
+      }
+    }
+    case LOAD_ANIMATED_VIEW: {
+      return {
+        ...state,
+        animated: true
+      }
+    }
+    case UNLOAD_ANIMATED_VIEW: {
+      return {
+        ...state,
+        animated: false
       }
     }
 

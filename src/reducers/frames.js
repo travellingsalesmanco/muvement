@@ -8,9 +8,11 @@ import {
   REMOVE_FRAME,
   RENAME_DANCER,
   RENAME_FRAME,
-  REORDER_FRAME
+  REORDER_FRAME,
+  EDIT_FRAME_TRANSITION,
+  CLEAR_FRAME_TRANSITION
 } from '../constants/actionTypes';
-import { defaultFrame } from '../constants/defaults';
+import { defaultFrame, defaultTransition } from '../constants/defaults';
 
 const frameReducer = (state = defaultFrame, action) => {
   switch (action.type) {
@@ -63,6 +65,24 @@ const frameReducer = (state = defaultFrame, action) => {
         duration: newDuration
       }
     }
+    case EDIT_FRAME_TRANSITION: {
+      const {payload: newTransition} = action;
+      return {
+        ...state,
+        transitionBefore: {
+          ...state.transitionBefore,
+          ...newTransition
+        }
+      }
+    }
+    case CLEAR_FRAME_TRANSITION: {
+      return {
+        ...state,
+        transitionBefore: {
+          ...defaultTransition
+        }
+      }
+    }
     default:
       return state;
   }
@@ -87,8 +107,8 @@ export default (state = [defaultFrame], action) => {
       const { fromIndex, toIndex } = action.payload;
       let frames = state.slice();
       const toMove = frames[fromIndex];
-      state.splice(fromIndex, 1);
-      state.splice(toIndex, 0, toMove);
+      frames.splice(fromIndex, 1);
+      frames.splice(toIndex, 0, toMove);
       return frames;
     }
 

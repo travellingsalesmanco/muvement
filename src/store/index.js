@@ -3,6 +3,8 @@ import { persistStore, persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 import localForage from 'localforage';
+import {composeWithDevTools} from 'redux-devtools-extension'
+import { firestoreWriter } from "../middleware/firestoreWrite";
 
 localForage.config({
   name: "Muvement",
@@ -17,7 +19,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export default () => {
   const store = createStore(
     persistedReducer,
-    applyMiddleware(thunk)
+    composeWithDevTools(applyMiddleware(thunk, firestoreWriter))
   );
   const persistor = persistStore(store);
   return { store, persistor }

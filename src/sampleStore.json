@@ -1,0 +1,14 @@
+{
+  "ui": {
+    "activeFrame": 0,
+    "showLabels": true
+  },
+  "dances": {
+    "byId": {
+      "danceId1": "sampleDanceObj1",
+      "danceId2": "sampleDanceObj2",
+      "danceId3": "sampleDanceObj3"
+    },
+    "myDances": ["danceId1", "danceId3"]
+  }
+}

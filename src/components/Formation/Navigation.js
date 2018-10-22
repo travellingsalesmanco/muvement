@@ -5,6 +5,7 @@ import './Navigation.css';
 import RedoIcon from "../../icons/RedoIcon";
 import UndoIcon from "../../icons/UndoIcon";
 import { toggleLabels } from "../../actions/danceActions";
+import { MinTablet, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class Navigation extends React.Component {
   render() {
@@ -19,30 +20,49 @@ class Navigation extends React.Component {
           <div className="title">
             <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
           </div>
-          <div className="right-container">
-            <Menu className="navbar-icon" mode="horizontal" theme="dark">
-              {/* TODO: Make the size of the icon bigger */}
-              <Menu.Item key="1">
-                <Button className="nav-bar-button">
-                  <UndoIcon />
-                </Button>
-                {/*<Button className="navbar-button" icon="undo" ghost/>*/}
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Button className="nav-bar-button">
-                  <RedoIcon />
-                </Button>
-                {/*<Button icon="redo"/>*/}
-              </Menu.Item>
-              <Menu.Item key="3">
-                {/* TODO: change eye icon depending on current show state */}
-                <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Button icon="fullscreen" />
-              </Menu.Item>
-            </Menu>
-          </div>
+          <MobilePortrait>
+            <div className="right-container">
+              <Menu className="navbar-icon" mode="horizontal" theme="dark">
+                <Menu.Item key="1">
+                  <Button className="nav-bar-button">
+                    <UndoIcon />
+                  </Button>
+                </Menu.Item>
+                <Menu.Item key="2">
+                  <Button className="nav-bar-button">
+                    <RedoIcon />
+                  </Button>
+                </Menu.Item>
+                <Menu.Item key="3">
+                  <Button icon="eye" />
+                </Menu.Item>
+              </Menu>
+            </div>
+          </MobilePortrait>
+          <MinTablet>
+            <div className="right-container">
+              <Menu className="navbar-icon" mode="horizontal" theme="dark">
+                {/* TODO: Make the size of the icon bigger */}
+                <Menu.Item key="1">
+                  <Button className="nav-bar-button">
+                    <UndoIcon />
+                  </Button>
+                </Menu.Item>
+                <Menu.Item key="2">
+                  <Button className="nav-bar-button">
+                    <RedoIcon />
+                  </Button>
+                </Menu.Item>
+                <Menu.Item key="3">
+                  {/* TODO: change eye icon depending on current show state */}
+                  <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
+                </Menu.Item>
+                <Menu.Item key="4">
+                  <Button icon="fullscreen" />
+                </Menu.Item>
+              </Menu>
+            </div>
+          </MinTablet>
         </div>
       </Header>
     );

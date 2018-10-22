@@ -17,7 +17,7 @@ class DancerDotsLayer extends PureComponent {
     };
 
     this.handleDragEnd = this.handleDragEnd.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
+    // this.handleRemove = this.handleRemove.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.bindWithinCanvas = this.bindWithinCanvas.bind(this)
   }
@@ -62,14 +62,14 @@ class DancerDotsLayer extends PureComponent {
     }
   };
 
-  handleRemove(e, dancerName) {
-    e.cancelBubble = true;
-    console.log("Remove dancer: " + dancerName);
-    this.props.dispatch(removeDancerFromFrame(this.props.danceId, this.props.frameId, dancerName));
-  };
+  // handleRemove(e, dancerName) {
+  //   e.cancelBubble = true;
+  //   console.log("Remove dancer: " + dancerName);
+  //   this.props.dispatch(removeDancerFromFrame(this.props.danceId, this.props.frameId, dancerName));
+  // };
 
   render() {
-    const { dotRadius, dancersLayout, editable, showLabels } = this.props;
+    const { dotRadius, dancersLayout, editable, showLabels, demo } = this.props;
     return (
       <Layer>
         {dancersLayout.map((dancerLayout) => {
@@ -79,15 +79,15 @@ class DancerDotsLayer extends PureComponent {
               key={dancerLayout.name}
               x={boundPos.x}
               y={boundPos.y}
-              draggable={editable}
+              draggable={editable || demo}
               dragBoundFunc={this.bindWithinCanvas}
-              onDragEnd={(e) => this.handleDragEnd(e, dancerLayout.name)}
+              onDragEnd={(e) => !demo && this.handleDragEnd(e, dancerLayout.name)}
             >
               <DancerDot radius={dotRadius} number={dancerLayout.id}
                 name={dancerLayout.name} onSelect={editable ? this.handleSelect : undefined} />
               {
                 editable && showLabels
-                  ? <DancerLabel name={dancerLayout.name} handleRemove={this.handleRemove} />
+                  ? <DancerLabel name={dancerLayout.name} />
                   : null
               }
             </Group>

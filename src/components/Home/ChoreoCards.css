@@ -98,7 +98,7 @@
 }
 
 .new-choreo-modal-inner .ant-input {
-  background-image: linear-gradient(to right, #24c6dc, #514a9d);
+  background: linear-gradient(to right, #24c6dc, #514a9d);
   border: 0;
   font-family: 'Sen-Regular', Arial, sans-serif;
   font-size: 18px;

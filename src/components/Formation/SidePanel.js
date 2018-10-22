@@ -11,7 +11,7 @@ class Title extends React.Component {
     const performerTitle = (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <UserAddIcon className="side-panel-icon" style={{ fontSize: '34px' }} />
-        <span style={{ fontFamily: 'Sen-Bold', marginLeft: '5px' }}>PERFORMERS</span>
+        <span style={{ fontFamily: 'Sen-Black', marginLeft: '5px' }}>PERFORMERS</span>
       </div>
     );
 
@@ -40,9 +40,9 @@ class SidePanel extends React.Component {
   render() {
     let drawerDisplay;
     if (this.props.id === 1) {
-      drawerDisplay = <PerformerList />
+      drawerDisplay = <PerformerList danceId={this.props.danceId}/>
     } else if (this.props.id === 4) {
-      drawerDisplay = <StageDimForm />
+      drawerDisplay = <StageDimForm danceId={this.props.danceId}/>
     }
 
     return (
