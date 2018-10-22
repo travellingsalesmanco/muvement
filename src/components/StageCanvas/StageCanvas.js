@@ -9,7 +9,7 @@ import StageLayer from './StageLayer';
 
 class StageCanvas extends PureComponent {
   render() {
-    const { danceId, frameId, width, height, editable, stageLayout, withGrid, animated } = this.props;
+    const { danceId, frameId, width, height, editable, stageLayout, withGrid, animated, demo } = this.props;
     // Canvas dimensions
     // console.log("Stage: ", width, height);
     return (
@@ -20,7 +20,7 @@ class StageCanvas extends PureComponent {
           animated
             ? <DancerDotsLayer danceId={danceId} frameId={frameId}
               width={width} height={height} stageRect={stageLayout.stageRect}
-              editable={editable} />
+              editable={editable} demo={demo} />
             : <AnimatedDancerDotsLayer danceId={danceId} frameId={frameId}
               width={width} height={height} stageRect={stageLayout.stageRect} />
         }
