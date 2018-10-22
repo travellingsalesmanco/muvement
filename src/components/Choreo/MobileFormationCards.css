@@ -24,9 +24,5 @@
   border-radius: 15px;
   height: 9em;
   width: 15em;
-}
-
-.mobile-formation-preview {
   pointer-events: none;
-  flex: 1;
 }

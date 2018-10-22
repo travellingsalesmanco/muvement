@@ -9,7 +9,7 @@ import HeadphoneIcon from "../../icons/HeadphoneIcon";
 import UserAddIcon from "../../icons/UserAddIcon";
 import { getDance } from '../../selectors/dance';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
-import StageCanvas from "../StageCanvas/StageCanvas";
+import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import withAuthorization from "../withAuthorization";
 import withFireStoreSync from "../withFirestoreSync";
 import './FrameScreen.css';
@@ -18,9 +18,9 @@ import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 import Timeline from "./Timeline";
 
-const SectionTitle = ({mobile, frameName, handleEditName, handleEditNameConfirm}) => (
+const SectionTitle = ({ mobile, frameName, handleEditName, handleEditNameConfirm }) => (
   <div className="section-title-container">
-    <div className="section-title" style={{margin: mobile ? '1rem 2rem' : '2rem'}}>
+    <div className="section-title" style={{ margin: mobile ? '1rem 2rem' : '2rem' }}>
       <div className="section-title-inner">
         <Input
           placeholder="Enter formation name"
@@ -33,8 +33,8 @@ const SectionTitle = ({mobile, frameName, handleEditName, handleEditNameConfirm}
   </div>
 );
 
-const MobileSwitchTabs = ({activeButton, handleClick}) => (
-  <div className="mobile-switch-tabs" style={{margin: '0 auto'}}>
+const MobileSwitchTabs = ({ activeButton, handleClick }) => (
+  <div className="mobile-switch-tabs" style={{ margin: '0 auto' }}>
     <button
       className={activeButton === 1 ? 'mobile-switch-tabs-active' : 'mobile-switch-tabs-inactive'}
       onClick={() => handleClick(1)}>
@@ -59,50 +59,14 @@ class FrameScreen extends Component {
     this.state = {
       placement: 'right',
       visible: false,
-      stageWidth: 100,
-      stageHeight: 100,
       sidePanelID: 0,
       frameName: '',
-      activeButton : 1
+      activeButton: 1
     }
   }
-
-  componentDidMount() {
-    this.checkSize();
-    window.addEventListener("resize", this.checkSize);
-  }
-
-  componentDidUpdate() {
-    this.checkSize();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.checkSize);
-  }
-
-  checkSize = () => {
-    let container = null
-    if (this.mobilePortraitContainer) {
-      container = this.mobilePortraitContainer
-    } else if (this.mobileLandscapeContainer) {
-      container = this.mobileLandscapeContainer
-    } else if (this.tabletContainer) {
-      container = this.tabletContainer
-    } else {
-      return
-    }
-    if (this.state.stageWidth !== container.offsetWidth
-      || this.state.stageHeight !== container.offsetHeight) {
-
-      this.setState({
-        stageWidth: container.offsetWidth,
-        stageHeight: container.offsetHeight
-      });
-    }
-  };
 
   handleClick = (number) => {
-    this.setState({activeButton: number});
+    this.setState({ activeButton: number });
   };
 
   handleMenuClick = (item) => {
@@ -163,21 +127,15 @@ class FrameScreen extends Component {
         <MobilePortrait>
           <Layout className="body">
             <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
-            <Layout style={{backgroundColor: 'transparent'}}>
+            <Layout style={{ backgroundColor: 'transparent' }}>
               <Content style={{ display: "flex", flexDirection: "column" }}>
                 <SectionTitle mobile={true} frameName={this.props.frameName} handleEditName={this.handleEditName}
-                              handleEditNameConfirm={this.handleEditNameConfirm}/>
-                <div style={{height: '15rem', marginBottom: '10px'}}
-                  ref={node => {
-                    this.mobilePortraitContainer = node
-                  }}>
-                  <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
-                    <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
-                                 height={this.state.stageHeight} editable withGrid />
-                  </div>
+                  handleEditNameConfirm={this.handleEditNameConfirm} />
+                <div style={{ height: '15rem', marginBottom: '10px' }}>
+                  <ResponsiveStageCanvas danceId={this.props.danceId} frameId={this.props.frameId} editable withGrid />
                 </div>
                 <div>
-                  <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
+                  <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                   {
                     activeButton === 1 &&
                     <div>
@@ -192,7 +150,7 @@ class FrameScreen extends Component {
                   {
                     activeButton === 3 &&
                     <div>
-                      <Timeline danceId={this.props.danceId}/>
+                      <Timeline danceId={this.props.danceId} />
 
                     </div>
                   }
@@ -205,14 +163,8 @@ class FrameScreen extends Component {
         <MobileLandscape>
           <Layout className="body">
             <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
-            <div
-              style={{ background: '#000', flex: 1, overflow: "hidden" }}
-              ref={node => {
-                    this.mobileLandscapeContainer = node
-              }}
-            >
-              <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
-                           height={this.state.stageHeight} editable withGrid />
+            <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
+              <ResponsiveStageCanvas danceId={this.props.danceId} frameId={this.props.frameId} editable withGrid />
             </div>
           </Layout>
         </MobileLandscape>
@@ -228,16 +180,12 @@ class FrameScreen extends Component {
             <Layout className="contents">
               <Content style={{ display: "flex", flexDirection: "column" }}>
                 <SectionTitle frameName={this.props.frameName} handleEditName={this.handleEditName}
-                              handleEditNameConfirm={this.handleEditNameConfirm}/>
+                  handleEditNameConfirm={this.handleEditNameConfirm} />
                 <div
                   className="framescreen-stage"
                   style={{ background: '#000', flex: 1, overflow: "hidden" }}
-                  ref={node => {
-                    this.tabletContainer = node
-                  }}
                 >
-                  <StageCanvas danceId={this.props.danceId} frameId={this.props.frameId} width={this.state.stageWidth}
-                               height={this.state.stageHeight} editable withGrid />
+                  <ResponsiveStageCanvas danceId={this.props.danceId} frameId={this.props.frameId} editable withGrid />
                 </div>
               </Content>
               <Sider width={'12rem'} className="sider">

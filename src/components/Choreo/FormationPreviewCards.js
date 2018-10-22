@@ -3,17 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { addAndSetActiveFrame, gotoFrame } from "../../actions/danceActions";
-import StageCanvas from "../StageCanvas/StageCanvas";
+import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import './ChoreoHomeScreen.css';
 
 class FormationPreviewCards extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      stageWidth: 100,
-      stageHeight: 100,
-    }
-  }
   clickHandler = (index) => {
     if (index === 0) {
       this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.frames.length));
@@ -23,27 +16,7 @@ class FormationPreviewCards extends React.Component {
       this.props.history.push(`${this.props.match.url}/frame`)
     }
   };
-  componentDidMount() {
-    this.checkSize();
-    window.addEventListener("resize", this.checkSize);
-  }
 
-  componentDidUpdate() {
-    this.checkSize();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.checkSize);
-  }
-
-  checkSize = () => {
-    if (this.state.stageWidth !== this.container.offsetWidth || this.state.stageHeight !== this.container.offsetHeight) {
-      this.setState({
-        stageWidth: this.container.offsetWidth,
-        stageHeight: this.container.offsetHeight
-      });
-    }
-  };
   render() {
     const frames = this.props.frames.slice();
     // Prepend "New FormationCard" to start of array of cards
@@ -71,11 +44,8 @@ class FormationPreviewCards extends React.Component {
                             <Icon type="file-add" className="add-formation-icon" />
                             <span className="add-formation-title"> ADD FORMATION </span>
                           </div>
-                          : <div className="ant-formation-card-cover">
-                            <div style={{ flex: 1, pointerEvents: "None" }}>
-                              <StageCanvas danceId={this.props.danceId} frameId={index - 1} width={this.state.stageWidth}
-                                height={this.state.stageHeight} />
-                            </div>
+                          : <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
+                            <ResponsiveStageCanvas danceId={this.props.danceId} frameId={index - 1} />
                           </div>
                       }
                       <div className="formation-name">
@@ -94,11 +64,8 @@ class FormationPreviewCards extends React.Component {
                           className="formation-card"
                           onClick={() => this.clickHandler(index + 1)}
                         >
-                          <div className="ant-formation-card-cover">
-                            <div style={{ flex: 1, pointerEvents: "None" }}>
-                              <StageCanvas danceId={this.props.danceId} frameId={index + 1 - 1} width={this.state.stageWidth}
-                                height={this.state.stageHeight} />
-                            </div>
+                          <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
+                            <ResponsiveStageCanvas danceId={this.props.danceId} frameId={index} />
                           </div>
                           <div className="formation-name">
                             <span>{frames[index + 1].name}</span>
