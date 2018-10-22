@@ -45,30 +45,41 @@ export const makeDancersLayoutSelector = () => {
 }
 
 export const getTimeline = createSelector(
-  [getFrames, getDancers, getSelectedDancers, getStageRectFromProp],
-  (frames, allDancers, selectedDancers, stageRect) => {
+  [getFrames],
+  (frames) => {
     let timeline = {
       totalDuration: 0,
       cumDurations: [],
-      layouts: []
     }
-    let prevDancerLayouts = [];
-    let dancerNameToPrevLayout = {};
     frames.forEach((frame) => {
       // Duration calculations
       timeline.totalDuration += frame.transitionBefore.duration + frame.numSeconds * 1000;
       timeline.cumDurations.push(timeline.totalDuration);
-      // Layout calculations
-      prevDancerLayouts = frame.dancers.map((dancer) => {
+    });
+    return timeline;
+  }
+)
+
+export const getAnimatedLayout = createSelector(
+  [getFrames, getDancers, getSelectedDancers, getStageRectFromProp],
+  (formations, allDancers, selectedDancers, stageRect) => {
+    // Dance layout -- array of formation layouts
+    let layout = [];
+    // Single formation layout -- array of dancer layouts
+    let prevFormationLayout = [];
+    // Map of dancer name to their respective layout in the previous formation
+    let nameToPrevDancerLayout = {};
+    formations.forEach((formation) => {
+      prevFormationLayout = formation.dancers.map((dancer) => {
         const pos = relativeToAbsolutePoint(dancer.position, stageRect);
-        if (dancerNameToPrevLayout[dancer.name]) {
-          const prevLayout = dancerNameToPrevLayout[dancer.name];
+        if (nameToPrevDancerLayout[dancer.name]) {
+          const prevLayout = nameToPrevDancerLayout[dancer.name];
           return {
             ...prevLayout,
             position: straightLineAnimation(prevLayout.endPos, pos)
           }
         } else {
-          // Dancer is not in prev frame, will just appear and stay stationary for whole duration
+          // Dancer was not in prev frame, make it appear and stay stationary for whole duration
           return {
             ...dancer,
             position: straightLineAnimation(pos, pos),
@@ -77,13 +88,14 @@ export const getTimeline = createSelector(
           }
         }
       });
-      dancerNameToPrevLayout = {};
-      prevDancerLayouts.forEach((dancerLayout) => {
-        dancerNameToPrevLayout[dancerLayout.name] = dancerLayout;
+      // Save the name-to-layout mapping to avoid O(n) search every time 
+      nameToPrevDancerLayout = {};
+      prevFormationLayout.forEach((dancerLayout) => {
+        nameToPrevDancerLayout[dancerLayout.name] = dancerLayout;
       })
-      timeline.layouts.push(prevDancerLayouts);
+      layout.push(prevFormationLayout);
     });
-    return timeline;
+    return layout;
   }
 )
 
