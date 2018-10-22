@@ -38,6 +38,7 @@ const makeMapStateToProps = () => {
   return (state, props) => {
     return {
       stageLayout: getStageLayout(state, props),
+      animated: state.UI.animated
     }
   }
 };
