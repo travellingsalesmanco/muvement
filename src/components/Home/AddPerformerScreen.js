@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Button, Input, Layout, Menu, Icon } from 'antd';
 import { withRouter } from "react-router-dom";
 import './AddPerformerScreen.css';
-import { addDance } from "../../actions/danceActions";
+import { addChoreo } from "../../actions/choreoActions";
 import { connect } from 'react-redux';
 import { firestore } from "../../firebase";
 import { defaultStageDim } from "../../constants/defaults";
@@ -33,15 +33,15 @@ class AddPerformerScreen extends React.Component {
   };
 
   handleNext = () => {
-    firestore.createDance({
+    firestore.createChoreo({
         name: this.props.choreoName,
         stageDim: defaultStageDim,
         dancers: this.state.names,
-        frames: []
+        formations: []
       }
-    ).then(createdDance => {
-      this.props.dispatch(addDance(createdDance.id, createdDance.data));
-      this.props.history.push(`/choreo/${createdDance.id}`)
+    ).then(createdChoreo => {
+      this.props.dispatch(addChoreo(createdChoreo.id, createdChoreo.data));
+      this.props.history.push(`/choreo/${createdChoreo.id}`)
     });
   };
 
@@ -95,7 +95,7 @@ class AddPerformerScreen extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    maxDanceId: state.dances.length - 1
+    maxChoreoId: state.choreos.length - 1
   }
 };
 

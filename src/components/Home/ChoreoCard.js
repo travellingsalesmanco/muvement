@@ -2,15 +2,15 @@ import { Card, Icon } from 'antd';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getDance } from '../../selectors/dance';
+import { getChoreo } from '../../selectors/choreo';
 import './ChoreoCards.css';
 
 class ChoreoCard extends PureComponent {
   clickHandler() {
-    this.props.history.push(`/choreo/${this.props.danceId}`);
+    this.props.history.push(`/choreo/${this.props.choreoId}`);
   }
   render() {
-    const { name, frameLength } = this.props;
+    const { name, formationLength } = this.props;
 
     return (
       <Card
@@ -26,7 +26,7 @@ class ChoreoCard extends PureComponent {
           <div className="description">
             <span>{name}</span>
             <div className="description-inner">
-              <span id="card-date">{frameLength} formations</span>
+              <span id="card-date">{formationLength} formations</span>
               <Icon type="share-alt" theme="outlined" style={{ fontSize: '20px' }} />
             </div>
           </div>
@@ -37,10 +37,10 @@ class ChoreoCard extends PureComponent {
 }
 const makeMapStateToProps = () => {
   return (state, props) => {
-    const dance = getDance(state, props.danceId)
+    const choreo = getChoreo(state, props.choreoId)
     return {
-      name: dance.name,
-      frameLength: dance.frames.length
+      name: choreo.name,
+      formationLength: choreo.formations.length
     }
   }
 }

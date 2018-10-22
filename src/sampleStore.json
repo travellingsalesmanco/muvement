@@ -1,14 +1,14 @@
 {
   "ui": {
-    "activeFrame": 0,
+    "activeFormation": 0,
     "showLabels": true
   },
-  "dances": {
+  "choreos": {
     "byId": {
-      "danceId1": "sampleDanceObj1",
-      "danceId2": "sampleDanceObj2",
-      "danceId3": "sampleDanceObj3"
+      "choreoId1": "sampleChoreoObj1",
+      "choreoId2": "sampleChoreoObj2",
+      "choreoId3": "sampleChoreoObj3"
     },
-    "myDances": ["danceId1", "danceId3"]
+    "myChoreos": ["choreoId1", "choreoId3"]
   }
 }

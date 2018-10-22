@@ -34,7 +34,7 @@ class LandingPage extends React.Component {
             <Button className="landing-signup-button" onClick={() => this.props.history.push(`/signup`)}>LETS GET
               CREATIVE</Button>
             <div className="demo-grid">
-              <ResponsiveStageCanvas danceId={"demo"} frameId={0}
+              <ResponsiveStageCanvas choreoId={"demo"} formationId={0}
                 withGrid demo />
             </div>
             {/*<img className="grid-img" src={GridImage} alt="grid image" />*/}

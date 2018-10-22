@@ -1,10 +1,10 @@
 import { db, auth, currentTimeStampField } from './firebase';
 
-// Returns created dance if successful
-export const createDance = (dance) => {
+// Returns created choreo if successful
+export const createChoreo = (choreo) => {
   // Add in creator id
-  return db.collection("dances").add({
-    ...dance,
+  return db.collection("choreos").add({
+    ...choreo,
     creator: {
       id: auth.currentUser.uid,
       name: auth.currentUser.displayName
@@ -22,14 +22,14 @@ export const createDance = (dance) => {
   });
 };
 
-export const getDance = (danceId) => {
-  return db.collection("dances").doc(danceId).get({ source: "server" }).then((docSnap) => {
+export const getChoreo = (choreoId) => {
+  return db.collection("choreos").doc(choreoId).get({ source: "server" }).then((docSnap) => {
     return docSnap.data({ serverTimestamps: "estimate" });
   })
 };
 
-export const getCreatorDances = () => {
-  return db.collection("dances").where("creator.id", "==", auth.currentUser.uid).get({ source: "server" })
+export const getCreatorChoreos = () => {
+  return db.collection("choreos").where("creator.id", "==", auth.currentUser.uid).get({ source: "server" })
     .then((querySnap) => {
       return querySnap.docs.map(docSnap => {
         return {
@@ -40,14 +40,14 @@ export const getCreatorDances = () => {
     });
 };
 
-export const updateDance = (danceId, dance) => {
-  return db.collection("dances").doc(danceId).set({
-    ...dance,
+export const updateChoreo = (choreoId, choreo) => {
+  return db.collection("choreos").doc(choreoId).set({
+    ...choreo,
     updatedAt: currentTimeStampField()
   });
 };
 
 
-export const deleteDance = (danceId) => {
-  return db.collection("dances").doc(danceId).delete();
+export const deleteChoreo = (choreoId) => {
+  return db.collection("choreos").doc(choreoId).delete();
 };

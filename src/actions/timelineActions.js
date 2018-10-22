@@ -1,10 +1,10 @@
 import { TIMELINE_JUMP } from "../constants/actionTypes";
-import { gotoFrame } from "./danceActions";
+import { gotoFormation } from "./choreoActions";
 
 const FPS = 30;
 const msPerFrame = 1000 / FPS;
 
-export function advanceNextFrame(danceId, formationId, endOfFormationDuration, endOfDanceDuration) {
+export function advanceNextFrame(choreoId, formationId, endOfFormationDuration, endOfChoreoDuration) {
   return (dispatch, getState) => {
     setTimeout(() => {
       if (getState().UI.isPlaying) {
@@ -13,8 +13,8 @@ export function advanceNextFrame(danceId, formationId, endOfFormationDuration, e
           type: TIMELINE_JUMP,
           payload: newTime,
         })
-        if (newTime >= endOfFormationDuration && newTime < endOfDanceDuration) {
-          gotoFrame(danceId, formationId + 1)
+        if (newTime >= endOfFormationDuration && newTime < endOfChoreoDuration) {
+          gotoFormation(choreoId, formationId + 1)
         }
       }
     }, msPerFrame);

@@ -1,12 +1,12 @@
 {
-  "danceId1": {
+  "choreoId1": {
     "creator": {
       "id": "profileId",
       "name": "Hyle Kanagami"
     },
     "createdAt": "timestamp1",
     "updatedAt": "timestamp2",
-    "name": "The Best Dance",
+    "name": "The Best Choreo",
     "published": false,
     "stageDim": {
       "width": 9.60,
@@ -20,7 +20,7 @@
       "And",
       "Me"
     ],
-    "frames": [
+    "formations": [
       {
         "name": "Introduction",
         "numSeconds": 30,

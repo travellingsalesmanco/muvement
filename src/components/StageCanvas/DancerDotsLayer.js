@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Group, Layer } from 'react-konva';
 import { connect } from 'react-redux';
-import { moveDancer, removeDancerFromFrame } from '../../actions/frameActions';
+import { moveDancer, removeDancerFromFormation } from '../../actions/formationActions';
 import { DESELECT_DANCER, SELECT_DANCER } from '../../constants/actionTypes';
 import { makeDancersLayoutSelector } from '../../selectors/layout';
 import { absoluteToRelativeX, absoluteToRelativeY, generateDotRadius } from '../../lib/stageUtils';
@@ -50,7 +50,7 @@ class DancerDotsLayer extends PureComponent {
       absoluteToRelativeX(e.target.x(), this.props.stageRect),
       absoluteToRelativeY(e.target.y(), this.props.stageRect)
     ];
-    this.props.dispatch(moveDancer(this.props.danceId, this.props.frameId, dancerName, newDancerPosition));
+    this.props.dispatch(moveDancer(this.props.choreoId, this.props.formationId, dancerName, newDancerPosition));
   };
 
   handleSelect(e, dancerName) {
@@ -65,7 +65,7 @@ class DancerDotsLayer extends PureComponent {
   // handleRemove(e, dancerName) {
   //   e.cancelBubble = true;
   //   console.log("Remove dancer: " + dancerName);
-  //   this.props.dispatch(removeDancerFromFrame(this.props.danceId, this.props.frameId, dancerName));
+  //   this.props.dispatch(removeDancerFromFormation(this.props.choreoId, this.props.formationId, dancerName));
   // };
 
   render() {

@@ -69,7 +69,7 @@ class HomeScreen extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    dances: state.dances
+    choreos: state.choreos
   }
 };
 

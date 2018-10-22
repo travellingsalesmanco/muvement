@@ -40,9 +40,9 @@ class SidePanel extends React.Component {
   render() {
     let drawerDisplay;
     if (this.props.id === 1) {
-      drawerDisplay = <PerformerList danceId={this.props.danceId}/>
+      drawerDisplay = <PerformerList choreoId={this.props.choreoId}/>
     } else if (this.props.id === 4) {
-      drawerDisplay = <StageDimForm danceId={this.props.danceId}/>
+      drawerDisplay = <StageDimForm choreoId={this.props.choreoId}/>
     }
 
     return (

@@ -1,50 +1,50 @@
 import {
-  RENAME_DANCE,
-  PUBLISH_DANCE,
-  UNPUBLISH_DANCE,
+  RENAME_CHOREO,
+  PUBLISH_CHOREO,
+  UNPUBLISH_CHOREO,
   EDIT_STAGE_DIMENSIONS,
-  ADD_FRAME,
-  REMOVE_FRAME,
-  RENAME_FRAME,
-  REORDER_FRAME,
-  EDIT_FRAME_DURATION,
+  ADD_FORMATION,
+  REMOVE_FORMATION,
+  RENAME_FORMATION,
+  REORDER_FORMATION,
+  EDIT_FORMATION_DURATION,
   ADD_DANCER,
   REMOVE_DANCER,
   RENAME_DANCER,
-  ADD_DANCER_TO_FRAME,
-  REMOVE_DANCER_FROM_FRAME,
+  ADD_DANCER_TO_FORMATION,
+  REMOVE_DANCER_FROM_FORMATION,
   MOVE_DANCER
 } from "../constants/actionTypes";
 import { firestore } from "../firebase";
 
 const ACTIONS_TO_UPDATE = [
-  RENAME_DANCE,
-  PUBLISH_DANCE,
-  UNPUBLISH_DANCE,
+  RENAME_CHOREO,
+  PUBLISH_CHOREO,
+  UNPUBLISH_CHOREO,
   EDIT_STAGE_DIMENSIONS,
-  ADD_FRAME,
-  REMOVE_FRAME,
-  RENAME_FRAME,
-  REORDER_FRAME,
-  EDIT_FRAME_DURATION,
+  ADD_FORMATION,
+  REMOVE_FORMATION,
+  RENAME_FORMATION,
+  REORDER_FORMATION,
+  EDIT_FORMATION_DURATION,
   ADD_DANCER,
   REMOVE_DANCER,
   RENAME_DANCER,
-  ADD_DANCER_TO_FRAME,
-  REMOVE_DANCER_FROM_FRAME,
+  ADD_DANCER_TO_FORMATION,
+  REMOVE_DANCER_FROM_FORMATION,
   MOVE_DANCER
 ];
 
 export const firestoreWriter = store => next => action => {
   let result = next(action);
   if (ACTIONS_TO_UPDATE.includes(action.type)) {
-    const danceId = action.danceId;
-    const updatedDance = store.getState().dances.byId[danceId];
-    console.log("Updating: " + action.type + " for " + danceId);
-    console.log("New dance: ");
-    console.log(updatedDance);
+    const choreoId = action.choreoId;
+    const updatedChoreo = store.getState().choreos.byId[choreoId];
+    console.log("Updating: " + action.type + " for " + choreoId);
+    console.log("New choreo: ");
+    console.log(updatedChoreo);
     // TODO: rate-limiting (debouncing)
-    firestore.updateDance(danceId, updatedDance);
+    firestore.updateChoreo(choreoId, updatedChoreo);
   }
   return result
 };
