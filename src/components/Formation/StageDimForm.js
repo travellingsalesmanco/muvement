@@ -1,15 +1,15 @@
 import { InputNumber } from "antd";
 import React from 'react';
-import { editStageDimensions } from "../../actions/danceActions"
+import { editStageDimensions } from "../../actions/choreoActions"
 import { connect } from 'react-redux'
 import './StageDimForm.css';
-import { getDance } from "../../selectors/dance";
+import { getChoreo } from "../../selectors/choreo";
 
 class StageDimForm extends React.Component {
 
   handleWidthChange = value => {
     if (value >= 0) {
-      this.props.dispatch(editStageDimensions(this.props.danceId, {
+      this.props.dispatch(editStageDimensions(this.props.choreoId, {
         width: value
       }));
     }
@@ -17,7 +17,7 @@ class StageDimForm extends React.Component {
 
   handleHeightChange = value => {
     if (value >= 0) {
-      this.props.dispatch(editStageDimensions(this.props.danceId, {
+      this.props.dispatch(editStageDimensions(this.props.choreoId, {
         height: value
       }));
     }
@@ -25,7 +25,7 @@ class StageDimForm extends React.Component {
 
   handleGridSizeChange = value => {
     if (value >= 0) {
-      this.props.dispatch(editStageDimensions(this.props.danceId, {
+      this.props.dispatch(editStageDimensions(this.props.choreoId, {
         gridSize: value
       }));
     }
@@ -46,12 +46,12 @@ class StageDimForm extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const dance = getDance(state, props.danceId)
+  const choreo = getChoreo(state, props.choreoId)
   return {
-    height: dance.stageDim.height,
-    width: dance.stageDim.width,
-    gridSize: dance.stageDim.gridSize,
-    units: dance.stageDim.units,
+    height: choreo.stageDim.height,
+    width: choreo.stageDim.width,
+    gridSize: choreo.stageDim.gridSize,
+    units: choreo.stageDim.units,
   }
 };
 

@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { Row, Col, Icon, Button } from "antd";
-import { removeDancers, addDancers } from "../../actions/danceActions"
+import { removeDancers, addDancers } from "../../actions/choreoActions"
 import { connect } from 'react-redux';
 import AddPerformerForm from "./AddPerformerForm";
-import { getDance } from "../../selectors/dance";
+import { getChoreo } from "../../selectors/choreo";
 
 class PerformerList extends React.Component {
   constructor(props) {
@@ -38,12 +38,12 @@ class PerformerList extends React.Component {
   };
 
   handleRemoval = () => {
-    this.props.dispatch(removeDancers(this.props.danceId, this.state.toRemove));
+    this.props.dispatch(removeDancers(this.props.choreoId, this.state.toRemove));
     this.handleCancelAction();
   };
 
   handleAddition = (nameArr) => {
-    this.props.dispatch(addDancers(this.props.danceId, nameArr));
+    this.props.dispatch(addDancers(this.props.choreoId, nameArr));
   };
 
   markDancerForRemoval(name) {
@@ -111,9 +111,9 @@ class PerformerList extends React.Component {
 }
 
 const mapStateToProps = function (state, props) {
-  const dance = getDance(state, props.danceId);
+  const choreo = getChoreo(state, props.choreoId);
   return {
-    dancers: dance.dancers,
+    dancers: choreo.dancers,
   }
 };
 

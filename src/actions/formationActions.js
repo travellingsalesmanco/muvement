@@ -1,27 +1,27 @@
 import { ADD_DANCER_TO_FORMATION, MOVE_DANCER, REMOVE_DANCER_FROM_FORMATION, RENAME_FORMATION, DESELECT_DANCER } from "../constants/actionTypes";
-import { getDance } from "../selectors/dance";
+import { getChoreo } from "../selectors/choreo";
 
-function formationContainsDancer(danceId, formationId, name, state) {
-  return getDance(state, danceId).formations[formationId].dancers.map(dancer => dancer.name).includes(name);
+function formationContainsDancer(choreoId, formationId, name, state) {
+  return getChoreo(state, choreoId).formations[formationId].dancers.map(dancer => dancer.name).includes(name);
 }
 
-export function renameFormation(danceId, formationId, name) {
+export function renameFormation(choreoId, formationId, name) {
   return dispatch => {
     dispatch({
       type: RENAME_FORMATION,
-      danceId: danceId,
+      choreoId: choreoId,
       formationId: formationId,
       payload: name
     })
   }
 }
 
-export function addDancerToFormation(danceId, formationId, name) {
+export function addDancerToFormation(choreoId, formationId, name) {
   return (dispatch, getState) => {
-    if (!formationContainsDancer(danceId, formationId, name, getState())) {
+    if (!formationContainsDancer(choreoId, formationId, name, getState())) {
       dispatch({
         type: ADD_DANCER_TO_FORMATION,
-        danceId: danceId,
+        choreoId: choreoId,
         formationId: formationId,
         payload: {
           name: name,
@@ -35,12 +35,12 @@ export function addDancerToFormation(danceId, formationId, name) {
   }
 }
 
-export function removeDancerFromFormation(danceId, formationId, name) {
+export function removeDancerFromFormation(choreoId, formationId, name) {
   return (dispatch, getState) => {
-    if (formationContainsDancer(danceId, formationId, name, getState())) {
+    if (formationContainsDancer(choreoId, formationId, name, getState())) {
       dispatch({
         type: REMOVE_DANCER_FROM_FORMATION,
-        danceId: danceId,
+        choreoId: choreoId,
         formationId: formationId,
         payload: name
       })
@@ -54,12 +54,12 @@ export function removeDancerFromFormation(danceId, formationId, name) {
   }
 }
 
-export function moveDancer(danceId, formationId, name, newPos) {
+export function moveDancer(choreoId, formationId, name, newPos) {
   return (dispatch, getState) => {
-    if (formationContainsDancer(danceId, formationId, name, getState())) {
+    if (formationContainsDancer(choreoId, formationId, name, getState())) {
       dispatch({
         type: MOVE_DANCER,
-        danceId: danceId,
+        choreoId: choreoId,
         formationId: formationId,
         payload: {
           name: name,

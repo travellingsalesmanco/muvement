@@ -1,15 +1,15 @@
 import { createSelector } from 'reselect';
 import { calculateStageDimensions, generateGrid, relativeToAbsolutePoint, straightLineAnimation } from "../lib/stageUtils";
-import { getFormations } from './dance';
+import { getFormations } from './choreo';
 
 // Simple retrieval selectors (no transformations), no need to memoize
 const getCanvasWidthFromProp = (_, props) => props.width;
 const getCanvasHeightFromProp = (_, props) => props.height;
 const getStageRectFromProp = (_, props) => props.stageRect;
 
-const getStageDim = (state, props) => state.dances.byId[props.danceId].stageDim;
-const getDancers = (state, props) => state.dances.byId[props.danceId].dancers;
-const getFormationDancers = (state, props) => state.dances.byId[props.danceId].formations[props.formationId].dancers;
+const getStageDim = (state, props) => state.choreos.byId[props.choreoId].stageDim;
+const getDancers = (state, props) => state.choreos.byId[props.choreoId].dancers;
+const getFormationDancers = (state, props) => state.choreos.byId[props.choreoId].formations[props.formationId].dancers;
 const getSelectedDancers = (state, props) => state.UI.selectedDancers;
 const getActiveFormationIdx = (state) => state.UI.activeFormation;
 const getElapsedTime = (state) => state.UI.elapsedTime;
@@ -63,7 +63,7 @@ export const getTimeline = createSelector(
 export const getAnimatedLayout = createSelector(
   [getFormations, getDancers, getSelectedDancers, getStageRectFromProp],
   (formations, allDancers, selectedDancers, stageRect) => {
-    // Dance layout -- array of formation layouts
+    // Choreo layout -- array of formation layouts
     let layout = [];
     // Single formation layout -- array of dancer layouts
     let prevFormationLayout = [];

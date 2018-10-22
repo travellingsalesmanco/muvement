@@ -1,13 +1,13 @@
 import { Button, Input, Layout } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
-import { addAndSetActiveFormation, gotoFormation } from "../../actions/danceActions";
+import { addAndSetActiveFormation, gotoFormation } from "../../actions/choreoActions";
 import { renameFormation } from "../../actions/formationActions";
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from "../../icons/GradientSVG";
 import HeadphoneIcon from "../../icons/HeadphoneIcon";
 import UserAddIcon from "../../icons/UserAddIcon";
-import { getDance } from '../../selectors/dance';
+import { getChoreo } from '../../selectors/choreo';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import withAuthorization from "../withAuthorization";
@@ -77,11 +77,11 @@ class FormationScreen extends Component {
         sidePanelID: parseInt(item.key),
       });
     } else if (item.key === "2") {
-      this.props.dispatch(addAndSetActiveFormation(this.props.danceId, this.props.formationId + 1));
+      this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formationId + 1));
     } else if (item.key === "5") {
-      this.props.dispatch(gotoFormation(this.props.danceId, this.props.formationId - 1));
+      this.props.dispatch(gotoFormation(this.props.choreoId, this.props.formationId - 1));
     } else if (item.key === "6") {
-      this.props.dispatch(gotoFormation(this.props.danceId, this.props.formationId + 1));
+      this.props.dispatch(gotoFormation(this.props.choreoId, this.props.formationId + 1));
     }
   };
 
@@ -93,7 +93,7 @@ class FormationScreen extends Component {
   };
 
   handleAddFormation = () => {
-    this.props.dispatch(addAndSetActiveFormation(this.props.danceId, this.props.formationId + 1));
+    this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formationId + 1));
   };
 
   handleEditTimeline = () => {
@@ -111,7 +111,7 @@ class FormationScreen extends Component {
     this.setState({
       formationName: e.target.value,
     }, () => {
-      this.props.dispatch(renameFormation(this.props.danceId, this.props.formationId, this.state.formationName));
+      this.props.dispatch(renameFormation(this.props.choreoId, this.props.formationId, this.state.formationName));
     });
   };
 
@@ -126,13 +126,13 @@ class FormationScreen extends Component {
       <Fragment>
         <MobilePortrait>
           <Layout className="body">
-            <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
+            <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout style={{ backgroundColor: 'transparent' }}>
               <Content style={{ display: "flex", flexDirection: "column" }}>
                 <SectionTitle mobile={true} formationName={this.props.formationName} handleEditName={this.handleEditName}
                   handleEditNameConfirm={this.handleEditNameConfirm} />
                 <div style={{ height: '15rem', marginBottom: '10px' }}>
-                  <ResponsiveStageCanvas danceId={this.props.danceId} formationId={this.props.formationId} editable withGrid />
+                  <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
                 </div>
                 <div>
                   <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
@@ -150,7 +150,7 @@ class FormationScreen extends Component {
                   {
                     activeButton === 3 &&
                     <div style={{height:"5rem"}}>
-                      <Timeline danceId={this.props.danceId} />
+                      <Timeline choreoId={this.props.choreoId} />
 
                     </div>
                   }
@@ -162,9 +162,9 @@ class FormationScreen extends Component {
 
         <MobileLandscape>
           <Layout className="body">
-            <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
+            <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
-              <ResponsiveStageCanvas danceId={this.props.danceId} formationId={this.props.formationId} editable withGrid />
+              <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
             </div>
           </Layout>
         </MobileLandscape>
@@ -176,7 +176,7 @@ class FormationScreen extends Component {
               endColor="#514a9d"
               idCSS="cool-gradient"
             />
-            <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
+            <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout className="contents">
               <Content style={{ display: "flex", flexDirection: "column" }}>
                 <SectionTitle formationName={this.props.formationName} handleEditName={this.handleEditName}
@@ -185,7 +185,7 @@ class FormationScreen extends Component {
                   className="formationscreen-stage"
                   style={{ background: '#000', flex: 1, overflow: "hidden" }}
                 >
-                  <ResponsiveStageCanvas danceId={this.props.danceId} formationId={this.props.formationId} editable withGrid />
+                  <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
                 </div>
               </Content>
               <Sider width={'12rem'} className="sider">
@@ -200,10 +200,10 @@ class FormationScreen extends Component {
                     <HeadphoneIcon style={{ fontSize: '25px' }} />
                   </Button>
                 </div>
-                <PreviewSlideList danceId={this.props.danceId} />
+                <PreviewSlideList choreoId={this.props.choreoId} />
               </Sider>
               <SidePanel
-                danceId={this.props.danceId}
+                choreoId={this.props.choreoId}
                 placement={this.state.placement}
                 closable={true}
                 onClose={this.onClose}
@@ -221,20 +221,20 @@ class FormationScreen extends Component {
 }
 
 function mapStateToProps(state, props) {
-  const danceId = props.match.params.choreoId;
-  const dance = getDance(state, danceId)
-  const activeFormation = dance.formations[state.UI.activeFormation];
+  const choreoId = props.match.params.choreoId;
+  const choreo = getChoreo(state, choreoId)
+  const activeFormation = choreo.formations[state.UI.activeFormation];
   return {
-    danceId: danceId,
+    choreoId: choreoId,
     formationId: state.UI.activeFormation,
-    danceName: dance.name,
+    choreoName: choreo.name,
     formationName: activeFormation.name,
     formationNumSeconds: activeFormation.numSeconds
   }
 }
 
 // Auth exists
-// TODO: Check if authorized to edit dance
+// TODO: Check if authorized to edit choreo
 const authCondition = (authUser) => !!authUser;
 
 export default withAuthorization(authCondition)(withFireStoreSync(true)(connect(mapStateToProps)(FormationScreen)));

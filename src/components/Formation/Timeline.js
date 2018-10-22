@@ -39,9 +39,9 @@ class Timeline extends Component {
     }
   };
   render() {
-    const { playing, danceId, formationId, timeline } = this.props;
+    const { playing, choreoId, formationId, timeline } = this.props;
     if (playing) {
-      this.props.dispatch(advanceNextFrame(danceId, formationId, timeline.cumDuration[formationId], timeline.totalDuration))
+      this.props.dispatch(advanceNextFrame(choreoId, formationId, timeline.cumDuration[formationId], timeline.totalDuration))
     }
     return (
       <div style={{ background: '#000', height: "100%", width: "100%", overflow: "hidden" }}

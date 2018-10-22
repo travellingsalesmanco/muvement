@@ -27,7 +27,7 @@ class ChoreoListScreen extends React.Component {
           </div>
         </Header>
         <Content>
-          <ChoreoCardList data={this.props.danceIds} match={this.props.match}
+          <ChoreoCardList data={this.props.choreoIds} match={this.props.match}
                           setModalVisible={this.props.setModalVisible} />
         </Content>
       </Fragment>
@@ -37,7 +37,7 @@ class ChoreoListScreen extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    danceIds: state.dances.myDances
+    choreoIds: state.choreos.myChoreos
   }
 };
 

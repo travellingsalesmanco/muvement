@@ -34,11 +34,11 @@ class ResponsiveStageCanvas extends Component {
     }
   };
   render() {
-    const { danceId, formationId, editable, withGrid, animated, demo } = this.props;
+    const { choreoId, formationId, editable, withGrid, animated, demo } = this.props;
     return (
       <div style={{ background: '#000', height: "100%", width: "100%", overflow: "hidden" }}
         ref={node => { this.container = node }}>
-        <StageCanvas danceId={danceId} formationId={formationId} width={this.state.stageWidth}
+        <StageCanvas choreoId={choreoId} formationId={formationId} width={this.state.stageWidth}
           height={this.state.stageHeight} editable={editable} withGrid={withGrid} animated={animated} demo={demo} />
       </div>
     );

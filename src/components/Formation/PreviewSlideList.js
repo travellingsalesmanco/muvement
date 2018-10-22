@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {gotoFormation, reorderAndFocusFormation} from "../../actions/danceActions";
+import {gotoFormation, reorderAndFocusFormation} from "../../actions/choreoActions";
 import StageCanvas from "../StageCanvas/StageCanvas";
 import './PreviewSlideList.css';
 import Draggable from 'react-draggable';
-import { getDance } from '../../selectors/dance';
+import { getChoreo } from '../../selectors/choreo';
 
 class PreviewSlideList extends React.Component {
   constructor(props) {
@@ -119,10 +119,10 @@ class PreviewSlideList extends React.Component {
 
         if (index === toIndex) {
           // Same formation, change focus
-          this.props.dispatch(gotoFormation(this.props.danceId, index));
+          this.props.dispatch(gotoFormation(this.props.choreoId, index));
         } else {
           // Reorder and change focus
-          this.props.dispatch(reorderAndFocusFormation(this.props.danceId, index, toIndex));
+          this.props.dispatch(reorderAndFocusFormation(this.props.choreoId, index, toIndex));
         }
       })
     } else {
@@ -160,7 +160,7 @@ class PreviewSlideList extends React.Component {
                              this.container = node;
                            }
                          }}>
-                      <StageCanvas danceId={this.props.danceId} formationId={index} width={this.state.stageWidth}
+                      <StageCanvas choreoId={this.props.choreoId} formationId={index} width={this.state.stageWidth}
                                    height={this.state.stageHeight} />
                     </div>
                   </div>
@@ -177,10 +177,10 @@ class PreviewSlideList extends React.Component {
 }
 
 function mapStateToProps(state, props) {
-  const dance = getDance(state, props.danceId)
+  const choreo = getChoreo(state, props.choreoId)
   return {
     activeFormationId: state.UI.activeFormation,
-    formations: dance.formations
+    formations: choreo.formations
   }
 }
 

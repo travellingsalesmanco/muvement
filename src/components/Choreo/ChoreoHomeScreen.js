@@ -1,7 +1,7 @@
 import { Button, Layout, Menu } from 'antd';
 import React from 'react';
 import { connect } from "react-redux";
-import { getDance } from '../../selectors/dance';
+import { getChoreo } from '../../selectors/choreo';
 import StageDimForm from "../Formation/StageDimForm";
 import { MinTablet, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 import withAuthorization from "../withAuthorization";
@@ -61,7 +61,7 @@ class ChoreoHomeScreen extends React.Component {
 
   render() {
     if (this.props.error) {
-      return <div>Invalid dance</div>
+      return <div>Invalid choreo</div>
     }
     const {Header, Content, Sider} = Layout;
     const {activeButton} = this.state;
@@ -100,13 +100,13 @@ class ChoreoHomeScreen extends React.Component {
             <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
             {
               activeButton === 1
-                ? <MobileFormationCards formations={this.props.formations} match={this.props.match} danceId={this.props.danceId}/>
+                ? <MobileFormationCards formations={this.props.formations} match={this.props.match} choreoId={this.props.choreoId}/>
                 : activeButton === 2
                   ? <div className="edit-performers">
                       <Button className="edit-performers-button" icon="edit" ghost block>EDIT</Button>
                     </div>
                   : <div>
-                      <StageDimForm danceId={this.props.danceId}/>
+                      <StageDimForm choreoId={this.props.choreoId}/>
                     </div>
             }
           </Layout>
@@ -114,7 +114,7 @@ class ChoreoHomeScreen extends React.Component {
         <MinTablet>
           <Layout className="choreo-homescreen-contents">
             <Content style={{display: "flex", flexDirection: "column"}}>
-              <FormationPreviewCards formations={this.props.formations} match={this.props.match} danceId={this.props.danceId}/>
+              <FormationPreviewCards formations={this.props.formations} match={this.props.match} choreoId={this.props.choreoId}/>
             </Content>
             <Sider width="20rem">
               <DefaultSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
@@ -123,10 +123,10 @@ class ChoreoHomeScreen extends React.Component {
                   ? <div>
                     <ChoreoPicture/>
                     <h2 className="stagedim-title">STAGE DIMENSION</h2>
-                    <StageDimForm danceId={this.props.danceId}/>
+                    <StageDimForm choreoId={this.props.choreoId}/>
                   </div>
                   : <div className="edit-performers">
-                    <PerformerList danceId={this.props.danceId}/>
+                    <PerformerList choreoId={this.props.choreoId}/>
                   </div>
               }
             </Sider>
@@ -138,22 +138,22 @@ class ChoreoHomeScreen extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const danceId = props.match.params.choreoId;
-  const dance = getDance(state, danceId);
-  if (dance === undefined) {
+  const choreoId = props.match.params.choreoId;
+  const choreo = getChoreo(state, choreoId);
+  if (choreo === undefined) {
     return {
       error: true
     }
   }
   return {
-    formations: dance.formations,
-    name: dance.name,
-    danceId: danceId
+    formations: choreo.formations,
+    name: choreo.name,
+    choreoId: choreoId
   }
 };
 
 // Auth exists
-// TODO: Check if authorized to edit dance
+// TODO: Check if authorized to edit choreo
 const authCondition = (authUser) => !!authUser;
 
 export default withAuthorization(authCondition)(withFireStoreSync(true)((connect(mapStateToProps)(ChoreoHomeScreen))));

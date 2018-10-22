@@ -2,17 +2,17 @@ import { Card, Col, Icon, Row } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { addAndSetActiveFormation, gotoFormation } from "../../actions/danceActions";
+import { addAndSetActiveFormation, gotoFormation } from "../../actions/choreoActions";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import './ChoreoHomeScreen.css';
 
 class FormationPreviewCards extends React.Component {
   clickHandler = (index) => {
     if (index === 0) {
-      this.props.dispatch(addAndSetActiveFormation(this.props.danceId, this.props.formations.length));
+      this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formations.length));
       this.props.history.push(`${this.props.match.url}/formation`)
     } else {
-      this.props.dispatch(gotoFormation(this.props.danceId, index - 1));
+      this.props.dispatch(gotoFormation(this.props.choreoId, index - 1));
       this.props.history.push(`${this.props.match.url}/formation`)
     }
   };
@@ -45,7 +45,7 @@ class FormationPreviewCards extends React.Component {
                             <span className="add-formation-title"> ADD FORMATION </span>
                           </div>
                           : <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
-                            <ResponsiveStageCanvas danceId={this.props.danceId} formationId={index - 1} />
+                            <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index - 1} />
                           </div>
                       }
                       <div className="formation-name">
@@ -65,7 +65,7 @@ class FormationPreviewCards extends React.Component {
                           onClick={() => this.clickHandler(index + 1)}
                         >
                           <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
-                            <ResponsiveStageCanvas danceId={this.props.danceId} formationId={index} />
+                            <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} />
                           </div>
                           <div className="formation-name">
                             <span>{formations[index + 1].name}</span>

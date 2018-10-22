@@ -1,4 +1,4 @@
-export const demoDance = {
+export const demoChoreo = {
   createdAt: { seconds: 1540148067, nanoseconds: 77000000 },
   creator: { id: "LrG4PV9PpwgieRuMa5YsSQ2iSUo1", name: "John Phua" },
   dancers: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"],
@@ -29,9 +29,9 @@ export const demoDance = {
   updatedAt: { seconds: 1540148283, nanoseconds: 441000000 }
 };
 
-export const demoDances = {
+export const demoChoreos = {
   byId: {
-    demo: demoDance
+    demo: demoChoreo
   },
-  myDances: []
+  myChoreos: []
 };

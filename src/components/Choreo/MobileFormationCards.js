@@ -2,13 +2,13 @@ import { Card } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { gotoFormation } from "../../actions/danceActions";
+import { gotoFormation } from "../../actions/choreoActions";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import './MobileFormationCards.css';
 
 class MobileFormationCards extends React.Component {
   clickHandler = (index) => {
-    this.props.dispatch(gotoFormation(this.props.danceId, index));
+    this.props.dispatch(gotoFormation(this.props.choreoId, index));
     this.props.history.push(`${this.props.match.url}/formation`)
   };
   render() {
@@ -30,7 +30,7 @@ class MobileFormationCards extends React.Component {
                 </div>
               </div>
               <div className="mobile-formation-preview-container">
-                <ResponsiveStageCanvas danceId={this.props.danceId} formationId={index} />
+                <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} />
               </div>
             </div>
           </Card>

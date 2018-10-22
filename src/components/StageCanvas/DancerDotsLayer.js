@@ -50,7 +50,7 @@ class DancerDotsLayer extends PureComponent {
       absoluteToRelativeX(e.target.x(), this.props.stageRect),
       absoluteToRelativeY(e.target.y(), this.props.stageRect)
     ];
-    this.props.dispatch(moveDancer(this.props.danceId, this.props.formationId, dancerName, newDancerPosition));
+    this.props.dispatch(moveDancer(this.props.choreoId, this.props.formationId, dancerName, newDancerPosition));
   };
 
   handleSelect(e, dancerName) {
@@ -65,7 +65,7 @@ class DancerDotsLayer extends PureComponent {
   // handleRemove(e, dancerName) {
   //   e.cancelBubble = true;
   //   console.log("Remove dancer: " + dancerName);
-  //   this.props.dispatch(removeDancerFromFormation(this.props.danceId, this.props.formationId, dancerName));
+  //   this.props.dispatch(removeDancerFromFormation(this.props.choreoId, this.props.formationId, dancerName));
   // };
 
   render() {

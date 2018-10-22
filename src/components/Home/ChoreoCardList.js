@@ -20,19 +20,19 @@ class ChoreoCardList extends React.Component {
             <NewChoreoCard onClick={() => this.props.setModalVisible(true)} />
           </Col>
           <Col span={10}>
-            {first !== undefined ? <ChoreoCard danceId={first} /> : null}
+            {first !== undefined ? <ChoreoCard choreoId={first} /> : null}
           </Col>
         </Row>
         {
-          rest.map((danceId, index) => {
+          rest.map((choreoId, index) => {
             if (index % 2 === 0) {
               return (
-                <Row gutter={72} type='flex' justify='center' key={danceId}>
+                <Row gutter={72} type='flex' justify='center' key={choreoId}>
                   <Col span={10}>
-                    <ChoreoCard danceId={danceId} />
+                    <ChoreoCard choreoId={choreoId} />
                   </Col>
                   <Col span={10}>
-                    {rest[index + 1] ? <ChoreoCard danceId={danceId} /> : null}
+                    {rest[index + 1] ? <ChoreoCard choreoId={choreoId} /> : null}
                   </Col>
                 </Row>
               );

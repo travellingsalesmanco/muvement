@@ -2,12 +2,12 @@ import { Card, Icon } from 'antd';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getDance } from '../../selectors/dance';
+import { getChoreo } from '../../selectors/choreo';
 import './ChoreoCards.css';
 
 class ChoreoCard extends PureComponent {
   clickHandler() {
-    this.props.history.push(`/choreo/${this.props.danceId}`);
+    this.props.history.push(`/choreo/${this.props.choreoId}`);
   }
   render() {
     const { name, formationLength } = this.props;
@@ -37,10 +37,10 @@ class ChoreoCard extends PureComponent {
 }
 const makeMapStateToProps = () => {
   return (state, props) => {
-    const dance = getDance(state, props.danceId)
+    const choreo = getChoreo(state, props.choreoId)
     return {
-      name: dance.name,
-      formationLength: dance.formations.length
+      name: choreo.name,
+      formationLength: choreo.formations.length
     }
   }
 }

@@ -1,105 +1,105 @@
 import {
-  ADD_DANCE,
-  LOAD_DANCE,
-  REMOVE_DANCE,
+  ADD_CHOREO,
+  LOAD_CHOREO,
+  REMOVE_CHOREO,
   ADD_DANCER,
   ADD_FORMATION,
   EDIT_STAGE_DIMENSIONS,
   REMOVE_DANCER,
   REORDER_FORMATION,
   SET_LABELS_VIEW,
-  SWITCH_ACTIVE_DANCE,
+  SWITCH_ACTIVE_CHOREO,
   SWITCH_ACTIVE_FORMATION
 } from "../constants/actionTypes";
 import { defaultStageDim } from "../constants/defaults";
-import { getDance } from "../selectors/dance";
+import { getChoreo } from "../selectors/choreo";
 
-function containsDancer(danceId, name, state) {
-  return getDance(state, danceId).dancers.includes(name);
+function containsDancer(choreoId, name, state) {
+  return getChoreo(state, choreoId).dancers.includes(name);
 }
 
-function hasFormation(danceId, formationId, state) {
-  return formationId >= 0 && formationId < getDance(state, danceId).formations.length
+function hasFormation(choreoId, formationId, state) {
+  return formationId >= 0 && formationId < getChoreo(state, choreoId).formations.length
 }
 
-function hasDance(danceId, state) {
-  return getDance(state, danceId) !== undefined;
+function hasChoreo(choreoId, state) {
+  return getChoreo(state, choreoId) !== undefined;
 }
 
-function ownsDance(danceId, state) {
-  return state.dances.myDances.includes(danceId);
+function ownsChoreo(choreoId, state) {
+  return state.choreos.myChoreos.includes(choreoId);
 }
 
-function getLostDances(dances, state) {
-  return state.dances.myDances.filter((danceId) => dances.every((dance) => dance.id !== danceId))
+function getLostChoreos(choreos, state) {
+  return state.choreos.myChoreos.filter((choreoId) => choreos.every((choreo) => choreo.id !== choreoId))
 }
 
-function isNewer(dance, danceId, state) {
-  const currDance = getDance(state, danceId);
+function isNewer(choreo, choreoId, state) {
+  const currChoreo = getChoreo(state, choreoId);
   // TODO: remove dummy check when deploy
-  return currDance.updatedAt !== "timestamp2"
-    ? currDance.updatedAt.seconds < dance.updatedAt.seconds
+  return currChoreo.updatedAt !== "timestamp2"
+    ? currChoreo.updatedAt.seconds < choreo.updatedAt.seconds
     : true;
 }
 
-export function addDance(id, dance) {
+export function addChoreo(id, choreo) {
   return (dispatch) => {
     dispatch({
-      type: ADD_DANCE,
+      type: ADD_CHOREO,
       payload: {
-        danceId: id,
-        dance: dance
+        choreoId: id,
+        choreo: choreo
       }
     });
     dispatch({
-      type: SWITCH_ACTIVE_DANCE,
+      type: SWITCH_ACTIVE_CHOREO,
       payload: id
     });
   }
 }
 
-export function updateDanceIfNewer(id, dance) {
+export function updateChoreoIfNewer(id, choreo) {
   return (dispatch, getState) => {
-    if (isNewer(dance, id, getState())) {
+    if (isNewer(choreo, id, getState())) {
       dispatch({
-        type: LOAD_DANCE,
+        type: LOAD_CHOREO,
         payload: {
-          danceId: id,
-          dance: dance
+          choreoId: id,
+          choreo: choreo
         }
       });
     }
   }
 }
 
-export function syncCreatorDances(dances) {
+export function syncCreatorChoreos(choreos) {
   return (dispatch, getState) => {
-    // Remove dances no longer tagged under creator in cloud
-    let lostDances = getLostDances(dances, getState());
-    lostDances.forEach((danceId) => {
+    // Remove choreos no longer tagged under creator in cloud
+    let lostChoreos = getLostChoreos(choreos, getState());
+    lostChoreos.forEach((choreoId) => {
       dispatch({
-        type: REMOVE_DANCE,
-        payload: danceId
+        type: REMOVE_CHOREO,
+        payload: choreoId
       })
     });
-    dances.forEach((dance) => {
-      if (!hasDance(dance.id, getState())) {
-        // Add dances not on local
+    choreos.forEach((choreo) => {
+      if (!hasChoreo(choreo.id, getState())) {
+        // Add choreos not on local
         console.log("ADDING");
         dispatch({
-          type: ADD_DANCE,
+          type: ADD_CHOREO,
           payload: {
-            danceId: dance.id,
-            dance: dance.data
+            choreoId: choreo.id,
+            choreo: choreo.data
           }
         });
-      } else if (isNewer(dance.data, dance.id, getState())) {
-        // Update existing dances if newer
+      } else if (isNewer(choreo.data, choreo.id, getState())) {
+        // Update existing choreos if newer
         dispatch({
-          type: LOAD_DANCE,
+          type: LOAD_CHOREO,
           payload: {
-            danceId: dance.id,
-            dance: dance.data
+            choreoId: choreo.id,
+            choreo: choreo.data
           }
         });
       }
@@ -107,13 +107,13 @@ export function syncCreatorDances(dances) {
   }
 }
 
-export function addDancers(danceId, names) {
+export function addDancers(choreoId, names) {
   return (dispatch, getState) => {
     names.forEach((name) => {
-      if (!containsDancer(danceId, name, getState())) {
+      if (!containsDancer(choreoId, name, getState())) {
         dispatch({
           type: ADD_DANCER,
-          danceId: danceId,
+          choreoId: choreoId,
           payload: name
         })
       } else {
@@ -123,13 +123,13 @@ export function addDancers(danceId, names) {
   }
 }
 
-export function removeDancers(danceId, names) {
+export function removeDancers(choreoId, names) {
   return (dispatch, getState) => {
     names.forEach((name) => {
-      if (containsDancer(danceId, name, getState())) {
+      if (containsDancer(choreoId, name, getState())) {
         dispatch({
           type: REMOVE_DANCER,
-          danceId: danceId,
+          choreoId: choreoId,
           payload: name
         })
       } else {
@@ -139,7 +139,7 @@ export function removeDancers(danceId, names) {
   }
 }
 
-export function editStageDimensions(danceId, toEdit) {
+export function editStageDimensions(choreoId, toEdit) {
   return dispatch => {
     if ((toEdit.width && toEdit.width <= 0)
       || (toEdit.height && toEdit.height <= 0)
@@ -148,21 +148,21 @@ export function editStageDimensions(danceId, toEdit) {
     } else {
       dispatch({
         type: EDIT_STAGE_DIMENSIONS,
-        danceId: danceId,
+        choreoId: choreoId,
         payload: toEdit
       })
     }
   }
 }
 
-export function addAndSetActiveFormation(danceId, formationId) {
+export function addAndSetActiveFormation(choreoId, formationId) {
   return dispatch => {
     if (formationId < 0) {
       console.log("[ERROR] Index cannot be negative")
     } else {
       dispatch({
         type: ADD_FORMATION,
-        danceId: danceId,
+        choreoId: choreoId,
         payload: formationId
       });
       dispatch({
@@ -173,10 +173,10 @@ export function addAndSetActiveFormation(danceId, formationId) {
   }
 }
 
-export function gotoFormation(danceId, targetFormationId) {
+export function gotoFormation(choreoId, targetFormationId) {
   return (dispatch, getState) => {
     // checks if formation is correct
-    if (!hasFormation(danceId, targetFormationId, getState())) {
+    if (!hasFormation(choreoId, targetFormationId, getState())) {
       console.log("[ERROR] Index out of bounds")
     } else {
       dispatch({
@@ -197,12 +197,12 @@ export function toggleLabels() {
   }
 }
 
-export function reorderAndFocusFormation(danceId, fromIndex, toIndex) {
+export function reorderAndFocusFormation(choreoId, fromIndex, toIndex) {
   return (dispatch, getState) => {
-    if (hasFormation(danceId, fromIndex, getState()) && hasFormation(danceId, toIndex, getState())) {
+    if (hasFormation(choreoId, fromIndex, getState()) && hasFormation(choreoId, toIndex, getState())) {
       dispatch({
         type: REORDER_FORMATION,
-        danceId: danceId,
+        choreoId: choreoId,
         payload: {
           fromIndex: fromIndex,
           toIndex: toIndex

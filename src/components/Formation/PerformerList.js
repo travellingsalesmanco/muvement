@@ -3,14 +3,14 @@ import { Row, Col, Icon, Button } from "antd";
 import { addDancerToFormation, removeDancerFromFormation } from "../../actions/formationActions"
 import { connect } from 'react-redux';
 import './PerformerList.css';
-import { getDance } from '../../selectors/dance';
+import { getChoreo } from '../../selectors/choreo';
 
 class PerformerList extends React.Component {
 
   addDancerToFormation(name) {
     if (!this.props.activeDancers.includes(name)) {
       console.log("Add dancer to formation: " + name);
-      this.props.dispatch(addDancerToFormation(this.props.danceId, this.props.formationId, name));
+      this.props.dispatch(addDancerToFormation(this.props.choreoId, this.props.formationId, name));
     } else {
       console.log("Dancer already on formation");
     }
@@ -19,7 +19,7 @@ class PerformerList extends React.Component {
   removeDancerFromFormation(name) {
     if (this.props.activeDancers.includes(name)) {
       console.log("Remove dancer from formation: " + name);
-      this.props.dispatch(removeDancerFromFormation(this.props.danceId, this.props.formationId, name));
+      this.props.dispatch(removeDancerFromFormation(this.props.choreoId, this.props.formationId, name));
     } else {
       console.log("Dancer already off formation");
     }
@@ -76,10 +76,10 @@ class PerformerList extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const dance = getDance(state, props.danceId)
+  const choreo = getChoreo(state, props.choreoId)
   return {
-    dancers: dance.dancers,
-    activeDancers: dance.formations[state.UI.activeFormation].dancers.map((dancer) => {
+    dancers: choreo.dancers,
+    activeDancers: choreo.formations[state.UI.activeFormation].dancers.map((dancer) => {
       return dancer.name;
     }),
     formationId: state.UI.activeFormation

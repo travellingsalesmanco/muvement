@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './Navigation.css';
 import RedoIcon from "../../icons/RedoIcon";
 import UndoIcon from "../../icons/UndoIcon";
-import { toggleLabels } from "../../actions/danceActions";
+import { toggleLabels } from "../../actions/choreoActions";
 import { MinTablet, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class Navigation extends React.Component {
@@ -15,7 +15,7 @@ class Navigation extends React.Component {
         <div className="nav-bar">
           <div className="back-button">
             <Button style={{ fontSize: '25px' }} icon="left"
-                    onClick={() => this.props.history.push(`/choreo/${this.props.danceId}`)} />
+                    onClick={() => this.props.history.push(`/choreo/${this.props.choreoId}`)} />
           </div>
           <div className="title">
             <h3 style={{ color: '#fff' }}>{this.props.title}</h3>

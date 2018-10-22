@@ -1,7 +1,7 @@
 import {
-  RENAME_DANCE,
-  PUBLISH_DANCE,
-  UNPUBLISH_DANCE,
+  RENAME_CHOREO,
+  PUBLISH_CHOREO,
+  UNPUBLISH_CHOREO,
   EDIT_STAGE_DIMENSIONS,
   ADD_FORMATION,
   REMOVE_FORMATION,
@@ -18,9 +18,9 @@ import {
 import { firestore } from "../firebase";
 
 const ACTIONS_TO_UPDATE = [
-  RENAME_DANCE,
-  PUBLISH_DANCE,
-  UNPUBLISH_DANCE,
+  RENAME_CHOREO,
+  PUBLISH_CHOREO,
+  UNPUBLISH_CHOREO,
   EDIT_STAGE_DIMENSIONS,
   ADD_FORMATION,
   REMOVE_FORMATION,
@@ -38,13 +38,13 @@ const ACTIONS_TO_UPDATE = [
 export const firestoreWriter = store => next => action => {
   let result = next(action);
   if (ACTIONS_TO_UPDATE.includes(action.type)) {
-    const danceId = action.danceId;
-    const updatedDance = store.getState().dances.byId[danceId];
-    console.log("Updating: " + action.type + " for " + danceId);
-    console.log("New dance: ");
-    console.log(updatedDance);
+    const choreoId = action.choreoId;
+    const updatedChoreo = store.getState().choreos.byId[choreoId];
+    console.log("Updating: " + action.type + " for " + choreoId);
+    console.log("New choreo: ");
+    console.log(updatedChoreo);
     // TODO: rate-limiting (debouncing)
-    firestore.updateDance(danceId, updatedDance);
+    firestore.updateChoreo(choreoId, updatedChoreo);
   }
   return result
 };
