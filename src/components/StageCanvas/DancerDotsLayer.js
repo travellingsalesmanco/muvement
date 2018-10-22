@@ -17,7 +17,7 @@ class DancerDotsLayer extends PureComponent {
     };
 
     this.handleDragEnd = this.handleDragEnd.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
+    // this.handleRemove = this.handleRemove.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.bindWithinCanvas = this.bindWithinCanvas.bind(this)
   }
