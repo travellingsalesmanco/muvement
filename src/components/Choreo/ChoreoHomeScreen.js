@@ -100,7 +100,7 @@ class ChoreoHomeScreen extends React.Component {
             <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
             {
               activeButton === 1
-                ? <MobileFormationCards frames={this.props.frames} match={this.props.match} danceId={this.props.danceId}/>
+                ? <MobileFormationCards formations={this.props.formations} match={this.props.match} danceId={this.props.danceId}/>
                 : activeButton === 2
                   ? <div className="edit-performers">
                       <Button className="edit-performers-button" icon="edit" ghost block>EDIT</Button>
@@ -114,7 +114,7 @@ class ChoreoHomeScreen extends React.Component {
         <MinTablet>
           <Layout className="choreo-homescreen-contents">
             <Content style={{display: "flex", flexDirection: "column"}}>
-              <FormationPreviewCards frames={this.props.frames} match={this.props.match} danceId={this.props.danceId}/>
+              <FormationPreviewCards formations={this.props.formations} match={this.props.match} danceId={this.props.danceId}/>
             </Content>
             <Sider width="20rem">
               <DefaultSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
@@ -146,7 +146,7 @@ const mapStateToProps = (state, props) => {
     }
   }
   return {
-    frames: dance.frames,
+    formations: dance.formations,
     name: dance.name,
     danceId: danceId
   }

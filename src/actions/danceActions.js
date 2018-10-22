@@ -3,13 +3,13 @@ import {
   LOAD_DANCE,
   REMOVE_DANCE,
   ADD_DANCER,
-  ADD_FRAME,
+  ADD_FORMATION,
   EDIT_STAGE_DIMENSIONS,
   REMOVE_DANCER,
-  REORDER_FRAME,
+  REORDER_FORMATION,
   SET_LABELS_VIEW,
   SWITCH_ACTIVE_DANCE,
-  SWITCH_ACTIVE_FRAME
+  SWITCH_ACTIVE_FORMATION
 } from "../constants/actionTypes";
 import { defaultStageDim } from "../constants/defaults";
 import { getDance } from "../selectors/dance";
@@ -18,8 +18,8 @@ function containsDancer(danceId, name, state) {
   return getDance(state, danceId).dancers.includes(name);
 }
 
-function hasFrame(danceId, frameId, state) {
-  return frameId >= 0 && frameId < getDance(state, danceId).frames.length
+function hasFormation(danceId, formationId, state) {
+  return formationId >= 0 && formationId < getDance(state, danceId).formations.length
 }
 
 function hasDance(danceId, state) {
@@ -155,33 +155,33 @@ export function editStageDimensions(danceId, toEdit) {
   }
 }
 
-export function addAndSetActiveFrame(danceId, frameId) {
+export function addAndSetActiveFormation(danceId, formationId) {
   return dispatch => {
-    if (frameId < 0) {
+    if (formationId < 0) {
       console.log("[ERROR] Index cannot be negative")
     } else {
       dispatch({
-        type: ADD_FRAME,
+        type: ADD_FORMATION,
         danceId: danceId,
-        payload: frameId
+        payload: formationId
       });
       dispatch({
-        type: SWITCH_ACTIVE_FRAME,
-        payload: frameId
+        type: SWITCH_ACTIVE_FORMATION,
+        payload: formationId
       })
     }
   }
 }
 
-export function gotoFrame(danceId, targetFrameId) {
+export function gotoFormation(danceId, targetFormationId) {
   return (dispatch, getState) => {
-    // checks if frame is correct
-    if (!hasFrame(danceId, targetFrameId, getState())) {
+    // checks if formation is correct
+    if (!hasFormation(danceId, targetFormationId, getState())) {
       console.log("[ERROR] Index out of bounds")
     } else {
       dispatch({
-        type: SWITCH_ACTIVE_FRAME,
-        payload: targetFrameId
+        type: SWITCH_ACTIVE_FORMATION,
+        payload: targetFormationId
       })
     }
   }
@@ -197,11 +197,11 @@ export function toggleLabels() {
   }
 }
 
-export function reorderAndFocusFrame(danceId, fromIndex, toIndex) {
+export function reorderAndFocusFormation(danceId, fromIndex, toIndex) {
   return (dispatch, getState) => {
-    if (hasFrame(danceId, fromIndex, getState()) && hasFrame(danceId, toIndex, getState())) {
+    if (hasFormation(danceId, fromIndex, getState()) && hasFormation(danceId, toIndex, getState())) {
       dispatch({
-        type: REORDER_FRAME,
+        type: REORDER_FORMATION,
         danceId: danceId,
         payload: {
           fromIndex: fromIndex,
@@ -209,7 +209,7 @@ export function reorderAndFocusFrame(danceId, fromIndex, toIndex) {
         }
       })
       dispatch({
-        type: SWITCH_ACTIVE_FRAME,
+        type: SWITCH_ACTIVE_FORMATION,
         payload: toIndex
       })
     } else {

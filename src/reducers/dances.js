@@ -11,7 +11,7 @@ import {
 import { defaultStageDim } from '../constants/defaults';
 import { demoDances } from '../constants/dummyData';
 import dancers from './dancers';
-import frames from './frames';
+import formations from './formations';
 
 const danceNameReducer = (state = "", action) => action.type === RENAME_DANCE ? action.payload : state;
 
@@ -45,7 +45,7 @@ const danceReducer = combineReducers({
   published: dancePublishedReducer,
   stageDim: stageDimReducer,
   dancers,
-  frames
+  formations
 });
 
 // Copy over metadata (e.g. firebase createdAt timestamps) when updating dance

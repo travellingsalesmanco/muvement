@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { calculateStageDimensions, generateGrid, relativeToAbsolutePoint, straightLineAnimation } from "../lib/stageUtils";
-import { getFrames } from './dance';
+import { getFormations } from './dance';
 
 // Simple retrieval selectors (no transformations), no need to memoize
 const getCanvasWidthFromProp = (_, props) => props.width;
@@ -9,9 +9,9 @@ const getStageRectFromProp = (_, props) => props.stageRect;
 
 const getStageDim = (state, props) => state.dances.byId[props.danceId].stageDim;
 const getDancers = (state, props) => state.dances.byId[props.danceId].dancers;
-const getFrameDancers = (state, props) => state.dances.byId[props.danceId].frames[props.frameId].dancers;
+const getFormationDancers = (state, props) => state.dances.byId[props.danceId].formations[props.formationId].dancers;
 const getSelectedDancers = (state, props) => state.UI.selectedDancers;
-const getActiveFrameIdx = (state) => state.UI.activeFrame;
+const getActiveFormationIdx = (state) => state.UI.activeFormation;
 const getElapsedTime = (state) => state.UI.elapsedTime;
 
 
@@ -30,8 +30,8 @@ export const makeStageLayoutSelector = () => {
 
 export const makeDancersLayoutSelector = () => {
   return createSelector(
-    [getDancers, getFrameDancers, getSelectedDancers, getStageRectFromProp],
-    (dancers, frameDancers, selectedDancers, stageRect) => frameDancers.map(
+    [getDancers, getFormationDancers, getSelectedDancers, getStageRectFromProp],
+    (dancers, formationDancers, selectedDancers, stageRect) => formationDancers.map(
       (dancer) => {
         return {
           ...dancer,
@@ -45,15 +45,15 @@ export const makeDancersLayoutSelector = () => {
 }
 
 export const getTimeline = createSelector(
-  [getFrames],
-  (frames) => {
+  [getFormations],
+  (formations) => {
     let timeline = {
       totalDuration: 0,
       cumDurations: [],
     }
-    frames.forEach((frame) => {
+    formations.forEach((formation) => {
       // Duration calculations
-      timeline.totalDuration += frame.transitionBefore.duration + frame.numSeconds * 1000;
+      timeline.totalDuration += formation.transitionBefore.duration + formation.numSeconds * 1000;
       timeline.cumDurations.push(timeline.totalDuration);
     });
     return timeline;
@@ -61,7 +61,7 @@ export const getTimeline = createSelector(
 )
 
 export const getAnimatedLayout = createSelector(
-  [getFrames, getDancers, getSelectedDancers, getStageRectFromProp],
+  [getFormations, getDancers, getSelectedDancers, getStageRectFromProp],
   (formations, allDancers, selectedDancers, stageRect) => {
     // Dance layout -- array of formation layouts
     let layout = [];
@@ -79,7 +79,7 @@ export const getAnimatedLayout = createSelector(
             position: straightLineAnimation(prevLayout.endPos, pos)
           }
         } else {
-          // Dancer was not in prev frame, make it appear and stay stationary for whole duration
+          // Dancer was not in prev formation, make it appear and stay stationary for whole duration
           return {
             ...dancer,
             position: straightLineAnimation(pos, pos),
@@ -99,11 +99,11 @@ export const getAnimatedLayout = createSelector(
   }
 )
 
-export const getFrameRelativeElapsedTime = (state, props) => {
-  const currFrameIdx = getActiveFrameIdx(state);
-  if (currFrameIdx === 0) {
+export const getFormationRelativeElapsedTime = (state, props) => {
+  const currFormationIdx = getActiveFormationIdx(state);
+  if (currFormationIdx === 0) {
     return getElapsedTime(state);
   } else {
-    return getElapsedTime(state) - getTimeline(state, props).cumDurations[currFrameIdx - 1];
+    return getElapsedTime(state) - getTimeline(state, props).cumDurations[currFormationIdx - 1];
   }
 }

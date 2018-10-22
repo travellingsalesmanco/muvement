@@ -2,29 +2,29 @@ import { Card, Col, Icon, Row } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { addAndSetActiveFrame, gotoFrame } from "../../actions/danceActions";
+import { addAndSetActiveFormation, gotoFormation } from "../../actions/danceActions";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import './ChoreoHomeScreen.css';
 
 class FormationPreviewCards extends React.Component {
   clickHandler = (index) => {
     if (index === 0) {
-      this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.frames.length));
-      this.props.history.push(`${this.props.match.url}/frame`)
+      this.props.dispatch(addAndSetActiveFormation(this.props.danceId, this.props.formations.length));
+      this.props.history.push(`${this.props.match.url}/formation`)
     } else {
-      this.props.dispatch(gotoFrame(this.props.danceId, index - 1));
-      this.props.history.push(`${this.props.match.url}/frame`)
+      this.props.dispatch(gotoFormation(this.props.danceId, index - 1));
+      this.props.history.push(`${this.props.match.url}/formation`)
     }
   };
 
   render() {
-    const frames = this.props.frames.slice();
+    const formations = this.props.formations.slice();
     // Prepend "New FormationCard" to start of array of cards
-    frames.unshift({ name: "" });
+    formations.unshift({ name: "" });
     return (
       <div>
         {
-          frames.map((formation, index) => {
+          formations.map((formation, index) => {
             if (index % 2 === 0) {
               return (
                 <Row gutter={60} type='flex' justify='center' key={index}>
@@ -45,7 +45,7 @@ class FormationPreviewCards extends React.Component {
                             <span className="add-formation-title"> ADD FORMATION </span>
                           </div>
                           : <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
-                            <ResponsiveStageCanvas danceId={this.props.danceId} frameId={index - 1} />
+                            <ResponsiveStageCanvas danceId={this.props.danceId} formationId={index - 1} />
                           </div>
                       }
                       <div className="formation-name">
@@ -55,7 +55,7 @@ class FormationPreviewCards extends React.Component {
                   </Col>
 
                   {
-                    frames[index + 1]
+                    formations[index + 1]
                       ?
                       <Col span={11}>
                         <Card
@@ -65,10 +65,10 @@ class FormationPreviewCards extends React.Component {
                           onClick={() => this.clickHandler(index + 1)}
                         >
                           <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
-                            <ResponsiveStageCanvas danceId={this.props.danceId} frameId={index} />
+                            <ResponsiveStageCanvas danceId={this.props.danceId} formationId={index} />
                           </div>
                           <div className="formation-name">
-                            <span>{frames[index + 1].name}</span>
+                            <span>{formations[index + 1].name}</span>
                           </div>
                         </Card>
                       </Col>

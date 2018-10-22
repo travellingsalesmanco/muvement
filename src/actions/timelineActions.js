@@ -1,5 +1,5 @@
 import { TIMELINE_JUMP } from "../constants/actionTypes";
-import { gotoFrame } from "./danceActions";
+import { gotoFormation } from "./danceActions";
 
 const FPS = 30;
 const msPerFrame = 1000 / FPS;
@@ -14,7 +14,7 @@ export function advanceNextFrame(danceId, formationId, endOfFormationDuration, e
           payload: newTime,
         })
         if (newTime >= endOfFormationDuration && newTime < endOfDanceDuration) {
-          gotoFrame(danceId, formationId + 1)
+          gotoFormation(danceId, formationId + 1)
         }
       }
     }, msPerFrame);

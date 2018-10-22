@@ -3,7 +3,7 @@ import {
   DESELECT_DANCER,
   SELECT_DANCER,
   SET_LABELS_VIEW,
-  SWITCH_ACTIVE_FRAME,
+  SWITCH_ACTIVE_FORMATION,
   TIMELINE_JUMP,
   TIMELINE_PLAY,
   TIMELINE_PAUSE,
@@ -14,11 +14,11 @@ import { defaultUI } from "../constants/defaults";
 
 export default (state = defaultUI, action) => {
   switch (action.type) {
-    case SWITCH_ACTIVE_FRAME: {
-      const { payload: frameId } = action;
+    case SWITCH_ACTIVE_FORMATION: {
+      const { payload: formationId } = action;
       return {
         ...state,
-        activeFrame: frameId
+        activeFormation: formationId
       }
     }
     case SELECT_DANCER: {

@@ -1,8 +1,8 @@
 import { Button, Input, Layout } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
-import { addAndSetActiveFrame, gotoFrame } from "../../actions/danceActions";
-import { renameFrame } from "../../actions/frameActions";
+import { addAndSetActiveFormation, gotoFormation } from "../../actions/danceActions";
+import { renameFormation } from "../../actions/formationActions";
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from "../../icons/GradientSVG";
 import HeadphoneIcon from "../../icons/HeadphoneIcon";
@@ -12,19 +12,19 @@ import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/B
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import withAuthorization from "../withAuthorization";
 import withFireStoreSync from "../withFirestoreSync";
-import './FrameScreen.css';
+import './FormationScreen.css';
 import Navigation from "./Navigation";
 import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 import Timeline from "./Timeline";
 
-const SectionTitle = ({ mobile, frameName, handleEditName, handleEditNameConfirm }) => (
+const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameConfirm }) => (
   <div className="section-title-container">
     <div className="section-title" style={{ margin: mobile ? '1rem 2rem' : '2rem' }}>
       <div className="section-title-inner">
         <Input
           placeholder="Enter formation name"
-          value={frameName}
+          value={formationName}
           onChange={handleEditName}
           onPressEnter={handleEditNameConfirm}
         />
@@ -53,14 +53,14 @@ const MobileSwitchTabs = ({ activeButton, handleClick }) => (
   </div>
 );
 
-class FrameScreen extends Component {
+class FormationScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       placement: 'right',
       visible: false,
       sidePanelID: 0,
-      frameName: '',
+      formationName: '',
       activeButton: 1
     }
   }
@@ -77,11 +77,11 @@ class FrameScreen extends Component {
         sidePanelID: parseInt(item.key),
       });
     } else if (item.key === "2") {
-      this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.frameId + 1));
+      this.props.dispatch(addAndSetActiveFormation(this.props.danceId, this.props.formationId + 1));
     } else if (item.key === "5") {
-      this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId - 1));
+      this.props.dispatch(gotoFormation(this.props.danceId, this.props.formationId - 1));
     } else if (item.key === "6") {
-      this.props.dispatch(gotoFrame(this.props.danceId, this.props.frameId + 1));
+      this.props.dispatch(gotoFormation(this.props.danceId, this.props.formationId + 1));
     }
   };
 
@@ -93,7 +93,7 @@ class FrameScreen extends Component {
   };
 
   handleAddFormation = () => {
-    this.props.dispatch(addAndSetActiveFrame(this.props.danceId, this.props.frameId + 1));
+    this.props.dispatch(addAndSetActiveFormation(this.props.danceId, this.props.formationId + 1));
   };
 
   handleEditTimeline = () => {
@@ -109,9 +109,9 @@ class FrameScreen extends Component {
 
   handleEditName = e => {
     this.setState({
-      frameName: e.target.value,
+      formationName: e.target.value,
     }, () => {
-      this.props.dispatch(renameFrame(this.props.danceId, this.props.frameId, this.state.frameName));
+      this.props.dispatch(renameFormation(this.props.danceId, this.props.formationId, this.state.formationName));
     });
   };
 
@@ -129,10 +129,10 @@ class FrameScreen extends Component {
             <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
             <Layout style={{ backgroundColor: 'transparent' }}>
               <Content style={{ display: "flex", flexDirection: "column" }}>
-                <SectionTitle mobile={true} frameName={this.props.frameName} handleEditName={this.handleEditName}
+                <SectionTitle mobile={true} formationName={this.props.formationName} handleEditName={this.handleEditName}
                   handleEditNameConfirm={this.handleEditNameConfirm} />
                 <div style={{ height: '15rem', marginBottom: '10px' }}>
-                  <ResponsiveStageCanvas danceId={this.props.danceId} frameId={this.props.frameId} editable withGrid />
+                  <ResponsiveStageCanvas danceId={this.props.danceId} formationId={this.props.formationId} editable withGrid />
                 </div>
                 <div>
                   <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
@@ -164,7 +164,7 @@ class FrameScreen extends Component {
           <Layout className="body">
             <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
             <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
-              <ResponsiveStageCanvas danceId={this.props.danceId} frameId={this.props.frameId} editable withGrid />
+              <ResponsiveStageCanvas danceId={this.props.danceId} formationId={this.props.formationId} editable withGrid />
             </div>
           </Layout>
         </MobileLandscape>
@@ -179,13 +179,13 @@ class FrameScreen extends Component {
             <Navigation title={this.props.danceName} history={this.props.history} danceId={this.props.danceId} />
             <Layout className="contents">
               <Content style={{ display: "flex", flexDirection: "column" }}>
-                <SectionTitle frameName={this.props.frameName} handleEditName={this.handleEditName}
+                <SectionTitle formationName={this.props.formationName} handleEditName={this.handleEditName}
                   handleEditNameConfirm={this.handleEditNameConfirm} />
                 <div
-                  className="framescreen-stage"
+                  className="formationscreen-stage"
                   style={{ background: '#000', flex: 1, overflow: "hidden" }}
                 >
-                  <ResponsiveStageCanvas danceId={this.props.danceId} frameId={this.props.frameId} editable withGrid />
+                  <ResponsiveStageCanvas danceId={this.props.danceId} formationId={this.props.formationId} editable withGrid />
                 </div>
               </Content>
               <Sider width={'12rem'} className="sider">
@@ -223,13 +223,13 @@ class FrameScreen extends Component {
 function mapStateToProps(state, props) {
   const danceId = props.match.params.choreoId;
   const dance = getDance(state, danceId)
-  const activeFrame = dance.frames[state.UI.activeFrame];
+  const activeFormation = dance.formations[state.UI.activeFormation];
   return {
     danceId: danceId,
-    frameId: state.UI.activeFrame,
+    formationId: state.UI.activeFormation,
     danceName: dance.name,
-    frameName: activeFrame.name,
-    frameNumSeconds: activeFrame.numSeconds
+    formationName: activeFormation.name,
+    formationNumSeconds: activeFormation.numSeconds
   }
 }
 
@@ -237,4 +237,4 @@ function mapStateToProps(state, props) {
 // TODO: Check if authorized to edit dance
 const authCondition = (authUser) => !!authUser;
 
-export default withAuthorization(authCondition)(withFireStoreSync(true)(connect(mapStateToProps)(FrameScreen)));
+export default withAuthorization(authCondition)(withFireStoreSync(true)(connect(mapStateToProps)(FormationScreen)));

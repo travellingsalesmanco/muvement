@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import FrameScreen from "./Formation/FrameScreen";
+import FormationScreen from "./Formation/FormationScreen";
 import { Route, Switch } from "react-router-dom";
 import HomeScreen from "./Home/HomeScreen";
 import ChoreoHomeScreen from "./Choreo/ChoreoHomeScreen";
@@ -28,7 +28,7 @@ class App extends Component {
           <Route exact path="/forgotpassword" component={ForgotPwScreen}/>
           <Route exact path="/settings" component={Settings}/>
           <Route exact path={`/choreo/:choreoId`} component={ChoreoHomeScreen} />
-          <Route exact path={`/choreo/:choreoId/frame`} component={FrameScreen} />
+          <Route exact path={`/choreo/:choreoId/formation`} component={FormationScreen} />
 
         {/*</Switch>*/}
       </div>

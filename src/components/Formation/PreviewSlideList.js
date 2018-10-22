@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {gotoFrame, reorderAndFocusFrame} from "../../actions/danceActions";
+import {gotoFormation, reorderAndFocusFormation} from "../../actions/danceActions";
 import StageCanvas from "../StageCanvas/StageCanvas";
 import './PreviewSlideList.css';
 import Draggable from 'react-draggable';
@@ -47,21 +47,21 @@ class PreviewSlideList extends React.Component {
         // Slide operations
         slideWidth: this.slide.offsetWidth,
         slideHeight: this.slide.offsetHeight,
-        slideListHeight: this.slide.offsetHeight * this.props.frames.length
+        slideListHeight: this.slide.offsetHeight * this.props.formations.length
       });
     }
   };
 
   updateSlidePos = () => {
     const {origSlidePos, slidePos, slideHeight} = this.state;
-    let framesPos = [];
+    let formationsPos = [];
     let currY = 0;
     let initState = false;
     let stateChanged = false;
-    this.props.frames.forEach((frame, index) => {
+    this.props.formations.forEach((formation, index) => {
       // Note: only increases Y-value
-      framesPos.push({ x: 0, y: currY});
-      if (origSlidePos.length === 0 || origSlidePos.length !== this.props.frames.length) {
+      formationsPos.push({ x: 0, y: currY});
+      if (origSlidePos.length === 0 || origSlidePos.length !== this.props.formations.length) {
         initState = true;
       } else if (slidePos[index].y !== origSlidePos[index].y) {
         stateChanged = true;
@@ -70,21 +70,21 @@ class PreviewSlideList extends React.Component {
     });
     if (initState) { // initial render
       this.setState({
-        slidePos: framesPos,
-        origSlidePos: framesPos,
-        slideListHeight: this.slide.offsetHeight * this.props.frames.length
+        slidePos: formationsPos,
+        origSlidePos: formationsPos,
+        slideListHeight: this.slide.offsetHeight * this.props.formations.length
       })
     }
     if (stateChanged && !this.state.slidePosChanged) { // due to resizing events
       this.setState({
-        slidePos: framesPos,
+        slidePos: formationsPos,
       })
     }
 
     if (stateChanged && this.state.slidePosChanged && this.state.slideDragEnded) { // after slide is dragged to new pos
       this.setState({
-        slidePos: framesPos,
-        origSlidePos: framesPos,
+        slidePos: formationsPos,
+        origSlidePos: formationsPos,
         slideDragEnded: false,
         slidePosChanged: false
       })
@@ -118,11 +118,11 @@ class PreviewSlideList extends React.Component {
         console.log("switch", index, toIndex);
 
         if (index === toIndex) {
-          // Same frame, change focus
-          this.props.dispatch(gotoFrame(this.props.danceId, index));
+          // Same formation, change focus
+          this.props.dispatch(gotoFormation(this.props.danceId, index));
         } else {
           // Reorder and change focus
-          this.props.dispatch(reorderAndFocusFrame(this.props.danceId, index, toIndex));
+          this.props.dispatch(reorderAndFocusFormation(this.props.danceId, index, toIndex));
         }
       })
     } else {
@@ -137,7 +137,7 @@ class PreviewSlideList extends React.Component {
         <div className="slide-list">
           <div style={{height: this.state.slideListHeight}}>
           {
-            this.props.frames.map((frame, index) => (
+            this.props.formations.map((formation, index) => (
               <Draggable
                 key={index}
                 axis="y"
@@ -147,7 +147,7 @@ class PreviewSlideList extends React.Component {
                 onDrag={(e, ui) => this.handleDrag(index, e, ui)}
                 onStop={() => this.handleDragStop(index)}
               >
-                <div className={index === this.props.activeFrameId ? "slide-outer linear-gradient-bg" : "slide-outer"}
+                <div className={index === this.props.activeFormationId ? "slide-outer linear-gradient-bg" : "slide-outer"}
                      ref={node=>{
                        if (index === 0) {
                          this.slide = node;
@@ -160,11 +160,11 @@ class PreviewSlideList extends React.Component {
                              this.container = node;
                            }
                          }}>
-                      <StageCanvas danceId={this.props.danceId} frameId={index} width={this.state.stageWidth}
+                      <StageCanvas danceId={this.props.danceId} formationId={index} width={this.state.stageWidth}
                                    height={this.state.stageHeight} />
                     </div>
                   </div>
-                  <span className="slide-title">{index + 1}. {frame.name}</span>
+                  <span className="slide-title">{index + 1}. {formation.name}</span>
                 </div>
               </Draggable>
             ))
@@ -179,8 +179,8 @@ class PreviewSlideList extends React.Component {
 function mapStateToProps(state, props) {
   const dance = getDance(state, props.danceId)
   return {
-    activeFrameId: state.UI.activeFrame,
-    frames: dance.frames
+    activeFormationId: state.UI.activeFormation,
+    formations: dance.formations
   }
 }
 

@@ -2,20 +2,20 @@ import { Card } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { gotoFrame } from "../../actions/danceActions";
+import { gotoFormation } from "../../actions/danceActions";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import './MobileFormationCards.css';
 
 class MobileFormationCards extends React.Component {
   clickHandler = (index) => {
-    this.props.dispatch(gotoFrame(this.props.danceId, index));
-    this.props.history.push(`${this.props.match.url}/frame`)
+    this.props.dispatch(gotoFormation(this.props.danceId, index));
+    this.props.history.push(`${this.props.match.url}/formation`)
   };
   render() {
     return (
       <div>
       {
-        this.props.frames.map((formation, index) => (
+        this.props.formations.map((formation, index) => (
           <Card
             key={index}
             hoverable
@@ -30,7 +30,7 @@ class MobileFormationCards extends React.Component {
                 </div>
               </div>
               <div className="mobile-formation-preview-container">
-                <ResponsiveStageCanvas danceId={this.props.danceId} frameId={index} />
+                <ResponsiveStageCanvas danceId={this.props.danceId} formationId={index} />
               </div>
             </div>
           </Card>

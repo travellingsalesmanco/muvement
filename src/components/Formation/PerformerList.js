@@ -1,27 +1,27 @@
 import React from 'react';
 import { Row, Col, Icon, Button } from "antd";
-import { addDancerToFrame, removeDancerFromFrame } from "../../actions/frameActions"
+import { addDancerToFormation, removeDancerFromFormation } from "../../actions/formationActions"
 import { connect } from 'react-redux';
 import './PerformerList.css';
 import { getDance } from '../../selectors/dance';
 
 class PerformerList extends React.Component {
 
-  addDancerToFrame(name) {
+  addDancerToFormation(name) {
     if (!this.props.activeDancers.includes(name)) {
-      console.log("Add dancer to frame: " + name);
-      this.props.dispatch(addDancerToFrame(this.props.danceId, this.props.frameId, name));
+      console.log("Add dancer to formation: " + name);
+      this.props.dispatch(addDancerToFormation(this.props.danceId, this.props.formationId, name));
     } else {
-      console.log("Dancer already on frame");
+      console.log("Dancer already on formation");
     }
   }
 
-  removeDancerFromFrame(name) {
+  removeDancerFromFormation(name) {
     if (this.props.activeDancers.includes(name)) {
-      console.log("Remove dancer from frame: " + name);
-      this.props.dispatch(removeDancerFromFrame(this.props.danceId, this.props.frameId, name));
+      console.log("Remove dancer from formation: " + name);
+      this.props.dispatch(removeDancerFromFormation(this.props.danceId, this.props.formationId, name));
     } else {
-      console.log("Dancer already off frame");
+      console.log("Dancer already off formation");
     }
   }
 
@@ -49,14 +49,14 @@ class PerformerList extends React.Component {
               style={this.isActiveDancerStyle(dancer)}
               type="minus"
               theme="outlined"
-              onClick={() => this.removeDancerFromFrame(dancer)}
+              onClick={() => this.removeDancerFromFormation(dancer)}
             />
           } else {
             actionIcon = <Icon
               style={this.isActiveDancerStyle(dancer)}
               type="plus"
               theme="outlined"
-              onClick={() => this.addDancerToFrame(dancer)}
+              onClick={() => this.addDancerToFormation(dancer)}
             />
           }
           return (
@@ -79,10 +79,10 @@ const mapStateToProps = (state, props) => {
   const dance = getDance(state, props.danceId)
   return {
     dancers: dance.dancers,
-    activeDancers: dance.frames[state.UI.activeFrame].dancers.map((dancer) => {
+    activeDancers: dance.formations[state.UI.activeFormation].dancers.map((dancer) => {
       return dancer.name;
     }),
-    frameId: state.UI.activeFrame
+    formationId: state.UI.activeFormation
   }
 };
 

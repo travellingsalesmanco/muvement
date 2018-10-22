@@ -2,7 +2,7 @@ export const defaultTransition = {
   duration: 0,
   midPoint: 0
 }
-export const defaultFrame = {
+export const defaultFormation = {
   name: "",
   numSeconds: 30,
   transitionBefore: defaultTransition,
@@ -18,7 +18,7 @@ export const defaultUI = {
   isPlaying: false,
   animated: false,
   elapsedTime: 0,
-  activeFrame: 0,
+  activeFormation: 0,
   showLabels: true,
   selectedDancers: []
 };

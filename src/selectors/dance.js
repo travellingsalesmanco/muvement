@@ -1,3 +1,3 @@
 export const getDance = (state, danceId) => state.dances.byId[danceId];
-export const getFrames = (state, props) => getDance(state, props.danceId).frames
-export const getFrame = (state, props) => getFrames(state, props)[props.frameId]
+export const getFormations = (state, props) => getDance(state, props.danceId).formations
+export const getFormation = (state, props) => getFormations(state, props)[props.formationId]

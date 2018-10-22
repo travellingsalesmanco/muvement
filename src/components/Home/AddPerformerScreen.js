@@ -37,7 +37,7 @@ class AddPerformerScreen extends React.Component {
         name: this.props.choreoName,
         stageDim: defaultStageDim,
         dancers: this.state.names,
-        frames: []
+        formations: []
       }
     ).then(createdDance => {
       this.props.dispatch(addDance(createdDance.id, createdDance.data));

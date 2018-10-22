@@ -10,7 +10,7 @@ class ChoreoCard extends PureComponent {
     this.props.history.push(`/choreo/${this.props.danceId}`);
   }
   render() {
-    const { name, frameLength } = this.props;
+    const { name, formationLength } = this.props;
 
     return (
       <Card
@@ -26,7 +26,7 @@ class ChoreoCard extends PureComponent {
           <div className="description">
             <span>{name}</span>
             <div className="description-inner">
-              <span id="card-date">{frameLength} formations</span>
+              <span id="card-date">{formationLength} formations</span>
               <Icon type="share-alt" theme="outlined" style={{ fontSize: '20px' }} />
             </div>
           </div>
@@ -40,7 +40,7 @@ const makeMapStateToProps = () => {
     const dance = getDance(state, props.danceId)
     return {
       name: dance.name,
-      frameLength: dance.frames.length
+      formationLength: dance.formations.length
     }
   }
 }
