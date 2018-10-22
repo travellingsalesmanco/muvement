@@ -34,7 +34,7 @@ class Navigation extends React.Component {
                   </Button>
                 </Menu.Item>
                 <Menu.Item key="3">
-                  <Button icon="fullscreen" />
+                  <Button icon="eye" />
                 </Menu.Item>
               </Menu>
             </div>
