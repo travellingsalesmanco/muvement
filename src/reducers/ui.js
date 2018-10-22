@@ -7,6 +7,8 @@ import {
   TIMELINE_JUMP,
   TIMELINE_PLAY,
   TIMELINE_PAUSE,
+  LOAD_ANIMATED_VIEW,
+  UNLOAD_ANIMATED_VIEW,
 } from "../constants/actionTypes";
 import { defaultUI } from "../constants/defaults";
 
@@ -63,6 +65,18 @@ export default (state = defaultUI, action) => {
       return {
         ...state,
         isPlaying: false
+      }
+    }
+    case LOAD_ANIMATED_VIEW: {
+      return {
+        ...state,
+        animated: true
+      }
+    }
+    case UNLOAD_ANIMATED_VIEW: {
+      return {
+        ...state,
+        animated: false
       }
     }
 

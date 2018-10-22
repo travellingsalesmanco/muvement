@@ -16,6 +16,7 @@ export const defaultStageDim = {
 };
 export const defaultUI = {
   isPlaying: false,
+  animated: false,
   elapsedTime: 0,
   activeFrame: 0,
   showLabels: true,
