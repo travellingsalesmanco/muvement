@@ -15,7 +15,7 @@ class MobileFormationCards extends React.Component {
     }
   }
   clickHandler = (index) => {
-    this.props.dispatch(gotoFrame(this.props.danceId, index - 1));
+    this.props.dispatch(gotoFrame(this.props.danceId, index));
     this.props.history.push(`${this.props.match.url}/frame`)
   };
   componentDidMount() {
