@@ -149,7 +149,7 @@ class FrameScreen extends Component {
                   }
                   {
                     activeButton === 3 &&
-                    <div>
+                    <div style={{height:"5rem"}}>
                       <Timeline danceId={this.props.danceId} />
 
                     </div>
