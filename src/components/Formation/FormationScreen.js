@@ -137,28 +137,30 @@ class FormationScreen extends Component {
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout style={{ backgroundColor: 'transparent' }}>
               <Content style={{ display: "flex", flexDirection: "column" }}>
-                <SectionTitle mobile={true} formationName={this.props.formationName} handleEditName={this.handleEditName}
-                  handleEditNameConfirm={this.handleEditNameConfirm} />
+                <SectionTitle mobile={true} formationName={this.props.formationName}
+                              handleEditName={this.handleEditName}
+                              handleEditNameConfirm={this.handleEditNameConfirm} />
                 <div style={{ height: '15rem', marginBottom: '10px' }}>
-                  <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
+                  <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
+                                         withGrid />
                 </div>
-                <div style={{ overflowY: 'scroll'}}>
+                <div style={{ overflowY: 'scroll' }}>
                   <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                   {
                     activeButton === 1 &&
-                    <div style={{ overflowX: 'scroll', marginTop: '1em'}}>
-                      <HorizontalSlideList/>
+                    <div style={{ overflowX: 'scroll', marginTop: '1em' }}>
+                      <HorizontalSlideList />
                     </div>
                   }
                   {
                     activeButton === 2 &&
-                    <div style={{ padding: '0 2em', fontSize: '1.2em'}}>
-                      <PerformerList choreoId={this.props.choreoId}/>
+                    <div style={{ padding: '0 2em', fontSize: '1.2em' }}>
+                      <PerformerList choreoId={this.props.choreoId} />
                     </div>
                   }
                   {
                     activeButton === 3 &&
-                    <div style={{height:"5rem"}}>
+                    <div style={{ height: "5rem" }}>
                       <Timeline choreoId={this.props.choreoId} />
 
                     </div>
@@ -173,7 +175,8 @@ class FormationScreen extends Component {
           <Layout className="body">
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
-              <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
+              <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
+                                     withGrid />
             </div>
           </Layout>
         </MobileLandscape>
@@ -189,11 +192,12 @@ class FormationScreen extends Component {
             <Layout className="contents">
               <Content style={{ display: "flex", flexDirection: "column" }}>
                 <SectionTitle formationName={this.props.formationName} handleEditName={this.handleEditName}
-                  handleEditNameConfirm={this.handleEditNameConfirm} />
-                  <div className="formationscreen-stage"
-                    style={{ background: '#000', height: '30em', overflow: "hidden" }}>
-                    <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
-                  </div>
+                              handleEditNameConfirm={this.handleEditNameConfirm} />
+                <div className="formationscreen-stage"
+                     style={{ background: '#000', height: '30em', overflow: "hidden" }}>
+                  <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
+                                         withGrid />
+                </div>
               </Content>
               <Sider width={'12rem'} className="sider">
                 <div className="button-container">
