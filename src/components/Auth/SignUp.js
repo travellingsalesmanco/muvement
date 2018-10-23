@@ -3,7 +3,8 @@ import './Auth.css';
 import { Button, Divider } from 'antd';
 import connect from "react-redux/es/connect/connect";
 import { BrowserRouter as Route } from "react-router-dom";
-import GridImage from "../../img/grid-image.svg";
+import GoogleIcon from "../../img/google.svg";
+import FacebookIcon from "../../img/facebook.svg";
 import { auth } from "../../firebase";
 import SignUpForm from "./SignUpForm";
 import Link from "react-router-dom/es/Link";
@@ -17,9 +18,15 @@ class SignUp extends React.Component {
         <p className="auth-text">Continue With</p>
         <div className="auth-buttons">
           <Button className="fb-login-button"
-                  onClick={() => auth.facebookSignIn().then(() => this.props.history.push(`/`))}>FACEBOOK</Button>
+                  onClick={() => auth.facebookSignIn().then(() => this.props.history.push(`/`))}>
+                  <img src={FacebookIcon} className="social-login-icon"></img>
+                  <span className="social-login-text">FACEBOOK</span>
+          </Button>
           <Button className="google-login-button"
-                  onClick={() => auth.googleSignIn().then(() => this.props.history.push(`/`))}>GOOGLE</Button>
+                  onClick={() => auth.googleSignIn().then(() => this.props.history.push(`/`))}>
+                  <img src={GoogleIcon} className="social-login-icon"></img>
+                  <span className="social-login-text">GOOGLE</span>
+          </Button>
         </div>
         <div>
           <Divider className="auth-divider"><span className="divider-text">Or Create Your Own Account</span></Divider>

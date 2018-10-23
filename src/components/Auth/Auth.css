@@ -8,7 +8,7 @@
 }
 
 .auth-background {
-    height: 100vh;
+    height: 100%;
     background-image: url("../../img/PortraitBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -63,6 +63,16 @@
     width: 9.5em;
     height: 3em;
     display: inline-block;
+}
+
+.social-login-icon{
+    width: 2.3em;
+    height: 2.3em;
+    padding-right: 10px;
+}
+
+.social-login-text{
+    vertical-align: middle;
 }
 
 .divider {
