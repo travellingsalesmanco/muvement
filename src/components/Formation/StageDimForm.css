@@ -5,7 +5,7 @@
 
 #stage-dim h3 {
   color: #fff;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
@@ -19,14 +19,14 @@
   border-top: 0;
   border-left: 0;
   border-right: 0;
-  font-size: 1.3em;
+  font-size: 1.15em;
   height: 100%;
 }
 
 #stage-dim .ant-input-number-input {
   padding: 0;
   font-family: "Sen-Regular";
-  height: 1.3em;
+  height: 1.15em;
 }
 
 #stage-dim .ant-input-number-focused {
