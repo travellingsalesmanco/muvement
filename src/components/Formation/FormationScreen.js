@@ -135,7 +135,7 @@ class FormationScreen extends Component {
                 <div style={{ height: '15rem', marginBottom: '10px' }}>
                   <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
                 </div>
-                <div>
+                <div style={{ overflowY: 'scroll'}}>
                   <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                   {
                     activeButton === 1 &&

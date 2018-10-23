@@ -61,7 +61,7 @@ class PerformerList extends React.Component {
           }
           return (
             <Row key={dancer}>
-              <Col span={18}>
+              <Col span={21}>
                 <span id="dancer-item" style={this.isActiveDancerStyle(dancer)}>{key + 1}. {dancer}</span>
               </Col>
               <Col span={3}>
