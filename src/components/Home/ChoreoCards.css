@@ -296,7 +296,8 @@
   padding: 2px 2px;
   background-image: linear-gradient(to right, #24c6dc, #514a9d);
   border-radius: 15px;
-  width: 350px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .ml-new-choreo-modal .ant-modal-close {
