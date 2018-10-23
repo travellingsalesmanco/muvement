@@ -125,11 +125,11 @@ class ChoreoHomeScreen extends React.Component {
                                           choreoId={this.props.choreoId}/>
                   : activeButton === 2
                   ? <div className="edit-performers">
-                    <Button className="edit-performers-button" icon="edit" ghost block>EDIT</Button>
-                  </div>
+                      <PerformerList choreoId={this.props.choreoId}/>
+                    </div>
                   : <div>
-                    <StageDimForm choreoId={this.props.choreoId}/>
-                  </div>
+                      <StageDimForm choreoId={this.props.choreoId}/>
+                    </div>
               }
             </Layout>
           </Layout>

@@ -39,3 +39,14 @@
 .form-item {
   margin-bottom: 0;
 }
+
+@media (max-width: 575px) {
+  .performer-input-item .ant-form-item-label,
+  .performer-input-item .ant-form-item-control-wrapper {
+    width: initial;
+  }
+
+  .performer-input-item .ant-form-item-label {
+    line-height: 39.9999px;
+  }
+}
