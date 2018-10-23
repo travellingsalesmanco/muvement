@@ -13,6 +13,7 @@ import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import withAuthorization from "../withAuthorization";
 import withFireStoreSync from "../withFirestoreSync";
 import './FormationScreen.css';
+import HorizontalSlideList from "./HorizontalSlideList";
 import Navigation from "./Navigation";
 import PerformerList from "./PerformerList";
 import PreviewSlideList from "./PreviewSlideList";
@@ -145,7 +146,8 @@ class FormationScreen extends Component {
                   <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                   {
                     activeButton === 1 &&
-                    <div>
+                    <div style={{ overflowX: 'scroll', marginTop: '1em'}}>
+                      <HorizontalSlideList/>
                     </div>
                   }
                   {
