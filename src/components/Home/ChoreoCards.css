@@ -230,3 +230,63 @@
   font-family: 'Sen-Bold';
   font-size: 16px;
 }
+
+.mp-new-choreo-modal .ant-modal-content {
+  padding: 2px 2px;
+  background-image: linear-gradient(to right, #24c6dc, #514a9d);
+  border-radius: 15px;
+  width: 100%;
+  margin: 0 auto;
+  top: -100px;
+}
+
+.mp-new-choreo-modal .ant-modal-close {
+  color: #fff;
+}
+
+.mp-new-choreo-modal .ant-modal-body {
+  padding: 0;
+}
+
+.mp-new-choreo-modal-inner {
+  background: #131313;
+  padding: 24px;
+  border-radius: 15px;
+  color: #fff;
+  text-align: center;
+}
+
+.mp-new-choreo-modal-inner h3 {
+  font-family: 'Sen-Black', Arial, sans-serif;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.mp-new-choreo-modal-inner .ant-input {
+  background: linear-gradient(to right, #24c6dc, #514a9d);
+  border: 0;
+  font-family: 'Sen-Regular', Arial, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 50px;
+  margin-top:30px;
+  width: 100%;
+  height: 45px;
+}
+
+.mp-new-choreo-modal-inner .ant-input::placeholder {
+    color: white;
+}
+
+.mp-new-choreo-modal-inner > button {
+  border-radius: 50px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  border: 2px solid #24c6dc;
+  font-family: 'Sen-Black', Arial, sans-serif;
+  color: #24c6dc;
+  background: transparent;
+  width: 100%;
+  height: 45px;
+  font-size: 14px;
+}

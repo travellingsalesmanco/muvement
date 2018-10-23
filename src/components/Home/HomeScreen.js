@@ -4,6 +4,7 @@ import AddPerformerScreen from "./AddPerformerScreen";
 import {connect} from 'react-redux';
 import ChoreoListScreen from "./ChoreoListScreen";
 import ReactGA from 'react-ga';
+import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class HomeScreen extends React.Component {
   state = {
@@ -45,6 +46,27 @@ class HomeScreen extends React.Component {
             : <ChoreoListScreen setModalVisible={this.setModalVisible}/>
         }
       </Layout>
+      <MobilePortrait>
+        <Modal
+          centered
+          visible={this.state.modalVisible}
+          onCancel={() => this.setModalVisible(false)}
+          footer={null}
+          className="mp-new-choreo-modal"
+        >
+          <div className="mp-new-choreo-modal-inner">
+            <h3>NEW STAGE NAME</h3>
+            <Input
+              placeholder="Enter formation name"
+              value={this.state.newChoreoName}
+              onChange={this.handleNewChoreoName}
+            />
+            <Button block onClick={this.handleNewChoreo}>START</Button>
+          </div>
+        </Modal>
+      </MobilePortrait>
+
+      <MobileLandscape>
         <Modal
           centered
           visible={this.state.modalVisible}
@@ -62,6 +84,28 @@ class HomeScreen extends React.Component {
             <Button block onClick={this.handleNewChoreo}>START</Button>
           </div>
         </Modal>
+      </MobileLandscape>
+
+      <MinTablet>
+        <Modal
+          centered
+          visible={this.state.modalVisible}
+          onCancel={() => this.setModalVisible(false)}
+          footer={null}
+          className="new-choreo-modal"
+        >
+          <div className="new-choreo-modal-inner">
+            <h3>NEW STAGE NAME</h3>
+            <Input
+              placeholder="Enter formation name"
+              value={this.state.newChoreoName}
+              onChange={this.handleNewChoreoName}
+            />
+            <Button block onClick={this.handleNewChoreo}>START</Button>
+          </div>
+        </Modal>
+      </MinTablet>
+
       </Fragment>
     );
   }
