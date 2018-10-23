@@ -10,6 +10,8 @@ import ResetPwScreen from "./Auth/ResetPassword";
 import ForgotPwScreen from "./Auth/ForgotPassword";
 import Settings from "./Settings/Settings";
 import ReactGA from 'react-ga';
+import Privacy from "./Static/Privacy";
+import Terms from "./Static/Terms";
 
 ReactGA.initialize('UA-125447140-3', {
   debug: false
@@ -21,6 +23,8 @@ class App extends Component {
       <div className="App">
         {/*<Switch>*/}
           <Route exact path="/" component={HomeScreen}/>
+          <Route exact path="/privacy" component={Privacy}/>
+          <Route exact path="/terms" component={Terms}/>
           <Route exact path="/landing" component={LandingPageScreen}/>
           <Route exact path="/signup" component={SignUpScreen}/>
           <Route exact path="/login" component={LogInScreen}/>
