@@ -181,12 +181,10 @@ class FormationScreen extends Component {
               <Content style={{ display: "flex", flexDirection: "column" }}>
                 <SectionTitle formationName={this.props.formationName} handleEditName={this.handleEditName}
                   handleEditNameConfirm={this.handleEditNameConfirm} />
-                <div
-                  className="formationscreen-stage"
-                  style={{ background: '#000', flex: 1, overflow: "hidden" }}
-                >
-                  <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
-                </div>
+                  <div className="formationscreen-stage"
+                    style={{ background: '#000', height: '30em', overflow: "hidden" }}>
+                    <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
+                  </div>
               </Content>
               <Sider width={'12rem'} className="sider">
                 <div className="button-container">
