@@ -2,7 +2,7 @@ import { Card } from 'antd';
 import React, { PureComponent, Fragment } from 'react';
 import FileAddIcon from '../../icons/FileAddIcon';
 import './ChoreoCards.css';
-import { MinTablet, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class NewChoreoCard extends PureComponent  {
   render() {
@@ -21,6 +21,20 @@ class NewChoreoCard extends PureComponent  {
         </div>
       </Card>
     </MobilePortrait>
+
+    <MobileLandscape>
+      <Card
+        hoverable
+        bordered={false}
+        className="choreo-card"
+        onClick={this.props.onClick}
+      >
+        <div className="new-choreo">
+          <FileAddIcon className="new-choreo-icon" />
+          <span className="add-choreo-title"> CREATE A NEW STAGE </span>
+        </div>
+      </Card>
+    </MobileLandscape>
 
     <MinTablet>
       <Card

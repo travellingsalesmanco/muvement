@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getChoreo } from '../../selectors/choreo';
 import './ChoreoCards.css';
-import { MinTablet, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class ChoreoCard extends PureComponent {
   clickHandler() {
@@ -36,6 +36,28 @@ class ChoreoCard extends PureComponent {
         </div>
       </Card>
       </MobilePortrait>
+
+      <MobileLandscape>
+        <Card
+          hoverable
+          bordered={false}
+          className="choreo-card"
+          onClick={() => this.clickHandler()}
+        >
+          <div>
+            <div className="ant-card-cover">
+              <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+            </div>
+            <div className="description">
+              <span>{name}</span>
+              <div className="description-inner">
+                <span id="formation-no">{formationLength} formations</span>
+                <Icon type="share-alt" theme="outlined" style={{ fontSize: '20px' }} />
+              </div>
+            </div>
+          </div>
+        </Card>
+        </MobileLandscape>
 
       <MinTablet>
         <Card

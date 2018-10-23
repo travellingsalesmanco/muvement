@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import ChoreoListScreen from "./ChoreoListScreen";
 import ReactGA from 'react-ga';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+import './ChoreoCards.css';
 
 class HomeScreen extends React.Component {
   state = {
@@ -72,9 +73,9 @@ class HomeScreen extends React.Component {
           visible={this.state.modalVisible}
           onCancel={() => this.setModalVisible(false)}
           footer={null}
-          className="new-choreo-modal"
+          className="ml-new-choreo-modal"
         >
-          <div className="new-choreo-modal-inner">
+          <div className="ml-new-choreo-modal-inner">
             <h3>NEW STAGE NAME</h3>
             <Input
               placeholder="Enter formation name"
