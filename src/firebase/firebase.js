@@ -20,6 +20,7 @@ if (!firebase.apps.length) {
 const db = firebase.firestore();
 const auth = firebase.auth();
 const storage = firebase.storage();
+const storageRef = storage.ref();
 
 // Create Providers
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -31,6 +32,7 @@ const GOOGLE_SIGN_IN_METHOD = firebase.auth.GoogleAuthProvider.GOOGLE_SIGN_IN_ME
 auth.useDeviceLanguage();
 db.settings({timestampsInSnapshots: true});
 
+// Timestamp methods
 const currentTimeStampField = () => {
   return firebase.firestore.FieldValue.serverTimestamp();
 };
@@ -48,5 +50,5 @@ export {
   GOOGLE_SIGN_IN_METHOD,
   currentTimeStampField,
   currentTimeStamp,
-  storage
+  storageRef
 };
