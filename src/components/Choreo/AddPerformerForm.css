@@ -41,9 +41,12 @@
 }
 
 @media (max-width: 575px) {
-  .performer-input-item .ant-form-item-label,
-  .performer-input-item .ant-form-item-control-wrapper {
+  .performer-input-item .ant-form-item-label {
     width: initial;
+  }
+
+  .performer-input-item .ant-form-item-control-wrapper {
+    width: 83.33333333%;
   }
 
   .performer-input-item .ant-form-item-label {
