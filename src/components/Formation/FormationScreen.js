@@ -14,6 +14,7 @@ import withAuthorization from "../withAuthorization";
 import withFireStoreSync from "../withFirestoreSync";
 import './FormationScreen.css';
 import Navigation from "./Navigation";
+import PerformerList from "./PerformerList";
 import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 import Timeline from "./Timeline";
@@ -143,8 +144,8 @@ class FormationScreen extends Component {
                   }
                   {
                     activeButton === 2 &&
-                    <div>
-
+                    <div style={{ padding: '0 2em', fontSize: '1.2em'}}>
+                      <PerformerList choreoId={this.props.choreoId}/>
                     </div>
                   }
                   {
