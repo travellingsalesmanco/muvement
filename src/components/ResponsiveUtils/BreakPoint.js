@@ -3,11 +3,11 @@ import MediaQuery from 'react-responsive';
 
 const breakpoints = {
   default: '(min-width: 1024px)',
-  tablet: '(min-width: 813px)',
+  tablet: '(min-width: 768px)',
   desktop: '(min-width: 1025px)',
-  tabletLandscape: '(min-width: 813px) and (max-width: 1024px) and (orientation: landscape)',
-  tabletPortrait: '(min-width: 813px) and (max-width: 1024px) and (orientation: portrait)',
-  mobileLandscape: '(min-width: 481px) and (max-width: 812px)',
+  tabletLandscape: '(min-width: 768px) and (max-width: 1024px) and (orientation: landscape)',
+  tabletPortrait: '(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)',
+  mobileLandscape: '(min-width: 481px) and (max-width: 767px)',
   mobilePortrait: '(min-width: 320px) and (max-width: 480px)'
 };
 
