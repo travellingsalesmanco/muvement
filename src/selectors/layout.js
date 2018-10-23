@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { calculateStageDimensions, generateGrid, relativeToAbsolutePoint, straightLineAnimation } from "../lib/stageUtils";
+import { calculateStageDimensions, generateGrid, relativeToAbsolutePoint, straightLineAnimation, stationaryAnimation } from "../lib/stageUtils";
 import { getFormations } from './choreo';
 
 // Simple retrieval selectors (no transformations), no need to memoize
@@ -76,13 +76,15 @@ export const getAnimatedLayout = createSelector(
           const prevLayout = nameToPrevDancerLayout[dancer.name];
           return {
             ...prevLayout,
-            position: straightLineAnimation(prevLayout.endPos, pos)
+            // NOTE: straightLineAnimation returns the bounded pos if duration is out of bounds, so we can
+            // use this for when the transition has finished and the frame is playing also
+            position: straightLineAnimation(prevLayout.endPos, pos, formation.transitionBefore.duration)
           }
         } else {
           // Dancer was not in prev formation, make it appear and stay stationary for whole duration
           return {
             ...dancer,
-            position: straightLineAnimation(pos, pos),
+            position: stationaryAnimation(pos),
             id: allDancers.indexOf(dancer.name) + 1,
             selected: selectedDancers.includes(dancer.name)
           }
@@ -95,6 +97,7 @@ export const getAnimatedLayout = createSelector(
       })
       layout.push(prevFormationLayout);
     });
+    console.log(layout);
     return layout;
   }
 )
