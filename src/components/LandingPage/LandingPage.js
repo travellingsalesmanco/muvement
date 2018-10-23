@@ -45,7 +45,7 @@ class LandingPage extends React.Component {
               CREATIVE</Button>
             <p className="muvement-features">Features</p>
             <p className="muvement-features-text">
-                Stop using pen & paper. <br />  Try out your formations here 
+                Stop using pen & paper, <br />  Create your formations here
                 </p>
             <div className="demo-grid">
               <ResponsiveStageCanvas choreoId={"demo"} formationId={0}
@@ -58,7 +58,7 @@ class LandingPage extends React.Component {
             <img className="muvement-features-img" src={FeatureTwo} alt="muvement name" />
 
             <p className="muvement-features-text">
-                Share and edit on the go!
+                Organise your performances <br /> anywhere and anytime!
             </p>
             <img className="muvement-features-img" src={FeatureThree} alt="muvement name" />
           </Content>

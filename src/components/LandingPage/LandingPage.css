@@ -9,6 +9,7 @@
 .landingpage-navbar {
   background-color: black;
   padding: 0em;
+  border-bottom: 1px solid black;
 }
 
 .logo {
@@ -29,7 +30,7 @@
 
 .muvement-name-img {
   margin: 0 auto;
-  padding-top: 5%;
+  padding-top: 15%;
   width: 15rem;
 }
 
