@@ -54,7 +54,7 @@ class AddPerformerScreen extends React.Component {
         <Header>
           <div className="nav-bar">
             <div className="mp-back-button">
-              <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.goBack()} />
+              <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.onBack()} />
             </div>
             <div className="mp-addperf-title">
               <h3 style={{ color: '#fff' }}>ADD PERFORMERS</h3>
@@ -96,7 +96,7 @@ class AddPerformerScreen extends React.Component {
           <Header>
             <div className="nav-bar">
               <div className="back-button">
-                <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.goBack()} />
+                <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.onBack()} />
               </div>
               <div className="ml-addperf-title">
                 <h3 style={{ color: '#fff' }}>ADD PERFORMERS</h3>
@@ -138,7 +138,7 @@ class AddPerformerScreen extends React.Component {
             <Header>
               <div className="nav-bar">
                 <div className="back-button">
-                  <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.history.goBack()} />
+                  <Button style={{ fontSize: '25px' }} icon="left" onClick={() => this.props.onBack()} />
                 </div>
                 <div className="title">
                   <h3 style={{ color: '#fff' }}>ADD PERFORMERS</h3>

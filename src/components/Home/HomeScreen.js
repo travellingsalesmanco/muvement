@@ -37,13 +37,21 @@ class HomeScreen extends React.Component {
     }
   };
 
+  handleChangeAddChoreoState = () => {
+    this.setState({
+      addChoreoState: false,
+      newChoreoName: ''
+    })
+  };
+
   render() {
     return (
       <Fragment>
       <Layout className="body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
         {
           this.state.addChoreoState
-            ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}/>
+            ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}
+                                  onBack={this.handleChangeAddChoreoState}/>
             : <ChoreoListScreen setModalVisible={this.setModalVisible}/>
         }
       </Layout>
