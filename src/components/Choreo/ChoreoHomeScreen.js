@@ -93,8 +93,28 @@ class ChoreoHomeScreen extends React.Component {
     );
     return (
       <Layout className="choreo-homescreen-body">
-        {navbar}
         <MobilePortrait>
+        <Header>
+          <div className="nav-bar">
+            <div>
+              <Button className="mp-back-button" style={{fontSize: '25px'}} icon="left"
+                      onClick={() => this.props.history.push('/')}/>
+            </div>
+            <div className="mp-title">
+              <h3>{this.props.name}</h3>
+            </div>
+            <div className="mp-right-container">
+              <Menu mode="horizontal" theme="dark">
+                <Menu.Item className="mp-menu-item" key="1">
+                  <Button icon="edit" ghost/>
+                </Menu.Item>
+                <Menu.Item key="2">
+                  <Button icon="setting" ghost/>
+                </Menu.Item>
+              </Menu>
+            </div>
+          </div>
+        </Header>
           <Layout className="choreo-homescreen-contents" style={{}}>
             <ChoreoPicture/>
             <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
@@ -111,7 +131,9 @@ class ChoreoHomeScreen extends React.Component {
             }
           </Layout>
         </MobilePortrait>
+
         <MinTablet>
+         {navbar}
           <Layout className="choreo-homescreen-contents">
             <Content style={{display: "flex", flexDirection: "column"}}>
               <FormationPreviewCards formations={this.props.formations} match={this.props.match} choreoId={this.props.choreoId}/>
