@@ -137,7 +137,7 @@ class FormationScreen extends Component {
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout style={{ backgroundColor: 'transparent' }}>
               <Content style={{ display: "flex", flexDirection: "column" }}>
-                <SectionTitle mobile={true} formationName={this.props.formationName}
+                <SectionTitle key={this.props.formationName} mobile={true} formationName={this.props.formationName}
                               handleEditName={this.handleEditName}
                               handleEditNameConfirm={this.handleEditNameConfirm} />
                 <div style={{ height: '15rem', marginBottom: '10px' }}>
@@ -191,7 +191,8 @@ class FormationScreen extends Component {
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout className="contents">
               <Content style={{ display: "flex", flexDirection: "column" }}>
-                <SectionTitle formationName={this.props.formationName} handleEditName={this.handleEditName}
+                <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
+                              handleEditName={this.handleEditName}
                               handleEditNameConfirm={this.handleEditNameConfirm} />
                 <div className="formationscreen-stage"
                      style={{ background: '#000', height: '30em', overflow: "hidden" }}>
