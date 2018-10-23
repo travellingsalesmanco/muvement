@@ -5,7 +5,8 @@ import GridImage from "../../img/grid-image-portrait.svg";
 import Logo from "../../img/m-logo.svg";
 import GradientSVG from "../../icons/GradientSVG";
 import HeadphoneIcon from "../../icons/HeadphoneIcon";
-import BorderInnerIcon from "../../icons/BorderInnerIcon";
+import SpotlightIcon from "../../icons/SpotlightIcon";
+import SlideShareIcon from "../../icons/SlideShareIcon";
 import Name from "../../img/MuvementLogo.png";
 import FeatureTwo from "../../img/feature2.png";
 import FeatureThree from "../../img/feature3.png";
@@ -51,7 +52,7 @@ class LandingPage extends React.Component {
               <ResponsiveStageCanvas choreoId={"demo"} formationId={0}
                 withGrid demo />
             </div>
-            <HeadphoneIcon style={{ fontSize: '20px' }}/>
+            // <HeadphoneIcon style={{ fontSize: '20px' }}/>
             <p className="muvement-features-text">
                 Sync transitions with music
             </p>
