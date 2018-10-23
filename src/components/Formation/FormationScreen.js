@@ -25,8 +25,8 @@ const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameCon
       <div className="section-title-inner">
         <Input
           placeholder="Enter formation name"
-          value={formationName}
-          onChange={handleEditName}
+          defaultValue={formationName}
+          onBlur={handleEditName}
           onPressEnter={handleEditNameConfirm}
         />
       </div>
