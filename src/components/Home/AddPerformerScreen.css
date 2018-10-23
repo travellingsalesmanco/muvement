@@ -31,7 +31,7 @@
 }
 
 .add-performer-container .ant-input {
-  font-family: 'Sen-Black', Arial, sans-serif;
+  font-family: 'Sen-Regular', Arial, sans-serif;
   font-size: 16px;
   background-color: transparent;
   border-bottom: 2px solid #514a9d;
@@ -46,4 +46,81 @@
 
 .add-performer-container .ant-input:focus {
   box-shadow: none;
+}
+
+/* Mobile Portrait */
+.mp-addperf-title{
+    font-family: Sen-Black;
+    font-size: 1.2rem;
+    text-shadow: 0px 0px 35px white;
+    flex: 1;
+    text-align: center;
+}
+
+.mp-back-button{
+    left: 10px;
+    font-size: 23px;
+    position: absolute;
+}
+
+.mp-add-performer-container {
+  padding: 1rem 10%;
+  width: 80%;
+  margin: 20px auto;
+
+}
+
+.mp-add-performer-button {
+  border-radius: 20px;
+  height: 40px;
+  font-size: 16px;
+  border: 2px solid #514a9d;
+  margin-top: 20px;
+}
+
+.mp-next-button {
+  border-radius: 20px;
+  height: 40px;
+  font-size: 16px;
+  margin-top: 20px;
+  background-image: linear-gradient(to right, #24c6dc, #514a9d);
+  box-shadow: 0px 0px 20px  #514A9D;
+  border: 0;
+  color: #fff;
+  font-family: 'Sen-Bold', Arial, sans-serif;
+}
+
+.mp-performer-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.mp-add-performer-container .ant-input {
+  font-family: 'Sen-Regular', Arial, sans-serif;
+  font-size: 16px;
+  background-color: transparent;
+  border-bottom: 2px solid #514a9d;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  padding: 4px 4px;
+  margin-left: 10px;
+  color: #fff;
+}
+
+.mp-add-performer-container .ant-input:focus {
+  box-shadow: none;
+}
+
+/* Mobile landscape */
+.ml-addperf-title{
+    font-family: Sen-Black;
+    font-size: 1.5rem;
+    text-shadow: 0px 0px 35px white;
+    flex: 1;
+    text-align: center;
 }
