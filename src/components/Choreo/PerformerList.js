@@ -65,7 +65,7 @@ class PerformerList extends React.Component {
             }
             return (
               <Row key={key}>
-                <Col span={18} onClick={() => this.addDancerToFormation(dancer)}>
+                <Col span={18}>
                   <span className="dancer-item">{key + 1}. {dancer}</span>
                 </Col>
                 <Col span={6}>
