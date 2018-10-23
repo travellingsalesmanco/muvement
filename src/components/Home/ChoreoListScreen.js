@@ -21,7 +21,7 @@ class ChoreoListScreen extends React.Component {
               <div className="mp-right-container">
                 <Menu mode="horizontal" theme="dark">
                   <Menu.Item key="1">
-                    <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
+                    <Button className="mp-setting" icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
                   </Menu.Item>
                 </Menu>
               </div>

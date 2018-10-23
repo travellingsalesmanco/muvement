@@ -5,6 +5,9 @@
 
 .nav-bar {
   display: flex;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
 }
 
 .nav-bar .title {
@@ -55,4 +58,19 @@
 
 .right-container .ant-menu.ant-menu-dark .ant-menu-item-selected {
     background-color: transparent;
+}
+
+/* Mobile Portrait */
+.nav-bar .mp-title h3 {
+  color: #fff;
+  width: 9em;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.5rem;
+}
+
+li.ant-menu-item.mp-menu-item{
+   margin-left: 10px;
+   padding: 0px;
 }

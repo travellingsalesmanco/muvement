@@ -159,6 +159,10 @@
   position: absolute;
 }
 
+.mp-setting {
+    right: -10px;
+}
+
 .mp-new-choreo {
   height: 150px;
   width: 100%;

@@ -3,10 +3,16 @@
   background-image: url(" ../../img/FormationsOverviewBackground.png");
   background-repeat: repeat;
   background-size: cover;
+  max-width: 100%;
+  margin: 0px;
 }
 
 .choreo-homescreen-contents {
   background-color: transparent;
+}
+
+.ant-layout-sider .ant-layout-sider-dark{
+    height: 100rem;
 }
 
 .ant-layout-sider-children {
@@ -148,7 +154,6 @@
     flex: 1;
     text-align: center;
     color: white;
-    width: 250px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -163,11 +168,15 @@ button.ant-btn.mp-back-button.ant-btn-icon-only{
 .mp-right-container .ant-menu-item .anticon {
   font-size: 23px;
   position: absolute;
-  right: 10px;
+  right: 0px;
 }
 
 li.mp-menu-item {
-  margin-right: 20px;
+  margin-right: 10px;
+}
+
+.ant-menu-submenu-title{
+    padding: 0px;
 }
 
 .mobile-switch-tabs {

@@ -62,7 +62,7 @@ class AddPerformerScreen extends React.Component {
             <div className="mp-right-container">
               <Menu mode="horizontal" theme="dark">
                 <Menu.Item key="1">
-                  <Button icon="setting" ghost />
+                  <Button className="mp-settings" icon="setting" ghost />
                 </Menu.Item>
               </Menu>
             </div>

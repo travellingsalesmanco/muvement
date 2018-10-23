@@ -63,6 +63,10 @@
     position: absolute;
 }
 
+.mp-right-container{
+    right: -40px;
+}
+
 .mp-add-performer-container {
   padding: 1rem 10%;
   width: 80%;
