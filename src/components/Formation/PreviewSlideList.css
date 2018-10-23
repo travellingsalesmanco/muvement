@@ -16,6 +16,10 @@
 
 .slide-title {
   color: #fff;
+  width: 10em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
 }
 
 .slide-list-title {

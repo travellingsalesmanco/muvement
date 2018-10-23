@@ -67,6 +67,13 @@
   font-size: 16px;
 }
 
+.description > span {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .description-inner {
   display: flex;
   flex-direction: row;
@@ -211,6 +218,13 @@
   color: #fff;
   font-family: 'Sen-Bold';
   font-size: 15px;
+}
+
+.mp-description > span {
+  width: 10em;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mp-description-inner {

@@ -18,6 +18,10 @@
 
 .nav-bar .title h3 {
   color: #fff;
+  width: 10em;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-bar ul {

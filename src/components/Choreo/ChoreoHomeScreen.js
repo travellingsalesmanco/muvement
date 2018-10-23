@@ -94,49 +94,51 @@ class ChoreoHomeScreen extends React.Component {
     return (
       <Layout className="choreo-homescreen-body">
         <MobilePortrait>
-        <Header>
-          <div className="nav-bar">
-            <div>
-              <Button className="mp-back-button" style={{fontSize: '25px'}} icon="left"
-                      onClick={() => this.props.history.push('/')}/>
+          <Header>
+            <div className="nav-bar">
+              <div>
+                <Button className="mp-back-button" style={{ fontSize: '25px' }} icon="left"
+                        onClick={() => this.props.history.push('/')}/>
+              </div>
+              <div className="mp-title">
+                <h3>{this.props.name}</h3>
+              </div>
+              <div className="mp-right-container">
+                <Menu mode="horizontal" theme="dark">
+                  <Menu.Item className="mp-menu-item" key="1">
+                    <Button icon="edit" ghost/>
+                  </Menu.Item>
+                  <Menu.Item key="2">
+                    <Button icon="setting" ghost/>
+                  </Menu.Item>
+                </Menu>
+              </div>
             </div>
-            <div className="mp-title">
-              <h3>{this.props.name}</h3>
-            </div>
-            <div className="mp-right-container">
-              <Menu mode="horizontal" theme="dark">
-                <Menu.Item className="mp-menu-item" key="1">
-                  <Button icon="edit" ghost/>
-                </Menu.Item>
-                <Menu.Item key="2">
-                  <Button icon="setting" ghost/>
-                </Menu.Item>
-              </Menu>
-            </div>
-          </div>
-        </Header>
+          </Header>
           <Layout className="choreo-homescreen-contents" style={{}}>
             <ChoreoPicture/>
             <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
             {
               activeButton === 1
-                ? <MobileFormationCards formations={this.props.formations} match={this.props.match} choreoId={this.props.choreoId}/>
+                ? <MobileFormationCards formations={this.props.formations} match={this.props.match}
+                                        choreoId={this.props.choreoId}/>
                 : activeButton === 2
-                  ? <div className="edit-performers">
-                      <Button className="edit-performers-button" icon="edit" ghost block>EDIT</Button>
-                    </div>
-                  : <div>
-                      <StageDimForm choreoId={this.props.choreoId}/>
-                    </div>
+                ? <div className="edit-performers">
+                  <Button className="edit-performers-button" icon="edit" ghost block>EDIT</Button>
+                </div>
+                : <div>
+                  <StageDimForm choreoId={this.props.choreoId}/>
+                </div>
             }
           </Layout>
         </MobilePortrait>
 
         <MinTablet>
-         {navbar}
+          {navbar}
           <Layout className="choreo-homescreen-contents">
-            <Content style={{display: "flex", flexDirection: "column"}}>
-              <FormationPreviewCards formations={this.props.formations} match={this.props.match} choreoId={this.props.choreoId}/>
+            <Content style={{ display: "flex", flexDirection: "column" }}>
+              <FormationPreviewCards formations={this.props.formations} match={this.props.match}
+                                     choreoId={this.props.choreoId}/>
             </Content>
             <Sider width="20rem">
               <DefaultSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>

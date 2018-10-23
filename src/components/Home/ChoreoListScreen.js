@@ -12,56 +12,56 @@ class ChoreoListScreen extends React.Component {
     const { Header, Content } = Layout;
     return (
       <Fragment>
-      <MobilePortrait>
-        <Header>
-          <div className="nav-bar">
-            <div className="mp-title">
-              <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
+        <MobilePortrait>
+          <Header>
+            <div className="nav-bar">
+              <div className="mp-title">
+                <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
+              </div>
+              <div className="mp-right-container">
+                <Menu mode="horizontal" theme="dark">
+                  <Menu.Item key="1">
+                    <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
+                  </Menu.Item>
+                </Menu>
+              </div>
             </div>
-            <div className="mp-right-container">
-              <Menu mode="horizontal" theme="dark">
-                <Menu.Item key="1">
-                  <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
-                </Menu.Item>
-              </Menu>
+          </Header>
+        </MobilePortrait>
+
+        <MobileLandscape>
+          <Header>
+            <div className="nav-bar">
+              <div className="ml-title">
+                <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
+              </div>
+              <div className="right-container">
+                <Menu mode="horizontal" theme="dark">
+                  <Menu.Item key="1">
+                    <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
+                  </Menu.Item>
+                </Menu>
+              </div>
             </div>
-          </div>
-        </Header>
-    </MobilePortrait>
+          </Header>
+        </MobileLandscape>
 
-    <MobileLandscape>
-      <Header>
-        <div className="nav-bar">
-          <div className="ml-title">
-            <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
-          </div>
-          <div className="right-container">
-            <Menu mode="horizontal" theme="dark">
-              <Menu.Item key="1">
-                <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
-              </Menu.Item>
-            </Menu>
-          </div>
-        </div>
-      </Header>
-  </MobileLandscape>
-
-  <MinTablet>
-    <Header>
-      <div className="nav-bar">
-        <div className="title">
-          <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
-        </div>
-        <div className="right-container">
-          <Menu mode="horizontal" theme="dark">
-            <Menu.Item key="1">
-              <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
-            </Menu.Item>
-          </Menu>
-        </div>
-      </div>
-    </Header>
-</MinTablet>
+        <MinTablet>
+          <Header>
+            <div className="nav-bar">
+              <div className="title">
+                <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
+              </div>
+              <div className="right-container">
+                <Menu mode="horizontal" theme="dark">
+                  <Menu.Item key="1">
+                    <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
+                  </Menu.Item>
+                </Menu>
+              </div>
+            </div>
+          </Header>
+        </MinTablet>
 
         <Content>
           <ChoreoCardList data={this.props.choreoIds} match={this.props.match}
