@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getTimeline } from '../../selectors/layout';
 import { advanceNextFrame } from '../../actions/timelineActions';
 import { Stage, Rect, Layer, Line } from 'react-konva'
-import { LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/actionTypes';
 
 class Timeline extends Component {
   constructor(props) {
@@ -14,7 +13,6 @@ class Timeline extends Component {
     }
   }
   componentDidMount() {
-    this.props.dispatch({ type: LOAD_ANIMATED_VIEW })
     this.checkSize();
     window.addEventListener("resize", this.checkSize);
   }
@@ -24,7 +22,6 @@ class Timeline extends Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch({ type: UNLOAD_ANIMATED_VIEW })
     window.removeEventListener("resize", this.checkSize);
   }
 

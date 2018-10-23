@@ -18,6 +18,7 @@ import PerformerList from "./PerformerList";
 import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 import Timeline from "./Timeline";
+import { LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/actionTypes';
 
 const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameConfirm }) => (
   <div className="section-title-container">
@@ -62,11 +63,16 @@ class FormationScreen extends Component {
       visible: false,
       sidePanelID: 0,
       formationName: '',
-      activeButton: 1
+      activeButton: props.animated ? 3 : 1
     }
   }
 
   handleClick = (number) => {
+    if (number === 3 && this.state.activeButton !== 3) {
+      this.props.dispatch({ type: LOAD_ANIMATED_VIEW })
+    } else if (this.state.activeButton === 3) {
+      this.props.dispatch({ type: UNLOAD_ANIMATED_VIEW })
+    }
     this.setState({ activeButton: number });
   };
 
@@ -228,7 +234,8 @@ function mapStateToProps(state, props) {
     formationId: state.UI.activeFormation,
     choreoName: choreo.name,
     formationName: activeFormation.name,
-    formationNumSeconds: activeFormation.numSeconds
+    formationNumSeconds: activeFormation.numSeconds,
+    animated: state.UI.animated
   }
 }
 
