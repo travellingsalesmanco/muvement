@@ -1,5 +1,5 @@
 import { Button, Layout, Menu } from 'antd';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from "react-redux";
 import { getChoreo } from '../../selectors/choreo';
 import StageDimForm from "../Formation/StageDimForm";
@@ -92,71 +92,75 @@ class ChoreoHomeScreen extends React.Component {
       </Header>
     );
     return (
-      <Layout className="choreo-homescreen-body">
+      <Fragment>
         <MobilePortrait>
-          <Header>
-            <div className="nav-bar">
-              <div>
-                <Button className="mp-back-button" style={{ fontSize: '25px' }} icon="left"
-                        onClick={() => this.props.history.push('/')}/>
-              </div>
-              <div className="mp-title">
-                <h3>{this.props.name}</h3>
-              </div>
-              <div className="mp-right-container">
-                <Menu mode="horizontal" theme="dark">
-                  <Menu.Item className="mp-menu-item" key="1">
-                    <Button icon="edit" ghost/>
-                  </Menu.Item>
-                  <Menu.Item key="2">
-                    <Button icon="setting" ghost/>
-                  </Menu.Item>
-                </Menu>
-              </div>
-            </div>
-          </Header>
-          <Layout className="choreo-homescreen-contents" style={{}}>
-            <ChoreoPicture/>
-            <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
-            {
-              activeButton === 1
-                ? <MobileFormationCards formations={this.props.formations} match={this.props.match}
-                                        choreoId={this.props.choreoId}/>
-                : activeButton === 2
-                ? <div className="edit-performers">
-                  <Button className="edit-performers-button" icon="edit" ghost block>EDIT</Button>
+          <Layout className="choreo-homescreen-body">
+            <Header>
+              <div className="nav-bar">
+                <div>
+                  <Button className="mp-back-button" style={{ fontSize: '25px' }} icon="left"
+                          onClick={() => this.props.history.push('/')}/>
                 </div>
-                : <div>
-                  <StageDimForm choreoId={this.props.choreoId}/>
+                <div className="mp-title">
+                  <h3>{this.props.name}</h3>
                 </div>
-            }
+                <div className="mp-right-container">
+                  <Menu mode="horizontal" theme="dark">
+                    <Menu.Item className="mp-menu-item" key="1">
+                      <Button icon="edit" ghost/>
+                    </Menu.Item>
+                    <Menu.Item key="2">
+                      <Button icon="setting" ghost/>
+                    </Menu.Item>
+                  </Menu>
+                </div>
+              </div>
+            </Header>
+            <Layout className="choreo-homescreen-contents" style={{}}>
+              <ChoreoPicture/>
+              <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
+              {
+                activeButton === 1
+                  ? <MobileFormationCards formations={this.props.formations} match={this.props.match}
+                                          choreoId={this.props.choreoId}/>
+                  : activeButton === 2
+                  ? <div className="edit-performers">
+                    <Button className="edit-performers-button" icon="edit" ghost block>EDIT</Button>
+                  </div>
+                  : <div>
+                    <StageDimForm choreoId={this.props.choreoId}/>
+                  </div>
+              }
+            </Layout>
           </Layout>
         </MobilePortrait>
 
         <MinTablet>
-          {navbar}
-          <Layout className="choreo-homescreen-contents">
-            <Content style={{ display: "flex", flexDirection: "column" }}>
-              <FormationPreviewCards formations={this.props.formations} match={this.props.match}
-                                     choreoId={this.props.choreoId}/>
-            </Content>
-            <Sider width="20rem">
-              <DefaultSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
-              {
-                this.state.activeButton === 1
-                  ? <div>
-                    <ChoreoPicture/>
-                    <h2 className="stagedim-title">STAGE DIMENSION</h2>
-                    <StageDimForm choreoId={this.props.choreoId}/>
-                  </div>
-                  : <div className="edit-performers">
-                    <PerformerList choreoId={this.props.choreoId}/>
-                  </div>
-              }
-            </Sider>
+          <Layout className="choreo-homescreen-body">
+            {navbar}
+            <Layout className="choreo-homescreen-contents">
+              <Content style={{ display: "flex", flexDirection: "column" }}>
+                <FormationPreviewCards formations={this.props.formations} match={this.props.match}
+                                       choreoId={this.props.choreoId}/>
+              </Content>
+              <Sider width="20rem">
+                <DefaultSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
+                {
+                  this.state.activeButton === 1
+                    ? <div>
+                      <ChoreoPicture/>
+                      <h2 className="stagedim-title">STAGE DIMENSION</h2>
+                      <StageDimForm choreoId={this.props.choreoId}/>
+                    </div>
+                    : <div className="edit-performers">
+                      <PerformerList choreoId={this.props.choreoId}/>
+                    </div>
+                }
+              </Sider>
+            </Layout>
           </Layout>
         </MinTablet>
-      </Layout>
+      </Fragment>
     );
   }
 }
