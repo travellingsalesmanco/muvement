@@ -15,7 +15,7 @@ class ChoreoCardList extends React.Component {
           endColor="#514a9d"
           idCSS="cool-gradient"
         />
-        <Row gutter={72} type='flex' justify='center'>
+        <Row gutter={20} type='flex' justify='center'>
           <Col span={10}>
             <NewChoreoCard onClick={() => this.props.setModalVisible(true)} />
           </Col>
@@ -27,7 +27,7 @@ class ChoreoCardList extends React.Component {
           rest.map((choreoId, index) => {
             if (index % 2 === 0) {
               return (
-                <Row gutter={72} type='flex' justify='center' key={choreoId}>
+                <Row gutter={20} type='flex' justify='center' key={choreoId}>
                   <Col span={10}>
                     <ChoreoCard choreoId={choreoId} />
                   </Col>

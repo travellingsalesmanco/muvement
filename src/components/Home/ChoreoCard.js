@@ -1,9 +1,10 @@
 import { Card, Icon } from 'antd';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getChoreo } from '../../selectors/choreo';
 import './ChoreoCards.css';
+import { MinTablet, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class ChoreoCard extends PureComponent {
   clickHandler() {
@@ -13,25 +14,52 @@ class ChoreoCard extends PureComponent {
     const { name, formationLength } = this.props;
 
     return (
+    <Fragment>
+    <MobilePortrait>
       <Card
         hoverable
         bordered={false}
-        className="choreo-card"
+        className="mp-choreo-card"
         onClick={() => this.clickHandler()}
       >
         <div>
-          <div className="ant-card-cover">
+          <div className="mp-ant-card-cover">
             <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
           </div>
-          <div className="description">
+          <div className="mp-description">
             <span>{name}</span>
-            <div className="description-inner">
-              <span id="card-date">{formationLength} formations</span>
+            <div className="mp-description-inner">
+              <span id="mp-formation-no">{formationLength} formations</span>
               <Icon type="share-alt" theme="outlined" style={{ fontSize: '20px' }} />
             </div>
           </div>
         </div>
       </Card>
+      </MobilePortrait>
+
+      <MinTablet>
+        <Card
+          hoverable
+          bordered={false}
+          className="choreo-card"
+          onClick={() => this.clickHandler()}
+        >
+          <div>
+            <div className="ant-card-cover">
+              <img alt="Cover" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+            </div>
+            <div className="description">
+              <span>{name}</span>
+              <div className="description-inner">
+                <span id="formation-no">{formationLength} formations</span>
+                <Icon type="share-alt" theme="outlined" style={{ fontSize: '20px' }} />
+              </div>
+            </div>
+          </div>
+        </Card>
+        </MinTablet>
+
+      </Fragment>
     );
   }
 }
