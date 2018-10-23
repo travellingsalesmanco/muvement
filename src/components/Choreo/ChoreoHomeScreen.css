@@ -152,6 +152,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 button.ant-btn.mp-back-button.ant-btn-icon-only{
@@ -161,7 +163,7 @@ button.ant-btn.mp-back-button.ant-btn-icon-only{
 .mp-right-container .ant-menu-item .anticon {
   font-size: 23px;
   position: absolute;
-  right: -30px;
+  right: -10px;
 }
 
 li.mp-menu-item {
