@@ -2,7 +2,7 @@ import { Card, Icon } from 'antd';
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { REMOVE_CHOREO } from "../../constants/actionTypes";
+import { removeChoreo } from "../../actions/choreoActions";
 import { getChoreo } from '../../selectors/choreo';
 import './ChoreoCards.css';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
@@ -10,10 +10,7 @@ import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/B
 class ChoreoCard extends PureComponent {
   clickHandler() {
     if (this.props.editState) {
-      this.props.dispatch({
-        type: REMOVE_CHOREO,
-        choreoId: this.props.choreoId
-      })
+      this.props.dispatch(removeChoreo(this.props.choreoId))
     } else {
       this.props.history.push(`/choreo/${this.props.choreoId}`);
     }

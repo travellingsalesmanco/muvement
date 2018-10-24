@@ -67,6 +67,15 @@ export function addChoreo(id, choreo) {
   }
 }
 
+export function removeChoreo(id) {
+  return (dispatch) => {
+    dispatch({
+      type: REMOVE_CHOREO,
+      choreoId: id,
+    })
+  }
+}
+
 export function updateChoreoImage(id, link) {
   return (dispatch) => {
     dispatch({
