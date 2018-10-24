@@ -43,16 +43,11 @@ const withFireStoreSync = (withChoreoRouteParams) => (Component) => {
 
     render() {
       const { loading, error } = this.state;
-      if (!loading) {
-        if (error != null) {
-          // TODO: replace with unauthorized / 404 page
-          return null;
-        } else {
-          return <Component {...this.props} />
-        }
-      } else {
-        // TODO: replace with loading
+      if (error != null) {
+        // TODO: replace with unauthorized / 404 page
         return null;
+      } else {
+        return <Component loading={loading} {...this.props}  />
       }
     }
   }
