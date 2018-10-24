@@ -8,6 +8,7 @@ import * as auth from "../../firebase/auth";
 import Link from "react-router-dom/es/Link";
 import GoogleIcon from "../../img/google.svg";
 import FacebookIcon from "../../img/facebook.svg";
+import withAuthorization from "../withAuthorization";
 
 
 class LogIn extends React.Component {
@@ -42,4 +43,8 @@ class LogIn extends React.Component {
   }
 }
 
-export default withRouter(LogIn);
+// Auth does not exist
+const authCondition = (authUser) => !authUser;
+const failRoute = "/";
+
+export default withAuthorization(authCondition, failRoute)(withRouter(LogIn));

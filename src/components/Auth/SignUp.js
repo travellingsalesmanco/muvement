@@ -8,6 +8,7 @@ import FacebookIcon from "../../img/facebook.svg";
 import { auth } from "../../firebase";
 import SignUpForm from "./SignUpForm";
 import Link from "react-router-dom/es/Link";
+import withAuthorization from "../withAuthorization";
 
 class SignUp extends React.Component {
 
@@ -40,4 +41,8 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+// Auth does not exist
+const authCondition = (authUser) => !authUser;
+const failRoute = "/";
+
+export default withAuthorization(authCondition, failRoute)(SignUp);
