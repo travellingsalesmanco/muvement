@@ -1,4 +1,4 @@
-import { Button, Layout, Menu } from 'antd';
+import { Button, Layout, Menu, Spin } from 'antd';
 import React, { Fragment } from 'react';
 import { connect } from "react-redux";
 import { getChoreo } from '../../selectors/choreo';
@@ -12,7 +12,7 @@ import FormationPreviewCards from "./FormationPreviewCards";
 import MobileFormationCards from "./MobileFormationCards";
 import PerformerList from "./PerformerList";
 
-const MobileSwitchTabs = ({activeButton, handleClick}) => (
+const MobileSwitchTabs = ({ activeButton, handleClick }) => (
   <div className="mobile-switch-tabs">
     <button
       className={activeButton === 1 ? 'mobile-switch-tabs-active' : 'mobile-switch-tabs-inactive'}
@@ -32,7 +32,7 @@ const MobileSwitchTabs = ({activeButton, handleClick}) => (
   </div>
 );
 
-const DefaultSwitchTabs = ({activeButton, handleClick}) => (
+const DefaultSwitchTabs = ({ activeButton, handleClick }) => (
   <div className="choreo-homescreen-tabs">
     <button
       className={activeButton === 1 ? 'choreo-homescreen-activebutton' : 'choreo-homescreen-inactivebutton'}
@@ -52,12 +52,12 @@ class ChoreoHomeScreen extends React.Component {
     startValue: null,
     endValue: null,
     endOpen: false,
-    activeButton : 1,
+    activeButton: 1,
     editState: false
   };
 
   handleClick = (number) => {
-    this.setState({activeButton: number});
+    this.setState({ activeButton: number });
   };
 
   handleEditState = () => {
@@ -79,14 +79,15 @@ class ChoreoHomeScreen extends React.Component {
     if (this.props.error) {
       return <div>Invalid choreo</div>
     }
-    const {Header, Content, Sider} = Layout;
-    const {activeButton} = this.state;
+    const { Header, Content, Sider } = Layout;
+    const { activeButton } = this.state;
+    const { loading } = this.props;
     const navbar = (
       <Header>
         <div className="nav-bar">
           <div>
-            <Button style={{fontSize: '25px'}} icon="left"
-                    onClick={() => this.props.history.push('/')}/>
+            <Button style={{ fontSize: '25px' }} icon="left"
+                    onClick={() => this.props.history.push('/')} />
             <MinTablet>
               <span className="backbutton-desc">Dashboard</span>
             </MinTablet>
@@ -97,10 +98,10 @@ class ChoreoHomeScreen extends React.Component {
           <div className="right-container">
             <Menu mode="horizontal" theme="dark">
               <Menu.Item key="1">
-                <Button icon="edit" ghost/>
+                <Button icon="edit" ghost />
               </Menu.Item>
               <Menu.Item key="2">
-                <Button icon="setting" ghost/>
+                <Button icon="setting" ghost />
               </Menu.Item>
             </Menu>
           </div>
@@ -115,7 +116,7 @@ class ChoreoHomeScreen extends React.Component {
               <div className="nav-bar">
                 <div>
                   <Button className="mp-back-button" style={{ fontSize: '25px' }} icon="left"
-                          onClick={() => this.props.history.push('/')}/>
+                          onClick={() => this.props.history.push('/')} />
                 </div>
                 <div className="mp-title">
                   <h3>{this.props.name}</h3>
@@ -125,32 +126,34 @@ class ChoreoHomeScreen extends React.Component {
                     <Menu.Item className="mp-menu-item" key="1">
                       {
                         this.state.editState
-                        ? <Button icon="close" ghost/>
-                        : <Button icon="edit" ghost/>
+                          ? <Button icon="close" ghost />
+                          : <Button icon="edit" ghost />
                       }
                     </Menu.Item>
                     <Menu.Item key="2">
-                      <Button icon="setting" ghost/>
+                      <Button icon="setting" ghost />
                     </Menu.Item>
                   </Menu>
                 </div>
               </div>
             </Header>
             <Layout className="choreo-homescreen-contents" style={{}}>
-              <ChoreoPicture choreoId={this.props.choreoId} imageUrl={this.props.choreoImageUrl} />
-              <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
-              {
-                activeButton === 1
-                  ? <MobileFormationCards formations={this.props.formations} match={this.props.match}
-                                          choreoId={this.props.choreoId} editState={this.state.editState}/>
-                  : activeButton === 2
-                  ? <div className="edit-performers">
-                      <PerformerList choreoId={this.props.choreoId}/>
+              <Spin spinning={loading} size={"large"}>
+                <ChoreoPicture choreoId={this.props.choreoId} imageUrl={this.props.choreoImageUrl} />
+                <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
+                {
+                  activeButton === 1
+                    ? <MobileFormationCards formations={this.props.formations} match={this.props.match}
+                                            choreoId={this.props.choreoId} editState={this.state.editState} />
+                    : activeButton === 2
+                    ? <div className="edit-performers">
+                      <PerformerList choreoId={this.props.choreoId} />
                     </div>
-                  : <div>
-                      <StageDimForm choreoId={this.props.choreoId}/>
+                    : <div>
+                      <StageDimForm choreoId={this.props.choreoId} />
                     </div>
-              }
+                }
+              </Spin>
             </Layout>
           </Layout>
         </MobilePortrait>
@@ -161,19 +164,19 @@ class ChoreoHomeScreen extends React.Component {
             <Layout className="choreo-homescreen-contents">
               <Content style={{ display: "flex", flexDirection: "column" }}>
                 <FormationPreviewCards formations={this.props.formations} match={this.props.match}
-                                       choreoId={this.props.choreoId}/>
+                                       choreoId={this.props.choreoId} />
               </Content>
               <Sider width="20rem">
-                <DefaultSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
+                <DefaultSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                 {
                   this.state.activeButton === 1
                     ? <div>
-                      <ChoreoPicture choreoId={this.props.choreoId} imageUrl={this.props.choreoImageUrl}/>
+                      <ChoreoPicture choreoId={this.props.choreoId} imageUrl={this.props.choreoImageUrl} />
                       <h2 className="stagedim-title">STAGE DIMENSION</h2>
-                      <StageDimForm choreoId={this.props.choreoId}/>
+                      <StageDimForm choreoId={this.props.choreoId} />
                     </div>
                     : <div className="edit-performers">
-                      <PerformerList choreoId={this.props.choreoId}/>
+                      <PerformerList choreoId={this.props.choreoId} />
                     </div>
                 }
               </Sider>

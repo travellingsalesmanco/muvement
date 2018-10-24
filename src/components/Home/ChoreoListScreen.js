@@ -1,4 +1,4 @@
-import { Button, Layout, Menu } from 'antd';
+import { Button, Layout, Menu, Spin } from 'antd';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import ChoreoCardList from "./ChoreoCardList";
@@ -10,6 +10,7 @@ import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/B
 class ChoreoListScreen extends React.Component {
   render() {
     const { Header, Content } = Layout;
+    const { loading } = this.props;
     return (
       <Fragment>
         <MobilePortrait>
@@ -21,7 +22,8 @@ class ChoreoListScreen extends React.Component {
               <div className="mp-right-container">
                 <Menu mode="horizontal" theme="dark">
                   <Menu.Item key="1">
-                    <Button className="mp-setting" icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
+                    <Button className="mp-setting" icon="setting" onClick={() => this.props.history.push(`/settings`)}
+                            ghost />
                   </Menu.Item>
                 </Menu>
               </div>
@@ -64,8 +66,10 @@ class ChoreoListScreen extends React.Component {
         </MinTablet>
 
         <Content>
-          <ChoreoCardList data={this.props.choreoIds} match={this.props.match}
-                          setModalVisible={this.props.setModalVisible} />
+          <Spin spinning={loading} size={"large"}>
+            <ChoreoCardList data={this.props.choreoIds} match={this.props.match}
+                            setModalVisible={this.props.setModalVisible} />
+          </Spin>
         </Content>
       </Fragment>
     );
