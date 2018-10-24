@@ -98,7 +98,7 @@ class ChoreoHomeScreen extends React.Component {
                       }
                     </Menu.Item>
                     <Menu.Item key="2">
-                      <Button icon="setting" ghost />
+                      <Button className="mp-setting" icon="setting" ghost />
                     </Menu.Item>
                   </Menu>
                 </div>
