@@ -15,10 +15,14 @@ import {
   ADD_DANCER_TO_FORMATION,
   REMOVE_DANCER_FROM_FORMATION,
   MOVE_DANCER,
-  USER_LOGOUT
+  USER_LOGOUT,
+  ADD_CHOREO,
+  REMOVE_CHOREO
 } from "../constants/actionTypes";
 import { firestore } from "../firebase";
 import { doSignOut } from "../firebase/auth";
+import { deleteChoreo } from "../firebase/firestore";
+import { defaultStageDim, genDummyImage } from "../constants/defaults";
 
 const ACTIONS_TO_UPDATE = [
   RENAME_CHOREO,
@@ -43,15 +47,48 @@ export const firestoreWriter = store => next => action => {
   if (action.type === USER_LOGOUT) {
     return doSignOut().then(() => next(action));
   }
-  let result = next(action);
-  if (ACTIONS_TO_UPDATE.includes(action.type)) {
-    const choreoId = action.choreoId ? action.choreoId : action.payload.choreoId;
-    const updatedChoreo = store.getState().choreos.byId[choreoId];
-    console.log("Updating: " + action.type + " for " + choreoId);
-    console.log("New choreo: ");
-    console.log(updatedChoreo);
-    // TODO: rate-limiting (debouncing)
-    firestore.updateChoreo(choreoId, updatedChoreo);
+  if (action.type === REMOVE_CHOREO) {
+    return deleteChoreo(action.choreoId).then(() => next(action));
   }
-  return result
+  if (action.type === ADD_CHOREO) {
+
+  }
+  switch (action.type) {
+    case USER_LOGOUT: {
+      return doSignOut().then(() => next(action));
+    }
+    case REMOVE_CHOREO: {
+      deleteChoreo(action.choreoId);
+      return next(action);
+    }
+    case ADD_CHOREO: {
+      if (action.choreoId) {
+        // Internal update of state
+        return next(action);
+      } else {
+        // Create new choreo on firestore
+        let newChoreo = action.payload;
+        return firestore.createChoreo(newChoreo).then(createdChoreo => {
+          return next({
+            ...action,
+            payload: createdChoreo.data,
+            choreoId: createdChoreo.id
+          });
+        });
+      }
+    }
+    default: {
+      let result = next(action);
+      if (ACTIONS_TO_UPDATE.includes(action.type)) {
+        const choreoId = action.choreoId;
+        const updatedChoreo = store.getState().choreos.byId[choreoId];
+        console.log("Updating: " + action.type + " for " + choreoId);
+        console.log("New choreo: ");
+        console.log(updatedChoreo);
+        // TODO: rate-limiting (debouncing)
+        firestore.updateChoreo(choreoId, updatedChoreo);
+      }
+      return result
+    }
+  }
 };
