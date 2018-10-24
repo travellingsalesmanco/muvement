@@ -229,6 +229,7 @@
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .mp-description-inner {
