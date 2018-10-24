@@ -25,6 +25,7 @@
   height: 9em;
   width: 15em;
   pointer-events: none;
+  position: relative;
 }
 
 .mobile-formation-add-button {
@@ -40,4 +41,12 @@
 .mobile-formation-add-button:active {
   color: #24C6DC;
   border-color: #24C6DC;
+}
+
+.delete-button {
+  color: red;
+  font-size: 1.5em;
+  position: absolute;
+  right: 0;
+  z-index: 1;
 }

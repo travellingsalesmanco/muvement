@@ -52,11 +52,27 @@ class ChoreoHomeScreen extends React.Component {
     startValue: null,
     endValue: null,
     endOpen: false,
-    activeButton : 1
+    activeButton : 1,
+    editState: false
   };
 
   handleClick = (number) => {
     this.setState({activeButton: number});
+  };
+
+  handleEditState = () => {
+    console.log(this.state.editState);
+    this.setState(prevState => ({
+      editState: !prevState.editState
+    }))
+  };
+
+  handleMenuClick = (item) => {
+    if (item.key === '1') {
+      this.setState(prevState => ({
+        editState: !prevState.editState
+      }))
+    }
   };
 
   render() {
@@ -105,9 +121,13 @@ class ChoreoHomeScreen extends React.Component {
                   <h3>{this.props.name}</h3>
                 </div>
                 <div className="mp-right-container">
-                  <Menu mode="horizontal" theme="dark">
+                  <Menu mode="horizontal" theme="dark" onClick={this.handleMenuClick}>
                     <Menu.Item className="mp-menu-item" key="1">
-                      <Button icon="edit" ghost/>
+                      {
+                        this.state.editState
+                        ? <Button icon="close" ghost/>
+                        : <Button icon="edit" ghost/>
+                      }
                     </Menu.Item>
                     <Menu.Item key="2">
                       <Button icon="setting" ghost/>
@@ -122,7 +142,7 @@ class ChoreoHomeScreen extends React.Component {
               {
                 activeButton === 1
                   ? <MobileFormationCards formations={this.props.formations} match={this.props.match}
-                                          choreoId={this.props.choreoId}/>
+                                          choreoId={this.props.choreoId} editState={this.state.editState}/>
                   : activeButton === 2
                   ? <div className="edit-performers">
                       <PerformerList choreoId={this.props.choreoId}/>
