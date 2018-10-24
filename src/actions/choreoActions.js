@@ -56,8 +56,8 @@ export function addChoreo(id, choreo) {
   return (dispatch) => {
     dispatch({
       type: ADD_CHOREO,
+      choreoId: id,
       payload: {
-        choreoId: id,
         choreo: choreo
       }
     });
@@ -72,8 +72,8 @@ export function updateChoreoImage(id, link) {
   return (dispatch) => {
     dispatch({
       type: UPDATE_CHOREO_IMAGE,
+      choreoId: id,
       payload: {
-        choreoId: id,
         link: link
       }
     })
@@ -85,8 +85,8 @@ export function updateChoreoIfNewer(id, choreo) {
     if (isNewer(choreo, id, getState())) {
       dispatch({
         type: LOAD_CHOREO,
+        choreoId: id,
         payload: {
-          choreoId: id,
           choreo: choreo
         }
       });
@@ -101,7 +101,7 @@ export function syncCreatorChoreos(choreos) {
     lostChoreos.forEach((choreoId) => {
       dispatch({
         type: REMOVE_CHOREO,
-        payload: choreoId
+        choreoId: choreoId
       })
     });
     choreos.forEach((choreo) => {

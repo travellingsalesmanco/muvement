@@ -62,7 +62,8 @@ const choreoWithMetaReducer = (state, action) => {
 export default (state = demoChoreos, action) => {
   switch (action.type) {
     case ADD_CHOREO: {
-      const { choreoId, choreo } = action.payload;
+      const { choreoId} = action;
+      const { choreo } = action.payload;
       return {
         ...state,
         byId: {
@@ -73,7 +74,8 @@ export default (state = demoChoreos, action) => {
       }
     }
     case LOAD_CHOREO: {
-      const { choreoId, choreo } = action.payload;
+      const { choreoId} = action;
+      const { choreo } = action.payload;
       return {
         ...state,
         byId: {
@@ -84,16 +86,17 @@ export default (state = demoChoreos, action) => {
       }
     }
     case REMOVE_CHOREO: {
-      const { idToRemove } = action.payload;
-      const { [idToRemove]: _, ...prunedByIds } = state.byId;
+      const { choreoId} = action;
+      const { [choreoId]: _, ...prunedByIds } = state.byId;
       return {
         ...state,
         byId: prunedByIds,
-        myChoreos: state.myChoreos.filter(choreoId => choreoId !== idToRemove)
+        myChoreos: state.myChoreos.filter(id => id !== choreoId)
       }
     }
     case UPDATE_CHOREO_IMAGE: {
-      const { choreoId, link } = action.payload;
+      const { choreoId} = action;
+      const { link } = action.payload;
       return {
         ...state,
         byId: {
