@@ -12,9 +12,7 @@ class ChoreoCard extends PureComponent {
     if (this.props.editState) {
       this.props.dispatch({
         type: REMOVE_CHOREO,
-        payload: {
-          idToRemove: this.props.choreoId
-        }
+        choreoId: this.props.choreoId
       })
     } else {
       this.props.history.push(`/choreo/${this.props.choreoId}`);
