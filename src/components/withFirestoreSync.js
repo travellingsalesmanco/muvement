@@ -2,6 +2,7 @@ import React from 'react';
 import { firestore } from '../firebase';
 import { syncCreatorChoreos, updateChoreoIfNewer } from "../actions/choreoActions";
 import { connect } from "react-redux/";
+import NotFound from "./Static/NotFound";
 
 const withFireStoreSync = (withChoreoRouteParams) => (Component) => {
   class CheckAccessAndUpdate extends React.Component {
@@ -44,10 +45,9 @@ const withFireStoreSync = (withChoreoRouteParams) => (Component) => {
     render() {
       const { loading, error } = this.state;
       if (error != null) {
-        // TODO: replace with unauthorized / 404 page
-        return null;
+        return <NotFound />;
       } else {
-        return <Component loading={loading} {...this.props}  />
+        return <Component loading={loading} {...this.props} />
       }
     }
   }
