@@ -1,12 +1,16 @@
 import React from 'react';
 import './Settings.css';
 import { Button, Layout, Menu, Icon } from 'antd';
-import connect from "react-redux/es/connect/connect";
 import { BrowserRouter as Route, withRouter } from "react-router-dom";
 import { auth } from "../../firebase";
+import {connect} from 'react-redux'
+import { USER_LOGOUT } from '../../constants/actionTypes';
 
 
 class Settings extends React.Component {
+  handleLogout = () => {
+    this.props.dispatch({type: USER_LOGOUT}).then(this.props.history.push('/landing'));
+  }
 
   render() {
     const { Header } = Layout;
@@ -32,7 +36,7 @@ class Settings extends React.Component {
                      title={<span><Icon type="lock" /><span>Reset Password</span></span>}>
             </SubMenu>
             <SubMenu key="logout" className="settings-menu-item"
-                     onTitleClick={() => auth.doSignOut().then(() => this.props.history.push(`/landing`))}
+                     onTitleClick={this.handleLogout}
                      title={<span><Icon type="logout" /><span>Logout</span></span>}>
             </SubMenu>
 
@@ -45,4 +49,4 @@ class Settings extends React.Component {
   }
 }
 
-export default withRouter(Settings);
+export default withRouter(connect()(Settings));

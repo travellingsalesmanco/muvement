@@ -14,9 +14,11 @@ import {
   RENAME_DANCER,
   ADD_DANCER_TO_FORMATION,
   REMOVE_DANCER_FROM_FORMATION,
-  MOVE_DANCER
+  MOVE_DANCER,
+  USER_LOGOUT
 } from "../constants/actionTypes";
 import { firestore } from "../firebase";
+import { doSignOut } from "../firebase/auth";
 
 const ACTIONS_TO_UPDATE = [
   RENAME_CHOREO,
@@ -38,6 +40,9 @@ const ACTIONS_TO_UPDATE = [
 ];
 
 export const firestoreWriter = store => next => action => {
+  if (action.type === USER_LOGOUT) {
+    return doSignOut().then(() => next(action));
+  }
   let result = next(action);
   if (ACTIONS_TO_UPDATE.includes(action.type)) {
     const choreoId = action.choreoId ? action.choreoId : action.payload.choreoId;
