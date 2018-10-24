@@ -10,7 +10,8 @@ import {
   REORDER_FORMATION,
   SET_LABELS_VIEW,
   SWITCH_ACTIVE_CHOREO,
-  SWITCH_ACTIVE_FORMATION
+  SWITCH_ACTIVE_FORMATION,
+  REMOVE_FORMATION
 } from "../constants/actionTypes";
 import { defaultStageDim } from "../constants/defaults";
 import { getChoreo } from "../selectors/choreo";
@@ -21,6 +22,14 @@ function containsDancer(choreoId, name, state) {
 
 function hasFormation(choreoId, formationId, state) {
   return formationId >= 0 && formationId < getChoreo(state, choreoId).formations.length
+}
+
+function getNumFormations(choreoId, state) {
+  return getChoreo(state, choreoId).formations.length;
+}
+
+function getActiveFormation(state) {
+  return state.UI.activeFormation;
 }
 
 function hasChoreo(choreoId, state) {
@@ -182,6 +191,35 @@ export function addAndSetActiveFormation(choreoId, formationId) {
         type: SWITCH_ACTIVE_FORMATION,
         payload: formationId
       })
+    }
+  }
+}
+
+export function removeFormation(choreoId, formationId) {
+  return (dispatch, getState) => {
+    if(hasFormation(choreoId, formationId, getState())) {
+      let numFormations = getNumFormations(choreoId, getState());
+      if(numFormations === 1){
+        // Must always have at least 1 formation
+        dispatch({
+          type: ADD_FORMATION,
+          choreoId: choreoId,
+          payload: formationId + 1
+        });
+        numFormations++;
+      }
+      dispatch({
+        type: REMOVE_FORMATION,
+        choreoId: choreoId,
+        payload: formationId
+      })
+      numFormations--;
+      if (getActiveFormation(getState()) >= numFormations) {
+        dispatch({
+          type: SWITCH_ACTIVE_FORMATION,
+          payload: numFormations - 1
+        })
+      }
     }
   }
 }

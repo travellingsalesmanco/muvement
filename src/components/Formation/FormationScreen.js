@@ -1,7 +1,7 @@
 import { Button, Input, Layout } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
-import { addAndSetActiveFormation, gotoFormation } from "../../actions/choreoActions";
+import { addAndSetActiveFormation, removeFormation } from "../../actions/choreoActions";
 import { renameFormation } from "../../actions/formationActions";
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from "../../icons/GradientSVG";
@@ -103,6 +103,9 @@ class FormationScreen extends Component {
   handleAddFormation = () => {
     this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formationId + 1));
   };
+  handleRemoveFormation = () => {
+    this.props.dispatch(removeFormation(this.props.choreoId, this.props.formationId));
+  }
 
   handleEditTimeline = () => {
 
@@ -148,9 +151,21 @@ class FormationScreen extends Component {
                   <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                   {
                     activeButton === 1 &&
-                    <div style={{ overflowX: 'scroll', marginTop: '1em' }}>
-                      <HorizontalSlideList />
-                    </div>
+                    <Fragment>
+                      <div style={{ overflowX: 'scroll', marginTop: '1em' }}>
+                        <HorizontalSlideList />
+                      </div>
+                      <div style={{display:"flex", flexDirection:"row"}}>
+                        <div style={{paddingTop:'0.5em', paddingRight:'0.5em', paddingBottom:'1em', paddingLeft:'2em', flex:1}}>
+                          <Button type={"default"} icon="plus" ghost block style={{borderRadius:'1em'}}
+                            onClick={this.handleAddFormation}>Add</Button>
+                        </div>
+                        <div style={{paddingTop:'0.5em', paddingRight:'2em', paddingBottom:'1em', paddingLeft:'0.5em', flex:1}}>
+                          <Button type={"danger"} icon="delete" ghost block style={{borderRadius:'1em'}}
+                            onClick={this.handleRemoveFormation}>Delete</Button>
+                        </div>
+                      </div>
+                    </Fragment>
                   }
                   {
                     activeButton === 2 &&
