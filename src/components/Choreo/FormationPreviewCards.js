@@ -2,19 +2,14 @@ import { Card, Col, Icon, Row } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { addAndSetActiveFormation, gotoFormation } from "../../actions/choreoActions";
-import { REMOVE_FORMATION } from "../../constants/actionTypes";
+import { addAndSetActiveFormation, gotoFormation, removeFormation } from "../../actions/choreoActions";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import './ChoreoHomeScreen.css';
 
 class FormationPreviewCards extends React.Component {
   clickHandler = (index) => {
     if (this.props.editState) {
-      this.props.dispatch({
-        type: REMOVE_FORMATION,
-        choreoId: this.props.choreoId,
-        formationId: index
-      })
+      this.props.dispatch(removeFormation(this.props.choreoId, index - 1))
     } else {
       if (index === 0) {
         this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formations.length));

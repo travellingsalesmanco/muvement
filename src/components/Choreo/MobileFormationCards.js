@@ -2,19 +2,14 @@ import { Button, Card, Icon } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { addAndSetActiveFormation, gotoFormation } from "../../actions/choreoActions";
-import { REMOVE_FORMATION } from "../../constants/actionTypes";
+import { addAndSetActiveFormation, gotoFormation, removeFormation } from "../../actions/choreoActions";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import './MobileFormationCards.css';
 
 class MobileFormationCards extends React.Component {
   clickHandler = (index) => {
     if (this.props.editState) {
-      this.props.dispatch({
-        type: REMOVE_FORMATION,
-        choreoId: this.props.choreoId,
-        formationId: index
-      })
+      this.props.dispatch(removeFormation(this.props.choreoId, index))
     } else {
       this.props.dispatch(gotoFormation(this.props.choreoId, index));
       this.props.history.push(`${this.props.match.url}/formation`)
