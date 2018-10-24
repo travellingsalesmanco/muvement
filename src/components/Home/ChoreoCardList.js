@@ -32,7 +32,7 @@ class ChoreoCardList extends React.Component {
                     <ChoreoCard choreoId={choreoId} />
                   </Col>
                   <Col span={10}>
-                    {rest[index + 1] ? <ChoreoCard choreoId={choreoId} /> : null}
+                    {rest[index + 1] ? <ChoreoCard choreoId={rest[index + 1]} /> : null}
                   </Col>
                 </Row>
               );
