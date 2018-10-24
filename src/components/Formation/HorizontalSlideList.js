@@ -71,7 +71,7 @@ class HorizontalSlideList extends React.Component {
                           provided.draggableProps.style
                         )}
                       >
-                        <div style={{ height: '8em', width: '10em', boxShadow: `0px 0px 1.5em 0px rgba(39, 39, 39, 0.75)`,}}>
+                        <div style={{ height: '8em', width: '10em', boxShadow: `0px 0px 1.5em 0px rgba(39, 39, 39, 0.75)`, pointerEvents:"None"}}>
                           <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index}/>
                         </div>
                         <span className="slide-title">{index + 1}. {item.name}</span>
