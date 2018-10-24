@@ -1,8 +1,8 @@
-import { Card } from 'antd';
+import { Button, Card } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { gotoFormation } from "../../actions/choreoActions";
+import { addAndSetActiveFormation, gotoFormation } from "../../actions/choreoActions";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import './MobileFormationCards.css';
 
@@ -11,9 +11,17 @@ class MobileFormationCards extends React.Component {
     this.props.dispatch(gotoFormation(this.props.choreoId, index));
     this.props.history.push(`${this.props.match.url}/formation`)
   };
+  handleAddFormation = () => {
+    this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formations.length));
+    // this.props.history.push(`${this.props.match.url}/formation`)
+  };
   render() {
     return (
       <div>
+        <div style={{padding: '0 1em'}}>
+        <Button type={"default"} icon={"plus"} ghost block className="mobile-formation-add-button"
+                onClick={this.handleAddFormation}>Add Formation</Button>
+        </div>
       {
         this.props.formations.map((formation, index) => (
           <Card
