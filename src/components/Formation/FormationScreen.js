@@ -122,7 +122,7 @@ class FormationScreen extends Component {
     return (
       <Fragment>
         <MobilePortrait>
-          <Layout className="body" style={{minHeight: '100vh', height: '100%'}}>
+          <Layout className="body" style={{ minHeight: '100vh', height: '100%' }}>
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout style={{ backgroundColor: 'transparent' }}>
               <Content style={{ display: "flex", flexDirection: "column" }}>
@@ -134,7 +134,7 @@ class FormationScreen extends Component {
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
                                            withGrid animated={this.props.animated} />
                   </div>
-                  <div style={{ overflowY: 'scroll'}}>
+                  <div style={{ overflowY: 'scroll' }}>
                     <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                     {
                       activeButton === 1 &&
@@ -174,9 +174,9 @@ class FormationScreen extends Component {
                     }
                     {
                       activeButton === 3 &&
-                      <div style={{paddingTop:'4em', textAlign:'center'}}>
-                        <span style={{color:'#fff', fontFamily:'Sen-Regular', fontSize:'1.5em'}}>Under Construction!</span>
-                      {/* <Timeline choreoId={this.props.choreoId} /> */}
+                      <div style={{ paddingTop: '4em', textAlign: 'center' }}>
+                        <span style={{ color: '#fff', fontFamily: 'Sen-Regular', fontSize: '1.5em' }}>Under Construction!</span>
+                        {/* <Timeline choreoId={this.props.choreoId} /> */}
                       </div>
                     }
                   </div>
@@ -187,15 +187,16 @@ class FormationScreen extends Component {
         </MobilePortrait>
 
         <MobileLandscape>
-          <Layout className="body">
-            <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
-            <Spin spinning={loading} size={"large"}>
+          <Spin spinning={loading} size={"large"}>
+            <Layout className="body">
+              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
               <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
+
                 <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
                                        withGrid animated={this.props.animated} />
               </div>
-            </Spin>
-          </Layout>
+            </Layout>
+          </Spin>
         </MobileLandscape>
 
         <MinTablet>
@@ -233,7 +234,7 @@ class FormationScreen extends Component {
                     </Button>
                   </div>
                   <h3 className="slide-list-title">All Formations</h3>
-                  <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)`}}>
+                  <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)` }}>
                     <VerticalSlideList />
                   </div>
                   {/*<PreviewSlideList choreoId={this.props.choreoId} />*/}
