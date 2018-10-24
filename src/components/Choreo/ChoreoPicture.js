@@ -1,14 +1,11 @@
 import React from 'react';
-import {Card, Upload, Icon, message} from 'antd';
+import { Card, Upload, Icon, message } from 'antd';
 import './ChoreoHomeScreen.css';
 import ImageAddIcon from "../../icons/ImageAddIcon";
 import GradientSVG from '../../icons/GradientSVG';
-
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
+import { storage } from "../../firebase";
+import { connect } from 'react-redux';
+import { updateChoreoImage } from "../../actions/choreoActions";
 
 function beforeUpload(file) {
   const isJPG = file.type === 'image/jpeg';
@@ -23,33 +20,38 @@ function beforeUpload(file) {
 }
 
 class ChoreoPicture extends React.Component {
-  state = {
-    loading: false,
-  };
-  handleChange = (info) => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+    };
+  }
+
+  handleChange = (info, choreoId) => {
     if (info.file.status === 'uploading') {
       this.setState({ loading: true });
       return;
     }
     if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, imageUrl => this.setState({
-        imageUrl,
+      // TODO: shift this to higher component to keep this pure
+      this.props.dispatch(updateChoreoImage(choreoId, info.file.response));
+      this.setState({
         loading: false,
-      }));
+      });
     }
-  }
+  };
+
   render() {
     const uploadButton = (
       <div>
         {
           this.state.loading
-            ? <Icon type={'loading'} style={{color: '#24c6dc', fontSize: '30px'}}/>
-            : <ImageAddIcon className="add-choreo-pic-icon"/>
+            ? <Icon type={'loading'} style={{ color: '#24c6dc', fontSize: '30px' }} />
+            : <ImageAddIcon className="add-choreo-pic-icon" />
         }
       </div>
     );
-    const imageUrl = this.state.imageUrl;
+    const { choreoId, imageUrl } = this.props;
     return (
       <div>
         <GradientSVG
@@ -57,22 +59,24 @@ class ChoreoPicture extends React.Component {
           endColor="#514a9d"
           idCSS="cool-gradient"
         />
-          <div style={{display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Upload
-              name="avatar"
-              listType="picture-card"
-              className="avatar-uploader"
-              showUploadList={false}
-              action="//jsonplaceholder.typicode.com/posts/"
-              beforeUpload={beforeUpload}
-              onChange={this.handleChange}
-            >
-              {imageUrl ? <img src={imageUrl} style={{ width: '100%' }} alt="avatar" /> : uploadButton}
-            </Upload>
-          </div>
+        <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Upload
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            customRequest={(req) => storage.addChoreoImage(req.file, choreoId).then((link) => {
+              req.onSuccess(link);
+            })}
+            beforeUpload={beforeUpload}
+            onChange={(info) => this.handleChange(info, choreoId)}
+          >
+            {imageUrl ? <img src={imageUrl} style={{ width: '100%' }} alt="avatar" /> : uploadButton}
+          </Upload>
+        </div>
       </div>
     );
   }
 }
 
-export default ChoreoPicture;
+export default connect()(ChoreoPicture);

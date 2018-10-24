@@ -5,7 +5,7 @@ import './AddPerformerScreen.css';
 import { addChoreo } from "../../actions/choreoActions";
 import { connect } from 'react-redux';
 import { firestore } from "../../firebase";
-import { defaultStageDim } from "../../constants/defaults";
+import { defaultStageDim, genDummyImage } from "../../constants/defaults";
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class AddPerformerScreen extends React.Component {
@@ -38,7 +38,8 @@ class AddPerformerScreen extends React.Component {
         name: this.props.choreoName,
         stageDim: defaultStageDim,
         dancers: this.state.names,
-        formations: []
+        formations: [],
+        imageUrl: genDummyImage(this.props.choreoName),
       }
     ).then(createdChoreo => {
       this.props.dispatch(addChoreo(createdChoreo.id, createdChoreo.data));

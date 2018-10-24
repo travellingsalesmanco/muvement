@@ -117,7 +117,7 @@ class ChoreoHomeScreen extends React.Component {
               </div>
             </Header>
             <Layout className="choreo-homescreen-contents" style={{}}>
-              <ChoreoPicture/>
+              <ChoreoPicture choreoId={this.props.choreoId} imageUrl={this.props.choreoImageUrl} />
               <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick}/>
               {
                 activeButton === 1
@@ -148,7 +148,7 @@ class ChoreoHomeScreen extends React.Component {
                 {
                   this.state.activeButton === 1
                     ? <div>
-                      <ChoreoPicture/>
+                      <ChoreoPicture choreoId={this.props.choreoId} imageUrl={this.props.choreoImageUrl}/>
                       <h2 className="stagedim-title">STAGE DIMENSION</h2>
                       <StageDimForm choreoId={this.props.choreoId}/>
                     </div>
@@ -176,7 +176,8 @@ const mapStateToProps = (state, props) => {
   return {
     formations: choreo.formations,
     name: choreo.name,
-    choreoId: choreoId
+    choreoId: choreoId,
+    choreoImageUrl: choreo.imageUrl
   }
 };
 
