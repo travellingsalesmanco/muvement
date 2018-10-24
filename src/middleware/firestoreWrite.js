@@ -2,6 +2,7 @@ import {
   RENAME_CHOREO,
   PUBLISH_CHOREO,
   UNPUBLISH_CHOREO,
+  UPDATE_CHOREO_IMAGE,
   EDIT_STAGE_DIMENSIONS,
   ADD_FORMATION,
   REMOVE_FORMATION,
@@ -21,6 +22,7 @@ const ACTIONS_TO_UPDATE = [
   RENAME_CHOREO,
   PUBLISH_CHOREO,
   UNPUBLISH_CHOREO,
+  UPDATE_CHOREO_IMAGE,
   EDIT_STAGE_DIMENSIONS,
   ADD_FORMATION,
   REMOVE_FORMATION,
@@ -38,7 +40,7 @@ const ACTIONS_TO_UPDATE = [
 export const firestoreWriter = store => next => action => {
   let result = next(action);
   if (ACTIONS_TO_UPDATE.includes(action.type)) {
-    const choreoId = action.choreoId;
+    const choreoId = action.choreoId ? action.choreoId : action.payload.choreoId;
     const updatedChoreo = store.getState().choreos.byId[choreoId];
     console.log("Updating: " + action.type + " for " + choreoId);
     console.log("New choreo: ");
