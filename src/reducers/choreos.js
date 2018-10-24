@@ -6,7 +6,8 @@ import {
   PUBLISH_CHOREO,
   REMOVE_CHOREO,
   RENAME_CHOREO,
-  UNPUBLISH_CHOREO
+  UNPUBLISH_CHOREO,
+  UPDATE_CHOREO_IMAGE,
 } from '../constants/actionTypes';
 import { defaultStageDim } from '../constants/defaults';
 import { demoChoreos } from '../constants/dummyData';
@@ -89,6 +90,20 @@ export default (state = demoChoreos, action) => {
         ...state,
         byId: prunedByIds,
         myChoreos: state.myChoreos.filter(choreoId => choreoId !== idToRemove)
+      }
+    }
+    case UPDATE_CHOREO_IMAGE: {
+      const { choreoId, link } = action.payload;
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [choreoId]: {
+            ...state.byId[choreoId],
+            imageUrl: link
+          }
+        },
+        myChoreos: [...state.myChoreos]
       }
     }
     default: {

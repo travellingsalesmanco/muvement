@@ -2,6 +2,7 @@ import {
   ADD_CHOREO,
   LOAD_CHOREO,
   REMOVE_CHOREO,
+  UPDATE_CHOREO_IMAGE,
   ADD_DANCER,
   ADD_FORMATION,
   EDIT_STAGE_DIMENSIONS,
@@ -55,6 +56,18 @@ export function addChoreo(id, choreo) {
       type: SWITCH_ACTIVE_CHOREO,
       payload: id
     });
+  }
+}
+
+export function updateChoreoImage(id, link) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_CHOREO_IMAGE,
+      payload: {
+        choreoId: id,
+        link: link
+      }
+    })
   }
 }
 
