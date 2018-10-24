@@ -49,7 +49,7 @@ class MobileFormationCards extends React.Component {
               <div className="mobile-formation-preview-container">
                 {
                   this.props.editState &&
-                  <span onClick={() => this.handleRemoveFormation(index)}>
+                  <span>
                     <Icon type="minus-circle" theme="outlined"
                           className={'delete-button'}/>
                   </span>

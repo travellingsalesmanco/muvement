@@ -82,32 +82,6 @@ class ChoreoHomeScreen extends React.Component {
     const { Header, Content, Sider } = Layout;
     const { activeButton } = this.state;
     const { loading } = this.props;
-    const navbar = (
-      <Header>
-        <div className="nav-bar">
-          <div>
-            <Button style={{ fontSize: '25px' }} icon="left"
-                    onClick={() => this.props.history.push('/')} />
-            <MinTablet>
-              <span className="backbutton-desc">Dashboard</span>
-            </MinTablet>
-          </div>
-          <div className="title">
-            <h3>{this.props.name}</h3>
-          </div>
-          <div className="right-container">
-            <Menu mode="horizontal" theme="dark">
-              <Menu.Item key="1">
-                <Button icon="edit" ghost />
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Button icon="setting" ghost />
-              </Menu.Item>
-            </Menu>
-          </div>
-        </div>
-      </Header>
-    );
     return (
       <Fragment>
         <MobilePortrait>
@@ -160,11 +134,38 @@ class ChoreoHomeScreen extends React.Component {
 
         <MinTablet>
           <Layout className="choreo-homescreen-body">
-            {navbar}
+            <Header>
+              <div className="nav-bar">
+                <div>
+                  <Button style={{ fontSize: '25px' }} icon="left"
+                          onClick={() => this.props.history.push('/')} />
+                  <MinTablet>
+                    <span className="backbutton-desc">Dashboard</span>
+                  </MinTablet>
+                </div>
+                <div className="title">
+                  <h3>{this.props.name}</h3>
+                </div>
+                <div className="right-container">
+                  <Menu mode="horizontal" theme="dark" onClick={this.handleMenuClick}>
+                    <Menu.Item className="mp-menu-item" key="1">
+                      {
+                        this.state.editState
+                          ? <Button icon="close" ghost />
+                          : <Button icon="edit" ghost />
+                      }
+                    </Menu.Item>
+                    <Menu.Item key="2">
+                      <Button icon="setting" ghost />
+                    </Menu.Item>
+                  </Menu>
+                </div>
+              </div>
+            </Header>
             <Layout className="choreo-homescreen-contents">
               <Content style={{ display: "flex", flexDirection: "column" }}>
                 <FormationPreviewCards formations={this.props.formations} match={this.props.match}
-                                       choreoId={this.props.choreoId} />
+                                       choreoId={this.props.choreoId} editState={this.state.editState}/>
               </Content>
               <Sider width="20rem">
                 <DefaultSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
