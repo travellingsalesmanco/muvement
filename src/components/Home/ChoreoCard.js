@@ -2,13 +2,23 @@ import { Card, Icon } from 'antd';
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { REMOVE_CHOREO } from "../../constants/actionTypes";
 import { getChoreo } from '../../selectors/choreo';
 import './ChoreoCards.css';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class ChoreoCard extends PureComponent {
   clickHandler() {
-    this.props.history.push(`/choreo/${this.props.choreoId}`);
+    if (this.props.editState) {
+      this.props.dispatch({
+        type: REMOVE_CHOREO,
+        payload: {
+          idToRemove: this.props.choreoId
+        }
+      })
+    } else {
+      this.props.history.push(`/choreo/${this.props.choreoId}`);
+    }
   }
 
   render() {
@@ -25,6 +35,13 @@ class ChoreoCard extends PureComponent {
           >
             <div>
               <div className="mp-ant-card-cover">
+                {
+                  this.props.editState &&
+                  <span>
+                    <Icon type="minus-circle" theme="outlined"
+                          className={'delete-button'}/>
+                  </span>
+                }
                 <img alt="Cover" src={imageUrl} />
               </div>
               <div className="mp-description">
@@ -47,6 +64,13 @@ class ChoreoCard extends PureComponent {
           >
             <div>
               <div className="ant-card-cover">
+                {
+                  this.props.editState &&
+                  <span>
+                    <Icon type="minus-circle" theme="outlined"
+                          className={'delete-button'}/>
+                  </span>
+                }
                 <img alt="Cover" src={imageUrl} />
               </div>
               <div className="description">
@@ -69,6 +93,13 @@ class ChoreoCard extends PureComponent {
           >
             <div>
               <div className="ant-card-cover">
+                {
+                  this.props.editState &&
+                  <span>
+                    <Icon type="minus-circle" theme="outlined"
+                          className={'delete-button'}/>
+                  </span>
+                }
                 <img alt="Cover" src={imageUrl} />
               </div>
               <div className="description">

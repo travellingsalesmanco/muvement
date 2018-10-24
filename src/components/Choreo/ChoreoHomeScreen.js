@@ -60,13 +60,6 @@ class ChoreoHomeScreen extends React.Component {
     this.setState({ activeButton: number });
   };
 
-  handleEditState = () => {
-    console.log(this.state.editState);
-    this.setState(prevState => ({
-      editState: !prevState.editState
-    }))
-  };
-
   handleMenuClick = (item) => {
     if (item.key === '1') {
       this.setState(prevState => ({

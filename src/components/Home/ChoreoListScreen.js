@@ -8,6 +8,18 @@ import withFireStoreSync from "../withFirestoreSync";
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class ChoreoListScreen extends React.Component {
+  state = {
+    editState: false
+  }
+
+  handleMenuClick = (item) => {
+    if (item.key === '1') {
+      this.setState(prevState => ({
+        editState: !prevState.editState
+      }))
+    }
+  };
+
   render() {
     const { Header, Content } = Layout;
     const { loading } = this.props;
@@ -20,8 +32,15 @@ class ChoreoListScreen extends React.Component {
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="mp-right-container">
-                <Menu mode="horizontal" theme="dark">
-                  <Menu.Item key="1">
+                <Menu mode="horizontal" theme="dark" onClick={this.handleMenuClick}>
+                  <Menu.Item className="mp-menu-item" key="1">
+                    {
+                      this.state.editState
+                        ? <Button icon="close" ghost />
+                        : <Button icon="edit" ghost />
+                    }
+                  </Menu.Item>
+                  <Menu.Item key="2">
                     <Button className="mp-setting" icon="setting" onClick={() => this.props.history.push(`/settings`)}
                             ghost />
                   </Menu.Item>
@@ -38,8 +57,15 @@ class ChoreoListScreen extends React.Component {
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="right-container">
-                <Menu mode="horizontal" theme="dark">
-                  <Menu.Item key="1">
+                <Menu mode="horizontal" theme="dark" onClick={this.handleMenuClick}>
+                  <Menu.Item className="mp-menu-item" key="1">
+                    {
+                      this.state.editState
+                        ? <Button icon="close" ghost />
+                        : <Button icon="edit" ghost />
+                    }
+                  </Menu.Item>
+                  <Menu.Item key="2">
                     <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
                   </Menu.Item>
                 </Menu>
@@ -55,8 +81,15 @@ class ChoreoListScreen extends React.Component {
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="right-container">
-                <Menu mode="horizontal" theme="dark">
-                  <Menu.Item key="1">
+                <Menu mode="horizontal" theme="dark" onClick={this.handleMenuClick}>
+                  <Menu.Item className="mp-menu-item" key="1">
+                    {
+                      this.state.editState
+                        ? <Button icon="close" ghost />
+                        : <Button icon="edit" ghost />
+                    }
+                  </Menu.Item>
+                  <Menu.Item key="2">
                     <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
                   </Menu.Item>
                 </Menu>
@@ -68,7 +101,7 @@ class ChoreoListScreen extends React.Component {
         <Content>
           <Spin spinning={loading} size={"large"}>
             <ChoreoCardList data={this.props.choreoIds} match={this.props.match}
-                            setModalVisible={this.props.setModalVisible} />
+                            setModalVisible={this.props.setModalVisible} editState={this.state.editState}/>
           </Spin>
         </Content>
       </Fragment>

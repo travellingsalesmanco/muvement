@@ -84,7 +84,7 @@ export default (state = demoChoreos, action) => {
       }
     }
     case REMOVE_CHOREO: {
-      const { payload: idToRemove } = action;
+      const { idToRemove } = action.payload;
       const { [idToRemove]: _, ...prunedByIds } = state.byId;
       return {
         ...state,
