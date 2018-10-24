@@ -54,7 +54,7 @@ function isNewer(choreo, choreoId, state) {
 
 export function addChoreo(id, choreo) {
   return (dispatch) => {
-    dispatch({
+    let res = dispatch({
       type: ADD_CHOREO,
       choreoId: id,
       payload: choreo
@@ -63,6 +63,7 @@ export function addChoreo(id, choreo) {
       type: SWITCH_ACTIVE_CHOREO,
       payload: id
     });
+    return res;
   }
 }
 

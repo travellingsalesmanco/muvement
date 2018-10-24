@@ -5,7 +5,7 @@ import './AddPerformerScreen.css';
 import { addChoreo } from "../../actions/choreoActions";
 import { connect } from 'react-redux';
 import { firestore } from "../../firebase";
-import { defaultStageDim, genDummyImage } from "../../constants/defaults";
+import { defaultStageDim, defaultFormation, genDummyImage } from "../../constants/defaults";
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class AddPerformerScreen extends React.Component {
@@ -37,22 +37,17 @@ class AddPerformerScreen extends React.Component {
 
   handleNext = () => {
     this.setState({
-        loading: true,
-        disabled: true,
-      }, () => {
-        firestore.createChoreo({
-            name: this.props.choreoName,
-            stageDim: defaultStageDim,
-            dancers: this.state.names,
-            formations: [],
-            imageUrl: genDummyImage(this.props.choreoName),
-          }
-        ).then(createdChoreo => {
-          this.props.dispatch(addChoreo(createdChoreo.id, createdChoreo.data));
-          this.props.history.push(`/choreo/${createdChoreo.id}`)
-        })
-      }
-    );
+      loading: true,
+      disabled: true,
+    }, () => {
+      this.props.dispatch(addChoreo(null, {
+        name: this.props.choreoName,
+        stageDim: defaultStageDim,
+        dancers: this.state.names,
+        formations: [defaultFormation],
+        imageUrl: genDummyImage(this.props.choreoName),
+      })).then(finalAction => this.props.history.push(`/choreo/${finalAction.choreoId}`))
+    })
   };
 
   render() {
