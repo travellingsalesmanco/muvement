@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import { addAndSetActiveFormation, removeFormation } from "../../actions/choreoActions";
 import { renameFormation } from "../../actions/formationActions";
+import { LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/actionTypes';
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from "../../icons/GradientSVG";
 import HeadphoneIcon from "../../icons/HeadphoneIcon";
@@ -19,7 +20,6 @@ import PerformerList from "./PerformerList";
 import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 import Timeline from "./Timeline";
-import { LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/actionTypes';
 
 const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameConfirm }) => (
   <div className="section-title-container">
@@ -75,22 +75,6 @@ class FormationScreen extends Component {
       this.props.dispatch({ type: UNLOAD_ANIMATED_VIEW })
     }
     this.setState({ activeButton: number });
-  };
-
-  handleMenuClick = (item) => {
-    console.log(item.key);
-    if (item.key === "1" || item.key === "4") {
-      this.setState({
-        visible: true,
-        sidePanelID: parseInt(item.key),
-      });
-    } else if (item.key === "2") {
-      this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formationId + 1));
-    } else if (item.key === "5") {
-      this.props.dispatch(gotoFormation(this.props.choreoId, this.props.formationId - 1));
-    } else if (item.key === "6") {
-      this.props.dispatch(gotoFormation(this.props.choreoId, this.props.formationId + 1));
-    }
   };
 
   handleEditPerformer = () => {
