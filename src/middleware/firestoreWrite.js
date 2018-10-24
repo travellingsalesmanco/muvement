@@ -44,21 +44,16 @@ const ACTIONS_TO_UPDATE = [
 ];
 
 export const firestoreWriter = store => next => action => {
-  if (action.type === USER_LOGOUT) {
-    return doSignOut().then(() => next(action));
-  }
-  if (action.type === REMOVE_CHOREO) {
-    return deleteChoreo(action.choreoId).then(() => next(action));
-  }
-  if (action.type === ADD_CHOREO) {
 
-  }
   switch (action.type) {
     case USER_LOGOUT: {
       return doSignOut().then(() => next(action));
     }
     case REMOVE_CHOREO: {
-      deleteChoreo(action.choreoId);
+      if (!action.stale) {
+        // Remove choreo from firestore (not internal change)
+        deleteChoreo(action.choreoId);
+      }
       return next(action);
     }
     case ADD_CHOREO: {

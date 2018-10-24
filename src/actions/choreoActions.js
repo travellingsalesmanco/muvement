@@ -96,7 +96,8 @@ export function syncCreatorChoreos(choreos) {
     lostChoreos.forEach((choreoId) => {
       dispatch({
         type: REMOVE_CHOREO,
-        choreoId: choreoId
+        choreoId: choreoId,
+        stale: true
       })
     });
     choreos.forEach((choreo) => {
