@@ -121,7 +121,7 @@ class FormationScreen extends Component {
     return (
       <Fragment>
         <MobilePortrait>
-          <Layout className="body">
+          <Layout className="body" style={{minHeight: '100vh', height: '100%'}}>
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout style={{ backgroundColor: 'transparent' }}>
               <Content style={{ display: "flex", flexDirection: "column" }}>
