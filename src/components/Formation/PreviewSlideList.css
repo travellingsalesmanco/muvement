@@ -21,6 +21,7 @@
   text-overflow: ellipsis;
   display: inline-block;
   white-space: nowrap;
+  margin-left: 0.5em;
 }
 
 .slide-list-title {

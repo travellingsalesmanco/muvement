@@ -20,6 +20,7 @@ import PerformerList from "./PerformerList";
 import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 import Timeline from "./Timeline";
+import VerticalSlideList from "./VerticalSlideList";
 
 const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameConfirm }) => (
   <div className="section-title-container">
@@ -133,7 +134,7 @@ class FormationScreen extends Component {
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
                                            withGrid animated={this.props.animated} />
                   </div>
-                  <div style={{ overflowY: 'scroll' }}>
+                  <div style={{ overflowY: 'scroll'}}>
                     <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                     {
                       activeButton === 1 &&
@@ -231,7 +232,11 @@ class FormationScreen extends Component {
                       <HeadphoneIcon style={{ fontSize: '25px' }} />
                     </Button>
                   </div>
-                  <PreviewSlideList choreoId={this.props.choreoId} />
+                  <h3 className="slide-list-title">All Formations</h3>
+                  <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)`}}>
+                    <VerticalSlideList />
+                  </div>
+                  {/*<PreviewSlideList choreoId={this.props.choreoId} />*/}
                 </Spin>
               </Sider>
               <SidePanel
