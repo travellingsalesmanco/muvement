@@ -171,6 +171,10 @@ button.ant-btn.mp-back-button.ant-btn-icon-only{
   right: 0px;
 }
 
+.mp-right-container .ant-menu.ant-menu-dark .ant-menu-item-selected {
+  background-color: transparent;
+}
+
 li.mp-menu-item {
   margin-right: 10px;
 }
