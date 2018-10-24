@@ -206,8 +206,8 @@ class FormationScreen extends Component {
             />
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout className="contents">
-              <Spin spinning={loading} size={"large"}>
-                <Content style={{ display: "flex", flexDirection: "column" }}>
+              <Content style={{ display: "flex", flexDirection: "column" }}>
+                <Spin spinning={loading} size={"large"}>
                   <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
                                 handleEditName={this.handleEditName}
                                 handleEditNameConfirm={this.handleEditNameConfirm} />
@@ -216,8 +216,10 @@ class FormationScreen extends Component {
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
                                            withGrid animated={this.props.animated} />
                   </div>
-                </Content>
-                <Sider width={'12rem'} className="sider">
+                </Spin>
+              </Content>
+              <Sider width={'12rem'} className="sider">
+                <Spin spinning={loading} size={"large"}>
                   <div className="button-container">
                     <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
                       <UserAddIcon style={{ fontSize: '33px' }} />
@@ -230,18 +232,18 @@ class FormationScreen extends Component {
                     </Button>
                   </div>
                   <PreviewSlideList choreoId={this.props.choreoId} />
-                </Sider>
-                <SidePanel
-                  choreoId={this.props.choreoId}
-                  placement={this.state.placement}
-                  closable={true}
-                  onClose={this.onClose}
-                  visible={this.state.visible}
-                  mask={false}
-                  id={this.state.sidePanelID}
-                  width={200}
-                />
-              </Spin>
+                </Spin>
+              </Sider>
+              <SidePanel
+                choreoId={this.props.choreoId}
+                placement={this.state.placement}
+                closable={true}
+                onClose={this.onClose}
+                visible={this.state.visible}
+                mask={false}
+                id={this.state.sidePanelID}
+                width={200}
+              />
             </Layout>
           </Layout>
         </MinTablet>
