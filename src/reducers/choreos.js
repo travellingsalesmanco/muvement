@@ -62,8 +62,7 @@ const choreoWithMetaReducer = (state, action) => {
 export default (state = demoChoreos, action) => {
   switch (action.type) {
     case ADD_CHOREO: {
-      const { choreoId} = action;
-      const { choreo } = action.payload;
+      const { choreoId, payload: choreo} = action;
       return {
         ...state,
         byId: {
@@ -74,8 +73,7 @@ export default (state = demoChoreos, action) => {
       }
     }
     case LOAD_CHOREO: {
-      const { choreoId} = action;
-      const { choreo } = action.payload;
+      const { choreoId, payload: choreo} = action;
       return {
         ...state,
         byId: {
@@ -95,8 +93,7 @@ export default (state = demoChoreos, action) => {
       }
     }
     case UPDATE_CHOREO_IMAGE: {
-      const { choreoId} = action;
-      const { link } = action.payload;
+      const { choreoId, payload: link} = action;
       return {
         ...state,
         byId: {

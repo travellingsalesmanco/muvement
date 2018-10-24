@@ -57,9 +57,7 @@ export function addChoreo(id, choreo) {
     dispatch({
       type: ADD_CHOREO,
       choreoId: id,
-      payload: {
-        choreo: choreo
-      }
+      payload: choreo
     });
     dispatch({
       type: SWITCH_ACTIVE_CHOREO,
@@ -73,9 +71,7 @@ export function updateChoreoImage(id, link) {
     dispatch({
       type: UPDATE_CHOREO_IMAGE,
       choreoId: id,
-      payload: {
-        link: link
-      }
+      payload: link
     })
   }
 }
@@ -86,9 +82,7 @@ export function updateChoreoIfNewer(id, choreo) {
       dispatch({
         type: LOAD_CHOREO,
         choreoId: id,
-        payload: {
-          choreo: choreo
-        }
+        payload: choreo
       });
     }
   }
@@ -110,19 +104,15 @@ export function syncCreatorChoreos(choreos) {
         console.log("ADDING");
         dispatch({
           type: ADD_CHOREO,
-          payload: {
-            choreoId: choreo.id,
-            choreo: choreo.data
-          }
+          choreoId: choreo.id,
+          payload: choreo.data
         });
       } else if (isNewer(choreo.data, choreo.id, getState())) {
         // Update existing choreos if newer
         dispatch({
           type: LOAD_CHOREO,
-          payload: {
-            choreoId: choreo.id,
-            choreo: choreo.data
-          }
+          choreoId: choreo.id,
+          payload: choreo.data
         });
       }
     });
