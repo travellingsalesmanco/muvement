@@ -6,7 +6,8 @@ import {
   PUBLISH_CHOREO,
   REMOVE_CHOREO,
   RENAME_CHOREO,
-  UNPUBLISH_CHOREO
+  UNPUBLISH_CHOREO,
+  UPDATE_CHOREO_IMAGE,
 } from '../constants/actionTypes';
 import { defaultStageDim } from '../constants/defaults';
 import { demoChoreos } from '../constants/dummyData';
@@ -61,7 +62,7 @@ const choreoWithMetaReducer = (state, action) => {
 export default (state = demoChoreos, action) => {
   switch (action.type) {
     case ADD_CHOREO: {
-      const { choreoId, choreo } = action.payload;
+      const { choreoId, payload: choreo} = action;
       return {
         ...state,
         byId: {
@@ -72,7 +73,7 @@ export default (state = demoChoreos, action) => {
       }
     }
     case LOAD_CHOREO: {
-      const { choreoId, choreo } = action.payload;
+      const { choreoId, payload: choreo} = action;
       return {
         ...state,
         byId: {
@@ -83,12 +84,26 @@ export default (state = demoChoreos, action) => {
       }
     }
     case REMOVE_CHOREO: {
-      const { payload: idToRemove } = action;
-      const { [idToRemove]: _, ...prunedByIds } = state.byId;
+      const { choreoId} = action;
+      const { [choreoId]: _, ...prunedByIds } = state.byId;
       return {
         ...state,
         byId: prunedByIds,
-        myChoreos: state.myChoreos.filter(choreoId => choreoId !== idToRemove)
+        myChoreos: state.myChoreos.filter(id => id !== choreoId)
+      }
+    }
+    case UPDATE_CHOREO_IMAGE: {
+      const { choreoId, payload: link} = action;
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [choreoId]: {
+            ...state.byId[choreoId],
+            imageUrl: link
+          }
+        },
+        myChoreos: [...state.myChoreos]
       }
     }
     default: {

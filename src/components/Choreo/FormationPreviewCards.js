@@ -2,18 +2,22 @@ import { Card, Col, Icon, Row } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { addAndSetActiveFormation, gotoFormation } from "../../actions/choreoActions";
+import { addAndSetActiveFormation, gotoFormation, removeFormation } from "../../actions/choreoActions";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import './ChoreoHomeScreen.css';
 
 class FormationPreviewCards extends React.Component {
   clickHandler = (index) => {
-    if (index === 0) {
-      this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formations.length));
-      this.props.history.push(`${this.props.match.url}/formation`)
+    if (this.props.editState) {
+      this.props.dispatch(removeFormation(this.props.choreoId, index - 1))
     } else {
-      this.props.dispatch(gotoFormation(this.props.choreoId, index - 1));
-      this.props.history.push(`${this.props.match.url}/formation`)
+      if (index === 0) {
+        this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formations.length));
+        this.props.history.push(`${this.props.match.url}/formation`)
+      } else {
+        this.props.dispatch(gotoFormation(this.props.choreoId, index - 1));
+        this.props.history.push(`${this.props.match.url}/formation`)
+      }
     }
   };
 
@@ -37,16 +41,20 @@ class FormationPreviewCards extends React.Component {
                     >
                       {
                         index === 0
-                          ? <div className="new-formation"
-                            ref={node => {
-                              this.container = node;
-                            }}>
-                            <Icon type="file-add" className="add-formation-icon" />
-                            <span className="add-formation-title"> ADD FORMATION </span>
-                          </div>
+                          ? <div className="new-formation" ref={node => { this.container = node; }}>
+                              <Icon type="file-add" className="add-formation-icon" />
+                              <span className="add-formation-title"> ADD FORMATION </span>
+                            </div>
                           : <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
-                            <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index - 1} />
-                          </div>
+                            {
+                              this.props.editState &&
+                                <span>
+                                  <Icon type="minus-circle" theme="outlined"
+                                        className={'delete-button'}/>
+                                </span>
+                            }
+                              <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index - 1} />
+                            </div>
                       }
                       <div className="formation-name">
                         <span>{formation.name}</span>
@@ -65,6 +73,13 @@ class FormationPreviewCards extends React.Component {
                           onClick={() => this.clickHandler(index + 1)}
                         >
                           <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
+                            {
+                              this.props.editState &&
+                              <span>
+                                <Icon type="minus-circle" theme="outlined"
+                                      className={'delete-button'}/>
+                              </span>
+                            }
                             <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} />
                           </div>
                           <div className="formation-name">

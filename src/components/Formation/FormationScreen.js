@@ -1,8 +1,9 @@
-import { Button, Input, Layout } from 'antd';
+import { Button, Input, Layout, Spin } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
-import { addAndSetActiveFormation, gotoFormation } from "../../actions/choreoActions";
+import { addAndSetActiveFormation, removeFormation } from "../../actions/choreoActions";
 import { renameFormation } from "../../actions/formationActions";
+import { LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/actionTypes';
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from "../../icons/GradientSVG";
 import HeadphoneIcon from "../../icons/HeadphoneIcon";
@@ -13,10 +14,13 @@ import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import withAuthorization from "../withAuthorization";
 import withFireStoreSync from "../withFirestoreSync";
 import './FormationScreen.css';
+import HorizontalSlideList from "./HorizontalSlideList";
 import Navigation from "./Navigation";
+import PerformerList from "./PerformerList";
 import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 import Timeline from "./Timeline";
+import VerticalSlideList from "./VerticalSlideList";
 
 const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameConfirm }) => (
   <div className="section-title-container">
@@ -24,8 +28,8 @@ const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameCon
       <div className="section-title-inner">
         <Input
           placeholder="Enter formation name"
-          value={formationName}
-          onChange={handleEditName}
+          defaultValue={formationName}
+          onBlur={handleEditName}
           onPressEnter={handleEditNameConfirm}
         />
       </div>
@@ -61,28 +65,17 @@ class FormationScreen extends Component {
       visible: false,
       sidePanelID: 0,
       formationName: '',
-      activeButton: 1
+      activeButton: props.animated ? 3 : 1
     }
   }
 
   handleClick = (number) => {
-    this.setState({ activeButton: number });
-  };
-
-  handleMenuClick = (item) => {
-    console.log(item.key);
-    if (item.key === "1" || item.key === "4") {
-      this.setState({
-        visible: true,
-        sidePanelID: parseInt(item.key),
-      });
-    } else if (item.key === "2") {
-      this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formationId + 1));
-    } else if (item.key === "5") {
-      this.props.dispatch(gotoFormation(this.props.choreoId, this.props.formationId - 1));
-    } else if (item.key === "6") {
-      this.props.dispatch(gotoFormation(this.props.choreoId, this.props.formationId + 1));
+    if (number === 3 && this.state.activeButton !== 3) {
+      this.props.dispatch({ type: LOAD_ANIMATED_VIEW })
+    } else if (this.state.activeButton === 3) {
+      this.props.dispatch({ type: UNLOAD_ANIMATED_VIEW })
     }
+    this.setState({ activeButton: number });
   };
 
   handleEditPerformer = () => {
@@ -95,6 +88,9 @@ class FormationScreen extends Component {
   handleAddFormation = () => {
     this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formationId + 1));
   };
+  handleRemoveFormation = () => {
+    this.props.dispatch(removeFormation(this.props.choreoId, this.props.formationId));
+  }
 
   handleEditTimeline = () => {
 
@@ -122,51 +118,85 @@ class FormationScreen extends Component {
   render() {
     const { Content, Sider } = Layout;
     const { activeButton } = this.state;
+    const { loading } = this.props;
     return (
       <Fragment>
         <MobilePortrait>
-          <Layout className="body">
+          <Layout className="body" style={{ minHeight: '100vh', height: '100%' }}>
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout style={{ backgroundColor: 'transparent' }}>
               <Content style={{ display: "flex", flexDirection: "column" }}>
-                <SectionTitle mobile={true} formationName={this.props.formationName} handleEditName={this.handleEditName}
-                  handleEditNameConfirm={this.handleEditNameConfirm} />
-                <div style={{ height: '15rem', marginBottom: '10px' }}>
-                  <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
-                </div>
-                <div>
-                  <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
-                  {
-                    activeButton === 1 &&
-                    <div>
-                    </div>
-                  }
-                  {
-                    activeButton === 2 &&
-                    <div>
-
-                    </div>
-                  }
-                  {
-                    activeButton === 3 &&
-                    <div style={{height:"5rem"}}>
-                      <Timeline choreoId={this.props.choreoId} />
-
-                    </div>
-                  }
-                </div>
+                <Spin spinning={loading} size={"large"}>
+                  <SectionTitle key={this.props.formationName} mobile={true} formationName={this.props.formationName}
+                                handleEditName={this.handleEditName}
+                                handleEditNameConfirm={this.handleEditNameConfirm} />
+                  <div style={{ height: '15rem', marginBottom: '10px' }}>
+                    <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
+                                           withGrid animated={this.props.animated} />
+                  </div>
+                  <div style={{ overflowY: 'scroll' }}>
+                    <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
+                    {
+                      activeButton === 1 &&
+                      <Fragment>
+                        <div style={{ overflowX: 'scroll', marginTop: '1em' }}>
+                          <HorizontalSlideList />
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                          <div style={{
+                            paddingTop: '0.5em',
+                            paddingRight: '0.5em',
+                            paddingBottom: '1em',
+                            paddingLeft: '2em',
+                            flex: 1
+                          }}>
+                            <Button type={"default"} icon="plus" ghost block style={{ borderRadius: '1em' }}
+                                    onClick={this.handleAddFormation}>Add</Button>
+                          </div>
+                          <div style={{
+                            paddingTop: '0.5em',
+                            paddingRight: '2em',
+                            paddingBottom: '1em',
+                            paddingLeft: '0.5em',
+                            flex: 1
+                          }}>
+                            <Button type={"danger"} icon="delete" ghost block style={{ borderRadius: '1em' }}
+                                    onClick={this.handleRemoveFormation}>Delete</Button>
+                          </div>
+                        </div>
+                      </Fragment>
+                    }
+                    {
+                      activeButton === 2 &&
+                      <div style={{ padding: '0 2em', fontSize: '1.2em' }}>
+                        <PerformerList choreoId={this.props.choreoId} />
+                      </div>
+                    }
+                    {
+                      activeButton === 3 &&
+                      <div style={{ paddingTop: '4em', textAlign: 'center' }}>
+                        <span style={{ color: '#fff', fontFamily: 'Sen-Regular', fontSize: '1.5em' }}>Under Construction!</span>
+                        {/* <Timeline choreoId={this.props.choreoId} /> */}
+                      </div>
+                    }
+                  </div>
+                </Spin>
               </Content>
             </Layout>
           </Layout>
         </MobilePortrait>
 
         <MobileLandscape>
-          <Layout className="body">
-            <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
-            <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
-              <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
-            </div>
-          </Layout>
+          <Spin spinning={loading} size={"large"}>
+            <Layout className="body">
+              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
+              <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
+
+                <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
+                                       withGrid animated={this.props.animated} />
+              </div>
+            </Layout>
+          </Spin>
         </MobileLandscape>
 
         <MinTablet>
@@ -179,28 +209,36 @@ class FormationScreen extends Component {
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout className="contents">
               <Content style={{ display: "flex", flexDirection: "column" }}>
-                <SectionTitle formationName={this.props.formationName} handleEditName={this.handleEditName}
-                  handleEditNameConfirm={this.handleEditNameConfirm} />
-                <div
-                  className="formationscreen-stage"
-                  style={{ background: '#000', flex: 1, overflow: "hidden" }}
-                >
-                  <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable withGrid />
-                </div>
+                <Spin spinning={loading} size={"large"}>
+                  <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
+                                handleEditName={this.handleEditName}
+                                handleEditNameConfirm={this.handleEditNameConfirm} />
+                  <div className="formationscreen-stage"
+                       style={{ background: '#000', height: '30em', overflow: "hidden" }}>
+                    <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
+                                           withGrid animated={this.props.animated} />
+                  </div>
+                </Spin>
               </Content>
               <Sider width={'12rem'} className="sider">
-                <div className="button-container">
-                  <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
-                    <UserAddIcon style={{ fontSize: '33px' }} />
-                  </Button>
-                  <Button className="sider-button" shape="circle" onClick={this.handleAddFormation}>
-                    <FileAddIcon style={{ fontSize: '25px' }} />
-                  </Button>
-                  <Button className="sider-button" shape="circle" onClick={this.handleEditTimeline}>
-                    <HeadphoneIcon style={{ fontSize: '25px' }} />
-                  </Button>
-                </div>
-                <PreviewSlideList choreoId={this.props.choreoId} />
+                <Spin spinning={loading} size={"large"}>
+                  <div className="button-container">
+                    <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
+                      <UserAddIcon style={{ fontSize: '33px' }} />
+                    </Button>
+                    <Button className="sider-button" shape="circle" onClick={this.handleAddFormation}>
+                      <FileAddIcon style={{ fontSize: '25px' }} />
+                    </Button>
+                    <Button className="sider-button" shape="circle" onClick={this.handleEditTimeline}>
+                      <HeadphoneIcon style={{ fontSize: '25px' }} />
+                    </Button>
+                  </div>
+                  <h3 className="slide-list-title">All Formations</h3>
+                  <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)` }}>
+                    <VerticalSlideList />
+                  </div>
+                  {/*<PreviewSlideList choreoId={this.props.choreoId} />*/}
+                </Spin>
               </Sider>
               <SidePanel
                 choreoId={this.props.choreoId}
@@ -229,12 +267,13 @@ function mapStateToProps(state, props) {
     formationId: state.UI.activeFormation,
     choreoName: choreo.name,
     formationName: activeFormation.name,
-    formationNumSeconds: activeFormation.numSeconds
+    formationNumSeconds: activeFormation.numSeconds,
+    animated: state.UI.animated
   }
 }
 
 // Auth exists
-// TODO: Check if authorized to edit choreo
 const authCondition = (authUser) => !!authUser;
+const failRoute = '/landing';
 
-export default withAuthorization(authCondition)(withFireStoreSync(true)(connect(mapStateToProps)(FormationScreen)));
+export default withAuthorization(authCondition, failRoute)(withFireStoreSync(true)(connect(mapStateToProps)(FormationScreen)));

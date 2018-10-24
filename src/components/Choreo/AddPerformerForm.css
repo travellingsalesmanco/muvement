@@ -1,0 +1,55 @@
+
+.performer-input-item {
+  margin-left: 2em;
+  font-size: 1.3em;
+}
+
+.performer-input-item .ant-form-item-label {
+  text-align: left;
+}
+
+.performer-input-item .ant-form-item-label label{
+  font-size: 1em;
+  color: #fff;
+  font-family: Sen-Regular, Arial, sans-serif;
+}
+
+.performer-input-item .has-error .ant-form-explain {
+  font-size: 0.875em;
+  font-family: Sen-Regular, Arial, sans-serif;
+}
+
+.performer-input-item .ant-input {
+  background-color: transparent;
+  color: #fff;
+  border-bottom: 1px solid #d9d9d9;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  font-family: Sen-Regular, Arial, sans-serif;
+  font-size: 1em;
+  width: 90%;
+}
+
+.performer-input-item .ant-input:focus {
+  box-shadow: none;
+}
+
+.form-item {
+  margin-bottom: 0;
+}
+
+@media (max-width: 575px) {
+  .performer-input-item .ant-form-item-label {
+    width: initial;
+  }
+
+  .performer-input-item .ant-form-item-control-wrapper {
+    width: 83.33333333%;
+  }
+
+  .performer-input-item .ant-form-item-label {
+    line-height: 39.9999px;
+  }
+}

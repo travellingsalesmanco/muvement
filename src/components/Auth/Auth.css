@@ -8,7 +8,7 @@
 }
 
 .auth-background {
-    height: 100vh;
+    height: 100%;
     background-image: url("../../img/PortraitBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -43,7 +43,8 @@
     padding: 1.5em;
 }
 
-.fb-login-button{
+.fb-login-button,
+.fb-login-button:hover {
     border-radius: 20em;
     background-color: #304D96;
     color: white;
@@ -55,7 +56,8 @@
 
 }
 
-.google-login-button{
+.google-login-button,
+.google-login-button:hover {
     border-radius: 20em;
     color: #6A6A6A;
     border: none;
@@ -63,6 +65,16 @@
     width: 9.5em;
     height: 3em;
     display: inline-block;
+}
+
+.social-login-icon{
+    width: 2.3em;
+    height: 2.3em;
+    padding-right: 10px;
+}
+
+.social-login-text{
+    vertical-align: middle;
 }
 
 .divider {
@@ -82,7 +94,7 @@
 
 
 .auth-signup-button,
-.auth-signup-button:hover
+.auth-signup-button:hover,
 .auth-signup-button:focus {
     background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
     margin-left: auto;

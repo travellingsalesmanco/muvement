@@ -5,6 +5,9 @@
 
 .nav-bar {
   display: flex;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
 }
 
 .nav-bar .title {
@@ -13,10 +16,16 @@
   text-shadow: 0px 0px 35px white;
   flex: 1;
   text-align: center;
+  width: 250px;
 }
 
 .nav-bar .title h3 {
   color: #fff;
+  width: 10em;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .nav-bar ul {
@@ -50,4 +59,20 @@
 
 .right-container .ant-menu.ant-menu-dark .ant-menu-item-selected {
     background-color: transparent;
+}
+
+/* Mobile Portrait */
+.nav-bar .mp-title h3 {
+  color: #fff;
+  width: 9em;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1.5rem;
+}
+
+li.ant-menu-item.mp-menu-item{
+   margin-left: 10px;
+   padding: 0px;
 }

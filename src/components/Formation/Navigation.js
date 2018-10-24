@@ -13,32 +13,33 @@ class Navigation extends React.Component {
     return (
       <Header>
         <div className="nav-bar">
-          <div className="back-button">
+          <div className="mp-back-button">
             <Button style={{ fontSize: '25px' }} icon="left"
                     onClick={() => this.props.history.push(`/choreo/${this.props.choreoId}`)} />
           </div>
-          <div className="title">
+          <div className="mp-title">
             <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
           </div>
           <MobilePortrait>
-            <div className="right-container">
+            <div className="mp-right-container">
               <Menu className="navbar-icon" mode="horizontal" theme="dark">
-                <Menu.Item key="1">
+                <Menu.Item className="mp-menu-item" key="1">
                   <Button className="nav-bar-button">
                     <UndoIcon />
                   </Button>
                 </Menu.Item>
-                <Menu.Item key="2">
+                <Menu.Item  key="2">
                   <Button className="nav-bar-button">
                     <RedoIcon />
                   </Button>
                 </Menu.Item>
-                <Menu.Item key="3">
-                  <Button icon="eye" />
+                <Menu.Item className="mp-menu-item" key="3">
+                  <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
                 </Menu.Item>
               </Menu>
             </div>
           </MobilePortrait>
+
           <MinTablet>
             <div className="right-container">
               <Menu className="navbar-icon" mode="horizontal" theme="dark">

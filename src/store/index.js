@@ -12,7 +12,8 @@ localForage.config({
 })
 const persistConfig = {
   key: "muvement",
-  storage: localForage
+  storage: localForage,
+  blacklist: ['UI']
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

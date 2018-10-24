@@ -2,6 +2,7 @@ export const demoChoreo = {
   createdAt: { seconds: 1540148067, nanoseconds: 77000000 },
   creator: { id: "LrG4PV9PpwgieRuMa5YsSQ2iSUo1", name: "John Phua" },
   dancers: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"],
+  imageUrl: "https://dummyimage.com/300x300/000000/fff.jpg&text=L",
   formations: [{
     dancers: [
       { name: "f", position: [0.5016886187098953, 0.49240121580547114] },

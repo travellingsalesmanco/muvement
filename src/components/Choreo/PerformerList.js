@@ -4,6 +4,7 @@ import { removeDancers, addDancers } from "../../actions/choreoActions"
 import { connect } from 'react-redux';
 import AddPerformerForm from "./AddPerformerForm";
 import { getChoreo } from "../../selectors/choreo";
+import './PerformerList.css';
 
 class PerformerList extends React.Component {
   constructor(props) {
@@ -64,11 +65,12 @@ class PerformerList extends React.Component {
             }
             return (
               <Row key={key}>
-                <Col span={18} onClick={() => this.addDancerToFormation(dancer)}>
-                  <span id="dancer-item">{key + 1}. {dancer}</span>
+                <Col span={18}>
+                  <span className="dancer-item">{key + 1}. {dancer}</span>
                 </Col>
                 <Col span={6}>
-                  <Icon type="minus" theme="outlined" onClick={() => this.markDancerForRemoval(dancer)} />
+                  <Icon style={{color: '#24C6DC'}}
+                        type="minus" theme="outlined" onClick={() => this.markDancerForRemoval(dancer)} />
                 </Col>
               </Row>)
           })}
@@ -86,7 +88,7 @@ class PerformerList extends React.Component {
             return (
               <Row key={key}>
                 <Col span={18}>
-                  <span id="dancer-item">{key + 1}. {dancer}</span>
+                  <span className="dancer-item">{key + 1}. {dancer}</span>
                 </Col>
               </Row>)
           })}
@@ -103,7 +105,7 @@ class PerformerList extends React.Component {
         </Fragment>
     }
     return (
-      <div id="performer-list">
+      <div className="performer-list">
         {performerListDisplay}
       </div>
     );

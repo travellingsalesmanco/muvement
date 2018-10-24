@@ -4,6 +4,7 @@
       "id": "profileId",
       "name": "Hyle Kanagami"
     },
+    "imageUrl": "https://dummyimage.com/300x300/000000/fff.jpg&text=T",
     "createdAt": "timestamp1",
     "updatedAt": "timestamp2",
     "name": "The Best Choreo",

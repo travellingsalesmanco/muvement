@@ -4,6 +4,8 @@ import AddPerformerScreen from "./AddPerformerScreen";
 import {connect} from 'react-redux';
 import ChoreoListScreen from "./ChoreoListScreen";
 import ReactGA from 'react-ga';
+import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+import './ChoreoCards.css';
 
 class HomeScreen extends React.Component {
   state = {
@@ -35,16 +37,65 @@ class HomeScreen extends React.Component {
     }
   };
 
+  handleChangeAddChoreoState = () => {
+    this.setState({
+      addChoreoState: false,
+      newChoreoName: ''
+    })
+  };
+
   render() {
     return (
       <Fragment>
       <Layout className="body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
         {
           this.state.addChoreoState
-            ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}/>
+            ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}
+                                  onBack={this.handleChangeAddChoreoState}/>
             : <ChoreoListScreen setModalVisible={this.setModalVisible}/>
         }
       </Layout>
+      <MobilePortrait>
+        <Modal
+          centered
+          visible={this.state.modalVisible}
+          onCancel={() => this.setModalVisible(false)}
+          footer={null}
+          className="mp-new-choreo-modal"
+        >
+          <div className="mp-new-choreo-modal-inner">
+            <h3>NEW STAGE NAME</h3>
+            <Input
+              placeholder="Enter formation name"
+              value={this.state.newChoreoName}
+              onChange={this.handleNewChoreoName}
+            />
+            <Button block onClick={this.handleNewChoreo}>START</Button>
+          </div>
+        </Modal>
+      </MobilePortrait>
+
+      <MobileLandscape>
+        <Modal
+          centered
+          visible={this.state.modalVisible}
+          onCancel={() => this.setModalVisible(false)}
+          footer={null}
+          className="ml-new-choreo-modal"
+        >
+          <div className="ml-new-choreo-modal-inner">
+            <h3>NEW STAGE NAME</h3>
+            <Input
+              placeholder="Enter formation name"
+              value={this.state.newChoreoName}
+              onChange={this.handleNewChoreoName}
+            />
+            <Button block onClick={this.handleNewChoreo}>START</Button>
+          </div>
+        </Modal>
+      </MobileLandscape>
+
+      <MinTablet>
         <Modal
           centered
           visible={this.state.modalVisible}
@@ -62,6 +113,8 @@ class HomeScreen extends React.Component {
             <Button block onClick={this.handleNewChoreo}>START</Button>
           </div>
         </Modal>
+      </MinTablet>
+
       </Fragment>
     );
   }

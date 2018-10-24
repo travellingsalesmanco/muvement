@@ -1,5 +1,6 @@
 import { Form, Input, Icon, Button } from 'antd';
 import React from 'react';
+import './AddPerformerForm.css';
 
 const FormItem = Form.Item;
 
@@ -80,7 +81,7 @@ class AddPerformerForm extends React.Component {
           required={false}
           key={k}
           labelCol={{
-            span: 4
+            span: 2
           }}
           wrapperCol={{
             span: 20
@@ -118,7 +119,7 @@ class AddPerformerForm extends React.Component {
           Performer</Button>
         {this.state.nextKey > 0 && (
           <div>
-            <FormItem>
+            <FormItem className="form-item">
               <Button type={"default"} htmlType="submit" block>DONE</Button>
             </FormItem>
             <Button type={"default"} block onClick={this.clearAll}>CANCEL</Button>

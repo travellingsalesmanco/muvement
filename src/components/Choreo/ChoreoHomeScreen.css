@@ -3,27 +3,22 @@
   background-image: url(" ../../img/FormationsOverviewBackground.png");
   background-repeat: repeat;
   background-size: cover;
+  max-width: 100%;
+  margin: 0px;
 }
 
 .choreo-homescreen-contents {
   background-color: transparent;
 }
 
+.ant-layout-sider .ant-layout-sider-dark{
+    height: 100rem;
+}
+
 .ant-layout-sider-children {
   background: linear-gradient(to bottom, #313131 -15%, #000000 140%);
   box-shadow: 0 2em 3em 0 rgba(0, 0, 0, 0.25), 0 2.1em 3.1em 0 rgba(0, 0, 0, 0.20);
 }
-
-/* .choreo-picture-card-cover{
-    width: 80%;
-    margin: 0 auto;
-    padding-top: 500em;
-    height: 50em;
-    background-position: center center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    border-radius: 5px;
-} */
 
 .add-choreo-pic-icon {
   font-size: 3rem;
@@ -89,10 +84,11 @@
 
 .ant-formation-card-cover {
   height: 15em;
-  border-radius: 1.2em;
+  /*border-radius: 1.2em;*/
   overflow: hidden;
   background: rgba(0, 0, 0, 0.35);
   box-shadow: 0px 0px 1.5em 0px rgba(0, 0, 0, 0.75);
+  position: relative;
 }
 
 .ant-formation-card-cover img {
@@ -152,6 +148,42 @@
   font-size: 1em;
 }
 
+.mp-title h3{
+    font-family: Sen-Black;
+    font-size: 1.5rem;
+    text-shadow: 0px 0px 35px white;
+    flex: 1;
+    text-align: center;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 10px;
+    padding-right: 30px;
+}
+
+button.ant-btn.mp-back-button.ant-btn-icon-only{
+    top: 10px;
+}
+
+.mp-right-container .ant-menu-item .anticon {
+  font-size: 23px;
+  position: absolute;
+  right: 0px;
+}
+
+.mp-right-container .ant-menu.ant-menu-dark .ant-menu-item-selected {
+  background-color: transparent;
+}
+
+li.mp-menu-item {
+  margin-right: 10px;
+}
+
+.ant-menu-submenu-title{
+    padding: 0px;
+}
+
 .mobile-switch-tabs {
   text-align: center;
   margin: 2em auto 0 auto;
@@ -205,9 +237,6 @@ button.ant-btn.backbutton.ant-btn-icon-only {
   margin-top: 1em;
 }
 
-.edit-performers {
-  text-align: center;
-}
 
 .edit-performers-button {
   width: 80%;

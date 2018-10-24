@@ -15,24 +15,24 @@ class ChoreoCardList extends React.Component {
           endColor="#514a9d"
           idCSS="cool-gradient"
         />
-        <Row gutter={72} type='flex' justify='center'>
+        <Row gutter={20} type='flex' justify='center'>
           <Col span={10}>
             <NewChoreoCard onClick={() => this.props.setModalVisible(true)} />
           </Col>
           <Col span={10}>
-            {first !== undefined ? <ChoreoCard choreoId={first} /> : null}
+            {first !== undefined ? <ChoreoCard choreoId={first} editState={this.props.editState}/> : null}
           </Col>
         </Row>
         {
           rest.map((choreoId, index) => {
             if (index % 2 === 0) {
               return (
-                <Row gutter={72} type='flex' justify='center' key={choreoId}>
+                <Row gutter={20} type='flex' justify='center' key={choreoId}>
                   <Col span={10}>
-                    <ChoreoCard choreoId={choreoId} />
+                    <ChoreoCard choreoId={choreoId} editState={this.props.editState}/>
                   </Col>
                   <Col span={10}>
-                    {rest[index + 1] ? <ChoreoCard choreoId={choreoId} /> : null}
+                    {rest[index + 1] ? <ChoreoCard choreoId={rest[index + 1]} editState={this.props.editState}/> : null}
                   </Col>
                 </Row>
               );
