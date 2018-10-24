@@ -142,7 +142,7 @@ class FormationScreen extends Component {
                               handleEditNameConfirm={this.handleEditNameConfirm} />
                 <div style={{ height: '15rem', marginBottom: '10px' }}>
                   <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                                         withGrid />
+                                         withGrid animated={this.props.animated} />
                 </div>
                 <div style={{ overflowY: 'scroll' }}>
                   <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
@@ -176,7 +176,7 @@ class FormationScreen extends Component {
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
               <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                                     withGrid />
+                                     withGrid animated={this.props.animated} />
             </div>
           </Layout>
         </MobileLandscape>
@@ -197,7 +197,7 @@ class FormationScreen extends Component {
                 <div className="formationscreen-stage"
                      style={{ background: '#000', height: '30em', overflow: "hidden" }}>
                   <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                                         withGrid />
+                                         withGrid animated={this.props.animated} />
                 </div>
               </Content>
               <Sider width={'12rem'} className="sider">
