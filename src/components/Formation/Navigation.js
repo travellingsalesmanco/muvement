@@ -34,7 +34,7 @@ class Navigation extends React.Component {
                   </Button>
                 </Menu.Item>
                 <Menu.Item className="mp-menu-item" key="3">
-                  <Button icon="eye" />
+                  <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
                 </Menu.Item>
               </Menu>
             </div>
