@@ -9,3 +9,8 @@ export const addChoreoImage = (file, danceId) => {
     return snapshot.ref.getDownloadURL();
   })
 };
+
+export const removeChoreoImage = (danceId) => {
+  let imageRef = choreoImagesRef.child(danceId + ".jpg");
+  return imageRef.delete();
+};

@@ -23,6 +23,7 @@ import { firestore } from "../firebase";
 import { doSignOut } from "../firebase/auth";
 import { deleteChoreo } from "../firebase/firestore";
 import { defaultStageDim, genDummyImage } from "../constants/defaults";
+import { removeChoreoImage } from "../firebase/storage";
 
 const ACTIONS_TO_UPDATE = [
   RENAME_CHOREO,
@@ -53,6 +54,7 @@ export const firestoreWriter = store => next => action => {
       if (!action.stale) {
         // Remove choreo from firestore (not internal change)
         deleteChoreo(action.choreoId);
+        removeChoreoImage(action.choreoId);
       }
       return next(action);
     }
