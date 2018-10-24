@@ -165,7 +165,7 @@ class ChoreoHomeScreen extends React.Component {
             <Layout className="choreo-homescreen-contents">
               <Content style={{ display: "flex", flexDirection: "column" }}>
                 <FormationPreviewCards formations={this.props.formations} match={this.props.match}
-                                       choreoId={this.props.choreoId} editState={this.state.editState}/>
+                                       choreoId={this.props.choreoId} editState={this.state.editState} />
               </Content>
               <Sider width="20rem">
                 <DefaultSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
@@ -206,7 +206,7 @@ const mapStateToProps = (state, props) => {
 };
 
 // Auth exists
-// TODO: Check if authorized to edit choreo
 const authCondition = (authUser) => !!authUser;
+const failRoute = "/landing";
 
-export default withAuthorization(authCondition)(withFireStoreSync(true)((connect(mapStateToProps)(ChoreoHomeScreen))));
+export default withAuthorization(authCondition, failRoute)(withFireStoreSync(true)((connect(mapStateToProps)(ChoreoHomeScreen))));

@@ -267,7 +267,7 @@ function mapStateToProps(state, props) {
 }
 
 // Auth exists
-// TODO: Check if authorized to edit choreo
 const authCondition = (authUser) => !!authUser;
+const failRoute = '/landing';
 
-export default withAuthorization(authCondition)(withFireStoreSync(true)(connect(mapStateToProps)(FormationScreen)));
+export default withAuthorization(authCondition, failRoute)(withFireStoreSync(true)(connect(mapStateToProps)(FormationScreen)));
