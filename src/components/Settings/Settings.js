@@ -39,7 +39,6 @@ class Settings extends React.Component {
                      onTitleClick={this.handleLogout}
                      title={<span><Icon type="logout" /><span>Logout</span></span>}>
             </SubMenu>
-
           </Menu>
         </div>
       </Layout>

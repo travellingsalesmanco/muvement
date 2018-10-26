@@ -36,11 +36,6 @@ li.ant-menu-submenu.ant-menu-submenu-vertical.settings-menu-item{
     color: white;
 }
 
-.ant-menu-submenu-vertical > .ant-menu-submenu-title:hover {
-    background-image: linear-gradient(to right, #24c6dc, #514a9d);
-    right: 0px;
-}
-
 .ant-menu-submenu-vertical > .ant-menu-submenu-title .ant-menu-submenu-arrow {
     right: 0px;
 }

@@ -13,6 +13,7 @@ import FeatureThree from "../../img/feature3.png";
 import './LandingPage.css';
 import { withRouter } from "react-router-dom";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
+import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class LandingPage extends React.Component {
   componentDidMount() {
@@ -54,7 +55,7 @@ class LandingPage extends React.Component {
             </div>
             // <HeadphoneIcon style={{ fontSize: '20px' }}/>
             <p className="muvement-features-text">
-                Sync transitions with music
+                Sync transitions with your audio track
             </p>
             <img className="muvement-features-img" src={FeatureTwo} alt="muvement name" />
 

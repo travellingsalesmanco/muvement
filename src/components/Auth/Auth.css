@@ -8,7 +8,7 @@
 }
 
 .auth-background {
-    height: 100rem;
+    height: 90rem;
     background-image: url("../../img/PortraitBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -110,7 +110,9 @@
     box-shadow: 0 0 1.2em  #514A9D;
 }
 
-button.auth-backbutton {
+button.auth-backbutton,
+button.auth-backbutton:hover,
+button.auth-backbutton:active {
     background: transparent;
     border: transparent;
     color: white;

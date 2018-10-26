@@ -98,7 +98,7 @@ class ChoreoHomeScreen extends React.Component {
                       }
                     </Menu.Item>
                     <Menu.Item key="2">
-                      <Button className="mp-setting" icon="setting" ghost />
+                      <Button className="mp-setting" icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
                     </Menu.Item>
                   </Menu>
                 </div>
@@ -149,7 +149,7 @@ class ChoreoHomeScreen extends React.Component {
                       }
                     </Menu.Item>
                     <Menu.Item key="2">
-                      <Button icon="setting" ghost />
+                      <Button icon="setting" ghost onClick={() => this.props.history.push(`/settings`)}/>
                     </Menu.Item>
                   </Menu>
                 </div>
@@ -202,7 +202,7 @@ class ChoreoHomeScreen extends React.Component {
                       }
                     </Menu.Item>
                     <Menu.Item key="2">
-                      <Button icon="setting" ghost />
+                      <Button icon="setting" ghost onClick={() => this.props.history.push(`/settings`)}/>
                     </Menu.Item>
                   </Menu>
                 </div>
