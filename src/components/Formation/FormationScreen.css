@@ -5,6 +5,13 @@
   background-size: cover;
 }
 
+.mp-body {
+  height: 100rem;
+  background-image: url("../../img/PortraitEditBackground.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .contents {
   background-color: transparent;
 }
