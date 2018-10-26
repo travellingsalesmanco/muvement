@@ -8,7 +8,7 @@
 }
 
 .auth-background {
-    height: 100%;
+    height: 100rem;
     background-image: url("../../img/PortraitBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
