@@ -104,6 +104,14 @@ class HomeScreen extends React.Component {
       </MobileLandscape>
 
       <MinTablet>
+      <Layout className="body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
+        {
+          this.state.addChoreoState
+            ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}
+                                  onBack={this.handleChangeAddChoreoState}/>
+            : <ChoreoListScreen setModalVisible={this.setModalVisible}/>
+        }
+      </Layout>
         <Modal
           centered
           visible={this.state.modalVisible}
