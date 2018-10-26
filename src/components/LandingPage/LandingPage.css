@@ -52,7 +52,7 @@
 
 .muvement-features-text{
     padding-top: 10px;
-    color: #24C6DC;
+    color: white;
     text-align: center;
     font-size: 14px;
     padding-bottom: 20px;
@@ -88,4 +88,90 @@
   margin-right: 3em;
   height: 15rem;
   box-shadow: 0px 0px 15px #141414;
+}
+
+/* Tablet */
+.tablet-logo {
+  text-align: center;
+}
+
+.tablet-muvement-name {
+  text-align: center;
+}
+
+.tablet-muvement-name-img {
+  margin: 0 auto;
+  padding-top: 15%;
+  width: 20rem;
+}
+
+.tabelt-muvement-desc {
+  text-align: center;
+  padding-top: 2%;
+  color: white;
+  font-size: 1.5em;
+  font-family: Sen-Bold;
+}
+
+.tablet-landing-signup {
+    text-align: center;
+}
+
+.tablet-landing-signup-button,
+.tablet-landing-signup-button .ant-btn:hover,
+.tablet-landing-signup-button .ant-btn:focus {
+  background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
+  width: 16rem;
+  height: 50px;
+  border-radius: 3rem;
+  color: white;
+  font-family: Sen-Bold;
+  font-size: 1.3em;
+  border: none;
+  box-shadow: 0px 0px 15px #514A9D;
+  margin: 3.5rem auto;
+}
+
+.tablet-muvement-desc {
+  text-align: center;
+  padding-top: 2%;
+  color: white;
+  font-size: 1.2em;
+  font-family: Sen-Bold;
+}
+
+.tablet-demo-grid{
+  margin-top: 30%;
+  margin-left: 3em;
+  margin-right: -3em;
+  height: 15rem;
+  box-shadow: 0px 0px 15px #141414;
+}
+
+.tablet-muvement-features {
+  text-align: center;
+  padding-top: 5%;
+  color: white;
+  font-size: 2.2rem;
+  text-shadow: 0px 0px 5px white;
+}
+
+.tablet-muvement-features-text{
+    padding-top: 30px;
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+    padding-bottom: 20px;
+    font-family: Sen-Bold;
+}
+
+.tablet-muvement-features-icon{
+    padding-top: 60px;
+    text-align: center;
+}
+
+.tablet-muvement-features-img {
+  margin: 0 20px 50px 20px;
+  padding-top: 5%;
+  width: 90%;
 }
