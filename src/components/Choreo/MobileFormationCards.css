@@ -28,23 +28,33 @@
   position: relative;
 }
 
-.mobile-formation-add-button {
-  border: 1px solid #24C6DC;
-  border-radius: 50px;
-  font-family: Sen-Black;
-  color: #24C6DC;
-  font-size: 1.1em;
-  height: 3em;
-  margin: 1em 0;
+.mobile-formation-add{
+  text-align: center;
 }
 
+.mobile-formation-add-button {
+  border-image: linear-gradient(to right, #24c6dc, #514a9d);
+  border-image-slice: 1;
+  font-family: Sen-Bold;
+  color: white;
+  font-size: 1.3em;
+  height: 2.5em;
+  margin: 2em auto;
+  width: 90%;
+}
+
+.mobile-formation-add-button:hover,
 .mobile-formation-add-button:active {
-  color: #24C6DC;
-  border-color: #24C6DC;
+    font-family: Sen-Bold;
+    color: #24c6dc;
+    font-size: 1.3em;
+    height: 2.5em;
+    margin: 2em auto;
+    width: 90%;
 }
 
 .delete-button {
-  color: red;
+  color: #E1564B;
   font-size: 1.5em;
   position: absolute;
   right: 0;

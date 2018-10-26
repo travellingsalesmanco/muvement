@@ -179,11 +179,13 @@ button.ant-btn.mp-back-button.ant-btn-icon-only{
 .mobile-switch-tabs {
   text-align: center;
   margin: 2em auto 0 auto;
-  border: 1px solid #a6a6a6;
+  border: 1px solid #24C6DC;
   border-radius: 30px;
   height: 3em;
-  width: 80%;
+  width: 90%;
   padding: 0px;
+  font-size: 13px;
+  margin-bottom: 2em;
 }
 
 .mobile-switch-tabs-active {

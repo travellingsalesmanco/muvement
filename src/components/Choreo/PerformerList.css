@@ -2,22 +2,32 @@
   padding: 1em
 }
 
+.ant-col-18.dancer {
+    margin-bottom: 5px;
+}
+
 .dancer-item {
   font-size: 1.3em;
   color: #fff;
   font-family: 'Sen-Regular', Arial, sans-serif;
   margin: 0 2em;
+
 }
 
-.performer-list button {
+.performer-list button,
+.performer-list button:active,
+.performer-list button:hover {
   border: 1px solid #24C6DC;
   border-radius: 50px;
-  font-family: Sen-Black;
-  color: #24C6DC;
-  font-size: 1.1em;
+  font-family: Sen-Bold;
+  color: white;
+  font-size: 1.2em;
   height: 3em;
   margin-top: 1em;
+  width: 70%;
+  background-color: #24C6DC;
 }
+
 
 .performer-list .ant-btn:active {
   color: #24C6DC;
@@ -26,4 +36,10 @@
 
 .performer-input-item {
   margin-bottom: 0;
+}
+
+.add-performer-form{
+    margin-top: 2em;
+    margin-bottom: 3em;
+    text-align: center;
 }

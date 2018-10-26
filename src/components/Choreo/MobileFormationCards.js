@@ -22,7 +22,7 @@ class MobileFormationCards extends React.Component {
   render() {
     return (
       <div>
-        <div style={{padding: '0 1em'}}>
+        <div className="mobile-formation-add" style={{padding: '0 1em'}}>
         <Button type={"default"} icon={"plus"} ghost block className="mobile-formation-add-button"
                 onClick={this.handleAddFormation}>Add Formation</Button>
         </div>
