@@ -42,11 +42,11 @@
 .nav-bar .right-container{
     margin-right: 2%;
     right: 0px;
+    line-height: 4.5em;
 }
 
 .nav-bar ul {
   text-align: right;
-  line-height: 2em;
 }
 
 .nav-bar li {
@@ -98,6 +98,7 @@
     position: absolute;
     margin-right: 8%;
     right: 0px;
+    line-height: 2em;
 }
 
 .mp-right-container .ant-menu-item .anticon {
