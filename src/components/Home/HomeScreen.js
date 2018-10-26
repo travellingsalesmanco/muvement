@@ -76,7 +76,7 @@ class HomeScreen extends React.Component {
       </MobilePortrait>
 
       <MobileLandscape>
-      <Layout className="body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
+      <Layout className="dashboard-body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
         {
           this.state.addChoreoState
             ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}
@@ -104,7 +104,7 @@ class HomeScreen extends React.Component {
       </MobileLandscape>
 
       <MinTablet>
-      <Layout className="body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
+      <Layout className="dashboard-body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
         {
           this.state.addChoreoState
             ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}

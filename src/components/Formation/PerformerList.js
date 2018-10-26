@@ -69,7 +69,7 @@ class PerformerList extends React.Component {
               </Col>
             </Row>)
         })}
-        
+
       </div>
     )
   }

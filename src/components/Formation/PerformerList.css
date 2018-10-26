@@ -15,7 +15,7 @@
 }
 
 #performer-list .ant-row {
-  margin: 5px 0;
+  margin: 10px 0;
 }
 
 #performer-list .anticon-minus:hover,
@@ -33,4 +33,8 @@
 
 .anticon-user-add, .anticon-user-delete{
   font-size: 20px;
+}
+
+.ant-row .formation-dancers {
+    margin-top: 2em;
 }

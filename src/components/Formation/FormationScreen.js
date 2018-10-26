@@ -130,7 +130,7 @@ class FormationScreen extends Component {
                   <SectionTitle key={this.props.formationName} mobile={true} formationName={this.props.formationName}
                                 handleEditName={this.handleEditName}
                                 handleEditNameConfirm={this.handleEditNameConfirm} />
-                  <div style={{ height: '15rem', marginBottom: '10px' }}>
+                  <div style={{ height: '15rem', marginBottom: '50px' }}>
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
                                            withGrid animated={this.props.animated} />
                   </div>
@@ -139,9 +139,10 @@ class FormationScreen extends Component {
                     {
                       activeButton === 1 &&
                       <Fragment>
-                        <div style={{ overflowX: 'scroll', marginTop: '1em' }}>
+                        <div style={{ overflowX: 'scroll', marginTop: '2em' }}>
                           <HorizontalSlideList />
                         </div>
+                        <div className="formationscreen-buttons">
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <div style={{
                             paddingTop: '0.5em',
@@ -160,15 +161,16 @@ class FormationScreen extends Component {
                             paddingLeft: '0.5em',
                             flex: 1
                           }}>
-                            <Button type={"danger"} icon="delete" ghost block style={{ borderRadius: '1em' }}
+                            <Button className="delete-formation" icon="delete" ghost block style={{ borderRadius: '1em' }}
                                     onClick={this.handleRemoveFormation}>Delete</Button>
+                          </div>
                           </div>
                         </div>
                       </Fragment>
                     }
                     {
                       activeButton === 2 &&
-                      <div style={{ padding: '0 2em', fontSize: '1.2em' }}>
+                      <div style={{ padding: '1em 2em', fontSize: '1.2em' }}>
                         <PerformerList choreoId={this.props.choreoId} />
                       </div>
                     }

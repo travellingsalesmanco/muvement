@@ -26,21 +26,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .section-title {
     border-radius: 50px;
     box-shadow: 0px 0px 20px  #514A9D;
-    /*margin: 2rem 2rem;*/
+
     position: relative;
     padding: 2px 2px;
     background-image: linear-gradient(to right, #24c6dc, #514a9d);
+    width: 70%;
 }
 
 .section-title-inner {
   background: #131313;
   text-align: center;
-  padding: 0.5em 5em;
+  padding: 0.3em 3em;
   border-radius: 50px;
 }
 
@@ -155,4 +158,8 @@
 
 .formationscreen-stage{
     margin-bottom: 2rem;
+}
+
+.formationscreen-buttons{
+    margin-top: 1.5em;
 }

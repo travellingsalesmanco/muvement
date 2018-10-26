@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Row, Col, Icon, Button } from "antd";
 import { removeDancers, addDancers } from "../../actions/choreoActions"
+import { TabletPortrait } from "../ResponsiveUtils/BreakPoint";
 import { connect } from 'react-redux';
 import AddPerformerForm from "./AddPerformerForm";
 import { getChoreo } from "../../selectors/choreo";
