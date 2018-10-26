@@ -68,7 +68,7 @@
 }
 
 .description > span {
-  width: 250px;
+  width: 50%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -192,7 +192,7 @@
 
 #mp-formation-no {
   color: #797979;
-  font-size: 13px;
+  font-size: 12px;
   margin-right: 10px;
 }
 
