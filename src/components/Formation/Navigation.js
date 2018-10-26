@@ -12,6 +12,7 @@ class Navigation extends React.Component {
     const { Header } = Layout;
     return (
       <Header>
+      <MobilePortrait>
         <div className="nav-bar">
           <div className="mp-back-button">
             <Button style={{ fontSize: '25px' }} icon="left"
@@ -20,7 +21,6 @@ class Navigation extends React.Component {
           <div className="mp-title">
             <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
           </div>
-          <MobilePortrait>
             <div className="mp-right-container">
               <Menu className="navbar-icon" mode="horizontal" theme="dark">
                 <Menu.Item className="mp-menu-item" key="1">
@@ -38,9 +38,18 @@ class Navigation extends React.Component {
                 </Menu.Item>
               </Menu>
             </div>
+        </div>
           </MobilePortrait>
 
           <MinTablet>
+          <div className="nav-bar">
+            <div className="mp-back-button">
+              <Button style={{ fontSize: '25px' }} icon="left"
+                      onClick={() => this.props.history.push(`/choreo/${this.props.choreoId}`)} />
+            </div>
+            <div className="title">
+              <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
+            </div>
             <div className="right-container">
               <Menu className="navbar-icon" mode="horizontal" theme="dark">
                 {/* TODO: Make the size of the icon bigger */}
@@ -63,8 +72,8 @@ class Navigation extends React.Component {
                 </Menu.Item>
               </Menu>
             </div>
+            </div>
           </MinTablet>
-        </div>
       </Header>
     );
   }

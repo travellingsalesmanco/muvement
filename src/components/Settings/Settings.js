@@ -20,7 +20,7 @@ class Settings extends React.Component {
         <Header className="settings-header">
           <div className="settings-navbar">
             <div>
-              <Button className="auth-backbutton" style={{ fontSize: '25px' }} icon="left"
+              <Button className="auth-backbutton" style={{ fontSize: '23px' }} icon="left"
                       onClick={() => this.props.history.goBack()} />
 
             </div>

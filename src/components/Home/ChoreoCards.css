@@ -145,22 +145,17 @@
 
 
 /* Mobile Portrait */
-.mp-title{
+.mp-dashboard-title{
     font-family: Sen-Black;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     text-shadow: 0px 0px 35px white;
     flex: 1;
     text-align: center;
-}
-
-.mp-right-container .ant-menu-item .anticon {
-  margin-right: 0;
-  font-size: 23px;
-  position: absolute;
+    margin-right: 2%;
 }
 
 .mp-setting {
-    right: -10px;
+    right: -5px;
 }
 
 .mp-new-choreo {
@@ -303,12 +298,13 @@
 }
 
 /* Mobile Landscape */
-.ml-title{
+.ml-dashboard-title{
     font-family: Sen-Black;
     font-size: 1.6rem;
     text-shadow: 0px 0px 35px white;
     flex: 1;
     text-align: center;
+    margin-left: 15%;
 }
 
 .ml-new-choreo-modal .ant-modal-content {

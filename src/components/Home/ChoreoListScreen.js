@@ -28,7 +28,7 @@ class ChoreoListScreen extends React.Component {
         <MobilePortrait>
           <Header>
             <div className="nav-bar">
-              <div className="mp-title">
+              <div className="mp-dashboard-title">
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="mp-right-container">
@@ -53,7 +53,7 @@ class ChoreoListScreen extends React.Component {
         <MobileLandscape>
           <Header>
             <div className="nav-bar">
-              <div className="ml-title">
+              <div className="ml-dashboard-title">
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="right-container">
@@ -77,7 +77,7 @@ class ChoreoListScreen extends React.Component {
         <MinTablet>
           <Header>
             <div className="nav-bar">
-              <div className="title">
+              <div className="dashboard-title">
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="right-container">
