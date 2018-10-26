@@ -78,7 +78,7 @@ class ChoreoHomeScreen extends React.Component {
     return (
       <Fragment>
         <MobilePortrait>
-          <Layout className="choreo-homescreen-body">
+          <Layout className="mp-choreo-homescreen-body">
             <Header>
               <div className="nav-bar">
                 <div>

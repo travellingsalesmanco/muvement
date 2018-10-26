@@ -1,3 +1,10 @@
+.mp-dashboard-body {
+  height: 100rem;
+  background-image: url("../../img/PortraitDashboardBackground.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .new-choreo {
   height: 250px;
   display: flex;
