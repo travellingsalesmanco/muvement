@@ -10,9 +10,10 @@ import {
   RENAME_FORMATION,
   REORDER_FORMATION,
   EDIT_FORMATION_TRANSITION,
-  CLEAR_FORMATION_TRANSITION
+  CLEAR_FORMATION_TRANSITION, UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY
 } from '../constants/actionTypes';
 import { defaultFormation, defaultTransition } from '../constants/defaults';
+import { undoableInMem } from "../lib/historyUtils";
 
 const formationReducer = (state = defaultFormation, action) => {
   switch (action.type) {
@@ -89,7 +90,7 @@ const formationReducer = (state = defaultFormation, action) => {
 };
 
 // Formations reducer
-export default (state = [defaultFormation], action) => {
+const formationsReducer = (state = [defaultFormation], action) => {
   switch (action.type) {
     case ADD_FORMATION: {
       const { payload: index } = action;
@@ -126,3 +127,11 @@ export default (state = [defaultFormation], action) => {
       return state;
   }
 };
+
+// TODO: add additional config where necessary
+export default undoableInMem(formationsReducer, {
+  undoType: UNDO_FORMATION_CHANGE,
+  redoType: REDO_FORMATION_CHANGE,
+  clearHistoryType: CLEAR_FORMATION_HISTORY,
+  ignoredTypes: [REMOVE_DANCER, RENAME_DANCER]
+});
