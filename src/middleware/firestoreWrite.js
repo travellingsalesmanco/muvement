@@ -17,7 +17,9 @@ import {
   MOVE_DANCER,
   USER_LOGOUT,
   ADD_CHOREO,
-  REMOVE_CHOREO
+  REMOVE_CHOREO,
+  UNDO_FORMATION_CHANGE,
+  REDO_FORMATION_CHANGE
 } from "../constants/actionTypes";
 import { firestore } from "../firebase";
 import { doSignOut } from "../firebase/auth";
@@ -41,7 +43,9 @@ const ACTIONS_TO_UPDATE = [
   RENAME_DANCER,
   ADD_DANCER_TO_FORMATION,
   REMOVE_DANCER_FROM_FORMATION,
-  MOVE_DANCER
+  MOVE_DANCER,
+  UNDO_FORMATION_CHANGE,
+  REDO_FORMATION_CHANGE
 ];
 
 export const firestoreWriter = store => next => action => {
