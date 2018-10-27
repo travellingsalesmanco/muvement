@@ -11,7 +11,8 @@ import {
   SET_LABELS_VIEW,
   SWITCH_ACTIVE_CHOREO,
   SWITCH_ACTIVE_FORMATION,
-  REMOVE_FORMATION
+  REMOVE_FORMATION,
+  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY
 } from "../constants/actionTypes";
 import { defaultStageDim } from "../constants/defaults";
 import { getChoreo } from "../selectors/choreo";
@@ -198,9 +199,9 @@ export function addAndSetActiveFormation(choreoId, formationId) {
 
 export function removeFormation(choreoId, formationId) {
   return (dispatch, getState) => {
-    if(hasFormation(choreoId, formationId, getState())) {
+    if (hasFormation(choreoId, formationId, getState())) {
       let numFormations = getNumFormations(choreoId, getState());
-      if(numFormations === 1){
+      if (numFormations === 1) {
         // Must always have at least 1 formation
         dispatch({
           type: ADD_FORMATION,
@@ -267,5 +268,32 @@ export function reorderAndFocusFormation(choreoId, fromIndex, toIndex) {
     } else {
       console.log("[ERROR] Index out of bounds")
     }
+  }
+}
+
+export function undoFormationsChange(choreoId) {
+  return (dispatch) => {
+    dispatch({
+      type: UNDO_FORMATION_CHANGE,
+      choreoId: choreoId,
+    })
+  }
+}
+
+export function redoFormationsChange(choreoId) {
+  return (dispatch) => {
+    dispatch({
+      type: REDO_FORMATION_CHANGE,
+      choreoId: choreoId,
+    })
+  }
+}
+
+export function clearFormationsHistory(choreoId) {
+  return (dispatch) => {
+    dispatch({
+      type: CLEAR_FORMATION_HISTORY,
+      choreoId: choreoId,
+    })
   }
 }

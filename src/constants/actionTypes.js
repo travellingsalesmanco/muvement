@@ -35,3 +35,8 @@ export const UNLOAD_ANIMATED_VIEW = "UNLOAD_ANIMATED_VIEW";
 
 // User auth actions
 export const USER_LOGOUT = "USER_LOGOUT";
+
+// Formation History actions
+export const UNDO_FORMATION_CHANGE = "UNDO_FORMATION_CHANGE";
+export const REDO_FORMATION_CHANGE = "REDO_FORMATION_CHANGE";
+export const CLEAR_FORMATION_HISTORY = "CLEAR_FORMATION_HISTORY";
