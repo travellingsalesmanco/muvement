@@ -143,27 +143,28 @@ class FormationScreen extends Component {
                           <HorizontalSlideList />
                         </div>
                         <div className="formationscreen-buttons">
-                        <div style={{ display: "flex", flexDirection: "row" }}>
-                          <div style={{
-                            paddingTop: '0.5em',
-                            paddingRight: '0.5em',
-                            paddingBottom: '1em',
-                            paddingLeft: '2em',
-                            flex: 1
-                          }}>
-                            <Button type={"default"} icon="plus" ghost block style={{ borderRadius: '1em' }}
-                                    onClick={this.handleAddFormation}>Add</Button>
-                          </div>
-                          <div style={{
-                            paddingTop: '0.5em',
-                            paddingRight: '2em',
-                            paddingBottom: '1em',
-                            paddingLeft: '0.5em',
-                            flex: 1
-                          }}>
-                            <Button className="delete-formation" icon="delete" ghost block style={{ borderRadius: '1em' }}
-                                    onClick={this.handleRemoveFormation}>Delete</Button>
-                          </div>
+                          <div style={{ display: "flex", flexDirection: "row" }}>
+                            <div style={{
+                              paddingTop: '0.5em',
+                              paddingRight: '0.5em',
+                              paddingBottom: '1em',
+                              paddingLeft: '2em',
+                              flex: 1
+                            }}>
+                              <Button type={"default"} icon="plus" ghost block style={{ borderRadius: '1em' }}
+                                      onClick={this.handleAddFormation}>Add</Button>
+                            </div>
+                            <div style={{
+                              paddingTop: '0.5em',
+                              paddingRight: '2em',
+                              paddingBottom: '1em',
+                              paddingLeft: '0.5em',
+                              flex: 1
+                            }}>
+                              <Button className="delete-formation" icon="delete" ghost block
+                                      style={{ borderRadius: '1em' }}
+                                      onClick={this.handleRemoveFormation}>Delete</Button>
+                            </div>
                           </div>
                         </div>
                       </Fragment>
