@@ -18,11 +18,20 @@
   right: 20px;
 }
 
-.landing-login-button {
+.landing-login-button{
   width: 80px;
   height: 1.8rem;
   border-radius: 20px;
-  top: -8px;
+}
+
+.landing-login-button:hover,
+.landing-login-button:active {
+    width: 80px;
+    height: 1.8rem;
+    border-radius: 20px;
+    top: -8px;
+    color: #24C6DC;
+    border: 1px solid #24C6DC;
 }
 
 .muvement-name-img {
@@ -66,8 +75,8 @@
 
 
 .landing-signup-button,
-.landing-signup-button .ant-btn:hover,
-.landing-signup-button .ant-btn:focus {
+.landing-signup-button:hover,
+.landing-signup-button:focus {
   background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
   width: 16rem;
   height: 50px;
@@ -112,8 +121,8 @@
 }
 
 .ml-landing-signup-button,
-.ml-landing-signup-button .ant-btn:hover,
-.ml-landing-signup-button .ant-btn:focus {
+.ml-landing-signup-button:hover,
+.ml-landing-signup-button:focus {
   background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
   width: 14rem;
   height: 50px;
@@ -164,9 +173,8 @@
   background-size: cover;
 }
 
-
-.tablet-muvement-name {
-  text-align: center;
+.tablet-muvement-name{
+    text-align: center;
 }
 
 .tablet-muvement-name-img {
@@ -180,8 +188,8 @@
 }
 
 .tablet-landing-signup-button,
-.tablet-landing-signup-button .ant-btn:hover,
-.tablet-landing-signup-button .ant-btn:focus {
+.tablet-landing-signup-button:hover,
+.tablet-landing-signup-button:focus {
   background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
   width: 16rem;
   height: 50px;

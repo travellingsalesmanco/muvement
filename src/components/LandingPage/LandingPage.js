@@ -197,7 +197,7 @@ class LandingPage extends React.Component {
              </Layout>
            </Layout>
            </MinTablet>
-      </Fragment>
+       </Fragment>
     );
   }
 }
