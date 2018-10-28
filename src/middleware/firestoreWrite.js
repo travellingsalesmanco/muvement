@@ -79,13 +79,19 @@ export const firestoreWriter = store => next => action => {
       }
     }
     default: {
+      const choreoId = action.choreoId;
+      const oldChoreo = store.getState().choreos.byId[choreoId];
       let result = next(action);
       if (ACTIONS_TO_UPDATE.includes(action.type)) {
-        const choreoId = action.choreoId;
         const updatedChoreo = store.getState().choreos.byId[choreoId];
         console.log("Updating: " + action.type + " for " + choreoId);
+        console.log("Old choreo: ");
+        console.log(oldChoreo);
         console.log("New choreo: ");
         console.log(updatedChoreo);
+        // TODO: proper deep comparison
+        console.log("Is same: ");
+        console.log(JSON.stringify(oldChoreo) === JSON.stringify(updatedChoreo));
         // TODO: rate-limiting (debouncing)
         firestore.updateChoreo(choreoId, updatedChoreo);
       }
