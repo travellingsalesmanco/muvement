@@ -6,6 +6,11 @@ import { withRouter } from "react-router-dom";
 import { auth } from "../../firebase";
 
 const FormItem = Form.Item;
+const NO_USER_FOUND_CODE = "auth/user-not-found";
+const NO_USER_FOUND_MESSAGE = "No such user found!";
+const WRONG_PASSWORD_CODE = "auth/wrong-password";
+const WRONG_PASSWORD_MESSAGE = "Incorrect password!";
+
 
 class LogInForm extends React.Component {
 
@@ -16,6 +21,26 @@ class LogInForm extends React.Component {
         console.log('Received values of form: ', values);
         auth.doSignInWithEmailAndPassword(values.email, values.password).then(
           () => this.props.history.push(`/`)
+        ).catch((err) => {
+          console.log(err);
+          let errMessage = "Could not log in";
+          switch (err.code) {
+            case NO_USER_FOUND_CODE: {
+              errMessage = NO_USER_FOUND_MESSAGE;
+              break;
+            }
+            case WRONG_PASSWORD_CODE: {
+              errMessage = WRONG_PASSWORD_MESSAGE;
+              break;
+            }
+          }
+
+          this.props.form.setFields({
+            submit: {
+              errors: [new Error(errMessage)],
+            }
+          });
+          }
         );
       }
     });
@@ -27,7 +52,7 @@ class LogInForm extends React.Component {
       <Form onSubmit={this.handleSubmit}>
         <FormItem>
           {getFieldDecorator('email', {
-            rules: [{ required: true, message: 'Please input your email!' }],
+            rules: [{ required: true, type: 'email', message: 'Please input your email!' }],
           })(
             <Input className="auth-input" prefix={<Icon type="mail" />} placeholder="Email" />
           )}
@@ -50,9 +75,14 @@ class LogInForm extends React.Component {
           })(
             <Checkbox><span className="form-text">Remember me</span></Checkbox>
           )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator('submit', {
+          })(
           <Button type="primary" htmlType="submit" className="auth-signup-button">
             LOG IN
           </Button>
+          )}
         </FormItem>
       </Form>
     );
