@@ -58,7 +58,9 @@ export const firestoreWriter = store => next => action => {
       if (!action.stale) {
         // Remove choreo from firestore (not internal change)
         deleteChoreo(action.choreoId);
-        removeChoreoImage(action.choreoId);
+        if (action.removeImage) {
+          removeChoreoImage(action.choreoId);
+        }
       }
       return next(action);
     }

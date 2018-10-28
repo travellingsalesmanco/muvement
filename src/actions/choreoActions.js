@@ -53,6 +53,12 @@ function isNewer(choreo, choreoId, state) {
     : true;
 }
 
+// TODO: proper storage check
+function isStorageImage(choreoId, state) {
+  const currChoreo = getChoreo(state, choreoId);
+  return !currChoreo.imageUrl.includes("https://dummyimage.com");
+}
+
 export function addChoreo(id, choreo) {
   return (dispatch) => {
     let res = dispatch({
@@ -69,10 +75,11 @@ export function addChoreo(id, choreo) {
 }
 
 export function removeChoreo(id) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: REMOVE_CHOREO,
       choreoId: id,
+      removeImage: isStorageImage(id, getState())
     })
   }
 }
