@@ -1,8 +1,6 @@
 import { Button, Col, Layout, Row } from 'antd';
 import React, { Fragment }from 'react';
 import ReactGA from 'react-ga';
-import GridImage from "../../img/grid-image-portrait.svg";
-import Logo from "../../img/m-logo.svg";
 import GradientSVG from "../../icons/GradientSVG";
 import HeadphoneIcon from "../../icons/HeadphoneIcon";
 import SpotlightIcon from "../../icons/SpotlightIcon";
@@ -10,6 +8,7 @@ import SlideShareIcon from "../../icons/SlideShareIcon";
 import Name from "../../img/MuvementLogo.png";
 import FeatureTwo from "../../img/feature2.png";
 import FeatureThree from "../../img/feature3.png";
+import GridImageLandscape from "../../img/GridImageLandscape.svg";
 import './LandingPage.css';
 import { withRouter } from "react-router-dom";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
@@ -66,6 +65,72 @@ class LandingPage extends React.Component {
             </Layout>
           </Layout>
           </MobilePortrait>
+
+          <MobileLandscape>
+           <Layout style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
+             <Header className="landingpage-navbar">
+               <div className="landing-login">
+                 <Button className="landing-login-button" onClick={() => this.props.history.push(`/login`)} ghost block>LOG
+                   IN</Button>
+               </div>
+             </ Header>
+
+             <Layout className="tablet-landingpage-contents">
+             <GradientSVG
+               startColor="#24c6dc"
+               endColor="#514a9d"
+               idCSS="cool-gradient"
+             />
+               <Content style={{ display: "flex", flexDirection: "column" }}>
+                <Row>
+                <Col span={12}>
+                 <div className="tablet-muvement-name">
+                    <img className="ml-muvement-name-img" src={Name} alt="muvement name" />
+                </div>
+                 <p className="ml-muvement-desc">Create and visualise your formations <br /> without pen and paper</p>
+                 <div className="tablet-landing-signup">
+                     <Button className="ml-landing-signup-button" onClick={() => this.props.history.push(`/signup`)}>LETS GET
+                       CREATIVE</Button>
+                   </div>
+                  </Col>
+                  <Col span={12} className="demo-grid-outer">
+                      <div className="ml-demo-grid">
+                        <ResponsiveStageCanvas choreoId={"demo"} formationId={0}
+                          withGrid demo />
+                      </div>
+                  </Col>
+                </Row>
+                 <p className="ml-muvement-features">More Features</p>
+
+                 <Row>
+                     <Col span={12}>
+                         <img className="ml-muvement-features-img" src={FeatureTwo} alt="muvement name" />
+                     </Col>
+                     <Col span={12}>
+                        <div className="ml-muvement-features-icon">
+                          <HeadphoneIcon style={{ fontSize: '20px' }}/>
+                        </div>
+                     <p className="ml-muvement-features-text">
+                         Sync transitions with your audio track
+                     </p>
+                     </Col>
+                 </Row>
+
+                 <Row>
+                    <Col span={12}>
+                         <p className="ml-muvement-features-text">
+                             Organise your performances <br /> anywhere and anytime!
+                         </p>
+                    </Col>
+
+                    <Col span={12}>
+                        <img className="ml-muvement-features-img" src={FeatureThree} alt="muvement name" />
+                    </Col>
+                 </Row>
+               </Content>
+             </Layout>
+           </Layout>
+           </MobileLandscape>
 
           <MinTablet>
            <Layout style={{ overflowY: 'scroll', overflowX: 'hidden' }}>

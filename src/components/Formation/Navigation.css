@@ -1,7 +1,7 @@
 .ant-layout-header {
   background: #131313;
-  /*padding: 0 1em;*/
   padding: 0px;
+  height: 50px;
 }
 
 .nav-bar {

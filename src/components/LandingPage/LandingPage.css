@@ -22,6 +22,7 @@
   width: 80px;
   height: 1.8rem;
   border-radius: 20px;
+  top: -8px;
 }
 
 .muvement-name-img {
@@ -44,6 +45,7 @@
   color: white;
   font-size: 2rem;
   text-shadow: 0px 0px 5px white;
+  font-family: Sen-Bold;
 }
 
 .muvement-features-text{
@@ -86,6 +88,73 @@
   box-shadow: 0px 0px 15px #141414;
 }
 
+.ml-demo-grid{
+  margin-top: 15%;
+  margin-left: 3em;
+  margin-right: -4em;
+  height: 15rem;
+  box-shadow: 0px 0px 15px #141414;
+}
+
+/* Mobile Landscape */
+.ml-muvement-name-img {
+  margin: 0 auto;
+  padding-top: 10%;
+  width: 15rem;
+}
+
+.ml-muvement-desc {
+  text-align: center;
+  padding-top: 2%;
+  color: white;
+  font-size: 0.95em;
+  font-family: Sen-Bold;
+}
+
+.ml-landing-signup-button,
+.ml-landing-signup-button .ant-btn:hover,
+.ml-landing-signup-button .ant-btn:focus {
+  background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
+  width: 14rem;
+  height: 50px;
+  border-radius: 3rem;
+  color: white;
+  font-family: Sen-Bold;
+  font-size: 1.1em;
+  border: none;
+  box-shadow: 0px 0px 15px #514A9D;
+  margin: 1.8rem auto;
+}
+
+.ml-muvement-features {
+  text-align: center;
+  padding-top: 5%;
+  color: white;
+  font-size: 1.8rem;
+  text-shadow: 0px 0px 5px white;
+  font-family: Sen-Bold;
+}
+
+.ml-muvement-features-text{
+    padding-top: 30px;
+    color: white;
+    text-align: center;
+    font-size: 1.1em;
+    padding-bottom: 20px;
+    font-family: Sen-Bold;
+}
+
+.ml-muvement-features-icon{
+    padding-top: 60px;
+    text-align: center;
+}
+
+.ml-muvement-features-img {
+  margin: 0 20px 50px 20px;
+  padding-top: 5%;
+  width: 90%;
+}
+
 /* Tablet */
 .tablet-landingpage-contents {
   height: 100%;
@@ -104,14 +173,6 @@
   margin: 0 auto;
   padding-top: 10%;
   width: 20rem;
-}
-
-.tabelt-muvement-desc {
-  text-align: center;
-  padding-top: 2%;
-  color: white;
-  font-size: 1.5em;
-  font-family: Sen-Bold;
 }
 
 .tablet-landing-signup {
@@ -155,6 +216,7 @@
   color: white;
   font-size: 2.2rem;
   text-shadow: 0px 0px 5px white;
+  font-family: Sen-Bold;
 }
 
 .tablet-muvement-features-text{
