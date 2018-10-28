@@ -75,13 +75,13 @@ export function undoableInMem(reducer, config) {
         if (state === newState) {
           return state;
         }
-        if (config.ignoredTypes.includes(action.type)) {
+        if (config.includedTypes.includes(action.type)) {
+          addToMem(memKey, state);
+          return newState;
+        } else {
           resetFromMem(memKey);
           return newState;
-
         }
-        addToMem(memKey, state);
-        return newState;
     }
   }
 }
