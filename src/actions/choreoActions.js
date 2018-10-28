@@ -191,6 +191,7 @@ export function addAndSetActiveFormation(choreoId, formationId) {
       });
       dispatch({
         type: SWITCH_ACTIVE_FORMATION,
+        choreoId: choreoId,
         payload: formationId
       })
     }
@@ -219,6 +220,7 @@ export function removeFormation(choreoId, formationId) {
       if (getActiveFormation(getState()) >= numFormations) {
         dispatch({
           type: SWITCH_ACTIVE_FORMATION,
+          choreoId: choreoId,
           payload: numFormations - 1
         })
       }
@@ -234,6 +236,7 @@ export function gotoFormation(choreoId, targetFormationId) {
     } else {
       dispatch({
         type: SWITCH_ACTIVE_FORMATION,
+        choreoId: choreoId,
         payload: targetFormationId
       })
     }
@@ -263,6 +266,7 @@ export function reorderAndFocusFormation(choreoId, fromIndex, toIndex) {
       })
       dispatch({
         type: SWITCH_ACTIVE_FORMATION,
+        choreoId: choreoId,
         payload: toIndex
       })
     } else {
