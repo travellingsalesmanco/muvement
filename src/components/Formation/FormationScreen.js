@@ -191,7 +191,7 @@ class FormationScreen extends Component {
 
         <MobileLandscape>
           <Spin spinning={loading} size={"large"}>
-            <Layout className="body">
+            <Layout className="body" style={{height: '100vh'}}>
               <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
               <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
 

@@ -1,12 +1,14 @@
 .mp-dashboard-body {
-  height: 100rem;
+  min-height: 100vh;
+  height: 100%;
   background-image: url("../../img/PortraitDashboardBackground.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .dashboard-body {
-  height: 100rem;
+  min-height: 100vh;
+  height: 100%;
   background-image: url("../../img/FormationsOverviewBackground.png");
   background-repeat: no-repeat;
   background-size: cover;

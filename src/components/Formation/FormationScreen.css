@@ -1,12 +1,14 @@
 .body {
-  height: 100rem;
+  min-height: 100vh;
+  height: 100%;
   background-image: url("../../img/EditBackground.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .mp-body {
-  height: 100rem;
+  min-height: 100vh;
+  height: 100%;
   background-image: url("../../img/PortraitEditBackground.png");
   background-repeat: no-repeat;
   background-size: cover;
