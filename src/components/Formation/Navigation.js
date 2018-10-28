@@ -5,7 +5,7 @@ import './Navigation.css';
 import RedoIcon from "../../icons/RedoIcon";
 import UndoIcon from "../../icons/UndoIcon";
 import { toggleLabels } from "../../actions/choreoActions";
-import { MinTablet, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 import { undoFormationsChange, redoFormationsChange } from "../../actions/choreoActions";
 import { canRedo, canUndo } from "../../lib/historyUtils";
 
@@ -51,6 +51,18 @@ class Navigation extends React.Component {
             </div>
           </div>
         </MobilePortrait>
+
+        <MobileLandscape>
+          <div className="nav-bar">
+            <div className="mp-back-button">
+              <Button style={{ fontSize: '25px' }} icon="left"
+                      onClick={() => this.props.history.push(`/choreo/${choreoId}`)} />
+            </div>
+            <div className="mp-title">
+              <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
+            </div>
+          </div>
+        </MobileLandscape>
 
         <MinTablet>
           <div className="nav-bar">
