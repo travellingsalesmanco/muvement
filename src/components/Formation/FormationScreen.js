@@ -65,7 +65,7 @@ class FormationScreen extends Component {
       visible: false,
       sidePanelID: 0,
       formationName: '',
-      activeButton: props.animated ? 3 : 1
+      activeButton: props.animated ? 3 : 2
     }
   }
 
