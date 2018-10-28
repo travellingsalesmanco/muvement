@@ -80,7 +80,7 @@ class HorizontalSlideList extends React.Component {
                           background: activeFormationId === index ? '#24C6DC' : 'transparent',
                           display: 'flex',
                           justifyContent: "center",
-                          alignContent: "center"
+                          alignItems: "center",
                         }}>
                         <div style={{
                           height: '7em',
