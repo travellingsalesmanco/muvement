@@ -27,9 +27,6 @@ class LandingPage extends React.Component {
          <MobilePortrait>
           <Layout style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
             <Header className="landingpage-navbar">
-              <div className="logo">
-                <img src={Logo} width="100" height="50" alt="muvement logo" />
-              </div>
               <div className="landing-login">
                 <Button className="landing-login-button" onClick={() => this.props.history.push(`/login`)} ghost block>LOG
                   IN</Button>
@@ -73,16 +70,13 @@ class LandingPage extends React.Component {
           <MinTablet>
            <Layout style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
              <Header className="landingpage-navbar">
-               <div className="tablet-logo">
-                 <img src={Logo} width="100" height="50" alt="muvement logo" />
-               </div>
                <div className="landing-login">
                  <Button className="landing-login-button" onClick={() => this.props.history.push(`/login`)} ghost block>LOG
                    IN</Button>
                </div>
              </ Header>
 
-             <Layout className="landingpage-contents">
+             <Layout className="tablet-landingpage-contents">
              <GradientSVG
                startColor="#24c6dc"
                endColor="#514a9d"

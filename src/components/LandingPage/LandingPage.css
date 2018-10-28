@@ -12,10 +12,6 @@
   border-bottom: 1px solid #191919;
 }
 
-.logo {
-  left: 0px;
-}
-
 .landing-login {
   top: 0px;
   position: absolute;
@@ -30,7 +26,7 @@
 
 .muvement-name-img {
   margin: 0 auto;
-  padding-top: 15%;
+  padding-top: 10%;
   width: 15rem;
 }
 
@@ -91,9 +87,14 @@
 }
 
 /* Tablet */
-.tablet-logo {
-  text-align: center;
+.tablet-landingpage-contents {
+  height: 100%;
+  background-image: url("../../img/LandingPageBackground.png");
+  /* background: linear-gradient(to top, #303030 -10%, #000000 100%); */
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
 
 .tablet-muvement-name {
   text-align: center;
@@ -101,7 +102,7 @@
 
 .tablet-muvement-name-img {
   margin: 0 auto;
-  padding-top: 15%;
+  padding-top: 10%;
   width: 20rem;
 }
 
