@@ -1,22 +1,29 @@
 import React from 'react';
 import './Settings.css';
-import { Button, Layout, Menu, Icon } from 'antd';
-import { BrowserRouter as Route, withRouter } from "react-router-dom";
-import { auth } from "../../firebase";
-import {connect} from 'react-redux'
+import { Button, Layout, List, Icon } from 'antd';
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux'
 import { USER_LOGOUT } from '../../constants/actionTypes';
 
 
 class Settings extends React.Component {
   handleLogout = () => {
-    this.props.dispatch({type: USER_LOGOUT}).then(this.props.history.push('/landing'));
-  }
+    this.props.dispatch({ type: USER_LOGOUT }).then(this.props.history.push('/landing'));
+  };
 
   render() {
     const { Header } = Layout;
-    const SubMenu = Menu.SubMenu;
+    const LIST_BUTTONS = [
+      <span onClick={() => this.props.history.push(`/resetpassword`)}><Icon
+        type="lock" /><span>Reset Password</span></span>,
+      <span onClick={() => window.open('https://muvement.app/terms','_blank')}><Icon type="exception" /><span>Terms</span></span>,
+      <span onClick={() => window.open('https://muvement.app/privacy','_blank')}><Icon
+        type="solution" /><span>Privacy Policy</span></span>,
+      <span onClick={this.handleLogout}><Icon type="logout" /><span>Log Out</span></span>
+
+    ];
     return (
-      <Layout style={{height:"100vh"}}>
+      <Layout style={{ height: "100vh" }}>
         <Header className="settings-header">
           <div className="settings-navbar">
             <div>
@@ -30,16 +37,11 @@ class Settings extends React.Component {
           </div>
         </Header>
         <div className="settings-background">
-          <Menu className="settings-menu" mode="vertical">
-            <SubMenu key="resetpw" className="settings-menu-item"
-                     onTitleClick={() => this.props.history.push(`/resetpassword`)}
-                     title={<span><Icon type="lock" /><span>Reset Password</span></span>}>
-            </SubMenu>
-            <SubMenu key="logout" className="settings-menu-item"
-                     onTitleClick={this.handleLogout}
-                     title={<span><Icon type="logout" /><span>Logout</span></span>}>
-            </SubMenu>
-          </Menu>
+          <List
+            split={false}
+            dataSource={LIST_BUTTONS}
+            renderItem={item => (<List.Item className="settings-title">{item}</List.Item>)}
+          />
         </div>
       </Layout>
 

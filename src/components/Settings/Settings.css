@@ -8,34 +8,26 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .settings-navbar{
     display: flex;
 }
 
-.settings-title{
+.settings-title span{
     color: white;
     font-family: Sen-Black;
     font-size: 1em;
     text-shadow: 0 0 1.2em white;
     flex: 1;
-    text-align: center;
-    margin: auto;
+    /*text-align: center;*/
+    margin: auto 1em;
 }
 
-.settings-menu{
-    margin-top: 1.5em;
-    color: white;
-    background-color: transparent;
-}
-
-li.ant-menu-submenu.ant-menu-submenu-vertical.settings-menu-item{
-    margin-bottom: 3em;
+.settings-title:hover{
+    background-color: #514a9d;
+    cursor: pointer;
 }
 
 .ant-menu-submenu-title:hover{
     color: white;
-}
-
-.ant-menu-submenu-vertical > .ant-menu-submenu-title .ant-menu-submenu-arrow {
-    right: 0px;
 }
