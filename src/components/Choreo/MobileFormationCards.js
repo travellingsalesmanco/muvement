@@ -29,8 +29,8 @@ class MobileFormationCards extends React.Component {
     return (
       <div>
         <div className="mobile-formation-add" style={{padding: '0 1em'}}>
-        <Button type={"default"} icon={"plus"} ghost block className="mobile-formation-add-button"
-                onClick={this.handleAddFormation}>Add Formation</Button>
+        <Button type={"default"} icon={"plus"} block className="mobile-formation-add-button"
+                onClick={this.handleAddFormation}>Create New Formation</Button>
         </div>
       {
         this.props.formations.map((formation, index) => (

@@ -13,7 +13,7 @@ import MobileFormationCards from "./MobileFormationCards";
 import PerformerList from "./PerformerList";
 
 const MobileSwitchTabs = ({ activeButton, handleClick }) => (
-  <div className="mobile-switch-tabs">
+  <div className="mobile-switch-tabs-home">
     <button
       className={activeButton === 1 ? 'mobile-switch-tabs-active' : 'mobile-switch-tabs-inactive'}
       onClick={() => handleClick(1)}>

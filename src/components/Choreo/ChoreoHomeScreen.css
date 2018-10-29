@@ -202,6 +202,17 @@ button.ant-btn.mp-back-button.ant-btn-icon-only{
   font-size: 13px;
 }
 
+.mobile-switch-tabs-home {
+  text-align: center;
+  margin: 2em auto 0em auto;
+  border: 1px solid #24C6DC;
+  border-radius: 30px;
+  height: 3em;
+  width: 90%;
+  padding: 0px;
+  font-size: 13px;
+}
+
 .mobile-switch-tabs-active {
   background-color: #24C6DC;
   border: none;

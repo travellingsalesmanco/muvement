@@ -33,14 +33,15 @@
 }
 
 .mobile-formation-add-button {
-  border-image: linear-gradient(to right, #24c6dc, #514a9d);
-  border-image-slice: 1;
+  background-image: linear-gradient(to right, #24c6dc, #514a9d);
   font-family: Sen-Bold;
   color: white;
   font-size: 1.3em;
-  height: 2.5em;
-  margin: 2em auto;
+  height: 2.2em;
   width: 90%;
+  margin: 2em auto;
+  border: none;
+
 }
 
 .mobile-formation-add-button:hover,
