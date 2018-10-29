@@ -24,7 +24,12 @@ class SignUpForm extends React.Component {
         loading: true,
         disabled: true,
       }, () => this.props.form.validateFields((err, values) => {
-        if (!err) {
+        if (err) {
+          this.setState({
+            loading: false,
+            disabled: false,
+          })
+        } else {
           console.log('Received values of form: ', values);
           auth.doSignUpWithEmailAndPassword(values.username, values.email, values.password).then(
             () => this.props.history.push(`/`)
@@ -99,13 +104,13 @@ class SignUpForm extends React.Component {
         </FormItem>
         <FormItem>
           {getFieldDecorator('submit', {})(
-          <Button type="primary" htmlType="submit"
-                  className="auth-signup-button"
-                  loading={loading}
-                  disabled={disabled}
-          >
-            SIGN UP
-          </Button>
+            <Button type="primary" htmlType="submit"
+                    className="auth-signup-button"
+                    loading={loading}
+                    disabled={disabled}
+            >
+              SIGN UP
+            </Button>
           )}
         </FormItem>
       </Form>

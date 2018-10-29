@@ -26,7 +26,12 @@ class LogInForm extends React.Component {
         loading: true,
         disabled: true,
       }, () => this.props.form.validateFields((err, values) => {
-        if (!err) {
+        if (err) {
+          this.setState({
+            loading: false,
+            disabled: false,
+          })
+        } else {
           console.log('Received values of form: ', values);
           auth.doSignInWithEmailAndPassword(values.email, values.password).then(
             () => this.props.history.push(`/`)
