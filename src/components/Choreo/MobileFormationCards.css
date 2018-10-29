@@ -46,12 +46,13 @@
 
 .mobile-formation-add-button:hover,
 .mobile-formation-add-button:active {
-    font-family: Sen-Bold;
-    color: #24c6dc;
+    background-image: linear-gradient(to right, #24c6dc, #514a9d);
+    color: white;
     font-size: 1.3em;
     height: 2.5em;
     margin: 2em auto;
     width: 90%;
+    font-family: Sen-Bold;
 }
 
 .delete-button {
