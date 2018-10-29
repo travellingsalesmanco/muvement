@@ -7,13 +7,14 @@
     background-image: url("../../img/FormationsOverviewBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
+    padding-top: 1.5em;
 }
 
 .settings-navbar{
     display: flex;
 }
 
-.settings-title span{
+.settings-title{
     color: white;
     font-family: Sen-Black;
     font-size: 1em;
@@ -21,6 +22,8 @@
     flex: 1;
     /*text-align: center;*/
     margin: auto 1em;
+    text-align: center;
+
 }
 
 .settings-title:hover{
@@ -28,6 +31,13 @@
     cursor: pointer;
 }
 
-.ant-menu-submenu-title:hover{
+.settings-item{
     color: white;
+    font-size: 1em;
+    flex: 1;
+    margin: auto 1em;
+}
+
+.settings-item span{
+    margin-left: 1em;
 }

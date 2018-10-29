@@ -40,7 +40,7 @@ class Settings extends React.Component {
           <List
             split={false}
             dataSource={LIST_BUTTONS}
-            renderItem={item => (<List.Item className="settings-title">{item}</List.Item>)}
+            renderItem={item => (<List.Item className="settings-item">{item}</List.Item>)}
           />
         </div>
       </Layout>
