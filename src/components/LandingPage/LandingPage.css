@@ -1,3 +1,5 @@
+/* Mobile Portrait */
+
 .landingpage-contents {
   height: 100%;
   background-image: url("../../img/PortraitBackground.png");
@@ -29,7 +31,6 @@
   width: 80px;
   height: 1.8rem;
   border-radius: 20px;
-  top: -8px;
   color: #24C6DC;
   border: 1px solid #24C6DC;
 }
@@ -145,7 +146,7 @@
 }
 
 .ml-muvement-features-text{
-  padding-top: 30px;
+  padding-top: 10px;
   color: white;
   text-align: center;
   font-size: 1.1em;
@@ -210,12 +211,7 @@
   font-family: Sen-Bold;
 }
 
-.tablet-demo-grid-outer {
-
-}
-
 .tablet-demo-grid{
-  /*margin-top: 30%;*/
   margin-left: 3em;
   margin-right: -3em;
   height: 25em;
@@ -232,6 +228,7 @@
 }
 
 .tablet-muvement-features-text{
+  padding-top: 10px;
   color: white;
   text-align: center;
   font-size: 1.5em;
@@ -246,4 +243,86 @@
   margin: 0 20px 50px 20px;
   padding-top: 5%;
   width: 90%;
+}
+
+
+/* Laptop Media Queries */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .landing-login-button{
+        width: 120px;
+    }
+
+    .landing-login-button:hover,
+    .landing-login-button:active {
+      width: 120px;
+    }
+
+    .tablet-muvement-name-img {
+      width: 28rem;
+    }
+
+    .tablet-muvement-desc {
+      font-size: 1.6em;
+    }
+
+    .tablet-landing-signup-button,
+    .tablet-landing-signup-button:hover,
+    .tablet-landing-signup-button:focus {
+      width: 20rem;
+      font-size: 1.5em;
+    }
+
+    .tablet-muvement-features {
+      font-size: 3rem;
+    }
+
+    .tablet-muvement-features-text{
+      font-size: 1.8em;
+    }
+
+    .tablet-demo-grid{
+        height: 30em;
+    }
+}
+
+/* Desktop Media Queries */
+@media (min-width: 1281px) {
+    .landing-login-button{
+        width: 150px;
+    }
+
+    .landing-login-button:hover,
+    .landing-login-button:active {
+      width: 150px;
+    }
+
+    .tablet-muvement-name-img {
+      width: 35rem;
+    }
+
+    .tablet-muvement-desc {
+      font-size: 1.8em;
+    }
+
+    .tablet-landing-signup-button,
+    .tablet-landing-signup-button:hover,
+    .tablet-landing-signup-button:focus {
+      width: 28rem;
+      height: 4rem;
+      font-size: 1.7em;
+    }
+
+    .tablet-muvement-features {
+      font-size: 4rem;
+    }
+
+    .tablet-muvement-features-text{
+      font-size: 2.5em;
+    }
+
+    .tablet-demo-grid{
+        margin-top: 10%;
+        height: 40em;
+    }
+
 }

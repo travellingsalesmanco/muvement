@@ -44,6 +44,7 @@ class LandingPage extends React.Component {
                 <Button className="landing-signup-button" onClick={() => this.props.history.push(`/signup`)}>LETS GET
                   CREATIVE</Button>
                 <p className="muvement-features">How it works</p>
+                <SpotlightIcon style={{ fontSize: '35px'}}/>
                 <p className="muvement-features-text">
                   Stage your formations, try it out below!
                 </p>
@@ -51,12 +52,13 @@ class LandingPage extends React.Component {
                   <ResponsiveStageCanvas choreoId={"demo"} formationId={0}
                                          withGrid demo />
                 </div>
-                // <HeadphoneIcon style={{ fontSize: '20px' }}/>
+                <HeadphoneIcon style={{ fontSize: '20px' , marginTop: '0.5em'}}/>
                 <p className="muvement-features-text">
                   Sync transitions with your audio track
                 </p>
                 <img className="muvement-features-img" src={FeatureTwo} alt="muvement name" />
 
+                <SlideShareIcon style={{ fontSize: '35px' , marginTop: '0.5em'}}/>
                 <p className="muvement-features-text">
                   Organise your performances <br /> anywhere and anytime!
                 </p>
@@ -118,6 +120,9 @@ class LandingPage extends React.Component {
 
                 <Row>
                   <Col span={12}>
+                   <div className="ml-muvement-features-icon">
+                    <SlideShareIcon style={{ fontSize: '35px'}}/>
+                   </div>
                     <p className="ml-muvement-features-text">
                       Organise your performances <br /> anywhere and anytime!
                     </p>
@@ -184,6 +189,9 @@ class LandingPage extends React.Component {
 
                 <Row type="flex" align="middle">
                   <Col span={12}>
+                  <div className="tablet-muvement-features-icon">
+                   <SlideShareIcon style={{ fontSize: '35px'}}/>
+                  </div>
                     <p className="tablet-muvement-features-text">
                       Organise your performances <br /> anywhere and anytime!
                     </p>
