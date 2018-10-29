@@ -26,16 +26,16 @@
 
 }
 
-.settings-title:hover{
-    background-color: #514a9d;
-    cursor: pointer;
-}
-
 .settings-item{
     color: white;
     font-size: 1em;
     flex: 1;
     margin: auto 1em;
+}
+
+.settings-item:hover{
+    background-color: #514a9d;
+    cursor: pointer;
 }
 
 .settings-item span{
