@@ -1,4 +1,4 @@
-import { Button, Layout, Menu, Spin } from 'antd';
+import { Button, Layout, Menu, Spin, BackTop } from 'antd';
 import React, { Fragment } from 'react';
 import { connect } from "react-redux";
 import { getChoreo } from '../../selectors/choreo';
@@ -120,6 +120,7 @@ class ChoreoHomeScreen extends React.Component {
                       <StageDimForm choreoId={this.props.choreoId} />
                     </div>
                 }
+                <BackTop />
               </Spin>
             </Layout>
           </Layout>
