@@ -200,7 +200,8 @@ export function addAndSetActiveFormation(choreoId, formationId) {
         type: SWITCH_ACTIVE_FORMATION,
         choreoId: choreoId,
         payload: formationId
-      })
+      });
+      return Promise.resolve()
     }
   }
 }
