@@ -1,25 +1,65 @@
 import React from 'react';
 import './Settings.css';
-import { Button, Layout, List, Icon } from 'antd';
+import { Button, Layout, List, Icon, Modal } from 'antd';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
 import { USER_LOGOUT } from '../../constants/actionTypes';
+import Terms from "../Static/Terms";
+import Privacy from "../Static/Privacy";
 
 
 class Settings extends React.Component {
+  state = {
+    termsVisible: false,
+    privacyVisible: false
+  };
+
+
   handleLogout = () => {
     this.props.dispatch({ type: USER_LOGOUT }).then(this.props.history.push('/landing'));
   };
 
+  showTerms = () => {
+    this.setState({
+      termsVisible: true,
+      privacyVisible: false
+    });
+  };
+
+  showPrivacy = () => {
+    this.setState({
+      termsVisible: false,
+      privacyVisible: true
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      termsVisible: false,
+      privacyVisible: false
+    });
+  };
+
+
   render() {
     const { Header } = Layout;
     const LIST_BUTTONS = [
-      <span onClick={() => this.props.history.push(`/resetpassword`)}><Icon
-        type="lock" /><span>Reset Password</span></span>,
-      <span onClick={() => window.open('https://muvement.app/terms','_blank')}><Icon type="exception" /><span>Terms</span></span>,
-      <span onClick={() => window.open('https://muvement.app/privacy','_blank')}><Icon
-        type="solution" /><span>Privacy Policy</span></span>,
-      <span onClick={this.handleLogout}><Icon type="logout" /><span>Log Out</span></span>
+      {
+        element: <span><Icon type="lock" /><span>Reset Password</span></span>,
+        clickHandler: () => this.props.history.push(`/resetpassword`)
+      },
+      {
+        element: <span><Icon type="exception" /><span>Terms of Service</span></span>,
+        clickHandler: this.showTerms
+      },
+      {
+        element: <span><Icon type="solution" /><span>Privacy Policy</span></span>,
+        clickHandler: this.showPrivacy
+      },
+      {
+        element: <span><Icon type="logout" /><span>Log Out</span></span>,
+        clickHandler: this.handleLogout
+      },
 
     ];
     return (
@@ -40,9 +80,28 @@ class Settings extends React.Component {
           <List
             split={false}
             dataSource={LIST_BUTTONS}
-            renderItem={item => (<List.Item className="settings-item">{item}</List.Item>)}
+            renderItem={item => (
+              <List.Item className="settings-item" onClick={item.clickHandler}>{item.element}</List.Item>)}
           />
         </div>
+        <Modal
+          title="Terms of Service"
+          visible={this.state.termsVisible}
+          onOk={this.handleClose}
+          onCancel={this.handleClose}
+          maskClosable={true}
+        >
+          {<Terms/>}
+        </Modal>
+        <Modal
+          title="Privacy Policy"
+          visible={this.state.privacyVisible}
+          onOk={this.handleClose}
+          onCancel={this.handleClose}
+          maskClosable={true}
+        >
+          {<Privacy/>}
+        </Modal>
       </Layout>
 
 
