@@ -187,7 +187,7 @@ button.ant-btn.mp-back-button.ant-btn-icon-only{
 
 .mobile-switch-tabs {
   text-align: center;
-  margin: 2em auto 0 auto;
+  margin: 0 auto;
   border: 1px solid #24C6DC;
   border-radius: 30px;
   height: 3em;
@@ -251,4 +251,22 @@ button.ant-btn.backbutton.ant-btn-icon-only {
 
 .ant-menu.ant-menu-dark .ant-menu-item-selected{
   background: transparent;
+}
+
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3)
+and (orientation : portrait) {
+    .mobile-switch-tabs {
+      text-align: center;
+      margin: 1.8em auto 0 auto;
+      border: 1px solid #24C6DC;
+      border-radius: 30px;
+      height: 3em;
+      width: 90%;
+      padding: 0px;
+      font-size: 13px;
+    }
 }

@@ -28,9 +28,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
+
 
 .section-title {
     border-radius: 50px;
@@ -45,7 +46,7 @@
 .section-title-inner {
   background: #131313;
   text-align: center;
-  padding: 0.3em 3em;
+  padding: 0.1em 3em;
   border-radius: 50px;
 }
 
@@ -55,7 +56,7 @@
   background-color: transparent;
   font-family: 'Sen-Bold';
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .section-title .ant-input:focus,
@@ -163,5 +164,28 @@
 }
 
 .formationscreen-buttons{
-    margin-top: 1.5em;
+    margin-top: 0.5em;
+}
+
+.horizontal-list {
+    padding-left: 1em;
+}
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3)
+and (orientation : portrait) {
+    .section-title-container {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .horizontal-list {
+        padding-top: 1em;
+    }
+
+    .formationscreen-buttons{
+        margin-top: 2em;
+    }
 }

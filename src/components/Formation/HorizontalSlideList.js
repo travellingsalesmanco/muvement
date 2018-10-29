@@ -73,18 +73,18 @@ class HorizontalSlideList extends React.Component {
                         )}
                       >
                         <div style={{
-                          height: '8em',
-                          width: '10em',
+                          height: '6em',
+                          width: '8em',
                           boxShadow: `0px 0px 1.5em 0px rgba(39, 39, 39, 0.75)`,
                           pointerEvents: "None",
-                          background: activeFormationId === index ? '#24C6DC' : 'transparent',
+                          background: activeFormationId === index ? 'linear-gradient(to right, rgba(36,198,220, 0.7), rgba(81,74,157, 0.7))' : 'transparent',
                           display: 'flex',
                           justifyContent: "center",
                           alignItems: "center"
                         }}>
                         <div style={{
-                          height: '7em',
-                          width: '9em',
+                          height: '5em',
+                          width: '7em',
                           pointerEvents: "None",
                           background: '#000',
                         }}>

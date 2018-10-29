@@ -38,7 +38,7 @@ const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameCon
 );
 
 const MobileSwitchTabs = ({ activeButton, handleClick }) => (
-  <div className="mobile-switch-tabs" style={{ margin: '0 auto' }}>
+  <div className="mobile-switch-tabs">
     <button
       className={activeButton === 1 ? 'mobile-switch-tabs-active' : 'mobile-switch-tabs-inactive'}
       onClick={() => handleClick(1)}>
@@ -130,7 +130,7 @@ class FormationScreen extends Component {
                   <SectionTitle key={this.props.formationName} mobile={true} formationName={this.props.formationName}
                                 handleEditName={this.handleEditName}
                                 handleEditNameConfirm={this.handleEditNameConfirm} />
-                  <div style={{ height: '15rem', marginBottom: '50px' }}>
+                  <div className="stage-canvas" style={{ height: '15rem', marginBottom: '25px' }}>
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
                                            withGrid animated={this.props.animated} />
                   </div>
@@ -139,7 +139,7 @@ class FormationScreen extends Component {
                     {
                       activeButton === 1 &&
                       <Fragment>
-                        <div style={{ overflowX: 'scroll', marginTop: '2em' }}>
+                        <div className="horizontal-list" style={{ overflowX: 'scroll', marginTop: '1em' }}>
                           <HorizontalSlideList />
                         </div>
                         <div className="formationscreen-buttons">
@@ -148,7 +148,7 @@ class FormationScreen extends Component {
                               paddingTop: '0.5em',
                               paddingRight: '0.5em',
                               paddingBottom: '1em',
-                              paddingLeft: '2em',
+                              paddingLeft: '1em',
                               flex: 1
                             }}>
                               <Button type={"default"} icon="plus" ghost block style={{ borderRadius: '1em' }}
