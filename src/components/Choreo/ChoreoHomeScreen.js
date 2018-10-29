@@ -1,6 +1,7 @@
-import { Button, Layout, Menu, Spin, BackTop } from 'antd';
+import { Button, Layout, Menu, Spin, BackTop, Icon } from 'antd';
 import React, { Fragment } from 'react';
 import { connect } from "react-redux";
+import { loadingIcon } from "../../icons/LoadingIcon";
 import { getChoreo } from '../../selectors/choreo';
 import StageDimForm from "../Formation/StageDimForm";
 import { MinTablet, MobilePortrait, TabletPortrait } from "../ResponsiveUtils/BreakPoint";
@@ -105,7 +106,7 @@ class ChoreoHomeScreen extends React.Component {
               </div>
             </Header>
             <Layout className="choreo-homescreen-contents" style={{}}>
-              <Spin spinning={loading} size={"large"}>
+              <Spin indicator={loadingIcon} spinning={loading}>
                 <ChoreoPicture choreoId={this.props.choreoId} imageUrl={this.props.choreoImageUrl} />
                 <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                 {

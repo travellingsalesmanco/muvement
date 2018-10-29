@@ -7,6 +7,7 @@ import { LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/action
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from "../../icons/GradientSVG";
 import HeadphoneIcon from "../../icons/HeadphoneIcon";
+import { loadingIcon } from "../../icons/LoadingIcon";
 import UserAddIcon from "../../icons/UserAddIcon";
 import { getChoreo } from '../../selectors/choreo';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
@@ -126,7 +127,7 @@ class FormationScreen extends Component {
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout style={{ backgroundColor: 'transparent' }}>
               <Content style={{ display: "flex", flexDirection: "column" }}>
-                <Spin spinning={loading} size={"large"}>
+                <Spin indicator={loadingIcon} spinning={loading}>
                   <SectionTitle key={this.props.formationName} mobile={true} formationName={this.props.formationName}
                                 handleEditName={this.handleEditName}
                                 handleEditNameConfirm={this.handleEditNameConfirm} />
@@ -190,7 +191,7 @@ class FormationScreen extends Component {
         </MobilePortrait>
 
         <MobileLandscape>
-          <Spin spinning={loading} size={"large"}>
+          <Spin indicator={loadingIcon} spinning={loading}>
             <Layout className="body" style={{height: '100vh'}}>
               <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
               <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
@@ -212,7 +213,7 @@ class FormationScreen extends Component {
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout className="contents">
               <Content style={{ display: "flex", flexDirection: "column" }}>
-                <Spin spinning={loading} size={"large"}>
+                <Spin indicator={loadingIcon} spinning={loading}>
                   <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
                                 handleEditName={this.handleEditName}
                                 handleEditNameConfirm={this.handleEditNameConfirm} />
@@ -224,7 +225,7 @@ class FormationScreen extends Component {
                 </Spin>
               </Content>
               <Sider width={'12rem'} className="sider">
-                <Spin spinning={loading} size={"large"}>
+                <Spin indicator={loadingIcon} spinning={loading}>
                   <div className="button-container">
                     <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
                       <UserAddIcon style={{ fontSize: '33px' }} />

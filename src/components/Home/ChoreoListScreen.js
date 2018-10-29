@@ -1,6 +1,7 @@
 import { Button, Layout, Menu, Spin } from 'antd';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { loadingIcon } from "../../icons/LoadingIcon";
 import ChoreoCardList from "./ChoreoCardList";
 import withAuthorization from "../withAuthorization";
 import { withRouter } from "react-router-dom";
@@ -99,7 +100,7 @@ class ChoreoListScreen extends React.Component {
         </MinTablet>
 
         <Content>
-          <Spin spinning={loading} size={"large"}>
+          <Spin indicator={loadingIcon} spinning={loading}>
             <ChoreoCardList data={this.props.choreoIds} match={this.props.match}
                             setModalVisible={this.props.setModalVisible} editState={this.state.editState}/>
           </Spin>
