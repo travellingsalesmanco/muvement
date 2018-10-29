@@ -3,19 +3,16 @@ import React from 'react';
 import './Auth.css';
 import Link from "react-router-dom/es/Link";
 import { withRouter } from "react-router-dom";
-import { auth } from "../../firebase";
+import { auth, firebaseConstants } from "../../firebase";
 
 const FormItem = Form.Item;
 
-const NO_USER_FOUND_CODE = "auth/user-not-found";
 const NO_USER_FOUND_MESSAGE = "No such user found!";
-const WRONG_PASSWORD_CODE = "auth/wrong-password";
 const WRONG_PASSWORD_MESSAGE = "Incorrect password!";
-const INVALID_EMAIL_CODE = "auth/invalid-email";
 const INVALID_EMAIL_MESSAGE = "Email is invalid!";
-const USER_DISABLED_CODE = "auth/user-disabled";
 const USER_DISABLED_MESSAGE = "Your account is disabled, please contact support.";
-
+const FACEBOOK_PROVIDER_MESSAGE = "You are registered through Facebook. Please sign in through that instead.";
+const GOOGLE_PROVIDER_MESSAGE = "You are registered through Google. Please sign in through that instead.";
 
 class LogInForm extends React.Component {
   state = {
@@ -28,47 +25,54 @@ class LogInForm extends React.Component {
     this.setState({
         loading: true,
         disabled: true,
-      }, () =>
-        this.props.form.validateFields((err, values) => {
-          if (!err) {
-            console.log('Received values of form: ', values);
-            auth.doSignInWithEmailAndPassword(values.email, values.password).then(
-              () => this.props.history.push(`/`)
-            ).catch((err) => {
-              console.log(err);
-              let errMessage = "Could not log in";
-              switch (err.code) {
-                case NO_USER_FOUND_CODE: {
-                  errMessage = NO_USER_FOUND_MESSAGE;
-                  break;
-                }
-                case WRONG_PASSWORD_CODE: {
-                  errMessage = WRONG_PASSWORD_MESSAGE;
-                  break;
-                }
-                case INVALID_EMAIL_CODE: {
-                  errMessage = INVALID_EMAIL_MESSAGE;
-                  break;
-                }
-                case USER_DISABLED_CODE: {
-                  errMessage = USER_DISABLED_MESSAGE;
-                  break;
-                }
+      }, () => this.props.form.validateFields((err, values) => {
+        if (!err) {
+          console.log('Received values of form: ', values);
+          auth.doSignInWithEmailAndPassword(values.email, values.password).then(
+            () => this.props.history.push(`/`)
+          ).catch((err) => {
+            console.log(err);
+            let errMessage = "Could not log in";
+            switch (err.code) {
+              case firebaseConstants.EMAIL_SIGN_IN.NO_USER_FOUND_CODE: {
+                errMessage = NO_USER_FOUND_MESSAGE;
+                break;
               }
-              this.setState({
-                  loading: false,
-                  disabled: false,
-                }, () => {
-                  this.props.form.setFields({
-                    submit: {
-                      errors: [new Error(errMessage)],
-                    }
-                  });
+              case firebaseConstants.EMAIL_SIGN_IN.WRONG_PASSWORD_CODE: {
+                errMessage = WRONG_PASSWORD_MESSAGE;
+                break;
+              }
+              case firebaseConstants.EMAIL_SIGN_IN.INVALID_EMAIL_CODE: {
+                errMessage = INVALID_EMAIL_MESSAGE;
+                break;
+              }
+              case firebaseConstants.EMAIL_SIGN_IN.USER_DISABLED_CODE: {
+                errMessage = USER_DISABLED_MESSAGE;
+                break;
+              }
+              case firebaseConstants.EMAIL_SIGN_IN.WRONG_PROVIDER_CODE: {
+                if (err.method === firebaseConstants.FACEBOOK_SIGN_IN_METHOD) {
+                  errMessage = FACEBOOK_PROVIDER_MESSAGE;
+                } else if (err.method === firebaseConstants.GOOGLE_SIGN_IN_METHOD) {
+                  errMessage = GOOGLE_PROVIDER_MESSAGE;
                 }
-              );
-            })
-          }
-        })
+                break;
+              }
+            }
+            this.setState({
+                loading: false,
+                disabled: false,
+              }, () => {
+                this.props.form.setFields({
+                  submit: {
+                    errors: [new Error(errMessage)],
+                  }
+                });
+              }
+            );
+          })
+        }
+      })
     );
   };
 

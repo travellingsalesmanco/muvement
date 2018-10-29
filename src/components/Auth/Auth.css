@@ -2,6 +2,11 @@
     background: black;
 }
 
+.auth-error-text {
+    text-align: center;
+    color: red;
+}
+
 .auth-text {
     text-align: center;
     color: white;
