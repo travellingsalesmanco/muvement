@@ -3,7 +3,7 @@ import React from 'react';
 
 const SlideShareSvg = () => (
   <svg viewBox="0 0 90.001 90" data-icon="slideshare" width="1em" height="1em"
-       fill="currentColor" aria-hidden="true" x="0px" y="0px">
+       fill="url(#cool-gradient)" aria-hidden="true" x="0px" y="0px">
     <g>
       <path id="SlideShare" d="M88.621,35.316c-3.438,6.591-10.616,8.598-17.634,12.282c0,5.189,0,12.215,0,14.227
       c0,2.006-2.585,13.676-12.442,13.676c-9.86,0-13.114-5.646-13.114-7.984c0-1.141,0-7.225,0-13.183
