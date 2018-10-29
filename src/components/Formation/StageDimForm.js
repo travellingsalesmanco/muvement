@@ -34,7 +34,7 @@ class StageDimForm extends React.Component {
   render() {
     return (
       <div id="stage-dim">
-        <h3>Height ({this.props.units})</h3>
+        <h3>Depth ({this.props.units})</h3>
         <InputNumber min={0.50} precision={2} defaultValue={this.props.height} onChange={this.handleHeightChange} />
         <h3>Width ({this.props.units})</h3>
         <InputNumber min={0.50} precision={2} defaultValue={this.props.width} onChange={this.handleWidthChange} />
