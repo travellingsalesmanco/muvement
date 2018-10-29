@@ -42,16 +42,19 @@ class ChoreoPicture extends React.Component {
   };
 
   render() {
+    const { choreoId, imageUrl } = this.props;
     const uploadButton = (
       <div>
         {
           this.state.loading
             ? <Icon type={'loading'} style={{ color: '#24c6dc', fontSize: '30px' }} />
-            : <ImageAddIcon className="add-choreo-pic-icon" />
+            : this.props.imageUrl
+              ? <img src={imageUrl} style={{ width: '100%' }} alt="avatar" />
+              : <ImageAddIcon className="add-choreo-pic-icon" />
         }
       </div>
     );
-    const { choreoId, imageUrl } = this.props;
+
     return (
       <div>
         <GradientSVG
@@ -71,7 +74,7 @@ class ChoreoPicture extends React.Component {
             beforeUpload={beforeUpload}
             onChange={(info) => this.handleChange(info, choreoId)}
           >
-            {imageUrl ? <img src={imageUrl} style={{ width: '100%' }} alt="avatar" /> : uploadButton}
+            {uploadButton}
           </Upload>
         </div>
       </div>
