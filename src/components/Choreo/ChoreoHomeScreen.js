@@ -120,7 +120,7 @@ class ChoreoHomeScreen extends React.Component {
                       <StageDimForm choreoId={this.props.choreoId} />
                     </div>
                 }
-                <BackTop />
+                <BackTop className="back-top"/>
               </Spin>
             </Layout>
           </Layout>
