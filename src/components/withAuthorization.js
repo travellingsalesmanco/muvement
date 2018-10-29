@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { firebase } from '../firebase';
+import { authInstance } from '../firebase';
 
 const withAuthorization = (authCondition, failRoute) => (Component) => {
   class WithAuthorization extends React.Component {
@@ -13,9 +13,9 @@ const withAuthorization = (authCondition, failRoute) => (Component) => {
     }
 
     componentDidMount() {
-      this.unsubscribe = firebase.auth.onAuthStateChanged(authUser => {
+      this.unsubscribe = authInstance.onAuthStateChanged(authUser => {
         if (authCondition(authUser)) {
-          this.setState({isAuthorized: true})
+          this.setState({ isAuthorized: true })
         } else {
           this.props.history.push(failRoute)
         }

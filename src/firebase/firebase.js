@@ -25,12 +25,10 @@ const storageRef = storage.ref();
 // Create Providers
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 const facebookProvider = new firebase.auth.FacebookAuthProvider();
-const FACEBOOK_SIGN_IN_METHOD = firebase.auth.FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD;
-const GOOGLE_SIGN_IN_METHOD = firebase.auth.GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD;
 
 // Additional configs
 auth.useDeviceLanguage();
-db.settings({timestampsInSnapshots: true});
+db.settings({ timestampsInSnapshots: true });
 
 // Timestamp methods
 const currentTimeStampField = () => {
@@ -41,13 +39,38 @@ const currentTimeStamp = () => {
   return firebase.firestore.Timestamp.now();
 };
 
+// Define consts for internal and external use
+const constants = {
+  FACEBOOK_SIGN_IN_METHOD: firebase.auth.FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD,
+  GOOGLE_SIGN_IN_METHOD: firebase.auth.GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD,
+  EMAIL_SIGN_IN_METHOD: firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD,
+  EMAIL_SIGN_IN: {
+    NO_USER_FOUND_CODE: "auth/user-not-found",
+    WRONG_PASSWORD_CODE: "auth/wrong-password",
+    INVALID_EMAIL_CODE: "auth/invalid-email",
+    USER_DISABLED_CODE: "auth/user-disabled",
+    // custom code
+    WRONG_PROVIDER_CODE: "WRONG_PROVIDER_CODE",
+  },
+  EMAIL_SIGN_UP: {
+    EMAIL_EXISTS_CODE: "auth/email-already-in-use",
+    WEAK_PASSWORD_CODE: "auth/weak-password",
+    INVALID_EMAIL_CODE: "auth/invalid-email",
+    // custom code
+    DIFFERENT_PROVIDER_CODE: "DIFFERENT_PROVIDER_CODE",
+  },
+  PROVIDER: {
+    ACCOUNT_EXISTS_CODE: "auth/account-exists-with-different-credential"
+  }
+};
+
+
 export {
   db,
   auth,
   googleProvider,
   facebookProvider,
-  FACEBOOK_SIGN_IN_METHOD,
-  GOOGLE_SIGN_IN_METHOD,
+  constants,
   currentTimeStampField,
   currentTimeStamp,
   storageRef
