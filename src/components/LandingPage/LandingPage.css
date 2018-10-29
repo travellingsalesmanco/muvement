@@ -26,12 +26,12 @@
 
 .landing-login-button:hover,
 .landing-login-button:active {
-    width: 80px;
-    height: 1.8rem;
-    border-radius: 20px;
-    top: -8px;
-    color: #24C6DC;
-    border: 1px solid #24C6DC;
+  width: 80px;
+  height: 1.8rem;
+  border-radius: 20px;
+  top: -8px;
+  color: #24C6DC;
+  border: 1px solid #24C6DC;
 }
 
 .muvement-name-img {
@@ -58,12 +58,12 @@
 }
 
 .muvement-features-text{
-    padding-top: 10px;
-    color: white;
-    text-align: center;
-    font-size: 14px;
-    padding-bottom: 20px;
-    font-family: Sen-Bold;
+  padding-top: 10px;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  padding-bottom: 20px;
+  font-family: Sen-Bold;
 }
 
 .muvement-features-img {
@@ -145,17 +145,17 @@
 }
 
 .ml-muvement-features-text{
-    padding-top: 30px;
-    color: white;
-    text-align: center;
-    font-size: 1.1em;
-    padding-bottom: 20px;
-    font-family: Sen-Bold;
+  padding-top: 30px;
+  color: white;
+  text-align: center;
+  font-size: 1.1em;
+  padding-bottom: 20px;
+  font-family: Sen-Bold;
 }
 
 .ml-muvement-features-icon{
-    padding-top: 60px;
-    text-align: center;
+  padding-top: 60px;
+  text-align: center;
 }
 
 .ml-muvement-features-img {
@@ -174,7 +174,7 @@
 }
 
 .tablet-muvement-name{
-    text-align: center;
+  text-align: center;
 }
 
 .tablet-muvement-name-img {
@@ -184,7 +184,7 @@
 }
 
 .tablet-landing-signup {
-    text-align: center;
+  text-align: center;
 }
 
 .tablet-landing-signup-button,
@@ -210,11 +210,15 @@
   font-family: Sen-Bold;
 }
 
+.tablet-demo-grid-outer {
+
+}
+
 .tablet-demo-grid{
-  margin-top: 30%;
+  /*margin-top: 30%;*/
   margin-left: 3em;
   margin-right: -3em;
-  height: 15rem;
+  height: 25em;
   box-shadow: 0px 0px 15px #141414;
 }
 
@@ -228,17 +232,14 @@
 }
 
 .tablet-muvement-features-text{
-    padding-top: 30px;
-    color: white;
-    text-align: center;
-    font-size: 1.5em;
-    padding-bottom: 20px;
-    font-family: Sen-Bold;
+  color: white;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: Sen-Bold;
 }
 
 .tablet-muvement-features-icon{
-    padding-top: 60px;
-    text-align: center;
+  text-align: center;
 }
 
 .tablet-muvement-features-img {
