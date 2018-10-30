@@ -7,6 +7,7 @@ import { LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/action
 import FileAddIcon from "../../icons/FileAddIcon";
 import GradientSVG from "../../icons/GradientSVG";
 import HeadphoneIcon from "../../icons/HeadphoneIcon";
+import { loadingIcon } from "../../icons/LoadingIcon";
 import UserAddIcon from "../../icons/UserAddIcon";
 import { getChoreo } from '../../selectors/choreo';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
@@ -38,7 +39,7 @@ const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameCon
 );
 
 const MobileSwitchTabs = ({ activeButton, handleClick }) => (
-  <div className="mobile-switch-tabs" style={{ margin: '0 auto' }}>
+  <div className="mobile-switch-tabs">
     <button
       className={activeButton === 1 ? 'mobile-switch-tabs-active' : 'mobile-switch-tabs-inactive'}
       onClick={() => handleClick(1)}>
@@ -65,7 +66,7 @@ class FormationScreen extends Component {
       visible: false,
       sidePanelID: 0,
       formationName: '',
-      activeButton: props.animated ? 3 : 1
+      activeButton: props.animated ? 3 : 2
     }
   }
 
@@ -122,15 +123,15 @@ class FormationScreen extends Component {
     return (
       <Fragment>
         <MobilePortrait>
-          <Layout className="body" style={{ minHeight: '100vh', height: '100%' }}>
+          <Layout className="mp-body" style={{ minHeight: '100vh', height: '100%' }}>
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout style={{ backgroundColor: 'transparent' }}>
               <Content style={{ display: "flex", flexDirection: "column" }}>
-                <Spin spinning={loading} size={"large"}>
+                <Spin indicator={loadingIcon} spinning={loading}>
                   <SectionTitle key={this.props.formationName} mobile={true} formationName={this.props.formationName}
                                 handleEditName={this.handleEditName}
                                 handleEditNameConfirm={this.handleEditNameConfirm} />
-                  <div style={{ height: '15rem', marginBottom: '10px' }}>
+                  <div className="stage-canvas" style={{ height: '15rem', marginBottom: '25px' }}>
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
                                            withGrid animated={this.props.animated} />
                   </div>
@@ -139,36 +140,39 @@ class FormationScreen extends Component {
                     {
                       activeButton === 1 &&
                       <Fragment>
-                        <div style={{ overflowX: 'scroll', marginTop: '1em' }}>
+                        <div className="horizontal-list" style={{ overflowX: 'scroll', marginTop: '1em' }}>
                           <HorizontalSlideList />
                         </div>
-                        <div style={{ display: "flex", flexDirection: "row" }}>
-                          <div style={{
-                            paddingTop: '0.5em',
-                            paddingRight: '0.5em',
-                            paddingBottom: '1em',
-                            paddingLeft: '2em',
-                            flex: 1
-                          }}>
-                            <Button type={"default"} icon="plus" ghost block style={{ borderRadius: '1em' }}
-                                    onClick={this.handleAddFormation}>Add</Button>
-                          </div>
-                          <div style={{
-                            paddingTop: '0.5em',
-                            paddingRight: '2em',
-                            paddingBottom: '1em',
-                            paddingLeft: '0.5em',
-                            flex: 1
-                          }}>
-                            <Button type={"danger"} icon="delete" ghost block style={{ borderRadius: '1em' }}
-                                    onClick={this.handleRemoveFormation}>Delete</Button>
+                        <div className="formationscreen-buttons">
+                          <div style={{ display: "flex", flexDirection: "row" }}>
+                            <div style={{
+                              paddingTop: '0.5em',
+                              paddingRight: '0.5em',
+                              paddingBottom: '1em',
+                              paddingLeft: '1em',
+                              flex: 1
+                            }}>
+                              <Button type={"default"} icon="plus" ghost block style={{ borderRadius: '1em' }}
+                                      onClick={this.handleAddFormation}>Add</Button>
+                            </div>
+                            <div style={{
+                              paddingTop: '0.5em',
+                              paddingRight: '2em',
+                              paddingBottom: '1em',
+                              paddingLeft: '0.5em',
+                              flex: 1
+                            }}>
+                              <Button className="delete-formation" icon="delete" ghost block
+                                      style={{ borderRadius: '1em' }}
+                                      onClick={this.handleRemoveFormation}>Delete</Button>
+                            </div>
                           </div>
                         </div>
                       </Fragment>
                     }
                     {
                       activeButton === 2 &&
-                      <div style={{ padding: '0 2em', fontSize: '1.2em' }}>
+                      <div style={{ padding: '1em 2em', fontSize: '1.2em' }}>
                         <PerformerList choreoId={this.props.choreoId} />
                       </div>
                     }
@@ -187,8 +191,8 @@ class FormationScreen extends Component {
         </MobilePortrait>
 
         <MobileLandscape>
-          <Spin spinning={loading} size={"large"}>
-            <Layout className="body">
+          <Spin indicator={loadingIcon} spinning={loading}>
+            <Layout className="body" style={{height: '100vh'}}>
               <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
               <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
 
@@ -209,7 +213,7 @@ class FormationScreen extends Component {
             <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
             <Layout className="contents">
               <Content style={{ display: "flex", flexDirection: "column" }}>
-                <Spin spinning={loading} size={"large"}>
+                <Spin indicator={loadingIcon} spinning={loading}>
                   <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
                                 handleEditName={this.handleEditName}
                                 handleEditNameConfirm={this.handleEditNameConfirm} />
@@ -221,7 +225,7 @@ class FormationScreen extends Component {
                 </Spin>
               </Content>
               <Sider width={'12rem'} className="sider">
-                <Spin spinning={loading} size={"large"}>
+                <Spin indicator={loadingIcon} spinning={loading}>
                   <div className="button-container">
                     <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
                       <UserAddIcon style={{ fontSize: '33px' }} />

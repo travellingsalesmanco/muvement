@@ -11,7 +11,8 @@ import {
   SET_LABELS_VIEW,
   SWITCH_ACTIVE_CHOREO,
   SWITCH_ACTIVE_FORMATION,
-  REMOVE_FORMATION
+  REMOVE_FORMATION,
+  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY
 } from "../constants/actionTypes";
 import { defaultStageDim } from "../constants/defaults";
 import { getChoreo } from "../selectors/choreo";
@@ -52,6 +53,12 @@ function isNewer(choreo, choreoId, state) {
     : true;
 }
 
+// TODO: proper storage check
+function isStorageImage(choreoId, state) {
+  const currChoreo = getChoreo(state, choreoId);
+  return !currChoreo.imageUrl.includes("https://dummyimage.com");
+}
+
 export function addChoreo(id, choreo) {
   return (dispatch) => {
     let res = dispatch({
@@ -68,10 +75,11 @@ export function addChoreo(id, choreo) {
 }
 
 export function removeChoreo(id) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: REMOVE_CHOREO,
       choreoId: id,
+      removeImage: isStorageImage(id, getState())
     })
   }
 }
@@ -190,17 +198,19 @@ export function addAndSetActiveFormation(choreoId, formationId) {
       });
       dispatch({
         type: SWITCH_ACTIVE_FORMATION,
+        choreoId: choreoId,
         payload: formationId
-      })
+      });
+      return Promise.resolve()
     }
   }
 }
 
 export function removeFormation(choreoId, formationId) {
   return (dispatch, getState) => {
-    if(hasFormation(choreoId, formationId, getState())) {
+    if (hasFormation(choreoId, formationId, getState())) {
       let numFormations = getNumFormations(choreoId, getState());
-      if(numFormations === 1){
+      if (numFormations === 1) {
         // Must always have at least 1 formation
         dispatch({
           type: ADD_FORMATION,
@@ -218,6 +228,7 @@ export function removeFormation(choreoId, formationId) {
       if (getActiveFormation(getState()) >= numFormations) {
         dispatch({
           type: SWITCH_ACTIVE_FORMATION,
+          choreoId: choreoId,
           payload: numFormations - 1
         })
       }
@@ -233,6 +244,7 @@ export function gotoFormation(choreoId, targetFormationId) {
     } else {
       dispatch({
         type: SWITCH_ACTIVE_FORMATION,
+        choreoId: choreoId,
         payload: targetFormationId
       })
     }
@@ -262,10 +274,38 @@ export function reorderAndFocusFormation(choreoId, fromIndex, toIndex) {
       })
       dispatch({
         type: SWITCH_ACTIVE_FORMATION,
+        choreoId: choreoId,
         payload: toIndex
       })
     } else {
       console.log("[ERROR] Index out of bounds")
     }
+  }
+}
+
+export function undoFormationsChange(choreoId) {
+  return (dispatch) => {
+    dispatch({
+      type: UNDO_FORMATION_CHANGE,
+      choreoId: choreoId,
+    })
+  }
+}
+
+export function redoFormationsChange(choreoId) {
+  return (dispatch) => {
+    dispatch({
+      type: REDO_FORMATION_CHANGE,
+      choreoId: choreoId,
+    })
+  }
+}
+
+export function clearFormationsHistory(choreoId) {
+  return (dispatch) => {
+    dispatch({
+      type: CLEAR_FORMATION_HISTORY,
+      choreoId: choreoId,
+    })
   }
 }

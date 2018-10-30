@@ -1,4 +1,7 @@
-
+.ant-btn .add-performer-button .ant-btn-default .ant-btn-block{
+    color: white;
+    background-color: blue;
+}
 .performer-input-item {
   margin-left: 2em;
   font-size: 1.3em;

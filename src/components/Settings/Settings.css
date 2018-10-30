@@ -7,7 +7,9 @@
     background-image: url("../../img/FormationsOverviewBackground.png");
     background-repeat: no-repeat;
     background-size: cover;
+    padding-top: 1.5em;
 }
+
 .settings-navbar{
     display: flex;
 }
@@ -15,30 +17,27 @@
 .settings-title{
     color: white;
     font-family: Sen-Black;
-    font-size: 1.2em;
+    font-size: 1em;
     text-shadow: 0 0 1.2em white;
     flex: 1;
+    /*text-align: center;*/
+    margin: auto 1em;
     text-align: center;
+
 }
 
-.settings-menu{
-    margin-top: 1.5em;
+.settings-item{
     color: white;
-    background-color: transparent;
+    font-size: 1em;
+    flex: 1;
+    margin: auto 1em;
 }
 
-li.ant-menu-submenu.ant-menu-submenu-vertical.settings-menu-item{
-    margin-bottom: 1.8em;
+.settings-item:hover{
+    background-color: #514a9d;
+    cursor: pointer;
 }
 
-.ant-menu-submenu-title:hover{
-    color: white;
-}
-
-.ant-menu-submenu-vertical > .ant-menu-submenu-title:hover {
-    background-image: linear-gradient(to right, #24c6dc, #514a9d);
-}
-
-.ant-menu-submenu-arrow:after{
-    color: white;
+.settings-item span{
+    margin-left: 1em;
 }

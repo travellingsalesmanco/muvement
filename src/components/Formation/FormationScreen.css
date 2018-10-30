@@ -1,6 +1,15 @@
 .body {
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   background-image: url("../../img/EditBackground.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.mp-body {
+  min-height: 100vh;
+  height: 100%;
+  background-image: url("../../img/PortraitEditBackground.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -19,21 +28,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
+
 
 .section-title {
     border-radius: 50px;
     box-shadow: 0px 0px 20px  #514A9D;
-    /*margin: 2rem 2rem;*/
+
     position: relative;
     padding: 2px 2px;
     background-image: linear-gradient(to right, #24c6dc, #514a9d);
+    width: 70%;
 }
 
 .section-title-inner {
   background: #131313;
   text-align: center;
-  padding: 0.5em 5em;
+  padding: 0.1em 3em;
   border-radius: 50px;
 }
 
@@ -43,7 +56,7 @@
   background-color: transparent;
   font-family: 'Sen-Bold';
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .section-title .ant-input:focus,
@@ -148,4 +161,31 @@
 
 .formationscreen-stage{
     margin-bottom: 2rem;
+}
+
+.formationscreen-buttons{
+    margin-top: 0.5em;
+}
+
+.horizontal-list {
+    padding-left: 1em;
+}
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3)
+and (orientation : portrait) {
+    .section-title-container {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .horizontal-list {
+        padding-top: 1em;
+    }
+
+    .formationscreen-buttons{
+        margin-top: 2em;
+    }
 }

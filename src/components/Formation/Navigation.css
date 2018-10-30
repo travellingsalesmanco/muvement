@@ -1,6 +1,6 @@
 .ant-layout-header {
   background: #131313;
-  /*padding: 0 1em;*/
+  padding: 0px;
 }
 
 .nav-bar {
@@ -8,6 +8,16 @@
   margin: 0px;
   padding: 0px;
   width: 100%;
+}
+
+.nav-bar .dashboard-title {
+  font-family: Sen-Black;
+  font-size: 2rem;
+  text-shadow: 0px 0px 35px white;
+  flex: 1;
+  text-align: center;
+  width: 250px;
+  margin-left: 10%;
 }
 
 .nav-bar .title {
@@ -21,16 +31,21 @@
 
 .nav-bar .title h3 {
   color: #fff;
-  width: 10em;
+  width: 13em;
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.nav-bar .right-container{
+    margin-right: 2%;
+    right: 0px;
+    margin-top: 1.3%;
+}
+
 .nav-bar ul {
   text-align: right;
-  line-height: 64px;
 }
 
 .nav-bar li {
@@ -49,12 +64,12 @@
 }
 
 .right-container .ant-menu-dark {
-  background: #131313;
+  background: transparent;
 }
 
 .right-container .ant-menu-item .anticon {
+  font-size: 25px;
   margin-right: 0;
-  font-size: 23px;
 }
 
 .right-container .ant-menu.ant-menu-dark .ant-menu-item-selected {
@@ -62,17 +77,39 @@
 }
 
 /* Mobile Portrait */
+.nav-bar .mp-title {
+    margin: auto;
+}
+
 .nav-bar .mp-title h3 {
   color: #fff;
   width: 9em;
+  margin: auto;
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 1.5rem;
+  text-align: center;
+}
+
+.nav-bar .mp-right-container{
+    position: absolute;
+    margin-right: 8%;
+    right: 0px;
+    top: -3px;
+}
+
+.mp-right-container .ant-menu-item .anticon {
+  font-size: 20px;
+  margin-right: 0;
 }
 
 li.ant-menu-item.mp-menu-item{
    margin-left: 10px;
    padding: 0px;
+}
+
+.ant-menu-item{
+    margin-left: 7px;
 }

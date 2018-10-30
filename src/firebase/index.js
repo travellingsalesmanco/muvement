@@ -1,11 +1,12 @@
 import * as auth from './auth';
-import * as firebase from './firebase';
 import * as firestore from './firestore';
 import * as storage from './storage';
+import { constants as firebaseConstants, auth as authInstance } from './firebase';
 
 export {
   auth,
-  firebase,
   firestore,
-  storage
+  storage,
+  firebaseConstants,
+  authInstance
 }

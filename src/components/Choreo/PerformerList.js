@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Row, Col, Icon, Button } from "antd";
 import { removeDancers, addDancers } from "../../actions/choreoActions"
+import { TabletPortrait } from "../ResponsiveUtils/BreakPoint";
 import { connect } from 'react-redux';
 import AddPerformerForm from "./AddPerformerForm";
 import { getChoreo } from "../../selectors/choreo";
@@ -87,11 +88,12 @@ class PerformerList extends React.Component {
             }
             return (
               <Row key={key}>
-                <Col span={18}>
+                <Col className="dancer" span={18}>
                   <span className="dancer-item">{key + 1}. {dancer}</span>
                 </Col>
               </Row>)
           })}
+          <div className="add-performer-form">
           <AddPerformerForm
             nextId={this.props.dancers.length + 1}
             handleSetAdd={this.handleSetAdd.bind(this)}
@@ -102,6 +104,7 @@ class PerformerList extends React.Component {
           <Button type={"default"} icon="user-delete" ghost block
                   onClick={this.handleRemoveToggle}>Edit Performers</Button>
           }
+          </div>
         </Fragment>
     }
     return (

@@ -47,7 +47,8 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <Fragment>
-      <Layout className="body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
+      <MobilePortrait>
+      <Layout className="mp-dashboard-body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
         {
           this.state.addChoreoState
             ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}
@@ -55,7 +56,6 @@ class HomeScreen extends React.Component {
             : <ChoreoListScreen setModalVisible={this.setModalVisible}/>
         }
       </Layout>
-      <MobilePortrait>
         <Modal
           centered
           visible={this.state.modalVisible}
@@ -76,6 +76,14 @@ class HomeScreen extends React.Component {
       </MobilePortrait>
 
       <MobileLandscape>
+      <Layout className="dashboard-body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
+        {
+          this.state.addChoreoState
+            ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}
+                                  onBack={this.handleChangeAddChoreoState}/>
+            : <ChoreoListScreen setModalVisible={this.setModalVisible}/>
+        }
+      </Layout>
         <Modal
           centered
           visible={this.state.modalVisible}
@@ -96,6 +104,14 @@ class HomeScreen extends React.Component {
       </MobileLandscape>
 
       <MinTablet>
+      <Layout className="dashboard-body" style={{overflowY: 'scroll', overflowX: 'hidden'}}>
+        {
+          this.state.addChoreoState
+            ? <AddPerformerScreen choreoName={this.state.newChoreoName} match={this.props.match}
+                                  onBack={this.handleChangeAddChoreoState}/>
+            : <ChoreoListScreen setModalVisible={this.setModalVisible}/>
+        }
+      </Layout>
         <Modal
           centered
           visible={this.state.modalVisible}

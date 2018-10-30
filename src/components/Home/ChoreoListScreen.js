@@ -1,6 +1,7 @@
 import { Button, Layout, Menu, Spin } from 'antd';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { loadingIcon } from "../../icons/LoadingIcon";
 import ChoreoCardList from "./ChoreoCardList";
 import withAuthorization from "../withAuthorization";
 import { withRouter } from "react-router-dom";
@@ -28,7 +29,7 @@ class ChoreoListScreen extends React.Component {
         <MobilePortrait>
           <Header>
             <div className="nav-bar">
-              <div className="mp-title">
+              <div className="mp-dashboard-title">
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="mp-right-container">
@@ -53,7 +54,7 @@ class ChoreoListScreen extends React.Component {
         <MobileLandscape>
           <Header>
             <div className="nav-bar">
-              <div className="ml-title">
+              <div className="ml-dashboard-title">
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="right-container">
@@ -77,7 +78,7 @@ class ChoreoListScreen extends React.Component {
         <MinTablet>
           <Header>
             <div className="nav-bar">
-              <div className="title">
+              <div className="dashboard-title">
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="right-container">
@@ -99,7 +100,7 @@ class ChoreoListScreen extends React.Component {
         </MinTablet>
 
         <Content>
-          <Spin spinning={loading} size={"large"}>
+          <Spin indicator={loadingIcon} spinning={loading}>
             <ChoreoCardList data={this.props.choreoIds} match={this.props.match}
                             setModalVisible={this.props.setModalVisible} editState={this.state.editState}/>
           </Spin>

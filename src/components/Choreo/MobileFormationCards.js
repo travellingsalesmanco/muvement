@@ -16,20 +16,27 @@ class MobileFormationCards extends React.Component {
     }
   };
   handleAddFormation = () => {
-    this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formations.length));
-    // this.props.history.push(`${this.props.match.url}/formation`)
+    this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formations.length))
+      .then(() => {
+        const scrollToIndex = this.props.formations.length - 1;
+        document.getElementById(scrollToIndex.toString()).scrollIntoView({
+          behavior: 'smooth'
+        });
+    });
   };
   render() {
+    console.log("RENDERED")
     return (
       <div>
-        <div style={{padding: '0 1em'}}>
-        <Button type={"default"} icon={"plus"} ghost block className="mobile-formation-add-button"
-                onClick={this.handleAddFormation}>Add Formation</Button>
+        <div className="mobile-formation-add" style={{padding: '0 1em'}}>
+        <Button type={"default"} icon={"plus"} block className="mobile-formation-add-button"
+                onClick={this.handleAddFormation}>Create New Formation</Button>
         </div>
       {
         this.props.formations.map((formation, index) => (
           <Card
             key={index}
+            id={index}
             hoverable
             bordered={false}
             className="mobile-formation-card"

@@ -17,7 +17,9 @@ import {
   MOVE_DANCER,
   USER_LOGOUT,
   ADD_CHOREO,
-  REMOVE_CHOREO
+  REMOVE_CHOREO,
+  UNDO_FORMATION_CHANGE,
+  REDO_FORMATION_CHANGE
 } from "../constants/actionTypes";
 import { firestore } from "../firebase";
 import { doSignOut } from "../firebase/auth";
@@ -41,7 +43,9 @@ const ACTIONS_TO_UPDATE = [
   RENAME_DANCER,
   ADD_DANCER_TO_FORMATION,
   REMOVE_DANCER_FROM_FORMATION,
-  MOVE_DANCER
+  MOVE_DANCER,
+  UNDO_FORMATION_CHANGE,
+  REDO_FORMATION_CHANGE
 ];
 
 export const firestoreWriter = store => next => action => {
@@ -54,7 +58,9 @@ export const firestoreWriter = store => next => action => {
       if (!action.stale) {
         // Remove choreo from firestore (not internal change)
         deleteChoreo(action.choreoId);
-        removeChoreoImage(action.choreoId);
+        if (action.removeImage) {
+          removeChoreoImage(action.choreoId);
+        }
       }
       return next(action);
     }
@@ -75,13 +81,19 @@ export const firestoreWriter = store => next => action => {
       }
     }
     default: {
+      const choreoId = action.choreoId;
+      const oldChoreo = store.getState().choreos.byId[choreoId];
       let result = next(action);
       if (ACTIONS_TO_UPDATE.includes(action.type)) {
-        const choreoId = action.choreoId;
         const updatedChoreo = store.getState().choreos.byId[choreoId];
         console.log("Updating: " + action.type + " for " + choreoId);
+        console.log("Old choreo: ");
+        console.log(oldChoreo);
         console.log("New choreo: ");
         console.log(updatedChoreo);
+        // TODO: proper deep comparison
+        console.log("Is same: ");
+        console.log(JSON.stringify(oldChoreo) === JSON.stringify(updatedChoreo));
         // TODO: rate-limiting (debouncing)
         firestore.updateChoreo(choreoId, updatedChoreo);
       }

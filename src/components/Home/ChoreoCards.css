@@ -1,10 +1,26 @@
+.mp-dashboard-body {
+  min-height: 100vh;
+  height: 100%;
+  background-image: url("../../img/PortraitDashboardBackground.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dashboard-body {
+  min-height: 100vh;
+  height: 100%;
+  background-image: url("../../img/FormationsOverviewBackground.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .new-choreo {
   height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  background: #191919;
+  background: black;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
@@ -38,6 +54,9 @@
   height: 250px;
   overflow: hidden;
   border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 }
 
 .ant-card-cover img {
@@ -68,7 +87,7 @@
 }
 
 .description > span {
-  width: 250px;
+  width: 50%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -145,22 +164,17 @@
 
 
 /* Mobile Portrait */
-.mp-title{
+.mp-dashboard-title{
     font-family: Sen-Black;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     text-shadow: 0px 0px 35px white;
     flex: 1;
     text-align: center;
-}
-
-.mp-right-container .ant-menu-item .anticon {
-  margin-right: 0;
-  font-size: 23px;
-  position: absolute;
+    margin-right: 2%;
 }
 
 .mp-setting {
-    right: -10px;
+    right: -5px;
 }
 
 .mp-new-choreo {
@@ -197,7 +211,7 @@
 
 #mp-formation-no {
   color: #797979;
-  font-size: 13px;
+  font-size: 12px;
   margin-right: 10px;
 }
 
@@ -206,6 +220,9 @@
   width: 100%;
   overflow: hidden;
   border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 }
 
 .mp-ant-card-cover img {
@@ -303,12 +320,13 @@
 }
 
 /* Mobile Landscape */
-.ml-title{
+.ml-dashboard-title{
     font-family: Sen-Black;
     font-size: 1.6rem;
     text-shadow: 0px 0px 35px white;
     flex: 1;
     text-align: center;
+    margin-left: 15%;
 }
 
 .ml-new-choreo-modal .ant-modal-content {

@@ -108,12 +108,12 @@ export default (state = demoChoreos, action) => {
     }
     default: {
       if (action.choreoId !== null && action.choreoId !== undefined) {
-        const { choreoId, ...prunedAction } = action;
+        const { choreoId } = action;
         return {
           ...state,
           byId: {
             ...state.byId,
-            [choreoId]: choreoWithMetaReducer(state.byId[choreoId], prunedAction)
+            [choreoId]: choreoWithMetaReducer(state.byId[choreoId], action)
           }
         }
       }

@@ -120,7 +120,7 @@ class AddPerformerForm extends React.Component {
         {this.state.nextKey > 0 && (
           <div>
             <FormItem className="form-item">
-              <Button type={"default"} htmlType="submit" block>DONE</Button>
+              <Button className="add-performer-button" type={"default"} htmlType="submit" block>DONE</Button>
             </FormItem>
             <Button type={"default"} block onClick={this.clearAll}>CANCEL</Button>
           </div>

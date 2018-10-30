@@ -1,9 +1,10 @@
-import { Button, Layout, Menu, Spin } from 'antd';
+import { Button, Layout, Menu, Spin, BackTop, Icon } from 'antd';
 import React, { Fragment } from 'react';
 import { connect } from "react-redux";
+import { loadingIcon } from "../../icons/LoadingIcon";
 import { getChoreo } from '../../selectors/choreo';
 import StageDimForm from "../Formation/StageDimForm";
-import { MinTablet, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+import { MinTablet, MobilePortrait, TabletPortrait } from "../ResponsiveUtils/BreakPoint";
 import withAuthorization from "../withAuthorization";
 import withFireStoreSync from "../withFirestoreSync";
 import './ChoreoHomeScreen.css';
@@ -13,7 +14,7 @@ import MobileFormationCards from "./MobileFormationCards";
 import PerformerList from "./PerformerList";
 
 const MobileSwitchTabs = ({ activeButton, handleClick }) => (
-  <div className="mobile-switch-tabs">
+  <div className="mobile-switch-tabs-home">
     <button
       className={activeButton === 1 ? 'mobile-switch-tabs-active' : 'mobile-switch-tabs-inactive'}
       onClick={() => handleClick(1)}>
@@ -78,7 +79,7 @@ class ChoreoHomeScreen extends React.Component {
     return (
       <Fragment>
         <MobilePortrait>
-          <Layout className="choreo-homescreen-body">
+          <Layout className="mp-choreo-homescreen-body">
             <Header>
               <div className="nav-bar">
                 <div>
@@ -98,14 +99,14 @@ class ChoreoHomeScreen extends React.Component {
                       }
                     </Menu.Item>
                     <Menu.Item key="2">
-                      <Button className="mp-setting" icon="setting" ghost />
+                      <Button className="mp-setting" icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
                     </Menu.Item>
                   </Menu>
                 </div>
               </div>
             </Header>
             <Layout className="choreo-homescreen-contents" style={{}}>
-              <Spin spinning={loading} size={"large"}>
+              <Spin indicator={loadingIcon} spinning={loading}>
                 <ChoreoPicture choreoId={this.props.choreoId} imageUrl={this.props.choreoImageUrl} />
                 <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                 {
@@ -120,10 +121,64 @@ class ChoreoHomeScreen extends React.Component {
                       <StageDimForm choreoId={this.props.choreoId} />
                     </div>
                 }
+                <BackTop className="back-top"/>
               </Spin>
             </Layout>
           </Layout>
         </MobilePortrait>
+
+        <TabletPortrait>
+          <Layout className="choreo-homescreen-body">
+            <Header>
+              <div className="nav-bar">
+                <div>
+                  <Button style={{ fontSize: '25px' }} icon="left"
+                          onClick={() => this.props.history.push('/')} />
+                  <MinTablet>
+                    <span className="backbutton-desc">Dashboard</span>
+                  </MinTablet>
+                </div>
+                <div className="title">
+                  <h3>{this.props.name}</h3>
+                </div>
+                <div className="right-container">
+                  <Menu mode="horizontal" theme="dark" onClick={this.handleMenuClick}>
+                    <Menu.Item className="mp-menu-item" key="1">
+                      {
+                        this.state.editState
+                          ? <Button icon="close" ghost />
+                          : <Button icon="edit" ghost />
+                      }
+                    </Menu.Item>
+                    <Menu.Item key="2">
+                      <Button icon="setting" ghost onClick={() => this.props.history.push(`/settings`)}/>
+                    </Menu.Item>
+                  </Menu>
+                </div>
+              </div>
+            </Header>
+            <Layout className="choreo-homescreen-contents">
+              <Content style={{ display: "flex", flexDirection: "column" }}>
+                <FormationPreviewCards formations={this.props.formations} match={this.props.match}
+                                       choreoId={this.props.choreoId} editState={this.state.editState} />
+              </Content>
+              <Sider width="18rem">
+                <DefaultSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
+                {
+                  this.state.activeButton === 1
+                    ? <div>
+                      <ChoreoPicture choreoId={this.props.choreoId} imageUrl={this.props.choreoImageUrl} />
+                      <h2 className="stagedim-title">STAGE DIMENSION</h2>
+                      <StageDimForm choreoId={this.props.choreoId} />
+                    </div>
+                    : <div className="edit-performers">
+                      <PerformerList choreoId={this.props.choreoId} />
+                    </div>
+                }
+              </Sider>
+            </Layout>
+          </Layout>
+        </TabletPortrait>
 
         <MinTablet>
           <Layout className="choreo-homescreen-body">
@@ -149,7 +204,7 @@ class ChoreoHomeScreen extends React.Component {
                       }
                     </Menu.Item>
                     <Menu.Item key="2">
-                      <Button icon="setting" ghost />
+                      <Button icon="setting" ghost onClick={() => this.props.history.push(`/settings`)}/>
                     </Menu.Item>
                   </Menu>
                 </div>

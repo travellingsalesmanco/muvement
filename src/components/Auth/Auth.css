@@ -2,12 +2,18 @@
     background: black;
 }
 
+.auth-error-text {
+    text-align: center;
+    color: red;
+}
+
 .auth-text {
     text-align: center;
     color: white;
 }
 
 .auth-background {
+    min-height: 100vh;
     height: 100%;
     background-image: url("../../img/PortraitBackground.png");
     background-repeat: no-repeat;
@@ -40,7 +46,6 @@
 
 .auth-buttons {
     text-align: center;
-    padding: 1.5em;
 }
 
 .fb-login-button,
@@ -49,7 +54,7 @@
     background-color: #304D96;
     color: white;
     border: none;
-    margin: 2em 1em;
+    margin: 0em 1em;
     width: 9.5em;
     height: 3em;
     display: inline-block;
@@ -110,7 +115,9 @@
     box-shadow: 0 0 1.2em  #514A9D;
 }
 
-button.auth-backbutton {
+button.auth-backbutton,
+button.auth-backbutton:hover,
+button.auth-backbutton:active {
     background: transparent;
     border: transparent;
     color: white;

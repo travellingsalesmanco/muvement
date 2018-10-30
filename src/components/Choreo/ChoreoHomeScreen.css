@@ -7,6 +7,15 @@
   margin: 0px;
 }
 
+.mp-choreo-homescreen-body {
+  min-height: 100vh;
+  background-image: url(" ../../img/PortraitEditBackground.png");
+  background-repeat: repeat;
+  background-size: cover;
+  max-width: 100%;
+  margin: 0px;
+}
+
 .choreo-homescreen-contents {
   background-color: transparent;
 }
@@ -16,7 +25,7 @@
 }
 
 .ant-layout-sider-children {
-  background: linear-gradient(to bottom, #313131 -15%, #000000 140%);
+  background: linear-gradient(to bottom, #313131 -70%, #000000 140%);
   box-shadow: 0 2em 3em 0 rgba(0, 0, 0, 0.25), 0 2.1em 3.1em 0 rgba(0, 0, 0, 0.20);
 }
 
@@ -43,6 +52,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media only screen and (max-width: 480px) {
+  .avatar-uploader {
+    width: 50%;
+  }
 }
 
 .avatar-uploader .ant-upload.ant-upload-select-picture-card {
@@ -148,9 +163,9 @@
   font-size: 1em;
 }
 
+
 .mp-title h3{
     font-family: Sen-Black;
-    font-size: 1.5rem;
     text-shadow: 0px 0px 35px white;
     flex: 1;
     text-align: center;
@@ -158,8 +173,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-left: 10px;
-    padding-right: 30px;
+    margin: auto;
 }
 
 button.ant-btn.mp-back-button.ant-btn-icon-only{
@@ -167,31 +181,36 @@ button.ant-btn.mp-back-button.ant-btn-icon-only{
 }
 
 .mp-right-container .ant-menu-item .anticon {
-  font-size: 23px;
+  font-size: 20px;
   position: absolute;
-  right: 0px;
 }
 
-.mp-right-container .ant-menu.ant-menu-dark .ant-menu-item-selected {
-  background-color: transparent;
-}
-
-li.mp-menu-item {
-  margin-right: 10px;
-}
 
 .ant-menu-submenu-title{
     padding: 0px;
+    position: fixed;
 }
 
 .mobile-switch-tabs {
   text-align: center;
-  margin: 2em auto 0 auto;
-  border: 1px solid #a6a6a6;
+  margin: 0 auto;
+  border: 1px solid #24C6DC;
   border-radius: 30px;
   height: 3em;
-  width: 80%;
+  width: 90%;
   padding: 0px;
+  font-size: 13px;
+}
+
+.mobile-switch-tabs-home {
+  text-align: center;
+  margin: 2em auto 0em auto;
+  border: 1px solid #24C6DC;
+  border-radius: 30px;
+  height: 3em;
+  width: 90%;
+  padding: 0px;
+  font-size: 13px;
 }
 
 .mobile-switch-tabs-active {
@@ -221,8 +240,6 @@ li.mp-menu-item {
 .backbutton-desc {
   color: white;
   font-size: 1rem;
-  display: inline-flex;
-  vertical-align: middle;
 }
 
 button.ant-btn.backbutton.ant-btn-icon-only {
@@ -247,4 +264,29 @@ button.ant-btn.backbutton.ant-btn-icon-only {
   font-size: 1em;
   height: 3em;
   margin-top: 1em;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected{
+  background: transparent;
+}
+
+.back-top .ant-back-top-content {
+  background-color: #24c6dc;
+}
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3)
+and (orientation : portrait) {
+    .mobile-switch-tabs {
+      text-align: center;
+      margin: 1.8em auto 0 auto;
+      border: 1px solid #24C6DC;
+      border-radius: 30px;
+      height: 3em;
+      width: 90%;
+      padding: 0px;
+      font-size: 13px;
+    }
 }

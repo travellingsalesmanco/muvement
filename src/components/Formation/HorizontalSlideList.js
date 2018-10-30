@@ -6,7 +6,7 @@ import { getChoreo } from "../../selectors/choreo";
 import ResponsiveStageCanvas from "../StageCanvas/ResponsiveStageCanvas";
 import { withRouter } from 'react-router-dom';
 
-const getItemStyle = (isDragging, draggableStyle) => ({
+const getItemStyle = (isDragging, draggableStyle, isActiveFormation) => ({
   userSelect: 'none',
   margin: `0 8px 0 0`,
   // change background colour if dragging
@@ -49,6 +49,7 @@ class HorizontalSlideList extends React.Component {
   };
 
   render() {
+    const { activeFormationId } = this.props;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="droppable" direction="horizontal">
@@ -68,11 +69,27 @@ class HorizontalSlideList extends React.Component {
                         {...provided.dragHandleProps}
                         style={getItemStyle(
                           snapshot.isDragging,
-                          provided.draggableProps.style
+                          provided.draggableProps.style,
                         )}
                       >
-                        <div style={{ height: '8em', width: '10em', boxShadow: `0px 0px 1.5em 0px rgba(39, 39, 39, 0.75)`, pointerEvents:"None"}}>
-                          <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index}/>
+                        <div style={{
+                          height: '6em',
+                          width: '8em',
+                          boxShadow: `0px 0px 1.5em 0px rgba(39, 39, 39, 0.75)`,
+                          pointerEvents: "None",
+                          background: activeFormationId === index ? 'linear-gradient(to right, rgba(36,198,220, 0.7), rgba(81,74,157, 0.7))' : 'transparent',
+                          display: 'flex',
+                          justifyContent: "center",
+                          alignItems: "center"
+                        }}>
+                        <div style={{
+                          height: '5em',
+                          width: '7em',
+                          pointerEvents: "None",
+                          background: '#000',
+                        }}>
+                          <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} />
+                        </div>
                         </div>
                         <span className="slide-title">{index + 1}. {item.name}</span>
                       </div>)

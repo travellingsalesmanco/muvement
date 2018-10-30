@@ -1,3 +1,5 @@
+/* Mobile Portrait */
+
 .landingpage-contents {
   height: 100%;
   background-image: url("../../img/PortraitBackground.png");
@@ -12,25 +14,30 @@
   border-bottom: 1px solid #191919;
 }
 
-.logo {
-  left: 0px;
-}
-
 .landing-login {
   top: 0px;
   position: absolute;
   right: 20px;
 }
 
-.landing-login-button {
+.landing-login-button{
   width: 80px;
   height: 1.8rem;
   border-radius: 20px;
 }
 
+.landing-login-button:hover,
+.landing-login-button:active {
+  width: 80px;
+  height: 1.8rem;
+  border-radius: 20px;
+  color: #24C6DC;
+  border: 1px solid #24C6DC;
+}
+
 .muvement-name-img {
   margin: 0 auto;
-  padding-top: 15%;
+  padding-top: 10%;
   width: 15rem;
 }
 
@@ -48,15 +55,16 @@
   color: white;
   font-size: 2rem;
   text-shadow: 0px 0px 5px white;
+  font-family: Sen-Bold;
 }
 
 .muvement-features-text{
-    padding-top: 10px;
-    color: #24C6DC;
-    text-align: center;
-    font-size: 14px;
-    padding-bottom: 20px;
-    font-family: Sen-Bold;
+  padding-top: 10px;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  padding-bottom: 20px;
+  font-family: Sen-Bold;
 }
 
 .muvement-features-img {
@@ -68,8 +76,8 @@
 
 
 .landing-signup-button,
-.landing-signup-button .ant-btn:hover,
-.landing-signup-button .ant-btn:focus {
+.landing-signup-button:hover,
+.landing-signup-button:focus {
   background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
   width: 16rem;
   height: 50px;
@@ -88,4 +96,233 @@
   margin-right: 3em;
   height: 15rem;
   box-shadow: 0px 0px 15px #141414;
+}
+
+.ml-demo-grid{
+  margin-top: 15%;
+  margin-left: 3em;
+  margin-right: -4em;
+  height: 15rem;
+  box-shadow: 0px 0px 15px #141414;
+}
+
+/* Mobile Landscape */
+.ml-muvement-name-img {
+  margin: 0 auto;
+  padding-top: 10%;
+  width: 15rem;
+}
+
+.ml-muvement-desc {
+  text-align: center;
+  padding-top: 2%;
+  color: white;
+  font-size: 0.95em;
+  font-family: Sen-Bold;
+}
+
+.ml-landing-signup-button,
+.ml-landing-signup-button:hover,
+.ml-landing-signup-button:focus {
+  background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
+  width: 14rem;
+  height: 50px;
+  border-radius: 3rem;
+  color: white;
+  font-family: Sen-Bold;
+  font-size: 1.1em;
+  border: none;
+  box-shadow: 0px 0px 15px #514A9D;
+  margin: 1.8rem auto;
+}
+
+.ml-muvement-features {
+  text-align: center;
+  padding-top: 5%;
+  color: white;
+  font-size: 1.8rem;
+  text-shadow: 0px 0px 5px white;
+  font-family: Sen-Bold;
+}
+
+.ml-muvement-features-text{
+  padding-top: 10px;
+  color: white;
+  text-align: center;
+  font-size: 1.1em;
+  padding-bottom: 20px;
+  font-family: Sen-Bold;
+}
+
+.ml-muvement-features-icon{
+  padding-top: 60px;
+  text-align: center;
+}
+
+.ml-muvement-features-img {
+  margin: 0 20px 50px 20px;
+  padding-top: 5%;
+  width: 90%;
+}
+
+/* Tablet */
+.tablet-landingpage-contents {
+  height: 100%;
+  background-image: url("../../img/LandingPageBackground.png");
+  /* background: linear-gradient(to top, #303030 -10%, #000000 100%); */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.tablet-muvement-name{
+  text-align: center;
+}
+
+.tablet-muvement-name-img {
+  margin: 0 auto;
+  padding-top: 10%;
+  width: 20rem;
+}
+
+.tablet-landing-signup {
+  text-align: center;
+}
+
+.tablet-landing-signup-button,
+.tablet-landing-signup-button:hover,
+.tablet-landing-signup-button:focus {
+  background: linear-gradient(to right, #24C6DC -30%, #514A9D 100%);
+  width: 16rem;
+  height: 50px;
+  border-radius: 3rem;
+  color: white;
+  font-family: Sen-Bold;
+  font-size: 1.3em;
+  border: none;
+  box-shadow: 0px 0px 15px #514A9D;
+  margin: 3.5rem auto;
+}
+
+.tablet-muvement-desc {
+  text-align: center;
+  padding-top: 2%;
+  color: white;
+  font-size: 1.2em;
+  font-family: Sen-Bold;
+}
+
+.tablet-demo-grid{
+  margin-left: 3em;
+  margin-right: -3em;
+  height: 25em;
+  box-shadow: 0px 0px 15px #141414;
+}
+
+.tablet-muvement-features {
+  text-align: center;
+  padding-top: 5%;
+  color: white;
+  font-size: 2.2rem;
+  text-shadow: 0px 0px 5px white;
+  font-family: Sen-Bold;
+}
+
+.tablet-muvement-features-text{
+  padding-top: 10px;
+  color: white;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: Sen-Bold;
+}
+
+.tablet-muvement-features-icon{
+  text-align: center;
+}
+
+.tablet-muvement-features-img {
+  margin: 0 20px 50px 20px;
+  padding-top: 5%;
+  width: 90%;
+}
+
+
+/* Laptop Media Queries */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .landing-login-button{
+        width: 120px;
+    }
+
+    .landing-login-button:hover,
+    .landing-login-button:active {
+      width: 120px;
+    }
+
+    .tablet-muvement-name-img {
+      width: 28rem;
+    }
+
+    .tablet-muvement-desc {
+      font-size: 1.6em;
+    }
+
+    .tablet-landing-signup-button,
+    .tablet-landing-signup-button:hover,
+    .tablet-landing-signup-button:focus {
+      width: 20rem;
+      font-size: 1.5em;
+    }
+
+    .tablet-muvement-features {
+      font-size: 3rem;
+    }
+
+    .tablet-muvement-features-text{
+      font-size: 1.8em;
+    }
+
+    .tablet-demo-grid{
+        height: 30em;
+    }
+}
+
+/* Desktop Media Queries */
+@media (min-width: 1281px) {
+    .landing-login-button{
+        width: 150px;
+    }
+
+    .landing-login-button:hover,
+    .landing-login-button:active {
+      width: 150px;
+    }
+
+    .tablet-muvement-name-img {
+      width: 35rem;
+    }
+
+    .tablet-muvement-desc {
+      font-size: 1.8em;
+    }
+
+    .tablet-landing-signup-button,
+    .tablet-landing-signup-button:hover,
+    .tablet-landing-signup-button:focus {
+      width: 28rem;
+      height: 4rem;
+      font-size: 1.7em;
+    }
+
+    .tablet-muvement-features {
+      font-size: 4rem;
+    }
+
+    .tablet-muvement-features-text{
+      font-size: 2.5em;
+    }
+
+    .tablet-demo-grid{
+        margin-top: 10%;
+        height: 40em;
+    }
+
 }
