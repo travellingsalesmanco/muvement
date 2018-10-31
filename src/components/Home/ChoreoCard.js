@@ -1,4 +1,4 @@
-import { Card, Icon } from 'antd';
+import { Modal, Button, Icon } from 'antd';
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { removeChoreo } from "../../actions/choreoActions";
 import { getChoreo } from '../../selectors/choreo';
 import './ChoreoCards.css';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+
+const confirm = Modal.confirm;
 
 class ChoreoCard extends PureComponent {
   handleClick = () => {
@@ -16,8 +18,27 @@ class ChoreoCard extends PureComponent {
 
   handleRemove = () => {
     if (this.props.editState) {
-      this.props.dispatch(removeChoreo(this.props.choreoId));
+      this.showConfirm();
     }
+  };
+
+  showConfirm = () => {
+    const onOk = () => {
+      return new Promise((resolve, reject) => {
+        this.props.dispatch(removeChoreo(this.props.choreoId))
+          .then(() => {
+            setTimeout(resolve, 500);
+          });
+      }).catch((e) => {
+        console.log(e)
+      });
+    };
+    confirm({
+      title: 'Do you want to delete this choreography?',
+      centered: true,
+      onOk,
+      onCancel() {},
+    });
   };
 
   render() {

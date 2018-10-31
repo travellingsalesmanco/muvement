@@ -81,6 +81,7 @@ export function removeChoreo(id) {
       choreoId: id,
       removeImage: isStorageImage(id, getState())
     })
+    return Promise.resolve()
   }
 }
 
