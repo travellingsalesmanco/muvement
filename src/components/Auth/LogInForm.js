@@ -34,7 +34,7 @@ class LogInForm extends React.Component {
         } else {
           console.log('Received values of form: ', values);
           auth.doSignInWithEmailAndPassword(values.email, values.password).then(
-            () => this.props.history.push(`/`)
+            () => this.props.history.push(`/dashboard`)
           ).catch((err) => {
             console.log(err);
             let errMessage = "Could not log in";
