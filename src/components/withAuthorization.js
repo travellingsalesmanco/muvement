@@ -9,12 +9,17 @@ const withAuthorization = (authCondition, failRoute) => (Component) => {
 
       this.state = {
         isAuthorized: false,
+        providers: []
       };
     }
 
     componentDidMount() {
       this.unsubscribe = authInstance.onAuthStateChanged(authUser => {
         if (authCondition(authUser)) {
+          // Pass down additional authUser context to components
+          if (authUser) {
+            this.setState({ providers: authUser.providerData.map((provider) => provider.providerId) })
+          }
           this.setState({ isAuthorized: true })
         } else {
           this.props.history.push(failRoute)
@@ -27,9 +32,9 @@ const withAuthorization = (authCondition, failRoute) => (Component) => {
     }
 
     render() {
-      const { isAuthorized } = this.state;
+      const { isAuthorized, providers } = this.state;
       return (
-        isAuthorized ? <Component {...this.props} /> : null
+        isAuthorized ? <Component firebaseAuthProviders={providers} {...this.props} /> : null
       );
     }
   }
