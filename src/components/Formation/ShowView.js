@@ -28,6 +28,13 @@ class ShowView extends Component {
       this.props.dispatch(play(this.props.timeline.totalDuration, 30, 1))
     }
   }
+  fastForward = () => {
+
+  }
+  slowDown = () => {
+
+  }
+
   render() {
     return (
       <div style={{ flex: 1, textAlign: "center" }}>
@@ -38,8 +45,12 @@ class ShowView extends Component {
           {this.msToDisplayedTime(this.props.elapsedTime)}
         </div>
         <div>
+          <Button type={"default"} ghost icon={"double-left"} style={{ border: 0, fontSize: "1.5rem" }}
+            onClick={this.slowDown} />
           <Button type={"default"} ghost icon={this.props.isPlaying ? "pause" : "caret-right"} style={{ border: 0, fontSize: "1.5rem" }}
             onClick={this.togglePlay} />
+          <Button type={"default"} ghost icon={"double-right"} style={{ border: 0, fontSize: "1.5rem" }}
+            onClick={this.fastForward} />
         </div>
       </div>
     )
