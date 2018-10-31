@@ -24,9 +24,9 @@
     "formations": [
       {
         "name": "Introduction",
-        "numSeconds": 30,
+        "duration": 5000,
         "transitionBefore": {
-          "duration": 0,
+          "duration": 2000,
           "midPoint": 0
         },
         "dancers": [
@@ -55,7 +55,7 @@
       },
       {
         "name": "Arrow part and 2 triangles",
-        "numSeconds": 30,
+        "duration": 5000,
         "dancers": [
           {
             "name": "And",

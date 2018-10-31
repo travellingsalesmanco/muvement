@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { calculateStageDimensions, generateGrid, relativeToAbsolutePoint, straightLineAnimation, stationaryAnimation } from "../lib/stageUtils";
-import { getFormations } from './choreo';
+import { getFormations, getDurationFromFormation } from './choreo';
 
 // Simple retrieval selectors (no transformations), no need to memoize
 const getCanvasWidthFromProp = (_, props) => props.width;
@@ -44,6 +44,13 @@ export const makeDancersLayoutSelector = () => {
   )
 }
 
+/**
+ * Constructs the timeline of the choreo given the set of formations.
+ * Returns an object containing:
+ *  (1) the total duration of the choreo (sum of all transition and formation durations, in ms)
+ *  (2) an array of the cumulative duration of the transitions and formations, at each formation, in ms
+ *      i.e. cumDuration[i] contains the array pair [duration from 0 to start of formation i, duration from 0 to end of formation i]
+ */
 export const getTimeline = createSelector(
   [getFormations],
   (formations) => {
@@ -51,53 +58,81 @@ export const getTimeline = createSelector(
       totalDuration: 0,
       cumDurations: [],
     }
-    formations.forEach((formation) => {
-      // Duration calculations
-      timeline.totalDuration += formation.transitionBefore.duration + formation.numSeconds * 1000;
-      timeline.cumDurations.push(timeline.totalDuration);
+    formations.forEach((formation, idx) => {
+      // Limit always have transition
+      const transitionDur = idx === 0 ? 0 : getDurationFromFormation(formation)
+      timeline.totalDuration += transitionDur + formation.duration;
+      timeline.cumDurations.push([timeline.totalDuration - formation.duration, timeline.totalDuration]);
     });
     return timeline;
   }
 )
 
+/**
+ * Layout the timeline for display
+ */
+export const getTimelineLayout = createSelector(
+  [getTimeline],
+  (timeline) => {
+
+  }
+)
+
 export const getAnimatedLayout = createSelector(
-  [getFormations, getDancers, getSelectedDancers, getStageRectFromProp],
-  (formations, allDancers, selectedDancers, stageRect) => {
-    // Choreo layout -- array of formation layouts
+  [getTimeline, getFormations, getDancers, getSelectedDancers, getStageRectFromProp],
+  (timeline, formations, allDancers, selectedDancers, stageRect) => {
+    let nameToLayout = {};
     let layout = [];
-    // Single formation layout -- array of dancer layouts
-    let prevFormationLayout = [];
-    // Map of dancer name to their respective layout in the previous formation
-    let nameToPrevDancerLayout = {};
-    formations.forEach((formation) => {
-      prevFormationLayout = formation.dancers.map((dancer) => {
-        const pos = relativeToAbsolutePoint(dancer.position, stageRect);
-        if (nameToPrevDancerLayout[dancer.name]) {
-          const prevLayout = nameToPrevDancerLayout[dancer.name];
-          return {
-            ...prevLayout,
-            // NOTE: straightLineAnimation returns the bounded pos if duration is out of bounds, so we can
-            // use this for when the transition has finished and the frame is playing also
-            position: straightLineAnimation(prevLayout.endPos, pos, formation.transitionBefore.duration)
+    // Set metadata
+    allDancers.forEach((name, idx) => {
+      let dancerLayout = {
+        name: name,
+        id: idx + 1,
+        selected: selectedDancers.includes(name),
+        visible: () => false,
+        position: () => { return { x: 0, y: 0 } }
+      }
+      layout.push(dancerLayout)
+      nameToLayout[name] = dancerLayout
+    })
+
+    let savedTransitionStart = 0;
+    let nameToPrevFormationPos = {};
+    formations.forEach((formation, idx) => {
+      // Copy the variable, otherwise the functions will capture references to it an update when it updates
+      const transitionStart = savedTransitionStart;
+      const nameToPos = {};
+      const [formationStart, formationEnd] = timeline.cumDurations[idx];
+      formation.dancers.forEach((dancer) => {
+        const pos = relativeToAbsolutePoint(dancer.position, stageRect)
+        nameToPos[dancer.name] = pos
+        let dancerLayout = nameToLayout[dancer.name]
+        // Get existing visibility and position functions
+        const { visible: prevVisible, position: prevPosition } = dancerLayout;
+        dancerLayout.visible = t => t >= transitionStart && t <= formationEnd ? true : prevVisible(t)
+        if (idx !== 0 && transitionStart < formationStart && nameToPrevFormationPos[dancer.name]) {
+          // Show animation and frame
+          const anim = straightLineAnimation(nameToPrevFormationPos[dancer.name], pos, getDurationFromFormation(formation))
+          dancerLayout.position = t => {
+            if (t >= transitionStart && t <= formationStart) {
+              return anim(t - transitionStart)
+            } else if (t >= formationStart && t <= formationEnd) {
+              return pos
+            } else {
+              return prevPosition(t)
+            } 
           }
+        } else if (transitionStart < formationStart) {
+          // Squash trivial animations into frame, show frame
+          dancerLayout.position = t => t >= transitionStart && t <= formationEnd ? pos : prevPosition(t)
         } else {
-          // Dancer was not in prev formation, make it appear and stay stationary for whole duration
-          return {
-            ...dancer,
-            position: stationaryAnimation(pos),
-            id: allDancers.indexOf(dancer.name) + 1,
-            selected: selectedDancers.includes(dancer.name)
-          }
+          // Show frame only
+          dancerLayout.position = t => t >= formationStart && t <= formationEnd ? pos : prevPosition(t)
         }
-      });
-      // Save the name-to-layout mapping to avoid O(n) search every time 
-      nameToPrevDancerLayout = {};
-      prevFormationLayout.forEach((dancerLayout) => {
-        nameToPrevDancerLayout[dancerLayout.name] = dancerLayout;
       })
-      layout.push(prevFormationLayout);
-    });
-    console.log(layout);
+      nameToPrevFormationPos = nameToPos;
+      savedTransitionStart = formationEnd;
+    })
     return layout;
   }
 )
@@ -107,6 +142,6 @@ export const getFormationRelativeElapsedTime = (state, props) => {
   if (currFormationIdx === 0) {
     return getElapsedTime(state);
   } else {
-    return getElapsedTime(state) - getTimeline(state, props).cumDurations[currFormationIdx - 1];
+    return getElapsedTime(state) - getTimeline(state, props).cumDurations[currFormationIdx - 1][1]; // idx 1 to get end of prev formation
   }
 }

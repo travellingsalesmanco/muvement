@@ -18,7 +18,7 @@ export const demoChoreo = {
       { name: "h", position: [0.2771023302938197, 0.8343465045592704] }
     ],
     name: "Landing Demo Formation",
-    numSeconds: 30,
+    duration: 5000,
     transitionBefore: {
       duration: 0,
       midPoint: 0

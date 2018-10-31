@@ -1,10 +1,10 @@
 export const defaultTransition = {
-  duration: 0,
+  duration: 2000,
   midPoint: 0
 };
 export const defaultFormation = {
   name: "",
-  numSeconds: 30,
+  duration: 5000,
   transitionBefore: defaultTransition,
   dancers: []
 };

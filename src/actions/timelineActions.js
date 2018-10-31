@@ -1,22 +1,57 @@
-import { TIMELINE_JUMP } from "../constants/actionTypes";
-import { gotoFormation } from "./choreoActions";
+import { EDIT_FORMATION_DURATION, EDIT_FORMATION_TRANSITION, TIMELINE_JUMP, TIMELINE_PAUSE } from "../constants/actionTypes";
+import { getChoreo } from "../selectors/choreo";
 
-const FPS = 30;
-const msPerFrame = 1000 / FPS;
 
-export function advanceNextFrame(choreoId, formationId, endOfFormationDuration, endOfChoreoDuration) {
+export function play(totalDuration, fps, speedup = 1) {
+  const msPerFrame = 1000 / fps;
+  const toAdvance = Math.trunc(msPerFrame * speedup)
   return (dispatch, getState) => {
-    setTimeout(() => {
+    const advanceNextFrame = () => {
       if (getState().UI.isPlaying) {
-        const newTime = getState().UI.elapsedTime + msPerFrame;
+        let newTime = getState().UI.elapsedTime + toAdvance
+        if (newTime >= totalDuration) {
+          newTime = totalDuration
+          dispatch({ type: TIMELINE_PAUSE })
+        }
         dispatch({
           type: TIMELINE_JUMP,
           payload: newTime,
         })
-        if (newTime >= endOfFormationDuration && newTime < endOfChoreoDuration) {
-          gotoFormation(choreoId, formationId + 1)
-        }
+        setTimeout(() => advanceNextFrame(), msPerFrame);
       }
-    }, msPerFrame);
+    }
+    advanceNextFrame();
+  }
+}
+
+export function offsetDuration(choreoId, formationId, offsetDuration) {
+  offsetDuration = Math.trunc(offsetDuration)
+  return (dispatch, getState) => {
+    const oldDuration = getChoreo(getState(), choreoId).formations[formationId].duration;
+    const newDuration = oldDuration + offsetDuration < 2000 ? 2000 : oldDuration + offsetDuration;
+    if (oldDuration !== newDuration) {
+      dispatch({
+        type: EDIT_FORMATION_DURATION,
+        choreoId: choreoId,
+        formationId: formationId,
+        payload: newDuration
+      })
+    }
+  }
+}
+
+export function offsetTransitionBeforeDuration(choreoId, formationId, offsetDuration) {
+  offsetDuration = Math.trunc(offsetDuration)
+  return (dispatch, getState) => {
+    const oldDuration = getChoreo(getState(), choreoId).formations[formationId].transitionBefore.duration;
+    const newDuration = oldDuration + offsetDuration < 1000 ? 1000 : oldDuration + offsetDuration;
+    if (oldDuration !== newDuration) {
+      dispatch({
+        type: EDIT_FORMATION_TRANSITION,
+        choreoId: choreoId,
+        formationId: formationId,
+        payload: { duration: newDuration }
+      })
+    }
   }
 }
