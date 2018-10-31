@@ -5,6 +5,7 @@ import { play } from '../../actions/timelineActions';
 import { TIMELINE_PAUSE, TIMELINE_PLAY } from '../../constants/actionTypes';
 import { getTimeline } from '../../selectors/layout';
 import Timeline from './Timeline';
+import './FormationScreen.css';
 
 class ShowView extends Component {
   componentWillUnmount() {
@@ -37,14 +38,14 @@ class ShowView extends Component {
 
   render() {
     return (
-      <div style={{ flex: 1, textAlign: "center" }}>
+      <div className="show-view" style={{ flex: 1, textAlign: "center"}}>
         <div style={{ height: "6rem", paddingTop: "0.5rem" }}>
           <Timeline choreoId={this.props.choreoId} data={this.props.timeline} msWidth={0.05} elapsedTime={this.props.elapsedTime} isPlaying={this.props.isPlaying} />
         </div>
-        <div style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff" }}>
+        <div className = "show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff" }}>
           {this.msToDisplayedTime(this.props.elapsedTime)}
         </div>
-        <div>
+        <div className = "show-buttons">
           <Button type={"default"} ghost icon={"double-left"} style={{ border: 0, fontSize: "1.5rem" }}
             onClick={this.slowDown} />
           <Button type={"default"} ghost icon={this.props.isPlaying ? "pause" : "caret-right"} style={{ border: 0, fontSize: "1.5rem" }}

@@ -6,6 +6,12 @@ import { connect } from 'react-redux'
 import { USER_LOGOUT } from '../../constants/actionTypes';
 import Terms from "../Static/Terms";
 import Privacy from "../Static/Privacy";
+import withAuthorization from "../withAuthorization";
+import { firebaseConstants } from "../../firebase";
+
+const hasEmailProvider = (providers) => {
+  return providers.includes(firebaseConstants.EMAIL_SIGN_IN_METHOD)
+};
 
 
 class Settings extends React.Component {
@@ -16,7 +22,7 @@ class Settings extends React.Component {
 
 
   handleLogout = () => {
-    this.props.dispatch({ type: USER_LOGOUT }).then(this.props.history.push('/landing'));
+    this.props.dispatch({ type: USER_LOGOUT }).then(this.props.history.push('/'));
   };
 
   showTerms = () => {
@@ -43,6 +49,7 @@ class Settings extends React.Component {
 
   render() {
     const { Header } = Layout;
+    const hasEmailAuthProvider = hasEmailProvider(this.props.firebaseAuthProviders);
     const LIST_BUTTONS = [
       {
         element: <span><Icon type="lock" /><span>Reset Password</span></span>,
@@ -62,6 +69,20 @@ class Settings extends React.Component {
       },
 
     ];
+    const NON_EMAIL_LIST_BUTTONS = [
+      {
+        element: <span><Icon type="exception" /><span>Terms of Service</span></span>,
+        clickHandler: this.showTerms
+      },
+      {
+        element: <span><Icon type="solution" /><span>Privacy Policy</span></span>,
+        clickHandler: this.showPrivacy
+      },
+      {
+        element: <span><Icon type="logout" /><span>Log Out</span></span>,
+        clickHandler: this.handleLogout
+      },
+    ];
     return (
       <Layout style={{ height: "100vh" }}>
         <Header className="settings-header">
@@ -79,7 +100,7 @@ class Settings extends React.Component {
         <div className="settings-background">
           <List
             split={false}
-            dataSource={LIST_BUTTONS}
+            dataSource={hasEmailAuthProvider ? LIST_BUTTONS : NON_EMAIL_LIST_BUTTONS}
             renderItem={item => (
               <List.Item className="settings-item" onClick={item.clickHandler}>{item.element}</List.Item>)}
           />
@@ -109,4 +130,8 @@ class Settings extends React.Component {
   }
 }
 
-export default withRouter(connect()(Settings));
+// Auth exists
+const authCondition = (authUser) => !!authUser;
+const failRoute = '/';
+
+export default withAuthorization(authCondition, failRoute)(withRouter(connect()(Settings)));

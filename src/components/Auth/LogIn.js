@@ -1,14 +1,13 @@
-import React from 'react';
-import './Auth.css';
 import { Button, Divider } from 'antd';
-import connect from "react-redux/es/connect/connect";
-import { BrowserRouter as Route, withRouter } from "react-router-dom";
-import LogInForm from "./LogInForm";
+import React from 'react';
+import { withRouter } from "react-router-dom";
 import Link from "react-router-dom/es/Link";
-import GoogleIcon from "../../img/google.svg";
-import FacebookIcon from "../../img/facebook.svg";
-import withAuthorization from "../withAuthorization";
 import { auth, firebaseConstants } from "../../firebase"
+import FacebookIcon from "../../img/facebook.svg";
+import GoogleIcon from "../../img/google.svg";
+import withAuthorization from "../withAuthorization";
+import './Auth.css';
+import LogInForm from "./LogInForm";
 
 const FACEBOOK_PROVIDER_MESSAGE = "You are registered through Facebook. Please sign in through that instead.";
 const GOOGLE_PROVIDER_MESSAGE = "You are registered through Google. Please sign in through that instead.";
@@ -25,7 +24,7 @@ class LogIn extends React.Component {
     this.setState({
         disabled: true,
       }, () => auth.facebookSignIn()
-        .then(() => this.props.history.push(`/`))
+        .then(() => this.props.history.push(`/dashboard`))
         .catch((err) => {
           let errMessage = "Could not log in";
           if (err.code === firebaseConstants.PROVIDER.ACCOUNT_EXISTS_CODE) {
@@ -47,7 +46,7 @@ class LogIn extends React.Component {
     this.setState({
         disabled: true,
       }, () => auth.googleSignIn()
-        .then(() => this.props.history.push(`/`))
+        .then(() => this.props.history.push(`/dashboard`))
         .catch((err) => {
           let errMessage = "Could not log in";
           if (err.code === firebaseConstants.PROVIDER.ACCOUNT_EXISTS_CODE) {
@@ -100,6 +99,6 @@ class LogIn extends React.Component {
 
 // Auth does not exist
 const authCondition = (authUser) => !authUser;
-const failRoute = "/";
+const failRoute = "/dashboard";
 
 export default withAuthorization(authCondition, failRoute)(withRouter(LogIn));

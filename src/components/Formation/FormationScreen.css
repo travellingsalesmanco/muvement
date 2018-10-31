@@ -171,6 +171,10 @@
     padding-left: 1em;
 }
 
+.show-view{
+    margin-top: 1em;
+}
+
 @media only screen
 and (min-device-width : 375px)
 and (max-device-width : 812px)
@@ -186,6 +190,18 @@ and (orientation : portrait) {
     }
 
     .formationscreen-buttons{
+        margin-top: 2em;
+    }
+
+    .show-view {
+        margin-top: 2.5em;
+    }
+
+    .show-buttons {
+        margin-top: 0.5em;
+    }
+
+    .show-timing {
         margin-top: 2em;
     }
 }

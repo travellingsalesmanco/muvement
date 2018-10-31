@@ -3,6 +3,8 @@
 
 // Maintains a singleton memory state on RAM, needs a unique key for each formation and choreo
 let undoableMem = {};
+// Not store undos when going between choreos
+let lastKey = null;
 
 // Attempts to create unique key and entry if mem if not present
 const getKey = (choreoId) => {
@@ -76,7 +78,9 @@ export function undoableInMem(reducer, config) {
           return state;
         }
         if (config.includedTypes.includes(action.type)) {
-          addToMem(memKey, state);
+          // TODO: find better solution for hacky way to avoid active formation switch on formation screen load
+          if (lastKey && lastKey === memKey) addToMem(memKey, state);
+          lastKey = memKey;
           return newState;
         } else {
           resetFromMem(memKey);

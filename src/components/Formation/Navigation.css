@@ -8,6 +8,8 @@
   margin: 0px;
   padding: 0px;
   width: 100%;
+  position: relative;
+  height: 100%;
 }
 
 .nav-bar .dashboard-title {
@@ -39,9 +41,11 @@
 }
 
 .nav-bar .right-container{
+    position: absolute;
     margin-right: 2%;
     right: 0px;
-    margin-top: 1.3%;
+    top: 50%;
+    transform: translateY(-50%)
 }
 
 .nav-bar ul {
@@ -53,7 +57,7 @@
 }
 
 .nav-bar-button{
-  padding: 1px 8px 2px 8px;
+  padding: 1px 3px 2px 3px;
 }
 
 .nav-bar .ant-btn {
@@ -76,6 +80,11 @@
     background-color: transparent;
 }
 
+.ant-btn:not(.ant-btn-circle):not(.ant-btn-circle-outline).ant-btn-icon-only{
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
 /* Mobile Portrait */
 .nav-bar .mp-title {
     margin: auto;
@@ -95,9 +104,10 @@
 
 .nav-bar .mp-right-container{
     position: absolute;
-    margin-right: 8%;
+    margin-right: 3%;
     right: 0px;
-    top: -3px;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .mp-right-container .ant-menu-item .anticon {
@@ -112,4 +122,27 @@ li.ant-menu-item.mp-menu-item{
 
 .ant-menu-item{
     margin-left: 7px;
+}
+
+@media (min-width: 321px)
+    and (max-width: 375px)
+    and (orientation : portrait) {
+        .nav-bar .mp-title h3 {
+          width: 7.5em;
+        }
+
+        .nav-bar .mp-title {
+            margin: auto 5em;
+        }
+    }
+
+@media (max-width: 320px) and (orientation : portrait) {
+    .nav-bar .mp-title h3 {
+      width: 8.0em;
+      font-size: 1.3em;
+    }
+
+    .nav-bar .mp-title {
+        margin: auto 5em;
+    }
 }

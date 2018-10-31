@@ -27,27 +27,19 @@ class Navigation extends React.Component {
               <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
             </div>
             <div className="mp-right-container">
-              <Menu className="navbar-icon" mode="horizontal" theme="dark">
-                <Menu.Item className="mp-menu-item" key="1">
                   <Button className="nav-bar-button"
                           onClick={() => this.props.dispatch(undoFormationsChange(choreoId))}
                           disabled={!canUndo}
                   >
                     <UndoIcon />
                   </Button>
-                </Menu.Item>
-                <Menu.Item key="2">
                   <Button className="nav-bar-button"
                           onClick={() => this.props.dispatch(redoFormationsChange(choreoId))}
                           disabled={!canRedo}
                   >
                     <RedoIcon />
                   </Button>
-                </Menu.Item>
-                <Menu.Item className="mp-menu-item" key="3">
                   <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
-                </Menu.Item>
-              </Menu>
             </div>
           </div>
         </MobilePortrait>
@@ -74,32 +66,21 @@ class Navigation extends React.Component {
               <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
             </div>
             <div className="right-container">
-              <Menu className="navbar-icon" mode="horizontal" theme="dark">
-                {/* TODO: Make the size of the icon bigger */}
-                <Menu.Item key="1">
                   <Button className="nav-bar-button"
                           onClick={() => this.props.dispatch(undoFormationsChange(choreoId))}
                           disabled={!canUndo}
                   >
                     <UndoIcon />
                   </Button>
-                </Menu.Item>
-                <Menu.Item key="2">
                   <Button className="nav-bar-button"
                           onClick={() => this.props.dispatch(redoFormationsChange(choreoId))}
                           disabled={!canRedo}
                   >
                     <RedoIcon />
                   </Button>
-                </Menu.Item>
-                <Menu.Item key="3">
                   {/* TODO: change eye icon depending on current show state */}
                   <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
-                </Menu.Item>
-                <Menu.Item key="4">
                   <Button icon="fullscreen" />
-                </Menu.Item>
-              </Menu>
             </div>
           </div>
         </MinTablet>

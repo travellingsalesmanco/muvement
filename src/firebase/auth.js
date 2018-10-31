@@ -66,6 +66,10 @@ export const doPasswordReset = (email) => {
   return auth.sendPasswordResetEmail(email);
 };
 
+export const doPasswordResetInAccount = () => {
+  return auth.sendPasswordResetEmail(auth.currentUser.email);
+};
+
 export const doPasswordUpdate = (password) => {
   return auth.currentUser.updatePassword(password);
 };

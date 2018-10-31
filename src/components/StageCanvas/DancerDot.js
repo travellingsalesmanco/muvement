@@ -21,6 +21,7 @@ class DancerDot extends PureComponent {
           fill={'white'}
           text={number}
           fontSize={12}
+          fontFamily={"Sen-Bold"}
           onClick={onSelect ? (e) => onSelect(e, name) : undefined}
           onTap={onSelect ? (e) => onSelect(e, name) : undefined}
         />

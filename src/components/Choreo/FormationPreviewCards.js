@@ -7,10 +7,8 @@ import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import './ChoreoHomeScreen.css';
 
 class FormationPreviewCards extends React.Component {
-  clickHandler = (index) => {
-    if (this.props.editState) {
-      this.props.dispatch(removeFormation(this.props.choreoId, index - 1))
-    } else {
+  handleClick = (index) => {
+    if (!this.props.editState) {
       if (index === 0) {
         this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formations.length));
         this.props.history.push(`${this.props.match.url}/formation`)
@@ -18,6 +16,12 @@ class FormationPreviewCards extends React.Component {
         this.props.dispatch(gotoFormation(this.props.choreoId, index - 1));
         this.props.history.push(`${this.props.match.url}/formation`)
       }
+    }
+  };
+
+  handleRemove = (index) => {
+    if (this.props.editState) {
+      this.props.dispatch(removeFormation(this.props.choreoId, index - 1));
     }
   };
 
@@ -33,62 +37,57 @@ class FormationPreviewCards extends React.Component {
               return (
                 <Row gutter={60} type='flex' justify='center' key={index}>
                   <Col span={11}>
-                    <Card
-                      hoverable
-                      bordered={false}
-                      className="formation-card"
-                      onClick={() => this.clickHandler(index)}
-                    >
-                      {
-                        index === 0
-                          ? <div className="new-formation" ref={node => { this.container = node; }}>
-                              <Icon type="file-add" className="add-formation-icon" />
-                              <span className="add-formation-title"> ADD FORMATION </span>
-                            </div>
-                          : <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
-                            {
-                              this.props.editState &&
-                                <span>
-                                  <Icon type="minus-circle" theme="outlined"
-                                        className={'delete-button'}/>
-                                </span>
-                            }
-                              <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index - 1} />
-                            </div>
-                      }
-                      <div className="formation-name">
-                        <span>{formation.name}</span>
-                      </div>
-                    </Card>
-                  </Col>
-
-                  {
-                    formations[index + 1]
-                      ?
-                      <Col span={11}>
-                        <Card
-                          hoverable
-                          bordered={false}
-                          className="formation-card"
-                          onClick={() => this.clickHandler(index + 1)}
-                        >
-                          <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
+                    {
+                      index === 0
+                      ? <div className="formation-card">
+                          <div className="new-formation" ref={node => { this.container = node; }}>
+                            <Icon type="file-add" className="add-formation-icon" />
+                            <span className="add-formation-title"> ADD FORMATION </span>
+                          </div>
+                        </div>
+                      : <div className="formation-card">
+                          <div onClick={() => this.handleClick(index)}>
                             {
                               this.props.editState &&
                               <span>
                                 <Icon type="minus-circle" theme="outlined"
-                                      className={'delete-button'}/>
+                                      className={'delete-button'} onClick={() => this.handleRemove(index)}/>
                               </span>
                             }
-                            <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} />
+                            <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
+                              <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index - 1} />
+                            </div>
                           </div>
                           <div className="formation-name">
-                            <span>{formations[index + 1].name}</span>
+                            <span>{formation.name}</span>
                           </div>
-                        </Card>
-                      </Col>
-                      : <Col span={11} />
+                        </div>
+                    }
+                  </Col>
+                  <Col span={11}>
+                  {
+                    formations[index + 1]
+                      ?
+                      <div className="formation-card">
+                        <div onClick={() => this.handleClick(index)}>
+                          {
+                            this.props.editState &&
+                            <span>
+                              <Icon type="minus-circle" theme="outlined"
+                                    className={'delete-button'} onClick={() => this.handleRemove(index)}/>
+                            </span>
+                          }
+                          <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
+                            <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} />
+                          </div>
+                        </div>
+                        <div className="formation-name">
+                          <span>{formation.name}</span>
+                        </div>
+                      </div>
+                      : null
                   }
+                  </Col>
                 </Row>
               );
             }
