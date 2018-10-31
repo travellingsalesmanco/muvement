@@ -170,6 +170,9 @@ class Timeline extends Component {
                   const formationWidth = formationEndPos - formationStartPos;
                   const isPast = this.isPast(elapsedWidth, formationEndPos);
                   const handleWidth = 10;
+                  const handleBarHeight = timelineHeight * 0.4
+                  const handleBarStartY = (timelineHeight - handleBarHeight) / 2;
+                  const handleBarEndY = handleBarStartY + handleBarHeight;
                   return (
                     <Fragment key={idx}>
                       <Shape x={transitionStartPos}
@@ -226,11 +229,11 @@ class Timeline extends Component {
                               dragBoundFunc={() => { return { x: this.toDisplayX(formationStartPos - handleWidth / 2), y: timelineY } }}
                               onDragMove={(e) => this.handleAnchorMove(e, formationStartPos, idx, true)}
                             />
-                            <Line points={[formationStartPos - handleWidth / 2, timelineHeight / 4, formationStartPos - handleWidth / 2, timelineHeight * 3 / 4]}
+                            <Line points={[formationStartPos - handleWidth / 2, handleBarStartY, formationStartPos - handleWidth / 2, handleBarEndY]}
                               stroke={"white"} strokeWidth={0.5} />
-                            <Line points={[formationStartPos - 1 - handleWidth / 2, timelineHeight / 4, formationStartPos - 1 - handleWidth / 2, timelineHeight * 3 / 4]}
+                            <Line points={[formationStartPos - 2 - handleWidth / 2, handleBarStartY, formationStartPos - 2 - handleWidth / 2, handleBarEndY]}
                               stroke={"white"} strokeWidth={0.5} />
-                            <Line points={[formationStartPos + 1 - handleWidth / 2, timelineHeight / 4, formationStartPos + 1 - handleWidth / 2, timelineHeight * 3 / 4]}
+                            <Line points={[formationStartPos + 2 - handleWidth / 2, handleBarStartY, formationStartPos + 2 - handleWidth / 2, handleBarEndY]}
                               stroke={"white"} strokeWidth={0.5} />
                           </Fragment>
                       }
@@ -243,11 +246,11 @@ class Timeline extends Component {
                         dragBoundFunc={() => { return { x: this.toDisplayX(formationEndPos - handleWidth), y: timelineY } }}
                         onDragMove={(e) => this.handleAnchorMove(e, formationEndPos, idx, false)}
                       />
-                      <Line points={[formationEndPos - handleWidth / 2, timelineHeight / 4, formationEndPos - handleWidth / 2, timelineHeight * 3 / 4]}
+                      <Line points={[formationEndPos - handleWidth / 2, handleBarStartY, formationEndPos - handleWidth / 2, handleBarEndY]}
                         stroke={"white"} strokeWidth={0.5} />
-                      <Line points={[formationEndPos - 1 - handleWidth / 2, timelineHeight / 4, formationEndPos - 1 - handleWidth / 2, timelineHeight * 3 / 4]}
+                      <Line points={[formationEndPos - 2 - handleWidth / 2, handleBarStartY, formationEndPos - 2 - handleWidth / 2, handleBarEndY ]}
                         stroke={"white"} strokeWidth={0.5} />
-                      <Line points={[formationEndPos + 1 - handleWidth / 2, timelineHeight / 4, formationEndPos + 1 - handleWidth / 2, timelineHeight * 3 / 4]}
+                      <Line points={[formationEndPos + 2 - handleWidth / 2, handleBarStartY, formationEndPos + 2 - handleWidth / 2, handleBarEndY ]}
                         stroke={"white"} strokeWidth={0.5} />
                     </Fragment>
                   );
