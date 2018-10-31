@@ -8,7 +8,7 @@ class GridLayer extends PureComponent {
       <Layer>
         {
           this.props.grid
-            .map((points, key) => <Line key={key} points={points} stroke={"#514a9d"} opacity={0.5} />)
+            .map((points, key) => <Line key={key} dash={[5, 2]} points={points} stroke={"#514a9d"} opacity={0.5} />)
         }
       </Layer>
     );
