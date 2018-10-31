@@ -255,6 +255,6 @@ const mapStateToProps = (state, props) => {
 
 // Auth exists
 const authCondition = (authUser) => !!authUser;
-const failRoute = "/landing";
+const failRoute = "/";
 
 export default withAuthorization(authCondition, failRoute)(withFireStoreSync(true)((connect(mapStateToProps)(ChoreoHomeScreen))));

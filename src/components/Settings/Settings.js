@@ -16,7 +16,7 @@ class Settings extends React.Component {
 
 
   handleLogout = () => {
-    this.props.dispatch({ type: USER_LOGOUT }).then(this.props.history.push('/landing'));
+    this.props.dispatch({ type: USER_LOGOUT }).then(this.props.history.push('/'));
   };
 
   showTerms = () => {

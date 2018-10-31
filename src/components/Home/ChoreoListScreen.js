@@ -111,7 +111,7 @@ const mapStateToProps = state => {
 
 // Auth exists
 const authCondition = (authUser) => !!authUser;
-const failRoute = "/landing";
+const failRoute = "/";
 
 export default withAuthorization(authCondition, failRoute)(
   withFireStoreSync(false)(withRouter(connect(mapStateToProps)(ChoreoListScreen)))

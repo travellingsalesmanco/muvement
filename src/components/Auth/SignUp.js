@@ -1,14 +1,12 @@
-import React from 'react';
-import './Auth.css';
 import { Button, Divider } from 'antd';
-import connect from "react-redux/es/connect/connect";
-import { BrowserRouter as Route } from "react-router-dom";
-import GoogleIcon from "../../img/google.svg";
-import FacebookIcon from "../../img/facebook.svg";
-import { auth, firebaseConstants } from "../../firebase";
-import SignUpForm from "./SignUpForm";
+import React from 'react';
 import Link from "react-router-dom/es/Link";
+import { auth, firebaseConstants } from "../../firebase";
+import FacebookIcon from "../../img/facebook.svg";
+import GoogleIcon from "../../img/google.svg";
 import withAuthorization from "../withAuthorization";
+import './Auth.css';
+import SignUpForm from "./SignUpForm";
 
 const FACEBOOK_PROVIDER_MESSAGE = "You are registered through Facebook. Please sign in through that instead.";
 const GOOGLE_PROVIDER_MESSAGE = "You are registered through Google. Please sign in through that instead.";
@@ -25,7 +23,7 @@ class SignUp extends React.Component {
     this.setState({
         disabled: true,
       }, () => auth.facebookSignIn()
-        .then(() => this.props.history.push(`/`))
+        .then(() => this.props.history.push(`/dashboard`))
         .catch((err) => {
           let errMessage = "Could not sign up";
           if (err.code === firebaseConstants.PROVIDER.ACCOUNT_EXISTS_CODE) {
@@ -47,7 +45,7 @@ class SignUp extends React.Component {
     this.setState({
         disabled: true,
       }, () => auth.googleSignIn()
-        .then(() => this.props.history.push(`/`))
+        .then(() => this.props.history.push(`/dashboard`))
         .catch((err) => {
           let errMessage = "Could not sign up";
           if (err.code === firebaseConstants.PROVIDER.ACCOUNT_EXISTS_CODE) {
@@ -99,6 +97,6 @@ class SignUp extends React.Component {
 
 // Auth does not exist
 const authCondition = (authUser) => !authUser;
-const failRoute = "/";
+const failRoute = "/dashboard";
 
 export default withAuthorization(authCondition, failRoute)(SignUp);
