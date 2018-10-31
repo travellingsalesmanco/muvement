@@ -22,6 +22,7 @@ import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 import Timeline from "./Timeline";
 import VerticalSlideList from "./VerticalSlideList";
+import ShowView from './ShowView';
 
 const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameConfirm }) => (
   <div className="section-title-container">
@@ -178,10 +179,7 @@ class FormationScreen extends Component {
                     }
                     {
                       activeButton === 3 &&
-                      <div style={{ paddingTop: '4em', textAlign: 'center' }}>
-                        <span style={{ color: '#fff', fontFamily: 'Sen-Regular', fontSize: '1.5em' }}>Under Construction!</span>
-                        {/* <Timeline choreoId={this.props.choreoId} /> */}
-                      </div>
+                        <ShowView choreoId={this.props.choreoId}/>
                     }
                   </div>
                 </Spin>
@@ -271,7 +269,6 @@ function mapStateToProps(state, props) {
     formationId: state.UI.activeFormation,
     choreoName: choreo.name,
     formationName: activeFormation.name,
-    formationNumSeconds: activeFormation.numSeconds,
     animated: state.UI.animated
   }
 }
