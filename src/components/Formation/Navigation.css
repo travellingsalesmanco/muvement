@@ -123,3 +123,26 @@ li.ant-menu-item.mp-menu-item{
 .ant-menu-item{
     margin-left: 7px;
 }
+
+@media (min-width: 321px)
+    and (max-width: 375px)
+    and (orientation : portrait) {
+        .nav-bar .mp-title h3 {
+          width: 7.5em;
+        }
+
+        .nav-bar .mp-title {
+            margin: auto 5em;
+        }
+    }
+
+@media (max-width: 320px) and (orientation : portrait) {
+    .nav-bar .mp-title h3 {
+      width: 8.0em;
+      font-size: 1.3em;
+    }
+
+    .nav-bar .mp-title {
+        margin: auto 5em;
+    }
+}
