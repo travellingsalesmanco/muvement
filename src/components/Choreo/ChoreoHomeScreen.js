@@ -82,7 +82,7 @@ class ChoreoHomeScreen extends React.Component {
               <div className="nav-bar">
                 <div>
                   <Button className="mp-back-button" style={{ fontSize: '25px' }} icon="left"
-                          onClick={() => this.props.history.push('/')} />
+                          onClick={() => this.props.history.push('/dashboard')} />
                 </div>
                 <div className="mp-title">
                   <h3>{this.props.name}</h3>
@@ -125,7 +125,7 @@ class ChoreoHomeScreen extends React.Component {
               <div className="nav-bar">
                 <div>
                   <Button style={{ fontSize: '25px' }} icon="left"
-                          onClick={() => this.props.history.push('/')} />
+                          onClick={() => this.props.history.push('/dashboard')} />
                   <MinTablet>
                     <span className="backbutton-desc">Dashboard</span>
                   </MinTablet>
@@ -172,7 +172,7 @@ class ChoreoHomeScreen extends React.Component {
               <div className="nav-bar">
                 <div>
                   <Button style={{ fontSize: '25px' }} icon="left"
-                          onClick={() => this.props.history.push('/')} />
+                          onClick={() => this.props.history.push('/dashboard')} />
                   <MinTablet>
                     <span className="backbutton-desc">Dashboard</span>
                   </MinTablet>
