@@ -48,6 +48,22 @@ const ACTIONS_TO_UPDATE = [
   REDO_FORMATION_CHANGE
 ];
 
+let choreosToUpdate = {}
+const updateFireStoreDebounced = (choreoId, newChoreo) => {
+  // If there's a queued update for the same choreo, skip incoming update
+  if (choreosToUpdate[choreoId] !== newChoreo) {
+    choreosToUpdate[choreoId] = newChoreo
+    setTimeout(() => {
+      // If store and newChoreo no longer match, then there's a newer update queued
+      if (choreosToUpdate[choreoId] === newChoreo) {
+        console.log("Updating firestore with wew choreo: ", newChoreo);
+        choreosToUpdate[choreoId] = undefined
+        firestore.updateChoreo(choreoId, newChoreo);
+      }
+    }, 500)
+  }
+}
+
 export const firestoreWriter = store => next => action => {
 
   switch (action.type) {
@@ -86,16 +102,7 @@ export const firestoreWriter = store => next => action => {
       let result = next(action);
       if (ACTIONS_TO_UPDATE.includes(action.type)) {
         const updatedChoreo = store.getState().choreos.byId[choreoId];
-        console.log("Updating: " + action.type + " for " + choreoId);
-        console.log("Old choreo: ");
-        console.log(oldChoreo);
-        console.log("New choreo: ");
-        console.log(updatedChoreo);
-        // TODO: proper deep comparison
-        console.log("Is same: ");
-        console.log(JSON.stringify(oldChoreo) === JSON.stringify(updatedChoreo));
-        // TODO: rate-limiting (debouncing)
-        firestore.updateChoreo(choreoId, updatedChoreo);
+        updateFireStoreDebounced(choreoId, updatedChoreo);
       }
       return result
     }
