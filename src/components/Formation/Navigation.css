@@ -42,7 +42,7 @@
 
 .nav-bar .right-container{
     position: absolute;
-    margin-right: 3%;
+    margin-right: 2%;
     right: 0px;
     top: 50%;
     transform: translateY(-50%)
@@ -57,7 +57,7 @@
 }
 
 .nav-bar-button{
-  padding: 1px 8px 2px 8px;
+  padding: 1px 3px 2px 3px;
 }
 
 .nav-bar .ant-btn {

@@ -51,18 +51,12 @@ class ChoreoListScreen extends React.Component {
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="right-container">
-                <Menu mode="horizontal" theme="dark" onClick={this.handleMenuClick}>
-                  <Menu.Item className="mp-menu-item" key="1">
                     {
                       this.state.editState
-                        ? <Button icon="close" ghost />
-                        : <Button icon="edit" ghost />
+                        ? <Button onClick={this.handleMenuClick}  icon="close" ghost />
+                        : <Button onClick={this.handleMenuClick}  icon="edit" ghost />
                     }
-                  </Menu.Item>
-                  <Menu.Item key="2">
                     <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
-                  </Menu.Item>
-                </Menu>
               </div>
             </div>
           </Header>
@@ -75,18 +69,12 @@ class ChoreoListScreen extends React.Component {
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="right-container">
-                <Menu mode="horizontal" theme="dark" onClick={this.handleMenuClick}>
-                  <Menu.Item className="mp-menu-item" key="1">
                     {
                       this.state.editState
-                        ? <Button icon="close" ghost />
-                        : <Button icon="edit" ghost />
+                        ? <Button onClick={this.handleMenuClick}  icon="close" ghost />
+                        : <Button onClick={this.handleMenuClick}  icon="edit" ghost />
                     }
-                  </Menu.Item>
-                  <Menu.Item key="2">
                     <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
-                  </Menu.Item>
-                </Menu>
               </div>
             </div>
           </Header>
