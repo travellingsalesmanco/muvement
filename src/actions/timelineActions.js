@@ -44,7 +44,7 @@ export function offsetTransitionBeforeDuration(choreoId, formationId, offsetDura
   offsetDuration = Math.trunc(offsetDuration)
   return (dispatch, getState) => {
     const oldDuration = getChoreo(getState(), choreoId).formations[formationId].transitionBefore.duration;
-    const newDuration = oldDuration + offsetDuration < 2000 ? 2000 : oldDuration + offsetDuration;
+    const newDuration = oldDuration + offsetDuration < 1000 ? 1000 : oldDuration + offsetDuration;
     if (oldDuration !== newDuration) {
       dispatch({
         type: EDIT_FORMATION_TRANSITION,
