@@ -8,13 +8,17 @@ import './ChoreoCards.css';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class ChoreoCard extends PureComponent {
-  clickHandler() {
-    if (this.props.editState) {
-      this.props.dispatch(removeChoreo(this.props.choreoId))
-    } else {
+  handleClick = () => {
+    if (!this.props.editState) {
       this.props.history.push(`/choreo/${this.props.choreoId}`);
     }
-  }
+  };
+
+  handleRemove = () => {
+    if (this.props.editState) {
+      this.props.dispatch(removeChoreo(this.props.choreoId));
+    }
+  };
 
   render() {
     const { name, imageUrl, formationLength } = this.props;
@@ -22,19 +26,14 @@ class ChoreoCard extends PureComponent {
     return (
       <Fragment>
         <MobilePortrait>
-          <Card
-            hoverable
-            bordered={false}
-            className="mp-choreo-card"
-            onClick={() => this.clickHandler()}
-          >
+          <div className="mp-choreo-card">
             <div>
-              <div className="mp-ant-card-cover">
+              <div className="mp-ant-card-cover" onClick={this.handleClick}>
                 {
                   this.props.editState &&
                   <span>
                     <Icon type="minus-circle" theme="outlined"
-                          className={'delete-button'}/>
+                          className={'delete-button'} onClick={this.handleRemove}/>
                   </span>
                 }
                 <img alt="Cover" src={imageUrl} />
@@ -47,23 +46,18 @@ class ChoreoCard extends PureComponent {
                 </div>
               </div>
             </div>
-          </Card>
+          </div>
         </MobilePortrait>
 
         <MobileLandscape>
-          <Card
-            hoverable
-            bordered={false}
-            className="choreo-card"
-            onClick={() => this.clickHandler()}
-          >
+          <div className="choreo-card">
             <div>
-              <div className="ant-card-cover">
+              <div className="ant-card-cover" onClick={this.handleClick}>
                 {
                   this.props.editState &&
                   <span>
                     <Icon type="minus-circle" theme="outlined"
-                          className={'delete-button'}/>
+                          className={'delete-button'} onClick={this.handleRemove}/>
                   </span>
                 }
                 <img alt="Cover" src={imageUrl} />
@@ -76,23 +70,18 @@ class ChoreoCard extends PureComponent {
                 </div>
               </div>
             </div>
-          </Card>
+          </div>
         </MobileLandscape>
 
         <MinTablet>
-          <Card
-            hoverable
-            bordered={false}
-            className="choreo-card"
-            onClick={() => this.clickHandler()}
-          >
+          <div className="choreo-card">
             <div>
-              <div className="ant-card-cover">
+              <div className="ant-card-cover" onClick={this.handleClick}>
                 {
                   this.props.editState &&
                   <span>
                     <Icon type="minus-circle" theme="outlined"
-                          className={'delete-button'}/>
+                          className={'delete-button'} onClick={this.handleRemove}/>
                   </span>
                 }
                 <img alt="Cover" src={imageUrl} />
@@ -105,7 +94,7 @@ class ChoreoCard extends PureComponent {
                 </div>
               </div>
             </div>
-          </Card>
+          </div>
         </MinTablet>
 
       </Fragment>
