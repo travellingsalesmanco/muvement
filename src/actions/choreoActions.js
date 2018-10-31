@@ -47,9 +47,7 @@ function getLostChoreos(choreos, state) {
 
 function isNewer(choreo, choreoId, state) {
   const currChoreo = getChoreo(state, choreoId);
-  // TODO: remove dummy check when deploy
-  return currChoreo.updatedAt !== "timestamp2"
-    ? currChoreo.updatedAt.seconds < choreo.updatedAt.seconds
+  return currChoreo ? currChoreo.updatedAt.seconds < choreo.updatedAt.seconds
     : true;
 }
 
