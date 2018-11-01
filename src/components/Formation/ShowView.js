@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { play } from '../../actions/timelineActions';
 import { TIMELINE_PAUSE, TIMELINE_PLAY } from '../../constants/actionTypes';
 import { getTimeline } from '../../selectors/layout';
-import Timeline from './Timeline';
+import Timeline from './Timeline/Timeline';
 import './FormationScreen.css';
 
 class ShowView extends Component {

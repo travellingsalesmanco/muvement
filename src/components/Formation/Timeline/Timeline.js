@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Circle, Group, Layer, Line, Rect, Shape, Stage, Text } from 'react-konva';
 import { connect } from 'react-redux';
-import { offsetDuration, offsetTransitionBeforeDuration } from '../../actions/timelineActions';
-import { TIMELINE_JUMP, TIMELINE_PAUSE } from '../../constants/actionTypes';
+import { offsetDuration, offsetTransitionBeforeDuration, jumpToTime } from '../../../actions/timelineActions';
+import { TIMELINE_JUMP, TIMELINE_PAUSE } from '../../../constants/actionTypes';
 
 class Timeline extends Component {
   constructor(props) {
@@ -60,14 +60,7 @@ class Timeline extends Component {
       this.props.dispatch({ type: TIMELINE_PAUSE })
     }
     const relativeDragPos = this.state.midPoint - e.target.x();
-    console.log(relativeDragPos);
-    const newTime = Math.trunc(relativeDragPos / this.props.msWidth);
-    if (newTime !== this.props.elapsedTime) {
-      this.props.dispatch({
-        type: TIMELINE_JUMP,
-        payload: newTime
-      })
-    }
+    this.props.dispatch(jumpToTime(relativeDragPos / this.props.msWidth))
   }
 
   inFocus = (elapsedWidth, leftBound, rightBound) =>
@@ -89,10 +82,7 @@ class Timeline extends Component {
     if (this.props.isPlaying) {
       this.props.dispatch({ type: TIMELINE_PAUSE })
     }
-    this.props.dispatch({
-      type: TIMELINE_JUMP,
-      payload: updatedTime
-    })
+    this.props.dispatch(jumpToTime(updatedTime))
   }
 
   handleAnchorMove = (e, anchorTimelineX, formationIdx, isTransition) => {

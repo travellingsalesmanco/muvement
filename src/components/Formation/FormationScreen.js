@@ -20,7 +20,6 @@ import Navigation from "./Navigation";
 import PerformerList from "./PerformerList";
 import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
-import Timeline from "./Timeline";
 import VerticalSlideList from "./VerticalSlideList";
 import ShowView from './ShowView';
 
