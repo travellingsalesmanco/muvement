@@ -5,8 +5,9 @@ import './AddPerformerScreen.css';
 import { addChoreo } from "../../actions/choreoActions";
 import { connect } from 'react-redux';
 import { firestore } from "../../firebase";
-import { defaultStageDim, defaultFormation, genDummyImage } from "../../constants/defaults";
+import { defaultStageDim, defaultFormation } from "../../constants/defaults";
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+import { genDummyImage } from '../../constants/dummyData';
 
 class AddPerformerScreen extends React.Component {
   state = {
@@ -90,11 +91,11 @@ class AddPerformerScreen extends React.Component {
                 ))
               }
               <Button type={"default"} icon="user-add" ghost block className="mp-add-performer-button"
-                      onClick={this.handleAdd}>Add Performer</Button>
+                onClick={this.handleAdd}>Add Performer</Button>
               <Button type={"default"} block className="mp-next-button"
-                      onClick={this.handleNext}
-                      loading={loading}
-                      disabled={disabled}
+                onClick={this.handleNext}
+                loading={loading}
+                disabled={disabled}
               >NEXT</Button>
             </div>
           </Content>
@@ -135,11 +136,11 @@ class AddPerformerScreen extends React.Component {
                 ))
               }
               <Button type={"default"} icon="user-add" ghost block className="mp-add-performer-button"
-                      onClick={this.handleAdd}>Add Performer</Button>
+                onClick={this.handleAdd}>Add Performer</Button>
               <Button type={"default"} block className="mp-next-button"
-                      onClick={this.handleNext}
-                      loading={loading}
-                      disabled={disabled}
+                onClick={this.handleNext}
+                loading={loading}
+                disabled={disabled}
               >NEXT</Button>
             </div>
           </Content>
@@ -180,11 +181,11 @@ class AddPerformerScreen extends React.Component {
                 ))
               }
               <Button type={"default"} icon="user-add" ghost block className="add-performer-button"
-                      onClick={this.handleAdd}>Add Performer</Button>
+                onClick={this.handleAdd}>Add Performer</Button>
               <Button type={"default"} block className="next-button"
-                      onClick={this.handleNext}
-                      loading={loading}
-                      disabled={disabled}
+                onClick={this.handleNext}
+                loading={loading}
+                disabled={disabled}
               >NEXT</Button>
             </div>
           </Content>

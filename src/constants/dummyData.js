@@ -36,3 +36,7 @@ export const demoChoreos = {
   },
   myChoreos: []
 };
+
+export const genDummyImage = (name) => {
+  return "https://dummyimage.com/300x300/000000/fff.jpg&text=" + name.charAt(0);
+};

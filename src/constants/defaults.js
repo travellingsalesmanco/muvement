@@ -14,9 +14,6 @@ export const defaultStageDim = {
   gridSize: 0.5,
   units: 'm'
 };
-export const genDummyImage = (name) => {
-  return "https://dummyimage.com/300x300/000000/fff.jpg&text=" + name.charAt(0);
-};
 export const defaultUI = {
   isPlaying: false,
   animated: false,
