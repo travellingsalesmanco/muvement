@@ -69,12 +69,12 @@ class FormationPreviewCards extends React.Component {
                     formations[index + 1]
                       ?
                       <div className="formation-card">
-                        <div onClick={() => this.handleClick(index)}>
+                        <div onClick={() => this.handleClick(index + 1)}>
                           {
                             this.props.editState &&
                             <span>
                               <Icon type="minus-circle" theme="outlined"
-                                    className={'delete-button'} onClick={() => this.handleRemove(index)}/>
+                                    className={'delete-button'} onClick={() => this.handleRemove(index + 1)}/>
                             </span>
                           }
                           <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
@@ -82,7 +82,7 @@ class FormationPreviewCards extends React.Component {
                           </div>
                         </div>
                         <div className="formation-name">
-                          <span>{formation.name}</span>
+                          <span>{formations[index + 1].name}</span>
                         </div>
                       </div>
                       : null
