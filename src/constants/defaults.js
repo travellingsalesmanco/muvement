@@ -22,3 +22,8 @@ export const defaultUI = {
   showLabels: true,
   selectedDancers: []
 };
+
+export const minFormationDuration = 1000;
+export const minTransitionDuration = 1000;
+export const timingInterval = 250;
+export const timingPrecision = 10;

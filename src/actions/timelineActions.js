@@ -1,10 +1,12 @@
 import { EDIT_FORMATION_DURATION, EDIT_FORMATION_TRANSITION, TIMELINE_JUMP, TIMELINE_PAUSE } from "../constants/actionTypes";
 import { getChoreo } from "../selectors/choreo";
+import { minFormationDuration, minTransitionDuration } from "../constants/defaults";
+import { truncToInterval, truncToPrecision } from "../lib/timelineUtils";
 
 
 export function play(totalDuration, fps, speedup = 1) {
-  const msPerFrame = 1000 / fps;
-  const toAdvance = Math.trunc(msPerFrame * speedup)
+  const msPerFrame = truncToPrecision(1000 / fps);
+  const toAdvance = truncToPrecision(msPerFrame * speedup);
   return (dispatch, getState) => {
     const advanceNextFrame = () => {
       if (getState().UI.isPlaying) {
@@ -25,10 +27,13 @@ export function play(totalDuration, fps, speedup = 1) {
 }
 
 export function offsetDuration(choreoId, formationId, offsetDuration) {
-  offsetDuration = Math.trunc(offsetDuration)
+  offsetDuration = truncToInterval(offsetDuration)
   return (dispatch, getState) => {
     const oldDuration = getChoreo(getState(), choreoId).formations[formationId].duration;
-    const newDuration = oldDuration + offsetDuration < 2000 ? 2000 : oldDuration + offsetDuration;
+    let newDuration = oldDuration + offsetDuration;
+    if (newDuration < minFormationDuration) {
+      newDuration = minFormationDuration
+    }
     if (oldDuration !== newDuration) {
       dispatch({
         type: EDIT_FORMATION_DURATION,
@@ -41,16 +46,31 @@ export function offsetDuration(choreoId, formationId, offsetDuration) {
 }
 
 export function offsetTransitionBeforeDuration(choreoId, formationId, offsetDuration) {
-  offsetDuration = Math.trunc(offsetDuration)
+  offsetDuration = truncToInterval(offsetDuration)
   return (dispatch, getState) => {
     const oldDuration = getChoreo(getState(), choreoId).formations[formationId].transitionBefore.duration;
-    const newDuration = oldDuration + offsetDuration < 1000 ? 1000 : oldDuration + offsetDuration;
+    let newDuration = oldDuration + offsetDuration;
+    if (newDuration < minTransitionDuration) {
+      newDuration = minTransitionDuration
+    }
     if (oldDuration !== newDuration) {
       dispatch({
         type: EDIT_FORMATION_TRANSITION,
         choreoId: choreoId,
         formationId: formationId,
         payload: { duration: newDuration }
+      })
+    }
+  }
+}
+
+export function jumpToTime(t) {
+  t = truncToPrecision(t);
+  return (dispatch, getState) => {
+    if(getState().UI.elapsedTime !== t) {
+      dispatch({
+        type: TIMELINE_JUMP,
+        payload: t
       })
     }
   }
