@@ -7,15 +7,14 @@ import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import './ChoreoHomeScreen.css';
 
 class FormationPreviewCards extends React.Component {
+  handleAdd = () => {
+    this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formations.length));
+    this.props.history.push(`${this.props.match.url}/formation`)
+  };
   handleClick = (index) => {
     if (!this.props.editState) {
-      if (index === 0) {
-        this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formations.length));
-        this.props.history.push(`${this.props.match.url}/formation`)
-      } else {
-        this.props.dispatch(gotoFormation(this.props.choreoId, index - 1));
-        this.props.history.push(`${this.props.match.url}/formation`)
-      }
+      this.props.dispatch(gotoFormation(this.props.choreoId, index - 1));
+      this.props.history.push(`${this.props.match.url}/formation`)
     }
   };
 
@@ -39,7 +38,7 @@ class FormationPreviewCards extends React.Component {
                   <Col span={11}>
                     {
                       index === 0
-                      ? <div className="formation-card">
+                      ? <div className="formation-card" onClick={this.handleAdd}>
                           <div className="new-formation" ref={node => { this.container = node; }}>
                             <Icon type="file-add" className="add-formation-icon" />
                             <span className="add-formation-title"> ADD FORMATION </span>
