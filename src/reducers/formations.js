@@ -93,8 +93,11 @@ export default (state = [defaultFormation], action) => {
   switch (action.type) {
     case ADD_FORMATION: {
       const { payload: index } = action;
+      // TODO: When min formation == 1 is lifted, to review
       let formations = state.slice();
-      formations.splice(index, 0, defaultFormation);
+      let newFormation = { ...formations[index - 1] };
+      newFormation.name = '';
+      formations.splice(index, 0, newFormation);
       return formations;
     }
     case REMOVE_FORMATION: {
