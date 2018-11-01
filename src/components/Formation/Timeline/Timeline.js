@@ -3,6 +3,7 @@ import { Circle, Group, Layer, Line, Rect, Shape, Stage, Text } from 'react-konv
 import { connect } from 'react-redux';
 import { offsetDuration, offsetTransitionBeforeDuration, jumpToTime } from '../../../actions/timelineActions';
 import { TIMELINE_JUMP, TIMELINE_PAUSE } from '../../../constants/actionTypes';
+import Timestamps from './Timestamps';
 
 class Timeline extends Component {
   constructor(props) {
@@ -98,21 +99,15 @@ class Timeline extends Component {
   }
 
   render() {
-    const { data: timeline, msWidth, elapsedTime } = this.props;
+    console.log("timeline render");
+    const { data: timeline, msWidth, elapsedTime, handleWidth, labelRadius, timestampSeparation } = this.props;
     if (elapsedTime > timeline.totalDuration) {
       this.props.dispatch({ type: TIMELINE_JUMP, payload: timeline.totalDuration })
     }
     const { displayWidth, displayHeight, midPoint, timelineDraggable } = this.state;
     const timelineHeight = displayHeight * 0.85;
-    const timelineWidth = timeline.totalDuration * msWidth;
     const timelineY = displayHeight - timelineHeight;
     const elapsedWidth = elapsedTime * msWidth;
-    const radius = 15;
-    let timestampDivisions = [];
-    const timestampSeparation = 1000;
-    for (let i = 0; i <= timeline.totalDuration; i += timestampSeparation) {
-      timestampDivisions.push(i)
-    }
     return (
       <div style={{ background: '#000', height: "100%", width: "100%", overflow: "hidden" }}
         ref={(ref) => this.container = ref}>
@@ -122,33 +117,7 @@ class Timeline extends Component {
             dragBoundFunc={timelineDraggable ? this.timelineDragBoundFunc : null}
             onDragMove={timelineDraggable ? this.handleDragMove : null}
           >
-            {
-              timestampDivisions.map((timestamp) => {
-                const timestampPos = timestamp * msWidth;
-                if (timestamp % 2000 === 0) {
-                  const minutes = Math.floor(timestamp / 60000);
-                  let [seconds] = ((timestamp % 60000) / 1000).toString().split(".");
-                  if (seconds.length === 1) {
-                    seconds = "0" + seconds
-                  }
-                  return <Text
-                    key={timestamp}
-                    x={timestampPos}
-                    y={0}
-                    fill={'white'}
-                    fontFamily={"Sen-bold"}
-                    text={minutes + ":" + seconds}
-                    fontSize={12}
-                  />
-                  // } else if (timestamp % 1000 === 0) {
-                  //   return <Line points={[timestampPos, timelineY, timestampPos, timelineY - 5]}
-                  //     key={timestamp}
-                  //     stroke={"white"} strokeWidth={1} opacity={0.8} />
-                } else {
-                  return null
-                }
-              })
-            }
+            <Timestamps msWidth={msWidth} interval={timestampSeparation} duration={timeline.totalDuration} />
             {/* <Line points={[0, timelineY - 1, timelineWidth, timelineY - 1]} stroke={"white"} strokeWidth={1} opacity={0.5} /> */}
             <Group y={timelineY}>
               {
@@ -159,7 +128,6 @@ class Timeline extends Component {
                   const transitionWidth = formationStartPos - transitionStartPos;
                   const formationWidth = formationEndPos - formationStartPos;
                   const isPast = this.isPast(elapsedWidth, formationEndPos);
-                  const handleWidth = 10;
                   const handleBarHeight = timelineHeight * 0.4
                   const handleBarStartY = (timelineHeight - handleBarHeight) / 2;
                   const handleBarEndY = handleBarStartY + handleBarHeight;
@@ -192,13 +160,13 @@ class Timeline extends Component {
                       <Group x={formationStartPos + formationWidth / 2} y={timelineHeight / 2}>
                         <Circle
                           fill={'#24c6dc'}
-                          radius={radius}
+                          radius={labelRadius}
                         />
                         <Text
-                          x={-radius}
-                          y={-radius}
-                          width={radius * 2}
-                          height={radius * 2}
+                          x={-labelRadius}
+                          y={-labelRadius}
+                          width={labelRadius * 2}
+                          height={labelRadius * 2}
                           align={'center'}
                           verticalAlign={'middle'}
                           fill={'white'}

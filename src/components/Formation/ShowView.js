@@ -40,7 +40,8 @@ class ShowView extends Component {
     return (
       <div className="show-view" style={{ flex: 1, textAlign: "center"}}>
         <div style={{ height: "6rem", paddingTop: "0.5rem" }}>
-          <Timeline choreoId={this.props.choreoId} data={this.props.timeline} msWidth={0.05} elapsedTime={this.props.elapsedTime} isPlaying={this.props.isPlaying} />
+          <Timeline choreoId={this.props.choreoId} data={this.props.timeline} msWidth={0.05} elapsedTime={this.props.elapsedTime} isPlaying={this.props.isPlaying}
+            labelRadius={15} handleWidth={10} timestampSeparation={2000} />
         </div>
         <div className = "show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff" }}>
           {this.msToDisplayedTime(this.props.elapsedTime)}
