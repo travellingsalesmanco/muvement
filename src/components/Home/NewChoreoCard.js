@@ -17,7 +17,7 @@ class NewChoreoCard extends PureComponent  {
       >
         <div className="mp-new-choreo">
           <FileAddIcon className="mp-new-choreo-icon" />
-          <span className="mp-add-choreo-title"> CREATE A NEW STAGE </span>
+          <span className="mp-add-choreo-title"> CREATE A NEW PERFORMANCE </span>
         </div>
       </Card>
     </MobilePortrait>
@@ -31,7 +31,7 @@ class NewChoreoCard extends PureComponent  {
       >
         <div className="new-choreo">
           <FileAddIcon className="new-choreo-icon" />
-          <span className="add-choreo-title"> CREATE A NEW STAGE </span>
+          <span className="add-choreo-title"> CREATE A NEW PERFORMANCE </span>
         </div>
       </Card>
     </MobileLandscape>
@@ -45,7 +45,7 @@ class NewChoreoCard extends PureComponent  {
       >
         <div className="new-choreo">
           <FileAddIcon className="new-choreo-icon" />
-          <span className="add-choreo-title"> CREATE A NEW STAGE </span>
+          <span className="add-choreo-title"> CREATE A NEW PERFORMANCE </span>
         </div>
       </Card>
     </MinTablet>
