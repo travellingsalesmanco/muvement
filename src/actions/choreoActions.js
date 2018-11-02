@@ -9,7 +9,6 @@ import {
   REMOVE_DANCER,
   REORDER_FORMATION,
   SET_LABELS_VIEW,
-  SWITCH_ACTIVE_CHOREO,
   SWITCH_ACTIVE_FORMATION,
   REMOVE_FORMATION,
   UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY
@@ -63,10 +62,6 @@ export function addChoreo(id, choreo) {
       type: ADD_CHOREO,
       choreoId: id,
       payload: choreo
-    });
-    dispatch({
-      type: SWITCH_ACTIVE_CHOREO,
-      payload: id
     });
     return res;
   }
