@@ -20,7 +20,7 @@ class ChoreoCardList extends React.Component {
             <NewChoreoCard onClick={() => this.props.setModalVisible(true)} />
           </Col>
           <Col span={10}>
-            {first !== undefined ? <ChoreoCard choreoId={first} editState={this.props.editState}/> : null}
+            {first !== undefined ? <ChoreoCard choreoId={first}/> : null}
           </Col>
         </Row>
         {
@@ -29,10 +29,10 @@ class ChoreoCardList extends React.Component {
               return (
                 <Row gutter={20} type='flex' justify='center' key={choreoId}>
                   <Col span={10}>
-                    <ChoreoCard choreoId={choreoId} editState={this.props.editState}/>
+                    <ChoreoCard choreoId={choreoId}/>
                   </Col>
                   <Col span={10}>
-                    {rest[index + 1] ? <ChoreoCard choreoId={rest[index + 1]} editState={this.props.editState}/> : null}
+                    {rest[index + 1] ? <ChoreoCard choreoId={rest[index + 1]}/> : null}
                   </Col>
                 </Row>
               );

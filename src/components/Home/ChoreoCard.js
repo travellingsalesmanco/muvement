@@ -11,15 +11,11 @@ const confirm = Modal.confirm;
 
 class ChoreoCard extends PureComponent {
   handleClick = () => {
-    if (!this.props.editState) {
-      this.props.history.push(`/choreo/${this.props.choreoId}`);
-    }
+    this.props.history.push(`/choreo/${this.props.choreoId}`);
   };
 
   handleRemove = () => {
-    if (this.props.editState) {
-      this.showConfirm();
-    }
+    this.showConfirm();
   };
 
   showConfirm = () => {
@@ -50,20 +46,16 @@ class ChoreoCard extends PureComponent {
           <div className="mp-choreo-card">
             <div>
               <div className="mp-ant-card-cover" onClick={this.handleClick}>
-                {
-                  this.props.editState &&
-                  <span>
-                    <Icon type="minus-circle" theme="outlined"
-                          className={'delete-button'} onClick={this.handleRemove}/>
-                  </span>
-                }
                 <img alt="Cover" src={imageUrl} />
               </div>
               <div className="mp-description">
                 <span>{name}</span>
                 <div className="mp-description-inner">
                   <span id="mp-formation-no">{formationLength} formations</span>
-                  <Icon type="share-alt" theme="outlined" style={{ fontSize: '20px' }} />
+                  <div className="icons">
+                    <Icon type="share-alt" theme="outlined"/>
+                    <Icon type="delete" theme="outlined" onClick={this.handleRemove}/>
+                  </div>
                 </div>
               </div>
             </div>
@@ -74,20 +66,16 @@ class ChoreoCard extends PureComponent {
           <div className="choreo-card">
             <div>
               <div className="ant-card-cover" onClick={this.handleClick}>
-                {
-                  this.props.editState &&
-                  <span>
-                    <Icon type="minus-circle" theme="outlined"
-                          className={'delete-button'} onClick={this.handleRemove}/>
-                  </span>
-                }
                 <img alt="Cover" src={imageUrl} />
               </div>
               <div className="description">
                 <span>{name}</span>
                 <div className="description-inner">
                   <span id="formation-no">{formationLength} formations</span>
-                  <Icon type="share-alt" theme="outlined" style={{ fontSize: '20px' }} />
+                  <div className="icons">
+                    <Icon type="share-alt" theme="outlined"/>
+                    <Icon type="delete" theme="outlined" onClick={this.handleRemove}/>
+                  </div>
                 </div>
               </div>
             </div>
@@ -98,20 +86,16 @@ class ChoreoCard extends PureComponent {
           <div className="choreo-card">
             <div>
               <div className="ant-card-cover" onClick={this.handleClick}>
-                {
-                  this.props.editState &&
-                  <span>
-                    <Icon type="minus-circle" theme="outlined"
-                          className={'delete-button'} onClick={this.handleRemove}/>
-                  </span>
-                }
                 <img alt="Cover" src={imageUrl} />
               </div>
               <div className="description">
                 <span>{name}</span>
                 <div className="description-inner">
                   <span id="formation-no">{formationLength} formations</span>
-                  <Icon type="share-alt" theme="outlined" style={{ fontSize: '20px' }} />
+                  <div className="icons">
+                    <Icon type="share-alt" theme="outlined"/>
+                    <Icon type="delete" theme="outlined" onClick={this.handleRemove}/>
+                  </div>
                 </div>
               </div>
             </div>

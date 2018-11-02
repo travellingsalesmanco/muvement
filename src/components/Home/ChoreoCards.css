@@ -100,6 +100,17 @@
   font-size: 16px;
 }
 
+.description-inner .icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description-inner .icons .anticon {
+  font-size: 20px;
+  margin-right: 0.5em;
+}
+
 .new-choreo-modal .ant-modal-content {
   /*border: 5px solid #24c6dc;*/
   padding: 2px 2px;
@@ -245,6 +256,17 @@
   color: #fff;
   font-family: 'Sen-Bold';
   font-size: 16px;
+}
+
+.mp-description-inner .icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mp-description-inner .icons .anticon {
+  font-size: 20px;
+  margin-right: 0.2em;
 }
 
 .mp-new-choreo-modal .ant-modal-content {
