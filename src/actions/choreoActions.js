@@ -117,7 +117,7 @@ export function syncCreatorChoreos(choreos) {
       })
     });
     choreos.forEach((choreo) => {
-      if (!hasChoreo(choreo.id, getState())) {
+      if (!hasChoreo(choreo.id, getState()) || !ownsChoreo(choreo.id, getState())) {
         // Add choreos not on local
         console.log("ADDING");
         dispatch({
