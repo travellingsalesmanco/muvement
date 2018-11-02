@@ -64,7 +64,7 @@
   background-color: transparent;
   border-color: transparent;
   color: #fff;
-  font-size: 20px;
+  font-size: 23px;
 }
 
 .right-container .ant-menu-dark {
@@ -81,8 +81,8 @@
 }
 
 .ant-btn:not(.ant-btn-circle):not(.ant-btn-circle-outline).ant-btn-icon-only{
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 /* Mobile Portrait */
@@ -132,8 +132,9 @@ li.ant-menu-item.mp-menu-item{
         }
 
         .nav-bar .mp-title {
-            margin: auto 5em;
+            margin: auto 5.5em;
         }
+
     }
 
 @media (max-width: 320px) and (orientation : portrait) {
@@ -144,5 +145,9 @@ li.ant-menu-item.mp-menu-item{
 
     .nav-bar .mp-title {
         margin: auto 5em;
+    }
+
+    .nav-bar .ant-btn {
+      font-size: 21px;
     }
 }
