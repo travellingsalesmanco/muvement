@@ -103,11 +103,7 @@ class Timeline extends Component {
   }
 
   render() {
-    console.log("timeline render");
     const { data: timeline, msWidth, elapsedTime, handleWidth, labelRadius, timestampSeparation } = this.props;
-    if (elapsedTime > timeline.totalDuration) {
-      this.props.dispatch({ type: TIMELINE_JUMP, payload: timeline.totalDuration })
-    }
     const { displayWidth, displayHeight, midPoint, timelineDraggable } = this.state;
     const timelineHeight = displayHeight * 0.85;
     const timelineY = displayHeight - timelineHeight;
@@ -122,7 +118,6 @@ class Timeline extends Component {
             onDragMove={timelineDraggable ? this.handleDragMove : null}
           >
             <Timestamps msWidth={msWidth} interval={timestampSeparation} duration={timeline.totalDuration} />
-            {/* <Line points={[0, timelineY - 1, timelineWidth, timelineY - 1]} stroke={"white"} strokeWidth={1} opacity={0.5} /> */}
             <Group y={timelineY}>
               {
                 timeline.cumDurations.map(([formationStart, formationEnd], idx, cumDurations) => {
