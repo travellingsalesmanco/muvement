@@ -70,8 +70,10 @@ class Timeline extends Component {
   isPast = (elapsedWidth, rightBound) => elapsedWidth >= rightBound
 
   handleTimelineSelect = (e) => {
-    const { x: pointerX } = e.target.getStage().getPointerPosition();
-    let updatedTime = this.props.elapsedTime + (pointerX - this.state.midPoint) / this.props.msWidth;
+    const pointerPos = e.target.getStage().getPointerPosition();
+    let transform = e.currentTarget.getAbsoluteTransform().copy();
+    transform.invert();
+    let updatedTime = transform.point(pointerPos).x / this.props.msWidth;
 
     // Some validation guards
     if (updatedTime > this.props.data.totalDuration) {
@@ -86,11 +88,13 @@ class Timeline extends Component {
     this.props.dispatch(jumpToTime(updatedTime))
   }
 
-  handleAnchorMove = (e, anchorTimelineX, formationIdx, isTransition) => {
-    const { x: pointerX } = e.target.getStage().getPointerPosition();
-    const offsetPos = pointerX - this.toDisplayX(anchorTimelineX);
-    const offsetDur = offsetPos / this.props.msWidth;
-    console.log(offsetDur);
+  handleAnchorMove = (e, formationIdx, isTransition) => {
+    console.log(e);
+    const pointerPos = e.target.getStage().getPointerPosition();
+    let transform = e.currentTarget.getAbsoluteTransform().copy();
+    transform.invert();
+    const offsetPos = transform.point(pointerPos);
+    const offsetDur = offsetPos.x / this.props.msWidth;
     if (isTransition) {
       this.props.dispatch(offsetTransitionBeforeDuration(this.props.choreoId, formationIdx, offsetDur))
     } else {
@@ -185,7 +189,7 @@ class Timeline extends Component {
                               onTouchEnd={() => this.setState({ timelineDraggable: true })}
                               onDragEnd={() => this.setState({ timelineDraggable: true })}
                               dragBoundFunc={() => { return { x: this.toDisplayX(formationStartPos - handleWidth / 2), y: timelineY } }}
-                              onDragMove={(e) => this.handleAnchorMove(e, formationStartPos, idx, true)}
+                              onDragMove={(e) => this.handleAnchorMove(e, idx, true)}
                             />
                             <Line points={[formationStartPos - handleWidth / 2, handleBarStartY, formationStartPos - handleWidth / 2, handleBarEndY]}
                               stroke={"white"} strokeWidth={0.5} />
@@ -202,7 +206,7 @@ class Timeline extends Component {
                         onTouchEnd={() => this.setState({ timelineDraggable: true })}
                         onDragEnd={() => this.setState({ timelineDraggable: true })}
                         dragBoundFunc={() => { return { x: this.toDisplayX(formationEndPos - handleWidth), y: timelineY } }}
-                        onDragMove={(e) => this.handleAnchorMove(e, formationEndPos, idx, false)}
+                        onDragMove={(e) => this.handleAnchorMove(e, idx, false)}
                       />
                       <Line points={[formationEndPos - handleWidth / 2, handleBarStartY, formationEndPos - handleWidth / 2, handleBarEndY]}
                         stroke={"white"} strokeWidth={0.5} />
