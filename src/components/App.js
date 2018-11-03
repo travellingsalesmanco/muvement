@@ -12,6 +12,7 @@ import Settings from "./Settings/Settings";
 import ReactGA from 'react-ga';
 import Privacy from "./Static/Privacy";
 import Terms from "./Static/Terms";
+import DancerFormationView from "./Formation/DancerFormationView";
 
 ReactGA.initialize('UA-125447140-3', {
   debug: false
@@ -32,6 +33,7 @@ class App extends Component {
           <Route exact path="/settings" component={Settings}/>
           <Route exact path={`/choreo/:choreoId`} component={ChoreoHomeScreen} />
           <Route exact path={`/choreo/:choreoId/formation`} component={FormationScreen} />
+          <Route exact path={`/choreoview/:choreoId/`} component={DancerFormationView} />
           <Route exact path="/" component={LandingPageScreen}/>
           <Redirect path="*" to="/"/>
         </Switch>
