@@ -1,12 +1,12 @@
-import { Button } from 'antd';
+import { Button, Icon, Upload } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { play, jumpToTime } from '../../actions/timelineActions';
-import { TIMELINE_PAUSE, TIMELINE_PLAY, TIMELINE_JUMP } from '../../constants/actionTypes';
-import { getTimeline } from '../../selectors/layout';
-import Timeline from './Timeline/Timeline';
-import './FormationScreen.css';
 import { gotoFormation } from '../../actions/choreoActions';
+import { jumpToTime, play } from '../../actions/timelineActions';
+import { TIMELINE_JUMP, TIMELINE_PAUSE, TIMELINE_PLAY } from '../../constants/actionTypes';
+import { getTimeline } from '../../selectors/layout';
+import './FormationScreen.css';
+import Timeline from './Timeline/Timeline';
 
 class ShowView extends Component {
   componentDidMount() {
@@ -79,12 +79,16 @@ class ShowView extends Component {
           {this.msToDisplayedTime(elapsedTime)}
         </div>
         <div className="show-buttons">
-          <Button type={"default"} ghost icon={"double-left"} style={{ border: 0, fontSize: "1.5rem" }}
-            onClick={this.slowDown} />
-          <Button type={"default"} ghost icon={this.props.isPlaying ? "pause" : "caret-right"} style={{ border: 0, fontSize: "1.5rem" }}
-            onClick={this.togglePlay} />
-          <Button type={"default"} ghost icon={"double-right"} style={{ border: 0, fontSize: "1.5rem" }}
-            onClick={this.fastForward} />
+          <Button type={"default"} ghost style={{ border: 0 }} onClick={this.slowDown}>
+            <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-left"} theme="outlined" />
+          </Button>
+          <Button type={"default"} ghost style={{ marginLeft: "0.5rem", marginRight: "0.5rem", border: "0" }} onClick={this.togglePlay}>
+            <Icon style={{ fontSize: "2.5rem", color: "#24C6DC" }} type={isPlaying ? "pause" : "caret-right"} theme="outlined" />
+          </Button>
+          <Button type={"default"} ghost style={{ border: 0 }} onClick={this.fastForward}>
+            <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-right"} theme="outlined" />
+          </Button>
+        </div>
         <div>
           <Upload 
             name={"music"}
