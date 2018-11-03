@@ -12,7 +12,7 @@ import {
   SET_LABELS_VIEW,
   SWITCH_ACTIVE_FORMATION,
   REMOVE_FORMATION,
-  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY,
+  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY, UPDATE_CHOREO_MUSIC
   PUBLISH_CHOREO, UNPUBLISH_CHOREO
 } from "../constants/actionTypes";
 import { defaultStageDim } from "../constants/defaults";
@@ -84,6 +84,16 @@ export function updateChoreoImage(id, link) {
   return (dispatch) => {
     dispatch({
       type: UPDATE_CHOREO_IMAGE,
+      choreoId: id,
+      payload: link
+    })
+  }
+}
+
+export function updateChoreoMusic(id, link) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_CHOREO_MUSIC,
       choreoId: id,
       payload: link
     })
