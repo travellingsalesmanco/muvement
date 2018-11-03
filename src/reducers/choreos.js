@@ -8,6 +8,7 @@ import {
   RENAME_CHOREO,
   UNPUBLISH_CHOREO,
   UPDATE_CHOREO_IMAGE,
+  UPDATE_CHOREO_MUSIC,
 } from '../constants/actionTypes';
 import { defaultStageDim } from '../constants/defaults';
 import { demoChoreos } from '../constants/dummyData';
@@ -45,11 +46,16 @@ const imageUrlReducer = (state = null, action) => {
   return action.type === UPDATE_CHOREO_IMAGE ? action.payload : state;
 }
 
+const musicUrlReducer = (state = null, action) => {
+  return action.type === UPDATE_CHOREO_MUSIC ? action.payload : state;
+}
+
 const choreoReducer = combineReducers({
   createdAt: (state = null) => state,
   creator: (state = null) => state,
   updatedAt: (state = null) => state,
   imageUrl: imageUrlReducer,
+  musicUrl: musicUrlReducer,
   name: choreoNameReducer,
   published: choreoPublishedReducer,
   stageDim: stageDimReducer,
