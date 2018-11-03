@@ -17,7 +17,7 @@ class AnimatedDancerDotsLayer extends Component {
   }
 
   render() {
-    const { dotRadius, showLabels, layout, elapsedTime } = this.props;
+    const { dotRadius, showLabels, layout, elapsedTime, demo } = this.props;
     return (
       <Layer>
         {
@@ -31,7 +31,7 @@ class AnimatedDancerDotsLayer extends Component {
                              name={dancerLayout.name}
                              selected={this.isSelected(dancerLayout.name)} isAnySelected={this.isAnySelected()} />
                   {
-                    showLabels
+                    showLabels && !demo
                       ? <DancerLabel name={dancerLayout.name} dotRadius={dotRadius} />
                       : null
                   }
