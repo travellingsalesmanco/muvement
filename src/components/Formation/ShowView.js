@@ -85,6 +85,16 @@ class ShowView extends Component {
             onClick={this.togglePlay} />
           <Button type={"default"} ghost icon={"double-right"} style={{ border: 0, fontSize: "1.5rem" }}
             onClick={this.fastForward} />
+        <div>
+          <Upload 
+            name={"music"}
+            accept={"audio/*"}
+            showUploadList={false}
+          >
+            <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
+              Add Music
+            </Button>
+          </Upload>
         </div>
       </div>
     )
