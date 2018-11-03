@@ -28,6 +28,13 @@ class HorizontalSlideList extends React.Component {
     this.onDragEnd = this.onDragEnd.bind(this);
   }
 
+  componentDidUpdate() {
+    const scrollToIndex = this.props.activeFormationId;
+    document.getElementById(scrollToIndex.toString()).scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+
   onDragEnd(result) {
     // dropped outside the list
     if (!result.destination) {
@@ -60,7 +67,7 @@ class HorizontalSlideList extends React.Component {
               {...provided.droppableProps}
             >
               {this.props.formations.map((item, index) => (
-                <div key={index} onClick={() => this.handleClick(index)}>
+                <div key={index} id={index} onClick={() => this.handleClick(index)}>
                   <Draggable draggableId={index} index={index}>
                     {(provided, snapshot) => {
                       return (<div
