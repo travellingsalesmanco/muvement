@@ -142,7 +142,7 @@ class FormationScreen extends Component {
                       activeButton === 1 &&
                       <Fragment>
                         <div className="horizontal-list" style={{ overflowX: 'scroll', marginTop: '1em' }}>
-                          <HorizontalSlideList />
+                          <HorizontalSlideList editable />
                         </div>
                         <div className="formationscreen-buttons">
                           <div style={{ display: "flex", flexDirection: "row" }}>
@@ -171,7 +171,7 @@ class FormationScreen extends Component {
                     }
                     {
                       activeButton === 3 &&
-                        <ShowView choreoId={this.props.choreoId}/>
+                      <ShowView choreoId={this.props.choreoId} />
                     }
                   </div>
                 </Spin>
@@ -182,7 +182,7 @@ class FormationScreen extends Component {
 
         <MobileLandscape>
           <Spin indicator={loadingIcon} spinning={loading}>
-            <Layout className="body" style={{height: '100vh'}}>
+            <Layout className="body" style={{ height: '100vh' }}>
               <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
               <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
 

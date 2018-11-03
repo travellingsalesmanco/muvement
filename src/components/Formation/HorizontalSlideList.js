@@ -56,10 +56,10 @@ class HorizontalSlideList extends React.Component {
   };
 
   render() {
-    const { activeFormationId } = this.props;
+    const { activeFormationId, editable } = this.props;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable" direction="horizontal">
+        <Droppable droppableId="droppable" direction="horizontal" isDropDisabled={!editable}>
           {(provided, snapshot) => (
             <div
               ref={provided.innerRef}
@@ -68,7 +68,7 @@ class HorizontalSlideList extends React.Component {
             >
               {this.props.formations.map((item, index) => (
                 <div key={index} id={index} onClick={() => this.handleClick(index)}>
-                  <Draggable draggableId={index} index={index}>
+                  <Draggable draggableId={index} index={index} isDragDisabled={!editable}>
                     {(provided, snapshot) => {
                       return (<div
                         ref={provided.innerRef}
