@@ -42,6 +42,10 @@ const stageDimReducer = (state = defaultStageDim, action) => {
 };
 
 const choreoReducer = combineReducers({
+  createdAt: (state = null) => state,
+  creator: (state = null) => state,
+  imageUrl:  (state = null) => state,
+  updatedAt: (state = null) => state,
   name: choreoNameReducer,
   published: choreoPublishedReducer,
   stageDim: stageDimReducer,
@@ -49,16 +53,7 @@ const choreoReducer = combineReducers({
   formations
 });
 
-// Copy over metadata (e.g. firebase createdAt timestamps) when updating choreo
-const choreoWithMetaReducer = (state, action) => {
-  return {
-    ...state,
-    ...choreoReducer(state, action)
-  }
-}
-
 // Choreos
-// TODO: Remove dummy choreo when deploying
 export default (state = demoChoreos, action) => {
   switch (action.type) {
     case ADD_CHOREO: {
@@ -113,7 +108,7 @@ export default (state = demoChoreos, action) => {
           ...state,
           byId: {
             ...state.byId,
-            [choreoId]: choreoWithMetaReducer(state.byId[choreoId], action)
+            [choreoId]: choreoReducer(state.byId[choreoId], action)
           }
         }
       }
