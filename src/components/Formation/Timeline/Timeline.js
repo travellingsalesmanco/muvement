@@ -168,10 +168,10 @@ class Timeline extends Component {
                           width={labelRadius * 2}
                           height={labelRadius * 2}
                           align={'center'}
-                          fill={"white"}
+                          fill={isPast ? "white" : "#5F5F5F"}
+                          opacity={isPast ? 0.85 : 1}
                           fontFamily={"Sen-bold"}
                           verticalAlign={'middle'}
-                          globalCompositeOperation={"difference"}
                           text={idx + 1}
                           fontSize={labelRadius * 1.2}
                         />
