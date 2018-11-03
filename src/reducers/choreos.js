@@ -41,11 +41,15 @@ const stageDimReducer = (state = defaultStageDim, action) => {
   }
 };
 
+const imageUrlReducer = (state = null, action) => {
+  return action.type === UPDATE_CHOREO_IMAGE ? action.payload : state;
+}
+
 const choreoReducer = combineReducers({
   createdAt: (state = null) => state,
   creator: (state = null) => state,
-  imageUrl: (state = null) => state,
   updatedAt: (state = null) => state,
+  imageUrl: imageUrlReducer,
   name: choreoNameReducer,
   published: choreoPublishedReducer,
   stageDim: stageDimReducer,
@@ -85,20 +89,6 @@ export default (state = demoChoreos, action) => {
         ...state,
         byId: prunedByIds,
         myChoreos: state.myChoreos.filter(id => id !== choreoId)
-      }
-    }
-    case UPDATE_CHOREO_IMAGE: {
-      const { choreoId, payload: link } = action;
-      return {
-        ...state,
-        byId: {
-          ...state.byId,
-          [choreoId]: {
-            ...state.byId[choreoId],
-            imageUrl: link
-          }
-        },
-        myChoreos: [...state.myChoreos]
       }
     }
     default: {
