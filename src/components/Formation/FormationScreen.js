@@ -229,7 +229,7 @@ class FormationScreen extends Component {
                   </div>
                   <h3 className="slide-list-title">All Formations</h3>
                   <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)` }}>
-                    <VerticalSlideList />
+                    <VerticalSlideList editable/>
                   </div>
                   {/*<PreviewSlideList choreoId={this.props.choreoId} />*/}
                 </Spin>

@@ -47,9 +47,10 @@ class VerticalSlideList extends React.Component {
       width: '100%'
     });
 
+    const { editable } = this.props;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable">
+        <Droppable droppableId="droppable" isDropDisabled={!editable}>
           {(provided, snapshot) => (
             <div
               ref={provided.innerRef}
@@ -59,7 +60,7 @@ class VerticalSlideList extends React.Component {
               {this.props.formations.map((item, index) => (
                 <div key={index} className={index === this.props.activeFormationId ? 'linear-gradient-bg' : null}
                      onClick={() => this.handleClick(index)}>
-                  <Draggable draggableId={index} index={index}>
+                  <Draggable draggableId={index} index={index} isDragDisabled={!editable}>
                     {(provided, snapshot) => {
                       return (<div
                         ref={provided.innerRef}
