@@ -21,7 +21,7 @@ class Navigation extends React.Component {
           <div className="nav-bar">
             <div className="mp-back-button">
               <Button style={{ fontSize: '25px' }} icon="left"
-                      onClick={() => this.props.history.push(`/choreo/${choreoId}`)} />
+                      onClick={() => this.props.history.push(`/dashboard`)} />
             </div>
             <div className="mp-title">
               <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
@@ -48,7 +48,7 @@ class Navigation extends React.Component {
           <div className="nav-bar">
             <div className="mp-back-button">
               <Button style={{ fontSize: '25px' }} icon="left"
-                      onClick={() => this.props.history.push(`/choreo/${choreoId}`)} />
+                      onClick={() => this.props.history.push(`/dashboard`)} />
             </div>
             <div className="mp-title">
               <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
@@ -60,7 +60,7 @@ class Navigation extends React.Component {
           <div className="nav-bar">
             <div className="mp-back-button">
               <Button style={{ fontSize: '25px' }} icon="left"
-                      onClick={() => this.props.history.push(`/choreo/${choreoId}`)} />
+                      onClick={() => this.props.history.push(`/dashboard`)} />
             </div>
             <div className="title">
               <h3 style={{ color: '#fff' }}>{this.props.title}</h3>

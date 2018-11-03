@@ -11,7 +11,7 @@ const confirm = Modal.confirm;
 
 class ChoreoCard extends PureComponent {
   handleClick = () => {
-    this.props.history.push(`/choreo/${this.props.choreoId}`);
+    this.props.history.push(`/choreo/${this.props.choreoId}/formation`);
   };
 
   handleRemove = () => {

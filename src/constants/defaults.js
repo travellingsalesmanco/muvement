@@ -6,7 +6,7 @@ export const defaultFormation = {
   name: "",
   duration: 5000,
   transitionBefore: defaultTransition,
-  dancers: []
+  dancers: [{ name: "Performer 1", position: [0.5,0.5] }]
 };
 export const defaultStageDim = {
   width: 9.6,
@@ -14,6 +14,7 @@ export const defaultStageDim = {
   gridSize: 0.5,
   units: 'm'
 };
+export const defaultDancers = ["Performer 1"];
 export const defaultUI = {
   isPlaying: false,
   animated: false,
