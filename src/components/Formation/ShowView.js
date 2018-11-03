@@ -73,7 +73,7 @@ class ShowView extends Component {
       <div className="show-view" style={{ flex: 1, textAlign: "center" }}>
         <div style={{ height: "6rem", paddingTop: "0.5rem" }}>
           <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
-            labelRadius={15} handleWidth={10} timestampSeparation={2000} />
+            labelRadius={14} handleWidth={10} timestampSeparation={2000} />
         </div>
         <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff" }}>
           {this.msToDisplayedTime(elapsedTime)}

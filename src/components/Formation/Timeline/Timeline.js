@@ -158,8 +158,9 @@ class Timeline extends Component {
                         onTap={() => console.log(idx, "formation tapped")} />
                       <Group x={formationStartPos + formationWidth / 2} y={timelineHeight / 2}>
                         <Circle
-                          fill={'#24c6dc'}
+                          fill={'white'}
                           radius={labelRadius}
+                          opacity={isPast ? 0.2 : 0.8}
                         />
                         <Text
                           x={-labelRadius}
@@ -167,10 +168,12 @@ class Timeline extends Component {
                           width={labelRadius * 2}
                           height={labelRadius * 2}
                           align={'center'}
+                          fill={"white"}
+                          fontFamily={"Sen-bold"}
                           verticalAlign={'middle'}
-                          fill={'white'}
+                          globalCompositeOperation={"difference"}
                           text={idx + 1}
-                          fontSize={12}
+                          fontSize={labelRadius * 1.2}
                         />
                       </Group>
                       {
