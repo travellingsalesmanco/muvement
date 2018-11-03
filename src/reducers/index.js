@@ -39,16 +39,13 @@ const FORMATION_DATA_CHANGES = [
   CLEAR_FORMATION_TRANSITION,
 ];
 
-const FORMATION_UI_CHANGES = [
-  SWITCH_ACTIVE_FORMATION
-];
-
 // TODO: add additional config where necessary
 const undoableAppReducer = undoableInMem(appReducer, {
   undoType: UNDO_FORMATION_CHANGE,
   redoType: REDO_FORMATION_CHANGE,
   clearHistoryType: CLEAR_FORMATION_HISTORY,
-  includedTypes: [...FORMATION_DATA_CHANGES, ...FORMATION_UI_CHANGES]
+  includedTypes: [...FORMATION_DATA_CHANGES],
+  resetTypes: []
 });
 
 // Root reducer

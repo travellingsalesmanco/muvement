@@ -4,7 +4,6 @@
 // Maintains a singleton memory state on RAM, needs a unique key for each formation and choreo
 let undoableMem = {};
 // Not store undos when going between choreos
-let lastKey = null;
 
 // Attempts to create unique key and entry if mem if not present
 const getKey = (choreoId) => {
@@ -54,6 +53,18 @@ export function canUndo(choreoId) {
   return undoableMem[memKey].past.length > 0;
 }
 
+
+/**
+ * Config has the following fields:
+ * undoType: action type that defines an undo action
+ * redoType: action type that defines a redo action
+ * clearHistoryType: action type that defines a clear history action
+ * includedTypes: action types that are to be tracked in undo redo
+ * resetTypes: action type that will also clear history
+ *
+ * Types not included in includedTypes or resetTypes will be ignored and not tracked
+ */
+
 export function undoableInMem(reducer, config) {
 
   // Call the reducer with empty action to populate the initial state
@@ -79,11 +90,12 @@ export function undoableInMem(reducer, config) {
         }
         if (config.includedTypes.includes(action.type)) {
           // TODO: find better solution for hacky way to avoid active formation switch on formation screen load
-          if (lastKey && lastKey === memKey) addToMem(memKey, state);
-          lastKey = memKey;
+          addToMem(memKey, state);
+          return newState;
+        } else if (config.resetTypes.includes(action.type)) {
+          resetFromMem(memKey);
           return newState;
         } else {
-          resetFromMem(memKey);
           return newState;
         }
     }
