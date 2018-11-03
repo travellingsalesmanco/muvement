@@ -80,12 +80,8 @@ class AddPerformerForm extends React.Component {
           label={index + nextId}
           required={false}
           key={k}
-          labelCol={{
-            span: 2
-          }}
-          wrapperCol={{
-            span: 20
-          }}
+          labelCol={{ span: 2 }}
+          wrapperCol={{ span: 20 }}
         >
           {getFieldDecorator(`names[${k}]`, {
             validateTrigger: ['onChange', 'onBlur'],

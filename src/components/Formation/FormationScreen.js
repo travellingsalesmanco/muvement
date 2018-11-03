@@ -172,9 +172,7 @@ class FormationScreen extends Component {
                     }
                     {
                       activeButton === 2 &&
-                      <div style={{ padding: '1em 2em', fontSize: '1.2em' }}>
                         <PerformerList choreoId={this.props.choreoId} />
-                      </div>
                     }
                     {
                       activeButton === 3 &&

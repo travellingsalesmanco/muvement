@@ -75,8 +75,9 @@ class PerformerList extends React.Component {
                 </Col>
               </Row>)
           })}
-          <Button type={"default"} block onClick={this.handleRemoval}>APPLY</Button>
-          <Button type={"default"} block onClick={this.handleCancelAction}>CANCEL</Button>
+          <Button className="add-performer-button" type={"default"} icon="user-add" ghost block onClick={this.add}>Add
+            Performer</Button>
+          <Button type={"default"} block onClick={this.handleRemoval}>DONE</Button>
         </Fragment>
     } else {
       // Default or add performer state

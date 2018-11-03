@@ -11,7 +11,7 @@ import {
   SET_LABELS_VIEW,
   SWITCH_ACTIVE_FORMATION,
   REMOVE_FORMATION,
-  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY
+  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY, RENAME_DANCER
 } from "../constants/actionTypes";
 import { defaultStageDim } from "../constants/defaults";
 import { getChoreo } from "../selectors/choreo";
@@ -132,6 +132,20 @@ export function syncCreatorChoreos(choreos) {
   }
 }
 
+export function addDancer(choreoId, name) {
+  return (dispatch, getState) => {
+    if (!containsDancer(choreoId, name, getState())) {
+      dispatch({
+        type: ADD_DANCER,
+        choreoId: choreoId,
+        payload: name
+      })
+    } else {
+      console.log("[ERROR] Duplicate dancer name")
+    }
+  }
+}
+
 export function addDancers(choreoId, names) {
   return (dispatch, getState) => {
     names.forEach((name) => {
@@ -148,6 +162,20 @@ export function addDancers(choreoId, names) {
   }
 }
 
+export function removeDancer(choreoId, name) {
+  return (dispatch, getState) => {
+    if (containsDancer(choreoId, name, getState())) {
+      dispatch({
+        type: REMOVE_DANCER,
+        choreoId: choreoId,
+        payload: name
+      })
+    } else {
+      console.log("[ERROR] Dancer does not exist")
+    }
+  }
+}
+
 export function removeDancers(choreoId, names) {
   return (dispatch, getState) => {
     names.forEach((name) => {
@@ -161,6 +189,27 @@ export function removeDancers(choreoId, names) {
         console.log("[ERROR] Dancer does not exist")
       }
     });
+  }
+}
+
+export function renameDancer(choreoId, oldName, newName) {
+  return (dispatch, getState) => {
+    if (containsDancer(choreoId, oldName, getState())) {
+      if (!containsDancer(choreoId, newName, getState())) {
+        dispatch({
+          type: RENAME_DANCER,
+          choreoId: choreoId,
+          payload: {
+            oldName: oldName,
+            newName: newName
+          }
+        })
+      } else {
+        console.log("[ERROR] Duplicate dancer name")
+      }
+    } else {
+      console.log("[ERROR] Dancer does not exist")
+    }
   }
 }
 
