@@ -9,9 +9,10 @@ import { minFormationDuration, minTransitionDuration } from "../constants/defaul
 import { truncToInterval, truncToPrecision } from "../lib/timelineUtils";
 
 
+let timer = null;
 export function play(totalDuration, fps, speedup = 1) {
-  const msPerFrame = truncToPrecision(1000 / fps);
-  const toAdvance = truncToPrecision(msPerFrame * speedup);
+  const msPerFrame = 1000 / fps;
+  const toAdvance = msPerFrame * speedup;
   return (dispatch, getState) => {
     const advanceNextFrame = () => {
       if (getState().UI.isPlaying) {
@@ -23,11 +24,12 @@ export function play(totalDuration, fps, speedup = 1) {
         dispatch({
           type: TIMELINE_JUMP,
           payload: newTime,
-        });
-        setTimeout(() => advanceNextFrame(), msPerFrame);
+        })
+      } else {
+        clearInterval(timer)
       }
-    };
-    advanceNextFrame();
+    }
+    timer = setInterval(advanceNextFrame, msPerFrame);
   }
 }
 
