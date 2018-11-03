@@ -21,7 +21,7 @@ class AnimatedDancerDotsLayer extends Component {
                   <DancerDot radius={dotRadius} number={dancerLayout.id} name={dancerLayout.name} />
                   {
                     showLabels
-                      ? <DancerLabel name={dancerLayout.name} />
+                      ? <DancerLabel name={dancerLayout.name} dotRadius={dotRadius} />
                       : null
                   }
                 </Group>
