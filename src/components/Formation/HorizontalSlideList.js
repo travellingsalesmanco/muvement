@@ -95,7 +95,7 @@ class HorizontalSlideList extends React.Component {
                           pointerEvents: "None",
                           background: '#000',
                         }}>
-                          <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} />
+                          <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} preview />
                         </div>
                         </div>
                         <span className="slide-title">{index + 1}. {item.name}</span>

@@ -50,7 +50,7 @@ class LandingPage extends React.Component {
                 </p>
                 <div className="demo-grid">
                   <ResponsiveStageCanvas choreoId={"demo"} formationId={0}
-                                         withGrid demo />
+                                         withGrid preview />
                 </div>
                 <HeadphoneIcon style={{ fontSize: '20px' , marginTop: '0.5em'}}/>
                 <p className="muvement-features-text">
@@ -98,7 +98,7 @@ class LandingPage extends React.Component {
                   <Col span={12} className="demo-grid-outer">
                     <div className="ml-demo-grid">
                       <ResponsiveStageCanvas choreoId={"demo"} formationId={0}
-                                             withGrid demo />
+                                             withGrid preview />
                     </div>
                   </Col>
                 </Row>
@@ -167,7 +167,7 @@ class LandingPage extends React.Component {
                   <Col span={12} className="tablet-demo-grid-outer">
                     <div className="tablet-demo-grid">
                       <ResponsiveStageCanvas choreoId={"demo"} formationId={0}
-                                             withGrid demo />
+                                             withGrid preview />
                     </div>
                   </Col>
                 </Row>

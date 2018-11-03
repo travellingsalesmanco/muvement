@@ -55,7 +55,7 @@ class MobileFormationCards extends React.Component {
                     </span>
                 }
                 <div className="mobile-formation-preview-container">
-                  <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} />
+                  <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} preview />
                 </div>
               </div>
             </div>

@@ -72,7 +72,7 @@ class VerticalSlideList extends React.Component {
                         )}
                       >
                         <div style={{ height: '9em', width: '100%', pointerEvents:"None"}}>
-                          <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index}/>
+                          <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} preview/>
                         </div>
                         <span className="slide-title">{index + 1}. {item.name}</span>
                       </div>)
