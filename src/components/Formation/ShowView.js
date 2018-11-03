@@ -1,12 +1,14 @@
-import { Button, Icon, Upload } from 'antd';
+import { Button, Icon, Upload, message } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { gotoFormation } from '../../actions/choreoActions';
+import { gotoFormation, updateChoreoMusic } from '../../actions/choreoActions';
 import { jumpToTime, play } from '../../actions/timelineActions';
 import { TIMELINE_JUMP, TIMELINE_PAUSE, TIMELINE_PLAY } from '../../constants/actionTypes';
 import { getTimeline } from '../../selectors/layout';
 import './FormationScreen.css';
 import Timeline from './Timeline/Timeline';
+import { storage } from '../../firebase';
+import { getChoreo } from '../../selectors/choreo';
 
 class ShowView extends Component {
   componentDidMount() {
@@ -62,10 +64,17 @@ class ShowView extends Component {
     }
     return l;
   }
-
+  handleMusicUploadChange = (info) => {
+    if (info.file.status === 'uploading') {
+      console.log("uploading music");
+    } else if (info.file.status === 'done') {
+      console.log("upload complete", info.file.response);
+      this.props.dispatch(updateChoreoMusic(this.props.choreoId, info.file.response));
+    }
+  };
 
   render() {
-    const { elapsedTime, timeline, isPlaying, choreoId, editable } = this.props;
+    const { elapsedTime, timeline, isPlaying, choreoId, musicUrl, editable } = this.props;
     if (elapsedTime > timeline.totalDuration) {
       this.props.dispatch({ type: TIMELINE_JUMP, payload: timeline.totalDuration })
     }
@@ -73,7 +82,7 @@ class ShowView extends Component {
       <div className="show-view" style={{ flex: 1, textAlign: "center" }}>
         <div style={{ height: "6rem", paddingTop: "0.5rem" }}>
           <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
-            labelRadius={14} handleWidth={10} timestampSeparation={2000} editable={editable} />
+            labelRadius={14} handleWidth={10} timestampSeparation={2000} editable={editable} musicUrl={musicUrl} />
         </div>
         <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff" }}>
           {this.msToDisplayedTime(elapsedTime)}
@@ -94,6 +103,17 @@ class ShowView extends Component {
             name={"music"}
             accept={"audio/*"}
             showUploadList={false}
+            customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
+              req.onSuccess(link);
+            })}
+            beforeUpload={(file) => {
+              if(file.size / 1024 / 1024 > 5) {
+                message.error('Audio file must be smaller than 5MB!')
+                return false
+              }
+              return true;
+            }}
+            onChange={this.handleMusicUploadChange}
           >
             <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
               Add Music
@@ -111,7 +131,8 @@ const mapStateToProps = (state, props) => {
     timeline: timeline,
     elapsedTime: state.UI.elapsedTime,
     isPlaying: state.UI.isPlaying,
-    activeFormation: state.UI.activeFormation
+    activeFormation: state.UI.activeFormation,
+    musicUrl: getChoreo(state, props.choreoId).musicUrl
   }
 }
 export default connect(mapStateToProps)(ShowView);
