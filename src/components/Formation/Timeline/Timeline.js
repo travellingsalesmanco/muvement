@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { offsetDuration, offsetTransitionBeforeDuration, jumpToTime } from '../../../actions/timelineActions';
 import { TIMELINE_JUMP, TIMELINE_PAUSE } from '../../../constants/actionTypes';
 import Timestamps from './Timestamps';
+import WaveSurfer from 'wavesurfer.js'
+import { getChoreo } from '../../../selectors/choreo';
+import { timingInterval } from '../../../constants/defaults';
 
 class Timeline extends Component {
   constructor(props) {
@@ -18,6 +21,7 @@ class Timeline extends Component {
 
   componentDidMount() {
     this.checkSize();
+    this.renderMusicWaveform();
     window.addEventListener("resize", this.checkSize);
   }
 
@@ -38,6 +42,10 @@ class Timeline extends Component {
         displayHeight: this.container.offsetHeight,
         midPoint: this.container.offsetWidth / 2
       });
+      if (this.wavesurfer) {
+        console.log("setting wavesurfer height to: ", this.container.offsetHeight);
+        this.wavesurfer.setHeight(this.container.offsetHeight);
+      }
     }
   };
 
@@ -90,7 +98,6 @@ class Timeline extends Component {
   }
 
   handleAnchorMove = (e, formationIdx, isTransition) => {
-    console.log(e);
     const pointerPos = e.target.getStage().getPointerPosition();
     let transform = e.currentTarget.getAbsoluteTransform().copy();
     transform.invert();
@@ -103,15 +110,53 @@ class Timeline extends Component {
     }
   }
 
+  renderMusicWaveform() {
+    this.wavesurfer = WaveSurfer.create({
+      container: '#music',
+      waveColor: 'violet',
+      progressColor: 'purple',
+      barWidth: this.props.msWidth * timingInterval,
+      minPxPerSec: this.props.msWidth * 1000
+    });
+    console.log(this.props.musicUrl);
+    this.wavesurfer.load(this.props.musicUrl)
+    this.wavesurfer.on('ready', () => {
+      console.log("wavesurfer loaded")
+      this.wavesurfer.zoom(this.props.msWidth * 1000)
+      this.wavesurfer.seekAndCenter(this.props.elapsedTime / (this.wavesurfer.getDuration() * 1000));
+    })
+  }
+
   render() {
     const { data: timeline, msWidth, elapsedTime, handleWidth, labelRadius, timestampSeparation, editable } = this.props;
     const { displayWidth, displayHeight, midPoint, timelineDraggable } = this.state;
     const timelineHeight = displayHeight * 0.85;
     const timelineY = displayHeight - timelineHeight;
     const elapsedWidth = elapsedTime * msWidth;
+    let musicWaveformX = this.state.midPoint - elapsedWidth;
+    if (musicWaveformX < 0) {
+      musicWaveformX = 0;
+    }
+    if (this.wavesurfer && this.wavesurfer.getDuration() > 0) {
+      const musicPlaying = this.wavesurfer.isPlaying();
+      if (this.props.isPlaying) {
+        if (!musicPlaying) {
+          this.wavesurfer.seekAndCenter(elapsedTime / (this.wavesurfer.getDuration() * 1000));
+          this.wavesurfer.play()
+        } else {
+          console.log(elapsedTime, this.wavesurfer.getCurrentTime() * 1000);
+        }
+      } else {
+        if (musicPlaying) {
+          this.wavesurfer.pause();
+        }
+        this.wavesurfer.seekAndCenter(elapsedTime / (this.wavesurfer.getDuration() * 1000));
+      }
+    }
     return (
-      <div style={{ background: '#000', height: "100%", width: "100%", overflow: "hidden" }}
-           ref={(ref) => this.container = ref}>
+      <div style={{ background: '#000', height: "100%", width: "100%", overflow: "hidden", position: "relative" }}
+        ref={(ref) => this.container = ref}>
+        <div style={{ position: "absolute", top: timelineY, left: musicWaveformX, height: timelineHeight, width: this.state.displayWidth }} id="music"></div>
         <Stage preventDefault={true} width={displayWidth} height={displayHeight} ref={ref => this.stageRef = ref}>
           <Layer x={midPoint - elapsedWidth} onTap={this.handleTimelineSelect} onClick={this.handleTimelineSelect}
                  draggable={timelineDraggable}
