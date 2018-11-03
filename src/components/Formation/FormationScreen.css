@@ -56,7 +56,10 @@
   background-color: transparent;
   font-family: 'Sen-Bold';
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .section-title .ant-input:focus,
