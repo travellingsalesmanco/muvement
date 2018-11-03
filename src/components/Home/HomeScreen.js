@@ -69,6 +69,7 @@ class HomeScreen extends React.Component {
               placeholder="Enter formation name"
               value={this.state.newChoreoName}
               onChange={this.handleNewChoreoName}
+              autoFocus={true}
             />
             <Button block onClick={this.handleNewChoreo}>START</Button>
           </div>
@@ -97,6 +98,7 @@ class HomeScreen extends React.Component {
               placeholder="Enter formation name"
               value={this.state.newChoreoName}
               onChange={this.handleNewChoreoName}
+              autoFocus={true}
             />
             <Button block onClick={this.handleNewChoreo}>START</Button>
           </div>
@@ -125,6 +127,7 @@ class HomeScreen extends React.Component {
               placeholder="Enter formation name"
               value={this.state.newChoreoName}
               onChange={this.handleNewChoreoName}
+              autoFocus={true}
             />
             <Button block onClick={this.handleNewChoreo}>START</Button>
           </div>

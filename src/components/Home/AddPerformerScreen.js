@@ -86,6 +86,7 @@ class AddPerformerScreen extends React.Component {
                       value={this.handleGetName(key)}
                       onChange={(e) => this.handleEditName(e, key)}
                       onPressEnter={this.handleEditNameConfirm}
+                      autoFocus={true}
                     />
                   </div>
                 ))
@@ -131,6 +132,7 @@ class AddPerformerScreen extends React.Component {
                       value={this.handleGetName(key)}
                       onChange={(e) => this.handleEditName(e, key)}
                       onPressEnter={this.handleEditNameConfirm}
+                      autoFocus={true}
                     />
                   </div>
                 ))
@@ -176,6 +178,7 @@ class AddPerformerScreen extends React.Component {
                       value={this.handleGetName(key)}
                       onChange={(e) => this.handleEditName(e, key)}
                       onPressEnter={this.handleEditNameConfirm}
+                      autoFocus={true}
                     />
                   </div>
                 ))
