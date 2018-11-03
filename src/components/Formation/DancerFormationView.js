@@ -13,7 +13,6 @@ import withFireStoreSync from "../withFirestoreSync";
 import './DancerFormationView.css';
 import HorizontalSlideList from "./HorizontalSlideList";
 import Navigation from "./Navigation";
-import SidePanel from "./SidePanel";
 import VerticalSlideList from "./VerticalSlideList";
 import ShowView from './ShowView';
 import DancerPerformerList from "./DancerView/DancerPerformerList";
@@ -56,9 +55,8 @@ class FormationScreen extends Component {
     super(props);
     this.state = {
       placement: 'right',
-      visible: false,
-      sidePanelID: 0,
       formationName: '',
+      tabletSideActiveId: 1,
       activeButton: props.animated ? 3 : 2
     }
   }
@@ -74,25 +72,19 @@ class FormationScreen extends Component {
 
   handleViewPerformers = () => {
     this.setState({
-      visible: true,
-      sidePanelID: 1,
+      tabletSideActiveId: 1
     });
   };
 
-  handleViewTimeline = () => {
-
-  };
-
-  onClose = () => {
+  handleViewFormations = () => {
     this.setState({
-      visible: false,
-      sidePanelID: 0
+      tabletSideActiveId: 2
     });
   };
 
   render() {
     const { Content, Sider } = Layout;
-    const { activeButton } = this.state;
+    const { activeButton, tabletSideActiveId } = this.state;
     const { loading } = this.props;
     return (
       <Fragment>
@@ -125,7 +117,7 @@ class FormationScreen extends Component {
                     }
                     {
                       activeButton === 3 &&
-                        <ShowView choreoId={this.props.choreoId}/>
+                      <ShowView choreoId={this.props.choreoId} />
                     }
                   </div>
                 </Spin>
@@ -136,7 +128,7 @@ class FormationScreen extends Component {
 
         <MobileLandscape>
           <Spin indicator={loadingIcon} spinning={loading}>
-            <Layout className="body" style={{height: '100vh'}}>
+            <Layout className="body" style={{ height: '100vh' }}>
               <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
               <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
 
@@ -172,27 +164,29 @@ class FormationScreen extends Component {
                     <Button className="sider-button" shape="circle" onClick={this.handleViewPerformers}>
                       <UserAddIcon style={{ fontSize: '33px' }} />
                     </Button>
-                    <Button className="sider-button" shape="circle" onClick={this.handleViewTimeline}>
+                    <Button className="sider-button" shape="circle" onClick={this.handleViewFormations}>
                       <HeadphoneIcon style={{ fontSize: '25px' }} />
                     </Button>
                   </div>
-                  <h3 className="slide-list-title">All Formations</h3>
-                  <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)` }}>
-                    <VerticalSlideList />
-                  </div>
+                  {tabletSideActiveId === 1 &&
+                  <Fragment>
+                    <h3 className="slide-list-title">Track Performers</h3>
+                    <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)` }}>
+                      <DancerPerformerList choreoId={this.props.choreoId} />
+                    </div>
+                  </Fragment>
+                  }
+                  {tabletSideActiveId === 2 &&
+                  <Fragment>
+                    <h3 className="slide-list-title">All Formations</h3>
+                    <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)` }}>
+                      <VerticalSlideList />
+                    </div>
+                  </Fragment>
+                  }
                   {/*<PreviewSlideList choreoId={this.props.choreoId} />*/}
                 </Spin>
               </Sider>
-              <SidePanel
-                choreoId={this.props.choreoId}
-                placement={this.state.placement}
-                closable={true}
-                onClose={this.onClose}
-                visible={this.state.visible}
-                mask={false}
-                id={this.state.sidePanelID}
-                width={200}
-              />
             </Layout>
           </Layout>
         </MinTablet>
