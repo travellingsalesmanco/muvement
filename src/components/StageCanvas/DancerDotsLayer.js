@@ -87,7 +87,7 @@ class DancerDotsLayer extends PureComponent {
                 name={dancerLayout.name} onSelect={editable ? this.handleSelect : undefined} />
               {
                 editable && showLabels
-                  ? <DancerLabel name={dancerLayout.name} />
+                  ? <DancerLabel name={dancerLayout.name} dotRadius={dotRadius} />
                   : null
               }
             </Group>
