@@ -167,11 +167,11 @@ class FormationScreen extends Component {
                     }
                     {
                       activeButton === 2 &&
-                        <PerformerList choreoId={this.props.choreoId} />
+                      <PerformerList choreoId={this.props.choreoId} />
                     }
                     {
                       activeButton === 3 &&
-                      <ShowView choreoId={this.props.choreoId} />
+                      <ShowView choreoId={this.props.choreoId} editable />
                     }
                   </div>
                 </Spin>

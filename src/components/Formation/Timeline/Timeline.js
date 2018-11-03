@@ -15,6 +15,7 @@ class Timeline extends Component {
       timelineDraggable: true
     }
   }
+
   componentDidMount() {
     this.checkSize();
     window.addEventListener("resize", this.checkSize);
@@ -103,19 +104,19 @@ class Timeline extends Component {
   }
 
   render() {
-    const { data: timeline, msWidth, elapsedTime, handleWidth, labelRadius, timestampSeparation } = this.props;
+    const { data: timeline, msWidth, elapsedTime, handleWidth, labelRadius, timestampSeparation, editable } = this.props;
     const { displayWidth, displayHeight, midPoint, timelineDraggable } = this.state;
     const timelineHeight = displayHeight * 0.85;
     const timelineY = displayHeight - timelineHeight;
     const elapsedWidth = elapsedTime * msWidth;
     return (
       <div style={{ background: '#000', height: "100%", width: "100%", overflow: "hidden" }}
-        ref={(ref) => this.container = ref}>
+           ref={(ref) => this.container = ref}>
         <Stage preventDefault={true} width={displayWidth} height={displayHeight} ref={ref => this.stageRef = ref}>
           <Layer x={midPoint - elapsedWidth} onTap={this.handleTimelineSelect} onClick={this.handleTimelineSelect}
-            draggable={timelineDraggable}
-            dragBoundFunc={timelineDraggable ? this.timelineDragBoundFunc : null}
-            onDragMove={timelineDraggable ? this.handleDragMove : null}
+                 draggable={timelineDraggable}
+                 dragBoundFunc={timelineDraggable ? this.timelineDragBoundFunc : null}
+                 onDragMove={timelineDraggable ? this.handleDragMove : null}
           >
             <Timestamps msWidth={msWidth} interval={timestampSeparation} duration={timeline.totalDuration} />
             <Group y={timelineY}>
@@ -133,29 +134,29 @@ class Timeline extends Component {
                   return (
                     <Fragment key={idx}>
                       <Shape x={transitionStartPos}
-                        sceneFunc={(context, shape) => {
-                          context.beginPath()
-                          context.moveTo(0, 0)
-                          context.lineTo(0, timelineHeight)
-                          context.lineTo(transitionWidth, 0)
-                          context.lineTo(transitionWidth, timelineHeight)
-                          context.closePath()
-                          context.fillStrokeShape(shape)
-                        }}
-                        fillLinearGradientStartPoint={{ x: 0 }} fillLinearGradientEndPoint={{ x: transitionWidth }}
-                        fillLinearGradientColorStops={[0, "#24c6dc", 1, "#514a9d"]}
+                             sceneFunc={(context, shape) => {
+                               context.beginPath()
+                               context.moveTo(0, 0)
+                               context.lineTo(0, timelineHeight)
+                               context.lineTo(transitionWidth, 0)
+                               context.lineTo(transitionWidth, timelineHeight)
+                               context.closePath()
+                               context.fillStrokeShape(shape)
+                             }}
+                             fillLinearGradientStartPoint={{ x: 0 }} fillLinearGradientEndPoint={{ x: transitionWidth }}
+                             fillLinearGradientColorStops={[0, "#24c6dc", 1, "#514a9d"]}
                       />
                       <Rect x={transitionStartPos}
-                        width={transitionWidth} height={timelineHeight}
-                        onTap={() => console.log(idx, " transition tapped")}
+                            width={transitionWidth} height={timelineHeight}
+                            onTap={() => console.log(idx, " transition tapped")}
                       />
 
                       <Rect x={formationStartPos}
-                        width={formationWidth} height={timelineHeight}
-                        fillLinearGradientStartPoint={{ x: 0 }} fillLinearGradientEndPoint={{ x: formationWidth }}
-                        fillLinearGradientColorStops={[0, isPast ? "#514a9d" : "#24c6dc", 1, "#514a9d"]}
-                        opacity={isPast ? 0.6 : 0.9}
-                        onTap={() => console.log(idx, "formation tapped")} />
+                            width={formationWidth} height={timelineHeight}
+                            fillLinearGradientStartPoint={{ x: 0 }} fillLinearGradientEndPoint={{ x: formationWidth }}
+                            fillLinearGradientColorStops={[0, isPast ? "#514a9d" : "#24c6dc", 1, "#514a9d"]}
+                            opacity={isPast ? 0.6 : 0.9}
+                            onTap={() => console.log(idx, "formation tapped")} />
                       <Group x={formationStartPos + formationWidth / 2} y={timelineHeight / 2}>
                         <Circle
                           fill={'white'}
@@ -177,41 +178,61 @@ class Timeline extends Component {
                         />
                       </Group>
                       {
-                        // Don't show transition adjustment handle for first formation
-                        idx === 0 ? null :
+                        // Don't show transition adjustment handle for first formation or if not editable
+                        idx === 0 || !editable ? null :
                           <Fragment>
                             <Rect x={formationStartPos - handleWidth}
-                              width={handleWidth} height={timelineHeight}
-                              draggable
-                              onTouchStart={() => { this.setState({ timelineDraggable: false }) }}
-                              onTouchEnd={() => this.setState({ timelineDraggable: true })}
-                              onDragEnd={() => this.setState({ timelineDraggable: true })}
-                              dragBoundFunc={() => { return { x: this.toDisplayX(formationStartPos - handleWidth / 2), y: timelineY } }}
-                              onDragMove={(e) => this.handleAnchorMove(e, idx, true)}
+                                  width={handleWidth} height={timelineHeight}
+                                  draggable
+                                  onTouchStart={() => {
+                                    this.setState({ timelineDraggable: false })
+                                  }}
+                                  onTouchEnd={() => this.setState({ timelineDraggable: true })}
+                                  onDragEnd={() => this.setState({ timelineDraggable: true })}
+                                  dragBoundFunc={() => {
+                                    return { x: this.toDisplayX(formationStartPos - handleWidth / 2), y: timelineY }
+                                  }}
+                                  onDragMove={(e) => this.handleAnchorMove(e, idx, true)}
                             />
-                            <Line points={[formationStartPos - handleWidth / 2, handleBarStartY, formationStartPos - handleWidth / 2, handleBarEndY]}
+                            <Line
+                              points={[formationStartPos - handleWidth / 2, handleBarStartY, formationStartPos - handleWidth / 2, handleBarEndY]}
                               stroke={"white"} strokeWidth={0.5} />
-                            <Line points={[formationStartPos - 2 - handleWidth / 2, handleBarStartY, formationStartPos - 2 - handleWidth / 2, handleBarEndY]}
+                            <Line
+                              points={[formationStartPos - 2 - handleWidth / 2, handleBarStartY, formationStartPos - 2 - handleWidth / 2, handleBarEndY]}
                               stroke={"white"} strokeWidth={0.5} />
-                            <Line points={[formationStartPos + 2 - handleWidth / 2, handleBarStartY, formationStartPos + 2 - handleWidth / 2, handleBarEndY]}
+                            <Line
+                              points={[formationStartPos + 2 - handleWidth / 2, handleBarStartY, formationStartPos + 2 - handleWidth / 2, handleBarEndY]}
                               stroke={"white"} strokeWidth={0.5} />
                           </Fragment>
                       }
-                      <Rect x={formationEndPos - handleWidth}
-                        width={handleWidth} height={timelineHeight}
-                        draggable
-                        onTouchStart={() => { this.setState({ timelineDraggable: false }) }}
-                        onTouchEnd={() => this.setState({ timelineDraggable: true })}
-                        onDragEnd={() => this.setState({ timelineDraggable: true })}
-                        dragBoundFunc={() => { return { x: this.toDisplayX(formationEndPos - handleWidth), y: timelineY } }}
-                        onDragMove={(e) => this.handleAnchorMove(e, idx, false)}
-                      />
-                      <Line points={[formationEndPos - handleWidth / 2, handleBarStartY, formationEndPos - handleWidth / 2, handleBarEndY]}
-                        stroke={"white"} strokeWidth={0.5} />
-                      <Line points={[formationEndPos - 2 - handleWidth / 2, handleBarStartY, formationEndPos - 2 - handleWidth / 2, handleBarEndY ]}
-                        stroke={"white"} strokeWidth={0.5} />
-                      <Line points={[formationEndPos + 2 - handleWidth / 2, handleBarStartY, formationEndPos + 2 - handleWidth / 2, handleBarEndY ]}
-                        stroke={"white"} strokeWidth={0.5} />
+                      {
+                        // Don't show formation duration handle if not editable
+                        !editable ? null :
+                          <Fragment>
+                            <Rect x={formationEndPos - handleWidth}
+                                  width={handleWidth} height={timelineHeight}
+                                  draggable
+                                  onTouchStart={() => {
+                                    this.setState({ timelineDraggable: false })
+                                  }}
+                                  onTouchEnd={() => this.setState({ timelineDraggable: true })}
+                                  onDragEnd={() => this.setState({ timelineDraggable: true })}
+                                  dragBoundFunc={() => {
+                                    return { x: this.toDisplayX(formationEndPos - handleWidth), y: timelineY }
+                                  }}
+                                  onDragMove={(e) => this.handleAnchorMove(e, idx, false)}
+                            />
+                            <Line
+                              points={[formationEndPos - handleWidth / 2, handleBarStartY, formationEndPos - handleWidth / 2, handleBarEndY]}
+                              stroke={"white"} strokeWidth={0.5} />
+                            <Line
+                              points={[formationEndPos - 2 - handleWidth / 2, handleBarStartY, formationEndPos - 2 - handleWidth / 2, handleBarEndY]}
+                              stroke={"white"} strokeWidth={0.5} />
+                            <Line
+                              points={[formationEndPos + 2 - handleWidth / 2, handleBarStartY, formationEndPos + 2 - handleWidth / 2, handleBarEndY]}
+                              stroke={"white"} strokeWidth={0.5} />
+                          </Fragment>
+                      }
                     </Fragment>
                   );
                 })
@@ -226,4 +247,5 @@ class Timeline extends Component {
     )
   }
 }
+
 export default connect()(Timeline);

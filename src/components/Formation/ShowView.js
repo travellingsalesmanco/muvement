@@ -65,7 +65,7 @@ class ShowView extends Component {
 
 
   render() {
-    const { elapsedTime, timeline, isPlaying, choreoId } = this.props;
+    const { elapsedTime, timeline, isPlaying, choreoId, editable } = this.props;
     if (elapsedTime > timeline.totalDuration) {
       this.props.dispatch({ type: TIMELINE_JUMP, payload: timeline.totalDuration })
     }
@@ -73,7 +73,7 @@ class ShowView extends Component {
       <div className="show-view" style={{ flex: 1, textAlign: "center" }}>
         <div style={{ height: "6rem", paddingTop: "0.5rem" }}>
           <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
-            labelRadius={14} handleWidth={10} timestampSeparation={2000} />
+            labelRadius={14} handleWidth={10} timestampSeparation={2000} editable={editable} />
         </div>
         <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff" }}>
           {this.msToDisplayedTime(elapsedTime)}
