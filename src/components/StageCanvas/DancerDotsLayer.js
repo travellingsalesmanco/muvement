@@ -30,7 +30,7 @@ class DancerDotsLayer extends PureComponent {
     let { x: newX, y: newY } = pos;
     if (pos.x < minX) {
       newX = minX;
-    } else if (pos.x > maxX ) {
+    } else if (pos.x > maxX) {
       newX = maxX;
     }
     if (pos.y < minY) {
@@ -62,6 +62,14 @@ class DancerDotsLayer extends PureComponent {
     }
   };
 
+  isSelected(name) {
+    return this.props.selectedDancers.includes(name);
+  }
+
+  isAnySelected() {
+    return this.props.selectedDancers.length > 0;
+  }
+
   // handleRemove(e, dancerName) {
   //   e.cancelBubble = true;
   //   console.log("Remove dancer: " + dancerName);
@@ -84,7 +92,9 @@ class DancerDotsLayer extends PureComponent {
               onDragEnd={(e) => !demo && this.handleDragEnd(e, dancerLayout.name)}
             >
               <DancerDot radius={dotRadius} number={dancerLayout.id}
-                name={dancerLayout.name} onSelect={editable ? this.handleSelect : undefined} />
+                         name={dancerLayout.name}
+                         onSelect={editable ? this.handleSelect : undefined}
+                         selected={this.isSelected(dancerLayout.name)} isAnySelected={this.isAnySelected()} />
               {
                 showLabels
                   ? <DancerLabel name={dancerLayout.name} dotRadius={dotRadius} />
