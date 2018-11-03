@@ -66,7 +66,7 @@ class FormationScreen extends Component {
       visible: false,
       sidePanelID: 0,
       formationName: '',
-      activeButton: props.animated ? 3 : 2
+      activeButton: props.animated ? 3 : 2,
     }
   }
 
@@ -89,6 +89,7 @@ class FormationScreen extends Component {
   handleAddFormation = () => {
     this.props.dispatch(addAndSetActiveFormation(this.props.choreoId, this.props.formationId + 1));
   };
+
   handleRemoveFormation = () => {
     this.props.dispatch(removeFormation(this.props.choreoId, this.props.formationId));
   }
@@ -146,20 +147,14 @@ class FormationScreen extends Component {
                         <div className="formationscreen-buttons">
                           <div style={{ display: "flex", flexDirection: "row" }}>
                             <div style={{
-                              paddingTop: '0.5em',
-                              paddingRight: '0.5em',
-                              paddingBottom: '1em',
-                              paddingLeft: '1em',
+                              padding: '0.5em 0.5em 1em 1em',
                               flex: 1
                             }}>
                               <Button type={"default"} icon="plus" ghost block style={{ borderRadius: '1em' }}
                                       onClick={this.handleAddFormation}>Add</Button>
                             </div>
                             <div style={{
-                              paddingTop: '0.5em',
-                              paddingRight: '2em',
-                              paddingBottom: '1em',
-                              paddingLeft: '0.5em',
+                              padding: '0.5em 2em 1em 0.5em',
                               flex: 1
                             }}>
                               <Button className="delete-formation" icon="delete" ghost block
