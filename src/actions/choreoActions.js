@@ -4,6 +4,7 @@ import {
   REMOVE_CHOREO,
   UPDATE_CHOREO_IMAGE,
   ADD_DANCER,
+  RENAME_DANCER,
   ADD_FORMATION,
   EDIT_STAGE_DIMENSIONS,
   REMOVE_DANCER,
@@ -11,7 +12,8 @@ import {
   SET_LABELS_VIEW,
   SWITCH_ACTIVE_FORMATION,
   REMOVE_FORMATION,
-  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY, RENAME_DANCER
+  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY,
+  PUBLISH_CHOREO, UNPUBLISH_CHOREO
 } from "../constants/actionTypes";
 import { defaultStageDim } from "../constants/defaults";
 import { getChoreo } from "../selectors/choreo";
@@ -348,6 +350,24 @@ export function clearFormationsHistory(choreoId) {
   return (dispatch) => {
     dispatch({
       type: CLEAR_FORMATION_HISTORY,
+      choreoId: choreoId,
+    })
+  }
+}
+
+export function publishChoreo(choreoId) {
+  return (dispatch) => {
+    dispatch({
+      type: PUBLISH_CHOREO,
+      choreoId: choreoId,
+    })
+  }
+}
+
+export function unpublishChoreo(choreoId) {
+  return (dispatch) => {
+    dispatch({
+      type: UNPUBLISH_CHOREO,
       choreoId: choreoId,
     })
   }
