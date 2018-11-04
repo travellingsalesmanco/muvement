@@ -21,7 +21,7 @@ const SectionTitle = ({ mobile, formationName }) => (
   <div className="section-title-container">
     <div className="section-title" style={{ margin: mobile ? '1rem 2rem' : '2rem' }}>
       <div className="section-title-inner">
-        {formationName ?
+        {formationName || formationName !== "" ?
           <span>{formationName}</span>
           : <span>Untitled</span>
         }

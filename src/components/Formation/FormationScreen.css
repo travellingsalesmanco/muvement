@@ -50,7 +50,8 @@
   border-radius: 50px;
 }
 
-.section-title .ant-input {
+.section-title .ant-input,
+.section-title span {
   border: 0;
   color: #fff;
   background-color: transparent;
