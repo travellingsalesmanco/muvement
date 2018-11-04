@@ -16,6 +16,7 @@ class Timeline extends Component {
       midPoint: 0,
       timelineDraggable: true,
       musicUrl: props.musicUrl,
+      playbackRate: props.playbackRate,
       musicDuration: 0
     }
   }
@@ -148,8 +149,8 @@ class Timeline extends Component {
       // Wavesurfer hasn't been created, nothing to do here
       return
     }
+    // Check if music has changed, reload necessary
     if (this.state.musicUrl !== this.props.musicUrl) {
-      // Music has changed, reload it if it exists
       console.log("[Audio] Music updated");
       this.wavesurfer.empty();
       this.setState({ musicUrl: this.props.musicUrl })
@@ -157,6 +158,7 @@ class Timeline extends Component {
         this.wavesurfer.load(this.props.musicUrl)
       }
     }
+    // Check if there is music to play
     if (this.state.musicDuration) {
       const musicPlaying = this.wavesurfer.isPlaying();
       const elapsedTime = this.props.elapsedTime;
@@ -167,6 +169,10 @@ class Timeline extends Component {
       }
       if (!musicPlaying) {
         this.centerMusicPosition(elapsedTime);
+      } else if (this.state.playbackRate !== this.props.playbackRate) {
+        console.log("[Audio] Setting playback rate to " + this.props.playbackRate + "x speed");
+        this.setState({ playbackRate: this.props.playbackRate })
+        this.wavesurfer.setPlaybackRate(this.props.playbackRate)
       }
     }
   }

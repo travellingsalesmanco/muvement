@@ -75,14 +75,14 @@ class ShowView extends Component {
   }
 
   render() {
-    const { elapsedTime, timeline, isPlaying, choreoId, musicUrl, editable } = this.props;
+    const { elapsedTime, timeline, isPlaying, choreoId, musicUrl, playbackRate, editable } = this.props;
     if (elapsedTime > timeline.totalDuration) {
       this.props.dispatch({ type: TIMELINE_JUMP, payload: timeline.totalDuration })
     }
     return (
       <div className="show-view" style={{ flex: 1, textAlign: "center" }}>
         <div style={{ height: "6rem", paddingTop: "0.5rem" }}>
-          <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
+          <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying} playbackRate={playbackRate}
             labelRadius={14} handleWidth={10} timestampSeparation={2000} timelineRatio={0.85}
             editable={editable} musicUrl={musicUrl} />
         </div>
@@ -136,7 +136,8 @@ const mapStateToProps = (state, props) => {
     elapsedTime: state.UI.elapsedTime,
     isPlaying: state.UI.isPlaying,
     activeFormation: state.UI.activeFormation,
-    musicUrl: getChoreo(state, props.choreoId).musicUrl
+    musicUrl: getChoreo(state, props.choreoId).musicUrl,
+    playbackRate: state.UI.playbackRate
   }
 }
 export default connect(mapStateToProps)(ShowView);
