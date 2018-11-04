@@ -15,6 +15,26 @@ class Navigation extends React.Component {
     const { choreoId, canUndo, canRedo } = this.props;
     console.log("CAN UNDO: " + canUndo);
     console.log("CAN REDO: " + canRedo);
+    const undoStyle = canUndo
+      ? {
+        cursor: 'pointer',
+        color: '#fff'
+      }
+      : {
+        pointerEvents: 'None',
+        cursor: 'not-allowed',
+        color: '#999'
+      };
+    const redoStyle = canRedo
+      ? {
+        cursor: 'pointer',
+        color: '#fff'
+      }
+      : {
+        pointerEvents: 'None',
+        cursor: 'not-allowed',
+        color: '#999'
+      };
     return (
       <Header>
         <MobilePortrait>
@@ -27,19 +47,19 @@ class Navigation extends React.Component {
               <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
             </div>
             <div className="mp-right-container">
-                  <Button className="nav-bar-button"
-                          onClick={() => this.props.dispatch(undoFormationsChange(choreoId))}
-                          disabled={!canUndo}
-                  >
-                    <UndoIcon />
-                  </Button>
-                  <Button className="nav-bar-button"
-                          onClick={() => this.props.dispatch(redoFormationsChange(choreoId))}
-                          disabled={!canRedo}
-                  >
-                    <RedoIcon />
-                  </Button>
-                  <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
+              <Button className="nav-bar-button"
+                      onClick={() => this.props.dispatch(undoFormationsChange(choreoId))}
+                      style={undoStyle}
+              >
+                <UndoIcon />
+              </Button>
+              <Button className="nav-bar-button"
+                      onClick={() => this.props.dispatch(redoFormationsChange(choreoId))}
+                      style={redoStyle}
+              >
+                <RedoIcon />
+              </Button>
+              <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
             </div>
           </div>
         </MobilePortrait>
@@ -66,21 +86,21 @@ class Navigation extends React.Component {
               <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
             </div>
             <div className="right-container">
-                  <Button className="nav-bar-button"
-                          onClick={() => this.props.dispatch(undoFormationsChange(choreoId))}
-                          disabled={!canUndo}
-                  >
-                    <UndoIcon />
-                  </Button>
-                  <Button className="nav-bar-button"
-                          onClick={() => this.props.dispatch(redoFormationsChange(choreoId))}
-                          disabled={!canRedo}
-                  >
-                    <RedoIcon />
-                  </Button>
-                  {/* TODO: change eye icon depending on current show state */}
-                  <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
-                  <Button icon="fullscreen" />
+              <Button className="nav-bar-button"
+                      onClick={() => this.props.dispatch(undoFormationsChange(choreoId))}
+                      style={undoStyle}
+              >
+                <UndoIcon />
+              </Button>
+              <Button className="nav-bar-button"
+                      onClick={() => this.props.dispatch(redoFormationsChange(choreoId))}
+                      style={redoStyle}
+              >
+                <RedoIcon />
+              </Button>
+              {/* TODO: change eye icon depending on current show state */}
+              <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
+              <Button icon="fullscreen" />
             </div>
           </div>
         </MinTablet>
