@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Layout, Menu } from "antd";
 import { connect } from 'react-redux';
 import './Navigation.css';
+import '../Home/AddPerformerScreen.css';
 import RedoIcon from "../../icons/RedoIcon";
 import UndoIcon from "../../icons/UndoIcon";
 import { toggleLabels } from "../../actions/choreoActions";
