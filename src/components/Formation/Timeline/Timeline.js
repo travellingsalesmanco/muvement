@@ -125,7 +125,7 @@ class Timeline extends Component {
     this.wavesurfer.on('ready', () => {
       console.log("[Audio] Wavesurfer loaded")
       this.wavesurfer.zoom(this.props.msWidth * 1000)
-      this.wavesurfer.seekAndCenter(this.props.elapsedTime / (this.wavesurfer.getDuration() * 1000));
+      this.centerMusicPosition(this.props.elapsedTime)
       this.setState({ musicDuration: this.wavesurfer.getDuration() * 1000 })
       this.wavesurfer.setHeight(this.state.displayHeight * this.props.timelineRatio * 2)
     })
