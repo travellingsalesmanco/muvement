@@ -114,10 +114,8 @@ class HorizontalSlideList extends React.Component {
 }
 
 function mapStateToProps(state, props) {
-  const choreoId = props.match.params.choreoId;
-  const choreo = getChoreo(state, choreoId);
+  const choreo = getChoreo(state, props.choreoId);
   return {
-    choreoId: choreoId,
     activeFormationId: state.UI.activeFormation,
     formations: choreo.formations
   }

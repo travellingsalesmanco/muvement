@@ -85,7 +85,7 @@ class FormationScreen extends Component {
   render() {
     const { Content, Sider } = Layout;
     const { activeButton, tabletSideActiveId } = this.state;
-    const { loading } = this.props;
+    const { loading, choreoId } = this.props;
     return (
       <Fragment>
         <MobilePortrait>
@@ -105,7 +105,7 @@ class FormationScreen extends Component {
                       activeButton === 1 &&
                       <Fragment>
                         <div className="horizontal-list" style={{ overflowX: 'scroll', marginTop: '1em' }}>
-                          <HorizontalSlideList />
+                          <HorizontalSlideList choreoId={choreoId} />
                         </div>
                       </Fragment>
                     }
@@ -180,7 +180,7 @@ class FormationScreen extends Component {
                   <Fragment>
                     <h3 className="slide-list-title">All Formations</h3>
                     <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)` }}>
-                      <VerticalSlideList />
+                      <VerticalSlideList choreoId={choreoId} />
                     </div>
                   </Fragment>
                   }
