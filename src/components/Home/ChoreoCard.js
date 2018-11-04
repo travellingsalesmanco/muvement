@@ -6,6 +6,7 @@ import { publishChoreo, removeChoreo, unpublishChoreo } from "../../actions/chor
 import { getChoreo } from '../../selectors/choreo';
 import './ChoreoCards.css';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const confirm = Modal.confirm;
 
@@ -14,12 +15,21 @@ const PublishedView = ({ link }) => (
     <h3>Share with your performers!</h3>
     <MobilePortrait>
       <p className="publish-link" style={{ width: '70vw' }}>{link}</p>
+      <CopyToClipboard text={link}>
+        <Button className="publish-copy-button" ghost>Copy to clipboard</Button>
+      </CopyToClipboard>
     </MobilePortrait>
     <MobileLandscape>
       <p className="publish-link">{link}</p>
+      <CopyToClipboard text={link}>
+        <Button className="publish-copy-button" ghost>Copy to clipboard</Button>
+      </CopyToClipboard>
     </MobileLandscape>
     <MinTablet>
       <p className="publish-link">{link}</p>
+      <CopyToClipboard text={link}>
+        <Button className="publish-copy-button" ghost>Copy to clipboard</Button>
+      </CopyToClipboard>
     </MinTablet>
   </Fragment>
 );
