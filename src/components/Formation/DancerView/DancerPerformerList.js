@@ -29,7 +29,6 @@ class DancerPerformerList extends React.Component {
     return this.props.selectedDancers.includes(name);
   }
 
-  // TODO: Implement edit button modal
   render() {
     return (
       <div id="dancer-performer-list">
