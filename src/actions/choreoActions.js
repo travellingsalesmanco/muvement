@@ -12,10 +12,9 @@ import {
   SET_LABELS_VIEW,
   SWITCH_ACTIVE_FORMATION,
   REMOVE_FORMATION,
-  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY, UPDATE_CHOREO_MUSIC
+  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY, UPDATE_CHOREO_MUSIC,
   PUBLISH_CHOREO, UNPUBLISH_CHOREO
 } from "../constants/actionTypes";
-import { defaultStageDim } from "../constants/defaults";
 import { getChoreo } from "../selectors/choreo";
 
 function containsDancer(choreoId, name, state) {
