@@ -40,7 +40,7 @@ class ShowView extends Component {
     const action = this.props.isPlaying ? TIMELINE_PAUSE : TIMELINE_PLAY
     this.props.dispatch({ type: action })
     if (action === TIMELINE_PLAY) {
-      this.props.dispatch(play(this.props.timeline.totalDuration, 30, 1))
+      this.props.dispatch(play(this.props.timeline.totalDuration))
     }
   }
   fastForward = () => {
@@ -82,7 +82,8 @@ class ShowView extends Component {
       <div className="show-view" style={{ flex: 1, textAlign: "center" }}>
         <div style={{ height: "6rem", paddingTop: "0.5rem" }}>
           <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
-            labelRadius={14} handleWidth={10} timestampSeparation={2000} editable={editable} musicUrl={musicUrl} />
+            labelRadius={14} handleWidth={10} timestampSeparation={2000} timelineRatio={0.85}
+            editable={editable} musicUrl={musicUrl} />
         </div>
         <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff" }}>
           {this.msToDisplayedTime(elapsedTime)}
