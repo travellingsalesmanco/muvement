@@ -114,7 +114,7 @@ class Timeline extends Component {
     this.wavesurfer = WaveSurfer.create({
       container: '#music',
       waveColor: 'violet',
-      progressColor: 'purple',
+      progressColor: 'grey',
       cursorWidth: 0,
       barWidth: this.props.msWidth * timingInterval / 2,
       barGap: 0,
