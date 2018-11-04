@@ -36,7 +36,7 @@ class DancerPerformerList extends React.Component {
         {this.props.dancers.map((dancer, key) => {
           return (
             <Row key={dancer}>
-              <Col span={21}>
+              <Col offset={1} span={15}>
                 <span id="dancer-list-item" style={this.isSelectedDancerStyle(dancer)}>{key + 1}. {dancer}</span>
               </Col>
               <Col span={3}>
