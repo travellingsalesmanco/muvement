@@ -2,7 +2,8 @@ import {
   EDIT_FORMATION_DURATION,
   EDIT_FORMATION_TRANSITION,
   TIMELINE_JUMP,
-  TIMELINE_PAUSE, TIMELINE_PLAY
+  TIMELINE_PAUSE, TIMELINE_PLAY,
+  SET_PLAYBACK_RATE
 } from "../constants/actionTypes";
 import { getChoreo } from "../selectors/choreo";
 import { minFormationDuration, minTransitionDuration, FPS } from "../constants/defaults";
@@ -175,3 +176,26 @@ export function jumpToTime(t) {
     }
   }
 }
+
+export function speedUp() {
+  return (dispatch, getState) => {
+    if (getState().UI.playbackRate < 2) {
+      dispatch({
+        type: SET_PLAYBACK_RATE,
+        payload: getState().UI.playbackRate * 2
+      })
+    }
+  }
+}
+
+export function slowDown() {
+  return (dispatch, getState) => {
+    if (getState().UI.playbackRate > 0.5) {
+      dispatch({
+        type: SET_PLAYBACK_RATE,
+        payload: getState().UI.playbackRate / 2
+      })
+    }
+  }
+}
+

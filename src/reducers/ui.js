@@ -9,6 +9,7 @@ import {
   TIMELINE_PAUSE,
   LOAD_ANIMATED_VIEW,
   UNLOAD_ANIMATED_VIEW,
+  SET_PLAYBACK_RATE,
 } from "../constants/actionTypes";
 import { defaultUI } from "../constants/defaults";
 
@@ -77,6 +78,13 @@ export default (state = defaultUI, action) => {
       return {
         ...state,
         animated: false
+      }
+    }
+    case SET_PLAYBACK_RATE: {
+      const {payload: rate} = action;
+      return {
+        ...state,
+        playbackRate: rate
       }
     }
 

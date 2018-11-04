@@ -32,6 +32,7 @@ export const TIMELINE_PLAY = "TIMELINE_PLAY";
 export const TIMELINE_PAUSE = "TIMELINE_PAUSE";
 export const LOAD_ANIMATED_VIEW = "LOAD_ANIMATED_VIEW";
 export const UNLOAD_ANIMATED_VIEW = "UNLOAD_ANIMATED_VIEW";
+export const SET_PLAYBACK_RATE = "SET_PLAYBACK_RATE"
 
 // User auth actions
 export const USER_LOGOUT = "USER_LOGOUT";

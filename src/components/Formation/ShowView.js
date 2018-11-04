@@ -2,7 +2,7 @@ import { Button, Icon, Upload, message } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gotoFormation, updateChoreoMusic } from '../../actions/choreoActions';
-import { jumpToTime, play } from '../../actions/timelineActions';
+import { jumpToTime, play, slowDown, speedUp } from '../../actions/timelineActions';
 import { TIMELINE_JUMP, TIMELINE_PAUSE, TIMELINE_PLAY } from '../../constants/actionTypes';
 import { getTimeline } from '../../selectors/layout';
 import './FormationScreen.css';
@@ -42,12 +42,6 @@ class ShowView extends Component {
     if (action === TIMELINE_PLAY) {
       this.props.dispatch(play(this.props.timeline.totalDuration))
     }
-  }
-  fastForward = () => {
-
-  }
-  slowDown = () => {
-
   }
   // Binary search for formation in focus
   findCurrentFormation() {
@@ -89,37 +83,39 @@ class ShowView extends Component {
           {this.msToDisplayedTime(elapsedTime)}
         </div>
         <div className="show-buttons">
-          <Button type={"default"} ghost style={{ border: 0 }} onClick={this.slowDown}>
+          <Button type={"default"} ghost style={{ border: 0 }} onClick={() => this.props.dispatch(slowDown())}>
             <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-left"} theme="outlined" />
           </Button>
           <Button type={"default"} ghost style={{ marginLeft: "0.5rem", marginRight: "0.5rem", border: "0" }} onClick={this.togglePlay}>
             <Icon style={{ fontSize: "2.5rem", color: "#24C6DC" }} type={isPlaying ? "pause" : "caret-right"} theme="outlined" />
           </Button>
-          <Button type={"default"} ghost style={{ border: 0 }} onClick={this.fastForward}>
+          <Button type={"default"} ghost style={{ border: 0 }} onClick={() => this.props.dispatch(speedUp())}>
             <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-right"} theme="outlined" />
           </Button>
         </div>
-        <div style={{ margin: '1em 0' }}>
-          <Upload 
-            name={"music"}
-            accept={"audio/*"}
-            showUploadList={false}
-            customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
-              req.onSuccess(link);
-            })}
-            beforeUpload={(file) => {
-              if(file.size / 1024 / 1024 > 5) {
-                message.error('Audio file must be smaller than 5MB!')
-                return false
-              }
-              return true;
-            }}
-            onChange={this.handleMusicUploadChange}
-          >
-            <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
-              Add Music
-            </Button>
-          </Upload>
+        <div style={{padding: "1rem"}}>
+          {
+            this.props.musicUrl
+              ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }} onClick={this.handleRemoveMusic}> Remove Music </Button>
+              : <Upload name={"music"} accept={"audio/*"} showUploadList={false}
+                customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
+                  req.onSuccess(link);
+                })}
+                beforeUpload={(file) => {
+                  if (file.size / 1024 / 1024 > 5) {
+                    message.error('Audio file must be smaller than 5MB!')
+                    return false
+                  }
+                  return true;
+                }}
+                onChange={this.handleMusicUploadChange}
+              >
+                <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
+                  Add Music
+                </Button>
+              </Upload>
+          }
+
         </div>
       </div>
     )
