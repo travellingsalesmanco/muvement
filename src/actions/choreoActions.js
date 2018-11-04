@@ -109,6 +109,7 @@ export function updateChoreoIfNewer(id, choreo) {
       });
     }
   }
+  return Promise.resolve();
 }
 
 export function syncCreatorChoreo(id, choreo) {
@@ -120,6 +121,7 @@ export function syncCreatorChoreo(id, choreo) {
         payload: choreo
       });
     }
+    return Promise.resolve();
   }
 }
 
@@ -152,6 +154,7 @@ export function syncCreatorChoreos(choreos) {
         });
       }
     });
+    return Promise.resolve()
   }
 }
 
