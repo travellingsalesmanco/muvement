@@ -10,7 +10,7 @@ import { getChoreo } from '../../selectors/choreo';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import withFireStoreSync from "../withFirestoreSync";
-import './DancerFormationView.css';
+import './FormationScreen.css';
 import HorizontalSlideList from "./HorizontalSlideList";
 import Navigation from "./Navigation";
 import VerticalSlideList from "./VerticalSlideList";
