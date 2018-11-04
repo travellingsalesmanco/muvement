@@ -28,7 +28,7 @@ export const demoChoreo = {
     }, { name: "Performer 5", position: [0.39831018518518524, 0.30740740740740735] }, {
       name: "Performer 8",
       position: [0.711604938271605, 0.21465751465751462]
-    }], duration: 2250, name: "", transitionBefore: { duration: 2000, midPoint: 0 }
+    }], duration: 1000, name: "", transitionBefore: { duration: 1000, midPoint: 0 }
   }, {
     dancers: [{
       name: "Performer 6",
@@ -48,7 +48,7 @@ export const demoChoreo = {
     }, { name: "Performer 2", position: [0.27618451250395687, 0.40843774177107506] }, {
       name: "Performer 1",
       position: [0.23549817980373527, 0.49474199474199493]
-    }], duration: 2000, name: "", transitionBefore: { duration: 2000, midPoint: 0 }
+    }], duration: 1000, name: "", transitionBefore: { duration: 1000, midPoint: 0 }
   }, {
     dancers: [{
       name: "Performer 6",
@@ -68,7 +68,7 @@ export const demoChoreo = {
     }, { name: "Performer 10", position: [0.706834441278886, 0.6836792836792838] }, {
       name: "Performer 11",
       position: [0.7614306346945237, 0.7877621210954544]
-    }], duration: 2000, name: "", transitionBefore: { duration: 2000, midPoint: 0 }
+    }], duration: 1000, name: "", transitionBefore: { duration: 1000, midPoint: 0 }
   }, {
     dancers: [{
       name: "Performer 10",
@@ -88,7 +88,7 @@ export const demoChoreo = {
     }, { name: "Performer 5", position: [0.39831018518518524, 0.30740740740740735] }, {
       name: "Performer 8",
       position: [0.711604938271605, 0.21465751465751462]
-    }], duration: 2000, name: "", transitionBefore: { duration: 2000, midPoint: 0 }
+    }], duration: 1000, name: "", transitionBefore: { duration: 1000, midPoint: 0 }
   }]
 };
 
