@@ -111,6 +111,18 @@ export function updateChoreoIfNewer(id, choreo) {
   }
 }
 
+export function syncCreatorChoreo(id, choreo) {
+  return (dispatch, getState) => {
+    if (!hasChoreo(id, getState()) || !ownsChoreo(id, getState())) {
+      dispatch({
+        type: ADD_CHOREO,
+        choreoId: id,
+        payload: choreo
+      });
+    }
+  }
+}
+
 export function syncCreatorChoreos(choreos) {
   return (dispatch, getState) => {
     // Remove choreos no longer tagged under creator in cloud
