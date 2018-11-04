@@ -22,7 +22,7 @@ class DancerDot extends PureComponent {
           verticalAlign={'middle'}
           fill={textFill}
           text={number}
-          fontSize={12}
+          fontSize={radius}
           fontFamily={"Sen-Bold"}
           // onClick={onSelect ? (e) => onSelect(e, name) : undefined}
           // onTap={onSelect ? (e) => onSelect(e, name) : undefined}
