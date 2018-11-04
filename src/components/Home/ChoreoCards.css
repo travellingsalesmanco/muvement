@@ -170,7 +170,65 @@
   font-size: 20px;
 }
 
+/**/
 
+.publish-link {
+  background: linear-gradient(to right, #24c6dc, #514a9d);
+  border: 0;
+  font-family: 'Sen-Regular', Arial, sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.publish-modal .ant-modal-content {
+  /*border: 5px solid #24c6dc;*/
+  padding: 2px 2px;
+  background-image: linear-gradient(to right, #24c6dc, #514a9d);
+  border-radius: 15px;
+}
+
+.publish-modal .ant-modal-close {
+  color: #fff;
+}
+
+.publish-modal .ant-modal-body {
+  padding: 0;
+}
+
+.publish-modal-inner {
+  background: #131313;
+  padding: 1em;
+  border-radius: 1em;
+  color: #fff;
+  text-align: center;
+}
+
+.publish-modal-inner > h3 {
+  font-family: 'Sen-Black', Arial, sans-serif;
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.publish-modal-inner > button {
+  border-radius: 1em;
+  margin-top: 1em;
+  border: 2px solid #24c6dc;
+  font-family: 'Sen-Black', Arial, sans-serif;
+  color: #24c6dc;
+  background: transparent;
+  width: 10em;
+  height: 2em;
+  font-size: 1rem;
+}
+
+/**/
 
 /* Mobile Portrait */
 .mp-dashboard-title{

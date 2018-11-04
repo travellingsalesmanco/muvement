@@ -2,20 +2,59 @@ import { Modal, Button, Icon } from 'antd';
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { removeChoreo } from "../../actions/choreoActions";
+import { publishChoreo, removeChoreo, unpublishChoreo } from "../../actions/choreoActions";
 import { getChoreo } from '../../selectors/choreo';
 import './ChoreoCards.css';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 const confirm = Modal.confirm;
 
+const PublishedView = ({ link }) => (
+  <Fragment>
+    <h3>Share with your performers!</h3>
+    <p className="publish-link">{link}</p>
+  </Fragment>
+);
+
+
 class ChoreoCard extends PureComponent {
+  state = {
+    publishModalVisible: false,
+    publishLoading: false,
+  };
+
   handleClick = () => {
     this.props.history.push(`/choreo/${this.props.choreoId}/formation`);
   };
 
   handleRemove = () => {
     this.showConfirm();
+  };
+
+  handlePublishToggle = () => {
+    this.setState({
+        publishLoading: true
+      }, () => {
+        this.props.published
+          ? this.props.dispatch(unpublishChoreo(this.props.choreoId))
+          : this.props.dispatch(publishChoreo(this.props.choreoId));
+        this.setState({
+          publishLoading: false
+        })
+      }
+    )
+  };
+
+  handleClose = () => {
+    this.setState({
+      publishModalVisible: false
+    })
+  };
+
+  handleShow = () => {
+    this.setState({
+      publishModalVisible: true
+    })
   };
 
   showConfirm = () => {
@@ -33,13 +72,15 @@ class ChoreoCard extends PureComponent {
       title: 'Do you want to delete this choreography?',
       centered: true,
       onOk,
-      onCancel() {},
+      onCancel() {
+      },
     });
   };
 
   render() {
-    const { name, imageUrl, formationLength } = this.props;
-
+    const { name, imageUrl, formationLength, published, publishedLink } = this.props;
+    const { publishModalVisible, publishLoading } = this.state;
+    console.log(published);
     return (
       <Fragment>
         <MobilePortrait>
@@ -53,13 +94,33 @@ class ChoreoCard extends PureComponent {
                 <div className="mp-description-inner">
                   <span id="mp-formation-no">{formationLength} formations</span>
                   <div className="icons">
-                    <Icon type="share-alt" theme="outlined"/>
-                    <Icon type="delete" theme="outlined" onClick={this.handleRemove}/>
+                    <Icon type="share-alt" theme="outlined" onClick={this.handleShow} />
+                    <Icon type="delete" theme="outlined" onClick={this.handleRemove} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <Modal
+            centered
+            visible={publishModalVisible}
+            onCancel={this.handleClose}
+            footer={null}
+            className="publish-modal"
+          >
+            <div className="publish-modal-inner">
+              {published
+                ? <PublishedView link={publishedLink} />
+                : <h3>Click 'Publish' below to share with your performers!</h3>
+              }
+              <Button block
+                      onClick={this.handlePublishToggle}
+                      loading={publishLoading}
+              >
+                {published ? 'Cancel Publish' : 'Publish'}
+              </Button>
+            </div>
+          </Modal>
         </MobilePortrait>
 
         <MobileLandscape>
@@ -73,13 +134,33 @@ class ChoreoCard extends PureComponent {
                 <div className="description-inner">
                   <span id="formation-no">{formationLength} formations</span>
                   <div className="icons">
-                    <Icon type="share-alt" theme="outlined"/>
-                    <Icon type="delete" theme="outlined" onClick={this.handleRemove}/>
+                    <Icon type="share-alt" theme="outlined" onClick={this.handleShow} />
+                    <Icon type="delete" theme="outlined" onClick={this.handleRemove} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <Modal
+            centered
+            visible={publishModalVisible}
+            onCancel={this.handleClose}
+            footer={null}
+            className="publish-modal"
+          >
+            <div className="publish-modal-inner">
+              {published
+                ? <PublishedView link={publishedLink} />
+                : <h3>Click 'Publish' below to share with your performers!</h3>
+              }
+              <Button block
+                      onClick={this.handlePublishToggle}
+                      loading={publishLoading}
+              >
+                {published ? 'Cancel Publish' : 'Publish'}
+              </Button>
+            </div>
+          </Modal>
         </MobileLandscape>
 
         <MinTablet>
@@ -93,13 +174,33 @@ class ChoreoCard extends PureComponent {
                 <div className="description-inner">
                   <span id="formation-no">{formationLength} formations</span>
                   <div className="icons">
-                    <Icon type="share-alt" theme="outlined"/>
-                    <Icon type="delete" theme="outlined" onClick={this.handleRemove}/>
+                    <Icon type="share-alt" theme="outlined" onClick={this.handleShow} />
+                    <Icon type="delete" theme="outlined" onClick={this.handleRemove} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <Modal
+            centered
+            visible={publishModalVisible}
+            onCancel={this.handleClose}
+            footer={null}
+            className="publish-modal"
+          >
+            <div className="publish-modal-inner">
+              {published
+                ? <PublishedView link={publishedLink} />
+                : <h3>Click 'Publish' below to share with your performers!</h3>
+              }
+              <Button block
+                      onClick={this.handlePublishToggle}
+                      loading={publishLoading}
+              >
+                {published ? 'Cancel Publish' : 'Publish'}
+              </Button>
+            </div>
+          </Modal>
         </MinTablet>
 
       </Fragment>
@@ -113,8 +214,11 @@ const makeMapStateToProps = () => {
     return {
       name: choreo.name,
       imageUrl: choreo.imageUrl,
-      formationLength: choreo.formations.length
+      formationLength: choreo.formations.length,
+      published: choreo.published,
+      //TODO: change when deployed
+      publishedLink: "localhost:3000/choreoview/" + props.choreoId
     }
   }
-}
+};
 export default withRouter(connect(makeMapStateToProps)(ChoreoCard));
