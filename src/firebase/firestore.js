@@ -28,6 +28,15 @@ export const getChoreo = (choreoId) => {
   })
 };
 
+export const getChoreoIfOwned = (choreoId) => {
+  return db.collection("choreos").doc(choreoId).get({ source: "server" }).then((docSnap) => {
+    if (docSnap.get('creator.id') !== auth.currentUser.uid) {
+      return Promise.reject("No permissions");
+    }
+    return docSnap.data({ serverTimestamps: "estimate" });
+  })
+};
+
 export const getCreatorChoreos = () => {
   return db.collection("choreos").where("creator.id", "==", auth.currentUser.uid).get({ source: "server" })
     .then((querySnap) => {
