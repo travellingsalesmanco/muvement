@@ -235,7 +235,7 @@ const makeMapStateToProps = () => {
       formationLength: choreo.formations.length,
       published: choreo.published,
       //TODO: change when deployed
-      publishedLink: "localhost:3000/choreoview/" + props.choreoId
+      publishedLink: "muvement.app/choreoview/" + props.choreoId
     }
   }
 };
