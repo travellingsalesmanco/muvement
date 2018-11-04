@@ -236,8 +236,7 @@ class Timeline extends Component {
                         opacity={0.7}
                       />
                       <Rect x={transitionStartPos}
-                            width={transitionWidth} height={timelineHeight}
-                            onTap={() => console.log(idx, " transition tapped")}
+                        width={transitionWidth} height={timelineHeight}
                       />
 
                       <Rect x={formationStartPos}
@@ -245,7 +244,7 @@ class Timeline extends Component {
                         fillLinearGradientStartPoint={{ x: 0 }} fillLinearGradientEndPoint={{ x: formationWidth }}
                         fillLinearGradientColorStops={[0, isPast ? "#514a9d" : "#24c6dc", 1, "#514a9d"]}
                         opacity={isPast ? 0.4 : 0.7}
-                        onTap={() => console.log(idx, "formation tapped")} />
+                      />
                       <Group x={formationStartPos + formationWidth / 2} y={timelineHeight / 2}>
                         <Circle
                           fill={'white'}
