@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { Circle, Group, Layer, Line, Rect, Shape, Stage, Text } from 'react-konva';
 import { connect } from 'react-redux';
-import { offsetDuration, offsetTransitionBeforeDuration, jumpToTime } from '../../../actions/timelineActions';
-import { TIMELINE_JUMP, TIMELINE_PAUSE } from '../../../constants/actionTypes';
-import Timestamps from './Timestamps';
-import WaveSurfer from 'wavesurfer.js'
-import { getChoreo } from '../../../selectors/choreo';
+import WaveSurfer from 'wavesurfer.js';
+import { jumpToTime, offsetDuration, offsetTransitionBeforeDuration, offsetTime, overridePlayWithWavesurfer } from '../../../actions/timelineActions';
+import { TIMELINE_PAUSE, TIMELINE_JUMP } from '../../../constants/actionTypes';
 import { timingInterval } from '../../../constants/defaults';
+import Timestamps from './Timestamps';
 
 class Timeline extends Component {
   constructor(props) {
@@ -15,13 +14,15 @@ class Timeline extends Component {
       displayWidth: 0,
       displayHeight: 0,
       midPoint: 0,
-      timelineDraggable: true
+      timelineDraggable: true,
+      musicUrl: props.musicUrl,
+      musicDuration: 0
     }
   }
 
   componentDidMount() {
     this.checkSize();
-    this.renderMusicWaveform();
+    this.mountMusicWaveform();
     window.addEventListener("resize", this.checkSize);
   }
 
@@ -43,8 +44,7 @@ class Timeline extends Component {
         midPoint: this.container.offsetWidth / 2
       });
       if (this.wavesurfer) {
-        console.log("setting wavesurfer height to: ", this.container.offsetHeight);
-        this.wavesurfer.setHeight(this.container.offsetHeight);
+        this.wavesurfer.setHeight(this.state.displayHeight * this.props.timelineRatio * 2)
       }
     }
   };
@@ -110,53 +110,90 @@ class Timeline extends Component {
     }
   }
 
-  renderMusicWaveform() {
+  mountMusicWaveform() {
     this.wavesurfer = WaveSurfer.create({
       container: '#music',
       waveColor: 'violet',
       progressColor: 'purple',
-      barWidth: this.props.msWidth * timingInterval,
+      cursorWidth: 0,
+      barWidth: this.props.msWidth * timingInterval / 2,
+      barGap: 0,
+      normalize: true,
       minPxPerSec: this.props.msWidth * 1000
     });
-    console.log(this.props.musicUrl);
-    this.wavesurfer.load(this.props.musicUrl)
     this.wavesurfer.on('ready', () => {
-      console.log("wavesurfer loaded")
+      console.log("[Audio] Wavesurfer loaded")
       this.wavesurfer.zoom(this.props.msWidth * 1000)
       this.wavesurfer.seekAndCenter(this.props.elapsedTime / (this.wavesurfer.getDuration() * 1000));
+      this.setState({ musicDuration: this.wavesurfer.getDuration() * 1000 })
+      this.wavesurfer.setHeight(this.state.displayHeight * this.props.timelineRatio * 2)
     })
+    if (this.state.musicUrl) {
+      this.wavesurfer.load(this.props.musicUrl)
+    }
+  }
+
+  centerMusicPosition(elapsedTime) {
+    const musicDuration = this.state.musicDuration;
+    if (elapsedTime < 0) {
+      this.wavesurfer.seekAndCenter(0)
+    } else if (elapsedTime >= musicDuration) {
+      this.wavesurfer.seekAndCenter(1);
+    } else {
+      this.wavesurfer.seekAndCenter(elapsedTime / musicDuration)
+    }
+  }
+  renderMusicWaveform() {
+    if (!this.wavesurfer) {
+      // Wavesurfer hasn't been created, nothing to do here
+      return
+    }
+    if (this.state.musicUrl !== this.props.musicUrl) {
+      // Music has changed, reload it if it exists
+      console.log("[Audio] Music updated");
+      this.wavesurfer.empty();
+      this.setState({ musicUrl: this.props.musicUrl })
+      if (this.props.musicUrl) {
+        this.wavesurfer.load(this.props.musicUrl)
+      }
+    }
+    if (this.state.musicDuration) {
+      const musicPlaying = this.wavesurfer.isPlaying();
+      const elapsedTime = this.props.elapsedTime;
+      if (this.props.isPlaying && !musicPlaying && elapsedTime < this.state.musicDuration) {
+        console.log("[Audio] Initiating play control override");
+        this.props.dispatch(overridePlayWithWavesurfer(this.wavesurfer))
+        return;
+      }
+      if (!musicPlaying) {
+        this.centerMusicPosition(elapsedTime);
+      }
+    }
   }
 
   render() {
-    const { data: timeline, msWidth, elapsedTime, handleWidth, labelRadius, timestampSeparation, editable } = this.props;
+    const { data: timeline, msWidth, elapsedTime, handleWidth, labelRadius, timestampSeparation, timelineRatio, editable } = this.props;
     const { displayWidth, displayHeight, midPoint, timelineDraggable } = this.state;
-    const timelineHeight = displayHeight * 0.85;
+    const timelineHeight = displayHeight * timelineRatio;
     const timelineY = displayHeight - timelineHeight;
     const elapsedWidth = elapsedTime * msWidth;
+    // Max timestamp visible on screen
+    const visibleTime = elapsedTime + midPoint / msWidth;
+    // Position offset of max music timestamp and max visible timestamp
+    // i.e. If there's insufficient remaining music to render the full width of displayed area, this value
+    // will turn negative 
+    const musicPosOffset = (this.state.musicDuration - visibleTime) * msWidth;
     let musicWaveformX = this.state.midPoint - elapsedWidth;
     if (musicWaveformX < 0) {
-      musicWaveformX = 0;
+      // The waveform div is a "sliding-window" with width equals displayWidth
+      // This allows music to be centered at midpoint
+      musicWaveformX = musicPosOffset < 0 ? musicPosOffset : 0;
     }
-    if (this.wavesurfer && this.wavesurfer.getDuration() > 0) {
-      const musicPlaying = this.wavesurfer.isPlaying();
-      if (this.props.isPlaying) {
-        if (!musicPlaying) {
-          this.wavesurfer.seekAndCenter(elapsedTime / (this.wavesurfer.getDuration() * 1000));
-          this.wavesurfer.play()
-        } else {
-          console.log(elapsedTime, this.wavesurfer.getCurrentTime() * 1000);
-        }
-      } else {
-        if (musicPlaying) {
-          this.wavesurfer.pause();
-        }
-        this.wavesurfer.seekAndCenter(elapsedTime / (this.wavesurfer.getDuration() * 1000));
-      }
-    }
+    this.renderMusicWaveform();
     return (
       <div style={{ background: '#000', height: "100%", width: "100%", overflow: "hidden", position: "relative" }}
         ref={(ref) => this.container = ref}>
-        <div style={{ position: "absolute", top: timelineY, left: musicWaveformX, height: timelineHeight, width: this.state.displayWidth }} id="music"></div>
+        <div style={{ zIndex: 0, position: "absolute", top: timelineY, left: musicWaveformX, height: timelineHeight * 2, width: this.state.displayWidth }} id="music"></div>
         <Stage preventDefault={true} width={displayWidth} height={displayHeight} ref={ref => this.stageRef = ref}>
           <Layer x={midPoint - elapsedWidth} onTap={this.handleTimelineSelect} onClick={this.handleTimelineSelect}
                  draggable={timelineDraggable}
@@ -179,17 +216,18 @@ class Timeline extends Component {
                   return (
                     <Fragment key={idx}>
                       <Shape x={transitionStartPos}
-                             sceneFunc={(context, shape) => {
-                               context.beginPath()
-                               context.moveTo(0, 0)
-                               context.lineTo(0, timelineHeight)
-                               context.lineTo(transitionWidth, 0)
-                               context.lineTo(transitionWidth, timelineHeight)
-                               context.closePath()
-                               context.fillStrokeShape(shape)
-                             }}
-                             fillLinearGradientStartPoint={{ x: 0 }} fillLinearGradientEndPoint={{ x: transitionWidth }}
-                             fillLinearGradientColorStops={[0, "#24c6dc", 1, "#514a9d"]}
+                        sceneFunc={(context, shape) => {
+                          context.beginPath()
+                          context.moveTo(0, 0)
+                          context.lineTo(0, timelineHeight)
+                          context.lineTo(transitionWidth, 0)
+                          context.lineTo(transitionWidth, timelineHeight)
+                          context.closePath()
+                          context.fillStrokeShape(shape)
+                        }}
+                        fillLinearGradientStartPoint={{ x: 0 }} fillLinearGradientEndPoint={{ x: transitionWidth }}
+                        fillLinearGradientColorStops={[0, "#24c6dc", 1, "#514a9d"]}
+                        opacity={0.7}
                       />
                       <Rect x={transitionStartPos}
                             width={transitionWidth} height={timelineHeight}
@@ -197,11 +235,11 @@ class Timeline extends Component {
                       />
 
                       <Rect x={formationStartPos}
-                            width={formationWidth} height={timelineHeight}
-                            fillLinearGradientStartPoint={{ x: 0 }} fillLinearGradientEndPoint={{ x: formationWidth }}
-                            fillLinearGradientColorStops={[0, isPast ? "#514a9d" : "#24c6dc", 1, "#514a9d"]}
-                            opacity={isPast ? 0.6 : 0.9}
-                            onTap={() => console.log(idx, "formation tapped")} />
+                        width={formationWidth} height={timelineHeight}
+                        fillLinearGradientStartPoint={{ x: 0 }} fillLinearGradientEndPoint={{ x: formationWidth }}
+                        fillLinearGradientColorStops={[0, isPast ? "#514a9d" : "#24c6dc", 1, "#514a9d"]}
+                        opacity={isPast ? 0.4 : 0.7}
+                        onTap={() => console.log(idx, "formation tapped")} />
                       <Group x={formationStartPos + formationWidth / 2} y={timelineHeight / 2}>
                         <Circle
                           fill={'white'}
