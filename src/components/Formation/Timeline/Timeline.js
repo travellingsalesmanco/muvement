@@ -162,7 +162,7 @@ class Timeline extends Component {
       const elapsedTime = this.props.elapsedTime;
       if (this.props.isPlaying && !musicPlaying && elapsedTime < this.state.musicDuration) {
         console.log("[Audio] Initiating play control override");
-        this.props.dispatch(overridePlayWithWavesurfer(this.wavesurfer))
+        this.props.dispatch(overridePlayWithWavesurfer(this.wavesurfer, this.props.data.totalDuration))
         return;
       }
       if (!musicPlaying) {

@@ -41,42 +41,49 @@ export function play(totalDuration) {
  * Use the wavesurfer audio loop to control animations to ensure the two are in sync
  * @param {*} wavesurfer 
  */
-export function overridePlayWithWavesurfer(wavesurfer) {
+export function overridePlayWithWavesurfer(wavesurfer, choreoEndTime) {
   // Set the flag to pause animation loop
   playOverride = true;
   const msPerFrame = 1000 / FPS;
   const musicDuration = wavesurfer.getDuration() * 1000;
+  const stopAudioPlayer = () => {
+    wavesurfer.pause()
+    wavesurfer.un('audioprocess')
+    wavesurfer.un('finish')
+    playOverride = false;
+    console.log("[Audio] Play control returned");
+  }
   return (dispatch, getState) => {
     wavesurfer.on('finish', () => {
       // Audio has finished playing but animation hasn't (animation is longer than audio)
       // Need to restart the animation loop to continue playing animation
-      wavesurfer.un('audioprocess')
-      wavesurfer.un('finish')
       if (getState().UI.elapsedTime !== musicDuration) {
         dispatch({
           type: TIMELINE_JUMP,
           payload: musicDuration
         })
       }
-      playOverride = false;
-      console.log("[Audio] Play control returned");
+      stopAudioPlayer();
     })
     wavesurfer.on('audioprocess', (t) => {
       if (getState().UI.isPlaying) {
         const audioTime = t * 1000;
+        if (audioTime >= choreoEndTime) {
+          dispatch({
+            type: TIMELINE_JUMP,
+            payload: choreoEndTime
+          })
+          stopAudioPlayer();
+          return;
+        } else if (audioTime - msPerFrame > getState().UI.elapsedTime) {
         // Limit animation refresh to FPS
-        if (audioTime - msPerFrame > getState().UI.elapsedTime) {
           dispatch({
             type: TIMELINE_JUMP,
             payload: audioTime
           })
         }
       } else {
-        wavesurfer.pause()
-        wavesurfer.un('audioprocess')
-        wavesurfer.un('finish')
-        playOverride = false;
-        console.log("[Audio] Play control returned");
+        stopAudioPlayer();
       }
     })
     wavesurfer.setPlaybackRate(getState().UI.playbackRate)
