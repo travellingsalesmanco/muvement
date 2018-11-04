@@ -56,7 +56,7 @@ class LandingPage extends React.Component {
                 <p className="muvement-features">How it works</p>
                 <SpotlightIcon style={{ fontSize: '35px' }} />
                 <p className="muvement-features-text">
-                  Stage your formations, try it out below!
+                  Seamless and stylish way to create your formations
                 </p>
                 <div className="demo-grid">
                   <ResponsiveStageCanvas choreoId={choreoId}
