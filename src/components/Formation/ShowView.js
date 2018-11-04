@@ -1,14 +1,15 @@
-import { Button, Icon, Upload, message } from 'antd';
+import { Button, Icon, message, Upload } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gotoFormation, updateChoreoMusic } from '../../actions/choreoActions';
 import { jumpToTime, play, slowDown, speedUp } from '../../actions/timelineActions';
 import { TIMELINE_JUMP, TIMELINE_PAUSE, TIMELINE_PLAY } from '../../constants/actionTypes';
+import { storage } from '../../firebase';
+import { getChoreo } from '../../selectors/choreo';
 import { getTimeline } from '../../selectors/layout';
 import './FormationScreen.css';
 import Timeline from './Timeline/Timeline';
-import { storage } from '../../firebase';
-import { getChoreo } from '../../selectors/choreo';
+import { removeChoreoMusic } from '../../firebase/storage';
 
 class ShowView extends Component {
   componentDidMount() {
@@ -60,12 +61,18 @@ class ShowView extends Component {
   }
   handleMusicUploadChange = (info) => {
     if (info.file.status === 'uploading') {
-      console.log("uploading music");
+      console.log("[Audio] Uploading...");
     } else if (info.file.status === 'done') {
-      console.log("upload complete", info.file.response);
+      console.log("[Audio] Upload complete");
       this.props.dispatch(updateChoreoMusic(this.props.choreoId, info.file.response));
     }
   };
+
+  handleRemoveMusic = () => {
+    // TODO: Confirmation dialog
+    this.props.dispatch(updateChoreoMusic(this.props.choreoId, null))
+    removeChoreoMusic(this.props.choreoId);
+  }
 
   render() {
     const { elapsedTime, timeline, isPlaying, choreoId, musicUrl, editable } = this.props;
