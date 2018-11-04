@@ -5,18 +5,22 @@ import {
   TIMELINE_PAUSE, TIMELINE_PLAY
 } from "../constants/actionTypes";
 import { getChoreo } from "../selectors/choreo";
-import { minFormationDuration, minTransitionDuration } from "../constants/defaults";
+import { minFormationDuration, minTransitionDuration, FPS } from "../constants/defaults";
 import { truncToInterval, truncToPrecision } from "../lib/timelineUtils";
 
 
 let timer = null;
-export function play(totalDuration, fps, speedup = 1) {
-  const msPerFrame = 1000 / fps;
-  const toAdvance = msPerFrame * speedup;
+let playOverride = false
+export function play(totalDuration) {
+  const msPerFrame = 1000 / FPS;
   return (dispatch, getState) => {
     const advanceNextFrame = () => {
       if (getState().UI.isPlaying) {
-        let newTime = getState().UI.elapsedTime + toAdvance
+        if (playOverride) {
+          return
+        }
+        const toAdvance = msPerFrame * getState().UI.playbackRate;
+        let newTime = getState().UI.elapsedTime + toAdvance;
         if (newTime >= totalDuration) {
           newTime = totalDuration;
           dispatch({ type: TIMELINE_PAUSE })
@@ -30,6 +34,53 @@ export function play(totalDuration, fps, speedup = 1) {
       }
     }
     timer = setInterval(advanceNextFrame, msPerFrame);
+  }
+}
+
+/**
+ * Use the wavesurfer audio loop to control animations to ensure the two are in sync
+ * @param {*} wavesurfer 
+ */
+export function overridePlayWithWavesurfer(wavesurfer) {
+  // Set the flag to pause animation loop
+  playOverride = true;
+  const msPerFrame = 1000 / FPS;
+  const musicDuration = wavesurfer.getDuration() * 1000;
+  return (dispatch, getState) => {
+    wavesurfer.on('finish', () => {
+      // Audio has finished playing but animation hasn't (animation is longer than audio)
+      // Need to restart the animation loop to continue playing animation
+      wavesurfer.un('audioprocess')
+      wavesurfer.un('finish')
+      if (getState().UI.elapsedTime !== musicDuration) {
+        dispatch({
+          type: TIMELINE_JUMP,
+          payload: musicDuration
+        })
+      }
+      playOverride = false;
+      console.log("[Audio] Play control returned");
+    })
+    wavesurfer.on('audioprocess', (t) => {
+      if (getState().UI.isPlaying) {
+        const audioTime = t * 1000;
+        // Limit animation refresh to FPS
+        if (audioTime - msPerFrame > getState().UI.elapsedTime) {
+          dispatch({
+            type: TIMELINE_JUMP,
+            payload: audioTime
+          })
+        }
+      } else {
+        wavesurfer.pause()
+        wavesurfer.un('audioprocess')
+        wavesurfer.un('finish')
+        playOverride = false;
+        console.log("[Audio] Play control returned");
+      }
+    })
+    wavesurfer.setPlaybackRate(getState().UI.playbackRate)
+    wavesurfer.play(getState().UI.elapsedTime / 1000)
   }
 }
 
