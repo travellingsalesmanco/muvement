@@ -13,13 +13,14 @@ localForage.config({
 })
 const migrations = {
   0: () => rootReducer(undefined, DUMMY_ACTION),
-  1: () => rootReducer(undefined, DUMMY_ACTION)
+  1: () => rootReducer(undefined, DUMMY_ACTION),
+  2: () => rootReducer(undefined, DUMMY_ACTION)
 }
 const persistConfig = {
   key: "muvement",
   storage: localForage,
   blacklist: ['UI'],
-  version: 1,
+  version: 2,
   migrate: createMigrate(migrations)
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -254,8 +254,8 @@ class FormationScreen extends Component {
 
 function mapStateToProps(state, props) {
   const choreoId = props.match.params.choreoId;
-  const choreo = getChoreo(state, choreoId)
-  if (!props.loading && choreo) {
+  const choreo = getChoreo(state, choreoId);
+  if (choreo) {
     const activeFormation = choreo.formations[state.UI.activeFormation];
     return {
       choreoId: choreoId,
@@ -265,11 +265,13 @@ function mapStateToProps(state, props) {
       animated: state.UI.animated
     }
   } else {
+    const emptyChoreo = getChoreo(state, "empty");
+    const emptyFormation = emptyChoreo.formations[0];
     return {
-      choreoId: 'demo',
+      choreoId: 'empty',
       formationId: 0,
-      choreoName: "Placeholder",
-      formationName: "Placeholder",
+      choreoName: emptyChoreo.name,
+      formationName: emptyFormation.name,
       animated: false
     }
   }

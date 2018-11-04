@@ -1,6 +1,6 @@
 export const demoChoreo = {
   createdAt: { seconds: 1541329788, nanoseconds: 157000000 },
-  creator: { id: "ircJhRoOiHPN8NhAeEaqQOZ5ndn1", name: "John Phua" },
+  creator: { id: "dummy", name: "Dummy" },
   updatedAt: { seconds: 1541330798, nanoseconds: 342000000 },
   imageUrl: "https://dummyimage.com/300x300/000000/fff.jpg&text=L",
   musicUrl: null,
@@ -92,9 +92,28 @@ export const demoChoreo = {
   }]
 };
 
-export const demoChoreos = {
+export const emptyChoreo = {
+  createdAt: { nanoseconds: 171000000, seconds: 1541337862 },
+  creator: { id: "dummy", name: "Dummy" },
+  updatedAt: { "seconds": 1541342390, "nanoseconds": 681000000 },
+  imageUrl: "https://dummyimage.com/300x300/000000/fff.jpg&text=t",
+  musicUrl: null,
+  name: "test",
+  published: true,
+  stageDim: { gridSize: 0.5, height: 5.18, units: "m", width: 9.6 },
+  dancers: [],
+  formations: [{
+    dancers: [],
+    duration: 5000,
+    name: "",
+    transitionBefore: { duration: 2000, midPoint: 0 }
+  }]
+};
+
+export const defaultChoreos = {
   byId: {
-    demo: demoChoreo
+    demo: demoChoreo,
+    empty: emptyChoreo
   },
   myChoreos: []
 };

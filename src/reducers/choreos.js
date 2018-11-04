@@ -11,7 +11,7 @@ import {
   UPDATE_CHOREO_MUSIC,
 } from '../constants/actionTypes';
 import { defaultStageDim } from '../constants/defaults';
-import { demoChoreos } from '../constants/dummyData';
+import { defaultChoreos } from '../constants/dummyData';
 import dancers from './dancers';
 import formations from './formations';
 
@@ -64,7 +64,7 @@ const choreoReducer = combineReducers({
 });
 
 // Choreos
-export default (state = demoChoreos, action) => {
+export default (state = defaultChoreos, action) => {
   switch (action.type) {
     case ADD_CHOREO: {
       const { choreoId, payload: choreo } = action;
