@@ -76,5 +76,5 @@ const authCondition = (authUser) => !!authUser;
 const failRoute = "/";
 
 export default withAuthorization(authCondition, failRoute)(
-  withFireStoreSync(false)(withRouter(connect(mapStateToProps)(ChoreoListScreen)))
+  withFireStoreSync(false, true)(withRouter(connect(mapStateToProps)(ChoreoListScreen)))
 );

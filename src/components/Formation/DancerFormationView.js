@@ -220,4 +220,4 @@ function mapStateToProps(state, props) {
   }
 }
 
-export default withFireStoreSync(true)(connect(mapStateToProps)(FormationScreen));
+export default withFireStoreSync(true, false)(connect(mapStateToProps)(FormationScreen));

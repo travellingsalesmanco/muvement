@@ -281,4 +281,4 @@ function mapStateToProps(state, props) {
 const authCondition = (authUser) => !!authUser;
 const failRoute = '/';
 
-export default withAuthorization(authCondition, failRoute)(withFireStoreSync(true)(connect(mapStateToProps)(FormationScreen)));
+export default withAuthorization(authCondition, failRoute)(withFireStoreSync(true, true)(connect(mapStateToProps)(FormationScreen)));
