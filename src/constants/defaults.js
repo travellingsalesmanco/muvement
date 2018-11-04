@@ -19,6 +19,7 @@ export const defaultUI = {
   isPlaying: false,
   animated: false,
   elapsedTime: 0,
+  playbackRate: 1,
   activeFormation: 0,
   showLabels: true,
   selectedDancers: []
@@ -28,3 +29,4 @@ export const minFormationDuration = 1000;
 export const minTransitionDuration = 1000;
 export const timingInterval = 250;
 export const timingPrecision = 10;
+export const FPS = 30;
