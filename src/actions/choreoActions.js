@@ -108,8 +108,8 @@ export function updateChoreoIfNewer(id, choreo) {
         payload: choreo
       });
     }
+    return Promise.resolve();
   }
-  return Promise.resolve();
 }
 
 export function syncCreatorChoreo(id, choreo) {
