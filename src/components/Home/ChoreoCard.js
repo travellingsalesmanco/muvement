@@ -12,7 +12,15 @@ const confirm = Modal.confirm;
 const PublishedView = ({ link }) => (
   <Fragment>
     <h3>Share with your performers!</h3>
-    <p className="publish-link">{link}</p>
+    <MobilePortrait>
+      <p className="publish-link" style={{ width: '70vw' }}>{link}</p>
+    </MobilePortrait>
+    <MobileLandscape>
+      <p className="publish-link">{link}</p>
+    </MobileLandscape>
+    <MinTablet>
+      <p className="publish-link">{link}</p>
+    </MinTablet>
   </Fragment>
 );
 
