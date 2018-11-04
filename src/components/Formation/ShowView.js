@@ -52,7 +52,7 @@ class ShowView extends Component {
   // Binary search for formation in focus
   findCurrentFormation() {
     const cumDurations = this.props.timeline.cumDurations;
-    let l = 0, r = cumDurations.length;
+    let l = 0, r = cumDurations.length - 1;
     let mid = 0;
     while (l < r) {
       mid = Math.floor((r + l) / 2);
