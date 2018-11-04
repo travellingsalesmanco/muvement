@@ -89,7 +89,7 @@ class ShowView extends Component {
             <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-right"} theme="outlined" />
           </Button>
         </div>
-        <div>
+        <div style={{ margin: '1em 0' }}>
           <Upload 
             name={"music"}
             accept={"audio/*"}

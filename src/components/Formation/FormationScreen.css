@@ -205,6 +205,6 @@ and (orientation : portrait) {
     }
 
     .show-timing {
-        margin-top: 2em;
+        margin-top: 1rem;
     }
 }
