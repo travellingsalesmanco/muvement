@@ -19,7 +19,8 @@ class StageCanvas extends PureComponent {
         {
           animated
             ? <AnimatedDancerDotsLayer choreoId={choreoId}
-                                       width={width} height={height} stageRect={stageLayout.stageRect} />
+                                       width={width} height={height} stageRect={stageLayout.stageRect}
+                                       preview={preview} />
             : <DancerDotsLayer choreoId={choreoId} formationId={formationId}
                                width={width} height={height} stageRect={stageLayout.stageRect}
                                editable={editable} preview={preview} />
