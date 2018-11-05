@@ -223,6 +223,7 @@ button.ant-btn.mp-back-button.ant-btn-icon-only{
   font-family: "Sen-Bold";
   padding: 0px;
   font-size: 1em;
+  outline: none;
 }
 
 .mobile-switch-tabs-inactive {

@@ -16,8 +16,12 @@ export default (state = [], action) => {
     }
     case RENAME_DANCER: {
       const {oldName, newName} = action.payload;
-      let newDancers = state.filter(name => name !== oldName);
-      newDancers.push(newName);
+      // let newDancers = state.filter(name => name !== oldName);
+      // newDancers.push(newName);
+      // Assumes that s
+      let newDancers = state.slice();
+      const index = state.indexOf(oldName);
+      newDancers[index] = newName;
       return newDancers;
     }
     default:

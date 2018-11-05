@@ -1,19 +1,3 @@
-#performer-list .ant-btn-background-ghost {
-  border-color: #24c6dc;
-  color: #24c6dc;
-}
-
-#performer-list .ant-btn:hover,
-#performer-list .ant-btn:focus {
-  border-color: #24c6dc;
-  color: #24c6dc;
-}
-
-#performer-list .ant-btn {
-  border-radius: 20px;
-  margin: 10px 0;
-}
-
 #performer-list .ant-row {
   margin: 10px 0;
 }
@@ -21,6 +5,47 @@
 #performer-list .anticon-minus:hover,
 #performer-list .anticon-plus:hover {
   cursor: pointer;
+}
+
+#performer-list button,
+#performer-list button:active,
+#performer-list button:hover {
+  border: 1px solid #24C6DC;
+  border-radius: 50px;
+  font-family: Sen-Bold;
+  color: white;
+  font-size: 1em;
+  height: 3em;
+  margin-top: 1em;
+  padding: 0 0.5em;
+  background-color: #24C6DC;
+}
+
+#dancer-item {
+  font-size: 1.3em;
+  color: #fff;
+  font-family: 'Sen-Regular', Arial, sans-serif;
+}
+
+#dancer-item .ant-input {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
+  color: #fff;
+  background-color: transparent;
+  font-family: 'Sen-Regular', Arial, sans-serif;
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
+}
+
+#dancer-item .ant-input:focus,
+#dancer-item .ant-input:hover {
+  box-shadow: none;
+  border-right-width: 0;
 }
 
 .add-performer {
@@ -37,4 +62,56 @@
 
 .ant-row .formation-dancers {
     margin-top: 2em;
+}
+
+.mp-performer-list {
+  padding: 1em
+}
+
+.mp-performer-list button,
+.mp-performer-list button:active,
+.mp-performer-list button:hover {
+  border: 1px solid #24C6DC;
+  border-radius: 50px;
+  font-family: Sen-Bold;
+  color: white;
+  font-size: 1.2em;
+  height: 3em;
+  margin-top: 1em;
+  width: 70%;
+  background-color: #24C6DC;
+}
+
+
+.mp-performer-list .ant-btn:active {
+  color: #24C6DC;
+  border-color: #24C6DC;
+}
+
+.mp-dancer-item {
+  font-size: 1.3em;
+  color: #fff;
+  font-family: 'Sen-Regular', Arial, sans-serif;
+  margin: 0 2em;
+}
+
+.mp-dancer-item .ant-input {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
+  color: #fff;
+  background-color: transparent;
+  font-family: 'Sen-Regular', Arial, sans-serif;
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 60%;
+}
+
+.mp-dancer-item .ant-input:focus,
+.mp-dancer-item .ant-input:hover {
+  box-shadow: none;
+  border-right-width: 0;
 }

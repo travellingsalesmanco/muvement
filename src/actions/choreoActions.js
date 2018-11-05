@@ -4,17 +4,17 @@ import {
   REMOVE_CHOREO,
   UPDATE_CHOREO_IMAGE,
   ADD_DANCER,
+  RENAME_DANCER,
   ADD_FORMATION,
   EDIT_STAGE_DIMENSIONS,
   REMOVE_DANCER,
   REORDER_FORMATION,
   SET_LABELS_VIEW,
-  SWITCH_ACTIVE_CHOREO,
   SWITCH_ACTIVE_FORMATION,
   REMOVE_FORMATION,
-  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY
+  UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY, UPDATE_CHOREO_MUSIC,
+  PUBLISH_CHOREO, UNPUBLISH_CHOREO
 } from "../constants/actionTypes";
-import { defaultStageDim } from "../constants/defaults";
 import { getChoreo } from "../selectors/choreo";
 
 function containsDancer(choreoId, name, state) {
@@ -47,9 +47,7 @@ function getLostChoreos(choreos, state) {
 
 function isNewer(choreo, choreoId, state) {
   const currChoreo = getChoreo(state, choreoId);
-  // TODO: remove dummy check when deploy
-  return currChoreo.updatedAt !== "timestamp2"
-    ? currChoreo.updatedAt.seconds < choreo.updatedAt.seconds
+  return currChoreo ? currChoreo.updatedAt.seconds < choreo.updatedAt.seconds
     : true;
 }
 
@@ -65,10 +63,6 @@ export function addChoreo(id, choreo) {
       type: ADD_CHOREO,
       choreoId: id,
       payload: choreo
-    });
-    dispatch({
-      type: SWITCH_ACTIVE_CHOREO,
-      payload: id
     });
     return res;
   }
@@ -95,6 +89,16 @@ export function updateChoreoImage(id, link) {
   }
 }
 
+export function updateChoreoMusic(id, link) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_CHOREO_MUSIC,
+      choreoId: id,
+      payload: link
+    })
+  }
+}
+
 export function updateChoreoIfNewer(id, choreo) {
   return (dispatch, getState) => {
     if (isNewer(choreo, id, getState())) {
@@ -104,6 +108,20 @@ export function updateChoreoIfNewer(id, choreo) {
         payload: choreo
       });
     }
+    return Promise.resolve();
+  }
+}
+
+export function syncCreatorChoreo(id, choreo) {
+  return (dispatch, getState) => {
+    if (!hasChoreo(id, getState()) || !ownsChoreo(id, getState())) {
+      dispatch({
+        type: ADD_CHOREO,
+        choreoId: id,
+        payload: choreo
+      });
+    }
+    return Promise.resolve();
   }
 }
 
@@ -119,7 +137,7 @@ export function syncCreatorChoreos(choreos) {
       })
     });
     choreos.forEach((choreo) => {
-      if (!hasChoreo(choreo.id, getState())) {
+      if (!hasChoreo(choreo.id, getState()) || !ownsChoreo(choreo.id, getState())) {
         // Add choreos not on local
         console.log("ADDING");
         dispatch({
@@ -136,6 +154,21 @@ export function syncCreatorChoreos(choreos) {
         });
       }
     });
+    return Promise.resolve()
+  }
+}
+
+export function addDancer(choreoId, name) {
+  return (dispatch, getState) => {
+    if (!containsDancer(choreoId, name, getState())) {
+      dispatch({
+        type: ADD_DANCER,
+        choreoId: choreoId,
+        payload: name
+      })
+    } else {
+      console.log("[ERROR] Duplicate dancer name")
+    }
   }
 }
 
@@ -155,6 +188,20 @@ export function addDancers(choreoId, names) {
   }
 }
 
+export function removeDancer(choreoId, name) {
+  return (dispatch, getState) => {
+    if (containsDancer(choreoId, name, getState())) {
+      dispatch({
+        type: REMOVE_DANCER,
+        choreoId: choreoId,
+        payload: name
+      })
+    } else {
+      console.log("[ERROR] Dancer does not exist")
+    }
+  }
+}
+
 export function removeDancers(choreoId, names) {
   return (dispatch, getState) => {
     names.forEach((name) => {
@@ -168,6 +215,27 @@ export function removeDancers(choreoId, names) {
         console.log("[ERROR] Dancer does not exist")
       }
     });
+  }
+}
+
+export function renameDancer(choreoId, oldName, newName) {
+  return (dispatch, getState) => {
+    if (containsDancer(choreoId, oldName, getState())) {
+      if (!containsDancer(choreoId, newName, getState())) {
+        dispatch({
+          type: RENAME_DANCER,
+          choreoId: choreoId,
+          payload: {
+            oldName: oldName,
+            newName: newName
+          }
+        })
+      } else {
+        console.log("[ERROR] Duplicate dancer name")
+      }
+    } else {
+      console.log("[ERROR] Dancer does not exist")
+    }
   }
 }
 
@@ -306,6 +374,24 @@ export function clearFormationsHistory(choreoId) {
   return (dispatch) => {
     dispatch({
       type: CLEAR_FORMATION_HISTORY,
+      choreoId: choreoId,
+    })
+  }
+}
+
+export function publishChoreo(choreoId) {
+  return (dispatch) => {
+    dispatch({
+      type: PUBLISH_CHOREO,
+      choreoId: choreoId,
+    })
+  }
+}
+
+export function unpublishChoreo(choreoId) {
+  return (dispatch) => {
+    dispatch({
+      type: UNPUBLISH_CHOREO,
       choreoId: choreoId,
     })
   }

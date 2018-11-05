@@ -17,6 +17,7 @@
 .new-choreo {
   height: 250px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
@@ -27,17 +28,14 @@
 }
 
 .new-choreo-icon {
-    position: absolute;
-    bottom: 120px;
   font-size: 64px;
 }
 
 .add-choreo-title{
-    position: absolute;
-    bottom: 70px;
     font-family: "Sen-Black";
     color: white;
     font-size: 19px;
+  text-align: center;
 }
 
 .choreo-card {
@@ -78,9 +76,8 @@
 .description {
   margin-top: 10px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   color: #fff;
   font-family: 'Sen-Bold';
   font-size: 16px;
@@ -95,12 +92,24 @@
 
 .description-inner {
   display: flex;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   color: #fff;
   font-family: 'Sen-Bold';
   font-size: 16px;
+}
+
+.description-inner .icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description-inner .icons .anticon {
+  font-size: 20px;
+  margin-right: 0.5em;
 }
 
 .new-choreo-modal .ant-modal-content {
@@ -161,7 +170,72 @@
   font-size: 20px;
 }
 
+/**/
 
+.publish-link {
+  background: linear-gradient(to right, #24c6dc, #514a9d);
+  border: 0;
+  font-family: 'Sen-Regular', Arial, sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  overflow-x: scroll;
+  white-space: nowrap;
+  margin-bottom: 0;
+  /*text-overflow: ellipsis;*/
+}
+
+.publish-copy-button {
+  padding: 0 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 0 transparent;
+}
+
+.publish-modal .ant-modal-content {
+  /*border: 5px solid #24c6dc;*/
+  padding: 2px 2px;
+  background-image: linear-gradient(to right, #24c6dc, #514a9d);
+  border-radius: 15px;
+}
+
+.publish-modal .ant-modal-close {
+  color: #fff;
+}
+
+.publish-modal .ant-modal-body {
+  padding: 0;
+}
+
+.publish-modal-inner {
+  background: #131313;
+  padding: 2rem;
+  border-radius: 1em;
+  color: #fff;
+  text-align: center;
+}
+
+.publish-modal-inner > h3 {
+  font-family: 'Sen-Black', Arial, sans-serif;
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.publish-modal-inner > button {
+  border-radius: 1em;
+  margin-top: 1em;
+  border: 2px solid #24c6dc;
+  font-family: 'Sen-Black', Arial, sans-serif;
+  color: #24c6dc;
+  background: transparent;
+  width: 10em;
+  height: 2em;
+  font-size: 1rem;
+}
+
+/**/
 
 /* Mobile Portrait */
 .mp-dashboard-title{
@@ -177,6 +251,7 @@
   height: 150px;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
@@ -187,14 +262,10 @@
 }
 
 .mp-new-choreo-icon {
-  position: absolute;
-  bottom: 80px;
   font-size: 40px;
 }
 
 .mp-add-choreo-title{
-    position: absolute;
-    bottom: 30px;
     font-family: "Sen-Black";
     color: white;
     font-size: 14px;
@@ -230,8 +301,6 @@
 
 .mp-description {
   margin-top: 10px;
-  justify-content: space-between;
-  align-items: center;
   color: #fff;
   font-family: 'Sen-Bold';
   font-size: 15px;
@@ -253,6 +322,17 @@
   color: #fff;
   font-family: 'Sen-Bold';
   font-size: 16px;
+}
+
+.mp-description-inner .icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mp-description-inner .icons .anticon {
+  font-size: 22px;
+  margin-right: 0.3em;
 }
 
 .mp-new-choreo-modal .ant-modal-content {

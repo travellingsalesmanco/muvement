@@ -47,9 +47,10 @@ class VerticalSlideList extends React.Component {
       width: '100%'
     });
 
+    const { editable } = this.props;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable">
+        <Droppable droppableId="droppable" isDropDisabled={!editable}>
           {(provided, snapshot) => (
             <div
               ref={provided.innerRef}
@@ -59,7 +60,7 @@ class VerticalSlideList extends React.Component {
               {this.props.formations.map((item, index) => (
                 <div key={index} className={index === this.props.activeFormationId ? 'linear-gradient-bg' : null}
                      onClick={() => this.handleClick(index)}>
-                  <Draggable draggableId={index} index={index}>
+                  <Draggable draggableId={index} index={index} isDragDisabled={!editable}>
                     {(provided, snapshot) => {
                       return (<div
                         ref={provided.innerRef}
@@ -71,7 +72,7 @@ class VerticalSlideList extends React.Component {
                         )}
                       >
                         <div style={{ height: '9em', width: '100%', pointerEvents:"None"}}>
-                          <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index}/>
+                          <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} preview/>
                         </div>
                         <span className="slide-title">{index + 1}. {item.name}</span>
                       </div>)
@@ -89,10 +90,8 @@ class VerticalSlideList extends React.Component {
 }
 
 function mapStateToProps(state, props) {
-  const choreoId = props.match.params.choreoId;
-  const choreo = getChoreo(state, choreoId);
+  const choreo = getChoreo(state, props.choreoId);
   return {
-    choreoId: choreoId,
     activeFormationId: state.UI.activeFormation,
     formations: choreo.formations
   }

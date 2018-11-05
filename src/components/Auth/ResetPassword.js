@@ -28,7 +28,7 @@ class ResetPassword extends React.Component {
     const { Header } = Layout;
     const { loading, disabled, sent } = this.state;
     return (
-      <Layout>
+      <Layout style={{ height: '100vh' }}>
         <Header className="auth-header">
           <div>
             <Button className="auth-backbutton" style={{ fontSize: '25px' }} icon="left"
@@ -36,12 +36,12 @@ class ResetPassword extends React.Component {
             <span className="auth-backbutton-desc">Setting</span>
           </div>
         </Header>
-        <div className="auth-background">
+        <div className="settings-background">
           <h1 className="auth-forgetpw-title">RESET PASSWORD</h1>
-          <div>
+          <div style={{ padding: '0 2em', textAlign: 'center', color: '#fff'}}>
             {
               sent
-                ? <span className={"auth-text"}>An email has been sent to you!</span>
+                ? <span>An email has been sent to you!</span>
                 : <Button className="auth-signup-button" type="primary" htmlType="submit"
                           onClick={() => this.handleSubmit()}
                           loading={loading}

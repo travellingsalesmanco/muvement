@@ -3,12 +3,14 @@ import { Circle, Text } from 'react-konva';
 
 class DancerDot extends PureComponent {
   render() {
-    const { radius, number, name, onSelect } = this.props;
+    const { radius, number, name, onSelect, selected, isAnySelected } = this.props;
     // console.log(name, " dot rendered");
+    const circleFill = (selected || !isAnySelected) ? '#24c6dc' : 'white';
+    const textFill = (selected || !isAnySelected) ? 'white' : '#24c6dc';
     return (
       <Fragment>
         <Circle
-          fill={'#24c6dc'}
+          fill={circleFill}
           radius={radius}
         />
         <Text
@@ -18,12 +20,12 @@ class DancerDot extends PureComponent {
           height={radius * 2}
           align={'center'}
           verticalAlign={'middle'}
-          fill={'white'}
+          fill={textFill}
           text={number}
-          fontSize={12}
+          fontSize={radius}
           fontFamily={"Sen-Bold"}
-          onClick={onSelect ? (e) => onSelect(e, name) : undefined}
-          onTap={onSelect ? (e) => onSelect(e, name) : undefined}
+          // onClick={onSelect ? (e) => onSelect(e, name) : undefined}
+          // onTap={onSelect ? (e) => onSelect(e, name) : undefined}
         />
       </Fragment>
     );

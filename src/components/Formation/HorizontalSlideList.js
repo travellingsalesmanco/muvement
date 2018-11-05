@@ -28,6 +28,13 @@ class HorizontalSlideList extends React.Component {
     this.onDragEnd = this.onDragEnd.bind(this);
   }
 
+  componentDidUpdate() {
+    const scrollToIndex = this.props.activeFormationId;
+    document.getElementById(scrollToIndex.toString()).scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+
   onDragEnd(result) {
     // dropped outside the list
     if (!result.destination) {
@@ -49,10 +56,10 @@ class HorizontalSlideList extends React.Component {
   };
 
   render() {
-    const { activeFormationId } = this.props;
+    const { activeFormationId, editable } = this.props;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable" direction="horizontal">
+        <Droppable droppableId="droppable" direction="horizontal" isDropDisabled={!editable}>
           {(provided, snapshot) => (
             <div
               ref={provided.innerRef}
@@ -60,8 +67,8 @@ class HorizontalSlideList extends React.Component {
               {...provided.droppableProps}
             >
               {this.props.formations.map((item, index) => (
-                <div key={index} onClick={() => this.handleClick(index)}>
-                  <Draggable draggableId={index} index={index}>
+                <div key={index} id={index} onClick={() => this.handleClick(index)}>
+                  <Draggable draggableId={index} index={index} isDragDisabled={!editable}>
                     {(provided, snapshot) => {
                       return (<div
                         ref={provided.innerRef}
@@ -88,7 +95,7 @@ class HorizontalSlideList extends React.Component {
                           pointerEvents: "None",
                           background: '#000',
                         }}>
-                          <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} />
+                          <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} preview />
                         </div>
                         </div>
                         <span className="slide-title">{index + 1}. {item.name}</span>
@@ -107,10 +114,8 @@ class HorizontalSlideList extends React.Component {
 }
 
 function mapStateToProps(state, props) {
-  const choreoId = props.match.params.choreoId;
-  const choreo = getChoreo(state, choreoId);
+  const choreo = getChoreo(state, props.choreoId);
   return {
-    choreoId: choreoId,
     activeFormationId: state.UI.activeFormation,
     formations: choreo.formations
   }

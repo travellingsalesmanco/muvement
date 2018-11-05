@@ -38,23 +38,25 @@ class FormationPreviewCards extends React.Component {
                   <Col span={11}>
                     {
                       index === 0
-                      ? <div className="formation-card" onClick={this.handleAdd}>
-                          <div className="new-formation" ref={node => { this.container = node; }}>
+                        ? <div className="formation-card" onClick={this.handleAdd}>
+                          <div className="new-formation" ref={node => {
+                            this.container = node;
+                          }}>
                             <Icon type="file-add" className="add-formation-icon" />
                             <span className="add-formation-title"> ADD FORMATION </span>
                           </div>
                         </div>
-                      : <div className="formation-card">
+                        : <div className="formation-card">
                           <div onClick={() => this.handleClick(index)}>
                             {
                               this.props.editState &&
                               <span>
                                 <Icon type="minus-circle" theme="outlined"
-                                      className={'delete-button'} onClick={() => this.handleRemove(index)}/>
+                                      className={'delete-button'} onClick={() => this.handleRemove(index)} />
                               </span>
                             }
                             <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
-                              <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index - 1} />
+                              <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index - 1} preview />
                             </div>
                           </div>
                           <div className="formation-name">
@@ -64,28 +66,28 @@ class FormationPreviewCards extends React.Component {
                     }
                   </Col>
                   <Col span={11}>
-                  {
-                    formations[index + 1]
-                      ?
-                      <div className="formation-card">
-                        <div onClick={() => this.handleClick(index + 1)}>
-                          {
-                            this.props.editState &&
-                            <span>
+                    {
+                      formations[index + 1]
+                        ?
+                        <div className="formation-card">
+                          <div onClick={() => this.handleClick(index + 1)}>
+                            {
+                              this.props.editState &&
+                              <span>
                               <Icon type="minus-circle" theme="outlined"
-                                    className={'delete-button'} onClick={() => this.handleRemove(index + 1)}/>
+                                    className={'delete-button'} onClick={() => this.handleRemove(index + 1)} />
                             </span>
-                          }
-                          <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
-                            <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} />
+                            }
+                            <div className="ant-formation-card-cover" style={{ pointerEvents: "None" }}>
+                              <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={index} preview />
+                            </div>
+                          </div>
+                          <div className="formation-name">
+                            <span>{formations[index + 1].name}</span>
                           </div>
                         </div>
-                        <div className="formation-name">
-                          <span>{formations[index + 1].name}</span>
-                        </div>
-                      </div>
-                      : null
-                  }
+                        : null
+                    }
                   </Col>
                 </Row>
               );
@@ -96,4 +98,5 @@ class FormationPreviewCards extends React.Component {
     );
   }
 }
+
 export default withRouter(connect()(FormationPreviewCards));

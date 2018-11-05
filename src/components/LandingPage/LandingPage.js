@@ -1,5 +1,5 @@
 import { Button, Col, Layout, Row } from 'antd';
-import React, { Fragment }from 'react';
+import React, { Fragment } from 'react';
 import ReactGA from 'react-ga';
 import GradientSVG from "../../icons/GradientSVG";
 import HeadphoneIcon from "../../icons/HeadphoneIcon";
@@ -13,14 +13,24 @@ import './LandingPage.css';
 import { withRouter } from "react-router-dom";
 import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+import connect from "react-redux/es/connect/connect";
+import { getChoreo } from "../../selectors/choreo";
+import { stopPlaying, loop } from "../../actions/timelineActions";
+import { getTimeline } from "../../selectors/layout";
 
 class LandingPage extends React.Component {
   componentDidMount() {
     ReactGA.pageview('Landing Page');
+    this.props.dispatch(loop(this.props.timeline.totalDuration, 30, 1))
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(stopPlaying());
   }
 
   render() {
     const { Header, Content, Sider } = Layout;
+    const { choreoId } = this.props;
     return (
       <Fragment>
         <MobilePortrait>
@@ -44,21 +54,21 @@ class LandingPage extends React.Component {
                 <Button className="landing-signup-button" onClick={() => this.props.history.push(`/signup`)}>LETS GET
                   CREATIVE</Button>
                 <p className="muvement-features">How it works</p>
-                <SpotlightIcon style={{ fontSize: '35px'}}/>
+                <SpotlightIcon style={{ fontSize: '35px' }} />
                 <p className="muvement-features-text">
-                  Stage your formations, try it out below!
+                  Seamless and stylish way to create your formations
                 </p>
                 <div className="demo-grid">
-                  <ResponsiveStageCanvas choreoId={"demo"} formationId={0}
-                                         withGrid demo />
+                  <ResponsiveStageCanvas choreoId={choreoId}
+                                         withGrid preview animated />
                 </div>
-                <HeadphoneIcon style={{ fontSize: '20px' , marginTop: '0.5em'}}/>
+                <HeadphoneIcon style={{ fontSize: '20px', marginTop: '0.5em' }} />
                 <p className="muvement-features-text">
                   Sync transitions with your audio track
                 </p>
                 <img className="muvement-features-img" src={FeatureTwo} alt="muvement name" />
 
-                <SlideShareIcon style={{ fontSize: '35px' , marginTop: '0.5em'}}/>
+                <SlideShareIcon style={{ fontSize: '35px', marginTop: '0.5em' }} />
                 <p className="muvement-features-text">
                   Organise your performances <br /> anywhere and anytime!
                 </p>
@@ -89,16 +99,18 @@ class LandingPage extends React.Component {
                     <div className="tablet-muvement-name">
                       <img className="ml-muvement-name-img" src={Name} alt="muvement name" />
                     </div>
-                    <p className="ml-muvement-desc">Create and visualise your formations <br /> without pen and paper</p>
+                    <p className="ml-muvement-desc">Create and visualise your formations <br /> without pen and paper
+                    </p>
                     <div className="tablet-landing-signup">
-                      <Button className="ml-landing-signup-button" onClick={() => this.props.history.push(`/signup`)}>LETS GET
+                      <Button className="ml-landing-signup-button" onClick={() => this.props.history.push(`/signup`)}>LETS
+                        GET
                         CREATIVE</Button>
                     </div>
                   </Col>
                   <Col span={12} className="demo-grid-outer">
                     <div className="ml-demo-grid">
-                      <ResponsiveStageCanvas choreoId={"demo"} formationId={0}
-                                             withGrid demo />
+                      <ResponsiveStageCanvas choreoId={choreoId}
+                                             withGrid preview animated />
                     </div>
                   </Col>
                 </Row>
@@ -110,7 +122,7 @@ class LandingPage extends React.Component {
                   </Col>
                   <Col span={12}>
                     <div className="ml-muvement-features-icon">
-                      <HeadphoneIcon style={{ fontSize: '20px' }}/>
+                      <HeadphoneIcon style={{ fontSize: '20px' }} />
                     </div>
                     <p className="ml-muvement-features-text">
                       Sync transitions with your audio track
@@ -120,9 +132,9 @@ class LandingPage extends React.Component {
 
                 <Row>
                   <Col span={12}>
-                   <div className="ml-muvement-features-icon">
-                    <SlideShareIcon style={{ fontSize: '35px'}}/>
-                   </div>
+                    <div className="ml-muvement-features-icon">
+                      <SlideShareIcon style={{ fontSize: '35px' }} />
+                    </div>
                     <p className="ml-muvement-features-text">
                       Organise your performances <br /> anywhere and anytime!
                     </p>
@@ -158,16 +170,18 @@ class LandingPage extends React.Component {
                     <div className="tablet-muvement-name">
                       <img className="tablet-muvement-name-img" src={Name} alt="muvement name" />
                     </div>
-                    <p className="tablet-muvement-desc">Create and visualise your formations <br /> without pen and paper</p>
+                    <p className="tablet-muvement-desc">Create and visualise your formations <br /> without pen and
+                      paper</p>
                     <div className="tablet-landing-signup">
-                      <Button className="tablet-landing-signup-button" onClick={() => this.props.history.push(`/signup`)}>LETS GET
+                      <Button className="tablet-landing-signup-button"
+                              onClick={() => this.props.history.push(`/signup`)}>LETS GET
                         CREATIVE</Button>
                     </div>
                   </Col>
                   <Col span={12} className="tablet-demo-grid-outer">
                     <div className="tablet-demo-grid">
-                      <ResponsiveStageCanvas choreoId={"demo"} formationId={0}
-                                             withGrid demo />
+                      <ResponsiveStageCanvas choreoId={choreoId}
+                                             withGrid preview animated />
                     </div>
                   </Col>
                 </Row>
@@ -179,7 +193,7 @@ class LandingPage extends React.Component {
                   </Col>
                   <Col span={12}>
                     <div className="tablet-muvement-features-icon">
-                      <HeadphoneIcon style={{ fontSize: '25px' }}/>
+                      <HeadphoneIcon style={{ fontSize: '25px' }} />
                     </div>
                     <p className="tablet-muvement-features-text">
                       Sync transitions with your audio track
@@ -189,9 +203,9 @@ class LandingPage extends React.Component {
 
                 <Row type="flex" align="middle">
                   <Col span={12}>
-                  <div className="tablet-muvement-features-icon">
-                   <SlideShareIcon style={{ fontSize: '35px'}}/>
-                  </div>
+                    <div className="tablet-muvement-features-icon">
+                      <SlideShareIcon style={{ fontSize: '35px' }} />
+                    </div>
                     <p className="tablet-muvement-features-text">
                       Organise your performances <br /> anywhere and anytime!
                     </p>
@@ -210,4 +224,12 @@ class LandingPage extends React.Component {
   }
 }
 
-export default withRouter(LandingPage);
+function mapStateToProps(state, props) {
+  // Hardcoded to retrieve demo
+  const timeline = getTimeline(state, props);
+  return {
+    timeline: timeline,
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(LandingPage));

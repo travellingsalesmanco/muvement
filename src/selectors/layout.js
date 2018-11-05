@@ -10,9 +10,7 @@ const getStageRectFromProp = (_, props) => props.stageRect;
 const getStageDim = (state, props) => state.choreos.byId[props.choreoId].stageDim;
 const getDancers = (state, props) => state.choreos.byId[props.choreoId].dancers;
 const getFormationDancers = (state, props) => state.choreos.byId[props.choreoId].formations[props.formationId].dancers;
-const getSelectedDancers = (state, props) => state.UI.selectedDancers;
-const getActiveFormationIdx = (state) => state.UI.activeFormation;
-const getElapsedTime = (state) => state.UI.elapsedTime;
+const getSelectedDancers = (state) => state.UI.selectedDancers;
 
 
 export const makeStageLayoutSelector = () => {
@@ -49,7 +47,8 @@ export const makeDancersLayoutSelector = () => {
  * Returns an object containing:
  *  (1) the total duration of the choreo (sum of all transition and formation durations, in ms)
  *  (2) an array of the cumulative duration of the transitions and formations, at each formation, in ms
- *      i.e. cumDuration[i] contains the array pair [duration from 0 to start of formation i, duration from 0 to end of formation i]
+ *      i.e. cumDurations[i] contains the array pair [duration from 0 to start of formation i,
+ *                                                    duration from 0 to end of formation i]
  */
 export const getTimeline = createSelector(
   [getFormations],
@@ -120,7 +119,7 @@ export const getAnimatedLayout = createSelector(
               return pos
             } else {
               return prevPosition(t)
-            } 
+            }
           }
         } else if (transitionStart < formationStart) {
           // Squash trivial animations into frame, show frame
@@ -136,12 +135,3 @@ export const getAnimatedLayout = createSelector(
     return layout;
   }
 )
-
-export const getFormationRelativeElapsedTime = (state, props) => {
-  const currFormationIdx = getActiveFormationIdx(state);
-  if (currFormationIdx === 0) {
-    return getElapsedTime(state);
-  } else {
-    return getElapsedTime(state) - getTimeline(state, props).cumDurations[currFormationIdx - 1][1]; // idx 1 to get end of prev formation
-  }
-}

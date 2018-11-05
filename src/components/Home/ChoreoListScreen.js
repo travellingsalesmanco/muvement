@@ -9,16 +9,6 @@ import withFireStoreSync from "../withFirestoreSync";
 import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
 
 class ChoreoListScreen extends React.Component {
-  state = {
-    editState: false
-  }
-
-  handleMenuClick = (item) => {
-      this.setState(prevState => ({
-        editState: !prevState.editState
-      }))
-  };
-
   render() {
     const { Header, Content } = Layout;
     const { loading } = this.props;
@@ -31,14 +21,8 @@ class ChoreoListScreen extends React.Component {
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="mp-right-container">
-                    {
-                      this.state.editState
-                        ? <Button onClick={this.handleMenuClick} icon="close" ghost />
-                        : <Button onClick={this.handleMenuClick} icon="edit" ghost />
-                    }
-                    <Button className="mp-setting" icon="setting" onClick={() => this.props.history.push(`/settings`)}
+                <Button className="mp-setting" icon="setting" onClick={() => this.props.history.push(`/settings`)}
                             ghost />
-
               </div>
             </div>
           </Header>
@@ -51,12 +35,7 @@ class ChoreoListScreen extends React.Component {
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="right-container">
-                    {
-                      this.state.editState
-                        ? <Button onClick={this.handleMenuClick}  icon="close" ghost />
-                        : <Button onClick={this.handleMenuClick}  icon="edit" ghost />
-                    }
-                    <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
+                <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
               </div>
             </div>
           </Header>
@@ -69,12 +48,7 @@ class ChoreoListScreen extends React.Component {
                 <h3 style={{ color: '#fff' }}>DASHBOARD</h3>
               </div>
               <div className="right-container">
-                    {
-                      this.state.editState
-                        ? <Button onClick={this.handleMenuClick}  icon="close" ghost />
-                        : <Button onClick={this.handleMenuClick}  icon="edit" ghost />
-                    }
-                    <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
+                <Button icon="setting" onClick={() => this.props.history.push(`/settings`)} ghost />
               </div>
             </div>
           </Header>
@@ -83,7 +57,7 @@ class ChoreoListScreen extends React.Component {
         <Content>
           <Spin indicator={loadingIcon} spinning={loading}>
             <ChoreoCardList data={this.props.choreoIds} match={this.props.match}
-                            setModalVisible={this.props.setModalVisible} editState={this.state.editState}/>
+                            setModalVisible={this.props.setModalVisible}/>
           </Spin>
         </Content>
       </Fragment>
@@ -102,5 +76,5 @@ const authCondition = (authUser) => !!authUser;
 const failRoute = "/";
 
 export default withAuthorization(authCondition, failRoute)(
-  withFireStoreSync(false)(withRouter(connect(mapStateToProps)(ChoreoListScreen)))
+  withFireStoreSync(false, true)(withRouter(connect(mapStateToProps)(ChoreoListScreen)))
 );

@@ -1,0 +1,25 @@
+#dancer-performer-list .ant-btn-background-ghost {
+  border-color: #24c6dc;
+  color: #24c6dc;
+}
+
+#dancer-performer-list .ant-btn:hover,
+#dancer-performer-list .ant-btn:focus {
+  border-color: #24c6dc;
+  color: #24c6dc;
+}
+
+#dancer-performer-list .ant-btn {
+  border-radius: 20px;
+  margin: 10px 0;
+}
+
+#dancer-performer-list .ant-row {
+  margin: 10px 0;
+}
+
+#dancer-list-item {
+  font-size: 1em;
+  color: #fff;
+  font-family: 'Sen-Regular', Arial, sans-serif;
+}
