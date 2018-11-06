@@ -150,7 +150,7 @@ class LandingPage extends React.Component {
         </MobileLandscape>
 
         <MinTablet>
-          <Layout style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
+          <Layout style={{ overflow: "hidden" }}>
             <Header className="landingpage-navbar">
               <div className="landing-login">
                 <Button className="landing-login-button" onClick={() => this.props.history.push(`/login`)} ghost block>LOG
