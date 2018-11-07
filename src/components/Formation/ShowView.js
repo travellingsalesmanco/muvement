@@ -136,7 +136,7 @@ class ShowView extends Component {
                     >
                       <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
                         Add Music
-                  </Button>
+                      </Button>
                     </Upload>
                 }
 
@@ -174,7 +174,7 @@ class ShowView extends Component {
                       >
                         <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
                           Add Music
-                  </Button>
+                        </Button>
                       </Upload>
                   }
 
