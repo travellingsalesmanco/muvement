@@ -44,8 +44,8 @@ class Timeline extends Component {
         displayHeight: this.container.offsetHeight,
         midPoint: this.container.offsetWidth / 2
       });
-      if (this.wavesurfer) {
-        this.wavesurfer.setHeight(this.state.displayHeight * this.props.timelineRatio * 2)
+      if (this.wavesurfer && this.wavesurfer.isReady) {
+        this.wavesurfer.setHeight(this.container.offsetHeight * this.props.timelineRatio * 2)
       }
     }
   };
