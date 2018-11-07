@@ -120,6 +120,7 @@ class Timeline extends Component {
       barWidth: this.props.msWidth * timingInterval / 2,
       barGap: 0,
       normalize: true,
+      hideScrollbar: true,
       minPxPerSec: this.props.msWidth * 1000
     });
     this.wavesurfer.on('ready', () => {
