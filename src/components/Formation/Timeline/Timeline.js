@@ -275,7 +275,11 @@ class Timeline extends Component {
                                   onTouchStart={() => {
                                     this.setState({ timelineDraggable: false })
                                   }}
+                                  onMouseDown={() => {
+                                    this.setState({ timelineDraggable: false })
+                                  }}
                                   onTouchEnd={() => this.setState({ timelineDraggable: true })}
+                                  onMouseUp={() => this.setState({ timelineDraggable: true })}
                                   onDragEnd={() => this.setState({ timelineDraggable: true })}
                                   dragBoundFunc={() => {
                                     return { x: this.toDisplayX(formationStartPos - handleWidth / 2), y: timelineY }
@@ -303,7 +307,11 @@ class Timeline extends Component {
                                   onTouchStart={() => {
                                     this.setState({ timelineDraggable: false })
                                   }}
+                                  onMouseDown={() => {
+                                    this.setState({ timelineDraggable: false })
+                                  }}
                                   onTouchEnd={() => this.setState({ timelineDraggable: true })}
+                                  onMouseUp={() => this.setState({ timelineDraggable: true })}
                                   onDragEnd={() => this.setState({ timelineDraggable: true })}
                                   dragBoundFunc={() => {
                                     return { x: this.toDisplayX(formationEndPos - handleWidth), y: timelineY }
