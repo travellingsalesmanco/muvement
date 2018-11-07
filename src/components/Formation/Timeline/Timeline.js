@@ -38,7 +38,6 @@ class Timeline extends Component {
   checkSize = () => {
     if (this.state.displayWidth !== this.container.offsetWidth
       || this.state.displayHeight !== this.container.offsetHeight) {
-
       this.setState({
         displayWidth: this.container.offsetWidth,
         displayHeight: this.container.offsetHeight,
@@ -150,7 +149,7 @@ class Timeline extends Component {
       // Wavesurfer hasn't been created, nothing to do here
       return
     }
-    // Check if music has changed, reload necessary
+    // Check if music has changed, reload if necessary
     if (this.state.musicUrl !== this.props.musicUrl) {
       console.log("[Audio] Music updated");
       this.wavesurfer.empty();
