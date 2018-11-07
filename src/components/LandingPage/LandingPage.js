@@ -1,22 +1,20 @@
 import { Button, Col, Layout, Row } from 'antd';
 import React, { Fragment } from 'react';
 import ReactGA from 'react-ga';
+import connect from "react-redux/es/connect/connect";
+import { withRouter } from "react-router-dom";
+import { loop, stopPlaying } from "../../actions/timelineActions";
 import GradientSVG from "../../icons/GradientSVG";
 import HeadphoneIcon from "../../icons/HeadphoneIcon";
-import SpotlightIcon from "../../icons/SpotlightIcon";
 import SlideShareIcon from "../../icons/SlideShareIcon";
-import Name from "../../img/MuvementLogo.png";
+import SpotlightIcon from "../../icons/SpotlightIcon";
 import FeatureTwo from "../../img/feature2.png";
 import FeatureThree from "../../img/feature3.png";
-import GridImageLandscape from "../../img/GridImageLandscape.svg";
-import './LandingPage.css';
-import { withRouter } from "react-router-dom";
-import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
-import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
-import connect from "react-redux/es/connect/connect";
-import { getChoreo } from "../../selectors/choreo";
-import { stopPlaying, loop } from "../../actions/timelineActions";
+import Name from "../../img/MuvementLogo.png";
 import { getTimeline } from "../../selectors/layout";
+import { MinTablet, MobileLandscape, MobilePortrait } from "../ResponsiveUtils/BreakPoint";
+import ResponsiveStageCanvas from '../StageCanvas/ResponsiveStageCanvas';
+import './LandingPage.css';
 
 class LandingPage extends React.Component {
   componentDidMount() {
@@ -29,13 +27,13 @@ class LandingPage extends React.Component {
   }
 
   render() {
-    const { Header, Content, Sider } = Layout;
+    const { Header, Content } = Layout;
     const { choreoId } = this.props;
     const loginHeaderBar = (
       <Header className="landingpage-navbar">
         <div className="landing-login">
           <Button className="landing-login-button" onClick={() => this.props.history.push(`/login`)} ghost block>
-          LOG IN
+            LOG IN
           </Button>
         </div>
       </Header>
