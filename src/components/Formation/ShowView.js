@@ -1,5 +1,5 @@
 import { Button, Icon, message, Upload } from 'antd';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { gotoFormation, updateChoreoMusic } from '../../actions/choreoActions';
 import { jumpToTime, play, slowDown, speedUp } from '../../actions/timelineActions';
@@ -10,6 +10,7 @@ import { getTimeline } from '../../selectors/layout';
 import './FormationScreen.css';
 import Timeline from './Timeline/Timeline';
 import { removeChoreoMusic } from '../../firebase/storage';
+import { MobilePortrait, MinTablet } from '../ResponsiveUtils/BreakPoint';
 
 class ShowView extends Component {
   componentDidMount() {
@@ -84,58 +85,114 @@ class ShowView extends Component {
     if (elapsedTime > timeline.totalDuration) {
       this.props.dispatch({ type: TIMELINE_JUMP, payload: timeline.totalDuration })
     }
-    return (
-      <div className="show-view" style={{ flex: 1, textAlign: "center" }}>
-        <div style={{ height: "6rem", paddingTop: "0.5rem" }}>
-          <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
-                    playbackRate={playbackRate}
-                    labelRadius={14} handleWidth={10} timestampSeparation={2000} timelineRatio={0.85}
-                    editable={editable} musicUrl={musicUrl} />
-        </div>
-        <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff" }}>
-          {this.msToDisplayedTime(elapsedTime)}
-        </div>
-        <div className="show-buttons">
-          <Button type={"default"} ghost style={{ border: 0 }} onClick={() => this.props.dispatch(slowDown())}>
-            <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-left"} theme="outlined" />
-          </Button>
-          <Button type={"default"} ghost style={{ marginLeft: "0.5rem", marginRight: "0.5rem", border: "0" }}
-                  onClick={this.togglePlay}>
-            <Icon style={{ fontSize: "2.5rem", color: "#24C6DC" }} type={isPlaying ? "pause" : "caret-right"}
-                  theme="outlined" />
-          </Button>
-          <Button type={"default"} ghost style={{ border: 0 }} onClick={() => this.props.dispatch(speedUp())}>
-            <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-right"} theme="outlined" />
-          </Button>
-        </div>
-        { editable &&
-          <div style={{ padding: "1rem" }}>
-            {
-              this.props.musicUrl
-                ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }} onClick={this.handleRemoveMusic}> Remove
-                  Music </Button>
-                : <Upload name={"music"} accept={"audio/*"} showUploadList={false}
-                          customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
-                            req.onSuccess(link);
-                          })}
-                          beforeUpload={(file) => {
-                            if (file.size / 1024 / 1024 > 5) {
-                              message.error('Audio file must be smaller than 5MB!')
-                              return false
-                            }
-                            return true;
-                          }}
-                          onChange={this.handleMusicUploadChange}
-                >
-                  <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
-                    Add Music
-                  </Button>
-                </Upload>
-            }
-
-          </div>
-        }
+    const playControls = (
+      <div className="show-buttons">
+        <Button type={"default"} ghost style={{ border: 0 }} onClick={() => this.props.dispatch(slowDown())}>
+          <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-left"} theme="outlined" />
+        </Button>
+        <Button type={"default"} ghost style={{ marginLeft: "0.5rem", marginRight: "0.5rem", border: "0" }}
+          onClick={this.togglePlay}>
+          <Icon style={{ fontSize: "2.5rem", color: "#24C6DC" }} type={isPlaying ? "pause" : "caret-right"}
+            theme="outlined" />
+        </Button>
+        <Button type={"default"} ghost style={{ border: 0 }} onClick={() => this.props.dispatch(speedUp())}>
+          <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-right"} theme="outlined" />
+        </Button>
       </div>
+    )
+    return (
+      <Fragment>
+        <MobilePortrait>
+          <div className="show-view" style={{ flex: 1, textAlign: "center" }}>
+            <div style={{ height: "6rem", paddingTop: "0.5rem" }}>
+              <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
+                playbackRate={playbackRate}
+                labelRadius={14} handleWidth={10} timestampSeparation={2000} timelineRatio={0.85}
+                editable={editable} musicUrl={musicUrl} />
+            </div>
+            <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff" }}>
+              {this.msToDisplayedTime(elapsedTime)}
+            </div>
+            {playControls}
+
+            {editable &&
+              <div style={{ padding: "1rem" }}>
+                {
+                  this.props.musicUrl
+                    ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }} onClick={this.handleRemoveMusic}> Remove
+                  Music </Button>
+                    : <Upload name={"music"} accept={"audio/*"} showUploadList={false}
+                      customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
+                        req.onSuccess(link);
+                      })}
+                      beforeUpload={(file) => {
+                        if (file.size / 1024 / 1024 > 5) {
+                          message.error('Audio file must be smaller than 5MB!')
+                          return false
+                        }
+                        return true;
+                      }}
+                      onChange={this.handleMusicUploadChange}
+                    >
+                      <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
+                        Add Music
+                  </Button>
+                    </Upload>
+                }
+
+              </div>
+            }
+          </div>
+        </MobilePortrait>
+        <MinTablet>
+          <div style={{height: "100%", display: "flex", flexDirection: "column"}}>
+            <div style={{display: "flex", alignItems: "center", justifyContent: "center", flex: 1}}>
+              <div style={{flex: 1}}>
+              {playControls}
+              </div>
+              <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff", flex:1, textAlign: "center" }}>
+                {this.msToDisplayedTime(elapsedTime)}
+              </div>
+              {editable &&
+                <div style={{ flex: 1, textAlign: "right" }}>
+                  {
+                    this.props.musicUrl
+                      ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }} onClick={this.handleRemoveMusic}> Remove
+                  Music </Button>
+                      : <Upload name={"music"} accept={"audio/*"} showUploadList={false}
+                        customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
+                          req.onSuccess(link);
+                        })}
+                        beforeUpload={(file) => {
+                          if (file.size / 1024 / 1024 > 5) {
+                            message.error('Audio file must be smaller than 5MB!')
+                            return false
+                          }
+                          return true;
+                        }}
+                        onChange={this.handleMusicUploadChange}
+                      >
+                        <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
+                          Add Music
+                  </Button>
+                      </Upload>
+                  }
+
+                </div>
+              }
+            </div>
+
+            <div style={{ paddingTop: "0.5rem", flex: 3 }}>
+              <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
+                playbackRate={playbackRate}
+                labelRadius={14} handleWidth={10} timestampSeparation={2000} timelineRatio={0.85}
+                editable={editable} musicUrl={musicUrl} />
+            </div>
+          </div>
+
+        </MinTablet>
+      </Fragment>
+
     )
   }
 }
