@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import MediaQuery from 'react-responsive';
 
 const breakpoints = {
@@ -30,9 +30,14 @@ export function MinDesktop(props) {
 
 export function MinTablet(props) {
   return (
-    <Breakpoint device='tablet'>
-      {props.children}
-    </Breakpoint>
+    <Fragment>
+      <Breakpoint device='tabletLandscape'>
+        {props.children}
+      </Breakpoint>
+      <Breakpoint device='desktop'>
+        {props.children}
+      </Breakpoint>
+    </Fragment>
   );
 }
 
@@ -70,8 +75,13 @@ export function MobileLandscape(props) {
 
 export function MobilePortrait(props) {
   return (
+    <Fragment>
     <Breakpoint device='mobilePortrait'>
       {props.children}
     </Breakpoint>
+    <Breakpoint device='tabletPortrait'>
+      {props.children}
+    </Breakpoint>
+    </Fragment>
   );
 }
