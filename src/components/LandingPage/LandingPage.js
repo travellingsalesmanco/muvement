@@ -31,16 +31,20 @@ class LandingPage extends React.Component {
   render() {
     const { Header, Content, Sider } = Layout;
     const { choreoId } = this.props;
+    const loginHeaderBar = (
+      <Header className="landingpage-navbar">
+        <div className="landing-login">
+          <Button className="landing-login-button" onClick={() => this.props.history.push(`/login`)} ghost block>
+          LOG IN
+          </Button>
+        </div>
+      </Header>
+    );
     return (
       <Fragment>
         <MobilePortrait>
-          <Layout style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
-            <Header className="landingpage-navbar">
-              <div className="landing-login">
-                <Button className="landing-login-button" onClick={() => this.props.history.push(`/login`)} ghost block>LOG
-                  IN</Button>
-              </div>
-            </ Header>
+          <Layout className="landingpage">
+            {loginHeaderBar}
 
             <Layout className="landingpage-contents">
               <GradientSVG
@@ -60,7 +64,7 @@ class LandingPage extends React.Component {
                 </p>
                 <div className="demo-grid">
                   <ResponsiveStageCanvas choreoId={choreoId}
-                                         withGrid preview animated />
+                    withGrid preview animated />
                 </div>
                 <HeadphoneIcon style={{ fontSize: '20px', marginTop: '0.5em' }} />
                 <p className="muvement-features-text">
@@ -79,13 +83,8 @@ class LandingPage extends React.Component {
         </MobilePortrait>
 
         <MobileLandscape>
-          <Layout style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
-            <Header className="landingpage-navbar">
-              <div className="landing-login">
-                <Button className="landing-login-button" onClick={() => this.props.history.push(`/login`)} ghost block>LOG
-                  IN</Button>
-              </div>
-            </ Header>
+          <Layout className="landingpage">
+            {loginHeaderBar}
 
             <Layout className="tablet-landingpage-contents">
               <GradientSVG
@@ -110,7 +109,7 @@ class LandingPage extends React.Component {
                   <Col span={12} className="demo-grid-outer">
                     <div className="ml-demo-grid">
                       <ResponsiveStageCanvas choreoId={choreoId}
-                                             withGrid preview animated />
+                        withGrid preview animated />
                     </div>
                   </Col>
                 </Row>
@@ -150,13 +149,8 @@ class LandingPage extends React.Component {
         </MobileLandscape>
 
         <MinTablet>
-          <Layout style={{ overflow: "hidden" }}>
-            <Header className="landingpage-navbar">
-              <div className="landing-login">
-                <Button className="landing-login-button" onClick={() => this.props.history.push(`/login`)} ghost block>LOG
-                  IN</Button>
-              </div>
-            </ Header>
+          <Layout className="landingpage">
+            {loginHeaderBar}
 
             <Layout className="tablet-landingpage-contents">
               <GradientSVG
@@ -174,14 +168,14 @@ class LandingPage extends React.Component {
                       paper</p>
                     <div className="tablet-landing-signup">
                       <Button className="tablet-landing-signup-button"
-                              onClick={() => this.props.history.push(`/signup`)}>LETS GET
+                        onClick={() => this.props.history.push(`/signup`)}>LETS GET
                         CREATIVE</Button>
                     </div>
                   </Col>
                   <Col span={12} className="tablet-demo-grid-outer">
                     <div className="tablet-demo-grid">
                       <ResponsiveStageCanvas choreoId={choreoId}
-                                             withGrid preview animated />
+                        withGrid preview animated />
                     </div>
                   </Col>
                 </Row>
