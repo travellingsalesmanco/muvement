@@ -18,9 +18,6 @@
   background-color: transparent;
 }
 
-.contents .ant-layout-content {
-  padding: 0 2rem;
-}
 .contents-main {
   display: flex;
   flex-direction: column;

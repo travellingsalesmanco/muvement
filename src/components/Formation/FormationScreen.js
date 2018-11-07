@@ -126,20 +126,24 @@ class FormationScreen extends Component {
     return (
       <Fragment>
         <MobilePortrait>
-          <Layout className="mp-body" style={{ minHeight: '100vh', height: '100%' }}>
-            <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
-            <Layout style={{ backgroundColor: 'transparent' }}>
-              <Content style={{ display: "flex", flexDirection: "column" }}>
-                <Spin indicator={loadingIcon} spinning={loading}>
+          <Spin indicator={loadingIcon} spinning={loading}>
+            <Layout className="mp-body">
+              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
+              <Layout className="contents">
+                <Content className="contents-main">
                   <SectionTitle key={this.props.formationName} mobile={true} formationName={this.props.formationName}
                     handleEditName={this.handleEditName}
                     handleEditNameConfirm={this.handleEditNameConfirm} />
-                  <div className="stage-canvas" style={{ height: '15rem', marginBottom: '25px' }}>
-                    <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                      withGrid animated={this.props.animated} />
+                  <div className="formationscreen-stage" style={{ flexBasis: "60%", flexGrow: 10, position: "relative" }}>
+                    <div style={{ position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}>
+                      <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
+                        withGrid animated={this.props.animated} />
+                    </div>
                   </div>
-                  <div style={{ overflowY: 'scroll' }}>
-                    <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
+                  <div style={{flexBasis: "10%", flexShrink: 1}}>
+                  <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
+                  </div>
+                  <div style={{ flexBasis: "35%", flexShrink: 1, height:"35vh", overflow:"scroll" }}>
                     {
                       activeButton === 1 &&
                       <Fragment>
@@ -169,17 +173,19 @@ class FormationScreen extends Component {
                     }
                     {
                       activeButton === 2 &&
+                      <div style={{overflowY: "scroll"}}>
                       <PerformerList choreoId={this.props.choreoId} />
+                      </div>
                     }
                     {
                       activeButton === 3 &&
                       <ShowView choreoId={this.props.choreoId} editable />
                     }
-                  </div>
-                </Spin>
-              </Content>
+                    </div>
+                </Content>
+              </Layout>
             </Layout>
-          </Layout>
+          </Spin>
         </MobilePortrait>
 
         <MobileLandscape>
@@ -207,8 +213,8 @@ class FormationScreen extends Component {
               <Layout className="contents">
                 <Content className="contents-main">
                   <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
-                  handleEditName={this.handleEditName}
-                  handleEditNameConfirm={this.handleEditNameConfirm} />
+                    handleEditName={this.handleEditName}
+                    handleEditNameConfirm={this.handleEditNameConfirm} />
                   <div className="formationscreen-stage"
                     style={{ flexBasis: "62.5%", flexGrow: 5 }}>
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
