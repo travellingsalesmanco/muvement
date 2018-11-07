@@ -206,15 +206,15 @@ class FormationScreen extends Component {
               <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
               <Layout className="contents">
                 <Content className="contents-main">
-                  {/* <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
+                  <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
                   handleEditName={this.handleEditName}
-                  handleEditNameConfirm={this.handleEditNameConfirm} /> */}
+                  handleEditNameConfirm={this.handleEditNameConfirm} />
                   <div className="formationscreen-stage"
-                    style={{ flexBasis: "75%", flexGrow: 3 }}>
+                    style={{ flexBasis: "62.5%", flexGrow: 5 }}>
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
                       withGrid animated={this.props.animated} />
                   </div>
-                  <div style={{ flexBasis: "25%", flexGrow: 1 }}>
+                  <div style={{ flexBasis: "25%", flexGrow: 2 }}>
                     <ShowView choreoId={this.props.choreoId} editable />
                   </div>
                 </Content>

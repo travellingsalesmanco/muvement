@@ -31,7 +31,7 @@
   display: -webkit-flex; /* Safari */
   -webkit-align-items: center; /* Safari 7.0+ */
   display: flex;
-  flex: 0 2 10%;
+  flex: 1 0 12.5%;
   align-items: center;
   justify-content: center;
   margin-top: 10px;

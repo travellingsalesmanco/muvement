@@ -146,12 +146,12 @@ class ShowView extends Component {
         </MobilePortrait>
         <MinTablet>
           <div style={{height: "100%", display: "flex", flexDirection: "column"}}>
-            <div style={{display: "flex", alignItems: "center", justifyContent: "center", flex: 1}}>
+            <div style={{display: "flex", alignItems: "center", justifyContent: "center", flexBasis: "50%", flexGrow: 1}}>
               <div style={{flex: 1}}>
-              {playControls}
               </div>
               <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff", flex:1, textAlign: "center" }}>
                 {this.msToDisplayedTime(elapsedTime)}
+                {playControls}
               </div>
               {editable &&
                 <div style={{ flex: 1, textAlign: "right" }}>
@@ -182,7 +182,7 @@ class ShowView extends Component {
               }
             </div>
 
-            <div style={{ paddingTop: "0.5rem", flex: 3 }}>
+            <div style={{ paddingTop: "0.5rem", flexBasis:"50%", flexGrow: 1 }}>
               <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
                 playbackRate={playbackRate}
                 labelRadius={14} handleWidth={10} timestampSeparation={2000} timelineRatio={0.85}
