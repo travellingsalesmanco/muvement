@@ -150,8 +150,8 @@ class ShowView extends Component {
               <div style={{flex: 1}}>
               </div>
               <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff", flex:1, textAlign: "center" }}>
-                {this.msToDisplayedTime(elapsedTime)}
                 {playControls}
+                {this.msToDisplayedTime(elapsedTime)}
               </div>
               {editable &&
                 <div style={{ flex: 1, textAlign: "right" }}>
