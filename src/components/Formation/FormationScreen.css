@@ -1,6 +1,6 @@
 .body {
   min-height: 100vh;
-  height: 100%;
+  height: 100vh;
   background-image: url("../../img/EditBackground.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -8,7 +8,7 @@
 
 .mp-body {
   min-height: 100vh;
-  height: 100%;
+  height: 100vh;
   background-image: url("../../img/PortraitEditBackground.png");
   background-repeat: no-repeat;
   background-size: cover;
