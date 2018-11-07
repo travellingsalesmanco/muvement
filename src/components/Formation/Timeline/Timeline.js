@@ -116,7 +116,7 @@ class Timeline extends Component {
       waveColor: 'violet',
       progressColor: 'grey',
       cursorWidth: 0,
-      barWidth: this.props.msWidth * timingInterval / 2,
+      barWidth: this.props.msWidth * timingInterval / 4,
       barGap: 0,
       normalize: true,
       hideScrollbar: true,
