@@ -140,10 +140,10 @@ class FormationScreen extends Component {
                         withGrid animated={this.props.animated} />
                     </div>
                   </div>
-                  <div style={{flexBasis: "10%", flexShrink: 1}}>
+                  <div style={{flexBasis: "10%", flexShrink: 1, paddingTop: '2em'}}>
                   <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                   </div>
-                  <div style={{ flexBasis: "35%", flexShrink: 1, height:"35vh", overflow:"scroll" }}>
+                  <div style={{ flexBasis: "30%", flexShrink: 1, height:"30vh", overflow:"scroll" }}>
                     {
                       activeButton === 1 &&
                       <Fragment>
