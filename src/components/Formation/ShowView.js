@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { gotoFormation, updateChoreoMusic } from '../../actions/choreoActions';
 import { jumpToTime, play, slowDown, speedUp } from '../../actions/timelineActions';
-import { TIMELINE_JUMP, TIMELINE_PAUSE, TIMELINE_PLAY } from '../../constants/actionTypes';
+import { TIMELINE_JUMP, TIMELINE_PAUSE, TIMELINE_PLAY, LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/actionTypes';
 import { storage } from '../../firebase';
 import { getChoreo } from '../../selectors/choreo';
 import { getTimeline } from '../../selectors/layout';
@@ -13,6 +13,12 @@ import { removeChoreoMusic } from '../../firebase/storage';
 import { MobilePortrait, MinTablet } from '../ResponsiveUtils/BreakPoint';
 
 class ShowView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formation: 0
+    }
+  }
   componentDidMount() {
     this.props.dispatch(jumpToTime(
       this.props.timeline.cumDurations[this.props.activeFormation][0]
@@ -24,9 +30,27 @@ class ShowView extends Component {
   }
 
   componentDidUpdate() {
-    const formation = this.findCurrentFormation();
-    if (formation !== this.props.activeFormation) {
-      this.props.dispatch(gotoFormation(this.props.choreoId, formation));
+    const [formationStart, formationEnd] = this.props.timeline.cumDurations[this.props.activeFormation]
+    if (this.props.elapsedTime >= formationStart && this.props.elapsedTime <= formationEnd) {
+      this.props.dispatch({type: UNLOAD_ANIMATED_VIEW})
+    } else {
+      this.props.dispatch({type: LOAD_ANIMATED_VIEW})
+    }
+
+    if (this.state.formation !== this.props.activeFormation) {
+      // Detect activeFormation change
+      this.setState({ formation: this.props.activeFormation })
+      // ActiveFormation mismatch with timeline => sync timeline
+      if (this.props.elapsedTime < formationStart || this.props.elapsedTime > formationEnd) {
+        this.props.dispatch(jumpToTime(formationStart))
+      }
+      return;
+    } else {
+      const formation = this.findCurrentFormation();
+      // Timeline mismatched with activeFormation => sync active formation
+      if (formation !== null && formation !== this.props.activeFormation) {
+        this.props.dispatch(gotoFormation(this.props.choreoId, formation));
+      }
     }
   }
 
@@ -52,17 +76,19 @@ class ShowView extends Component {
   // Binary search for formation in focus
   findCurrentFormation() {
     const cumDurations = this.props.timeline.cumDurations;
+    const elapsedTime = this.props.elapsedTime;
     let l = 0, r = cumDurations.length - 1;
     let mid = 0;
     while (l < r) {
       mid = Math.floor((r + l) / 2);
-      if (this.props.elapsedTime > cumDurations[mid][1]) {
+      if (elapsedTime > cumDurations[mid][1]) {
         l = mid + 1;
       } else {
         r = mid;
       }
     }
-    return l;
+    const [formationStart, formationEnd] = cumDurations[l];
+    return elapsedTime >= formationStart && elapsedTime <= formationEnd ? l : null;
   }
 
   handleMusicUploadChange = (info) => {
