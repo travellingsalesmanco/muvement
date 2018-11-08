@@ -12,6 +12,13 @@ class VerticalSlideList extends React.Component {
     this.onDragEnd = this.onDragEnd.bind(this);
   }
 
+  componentDidUpdate() {
+    const scrollToIndex = this.props.activeFormationId;
+    document.getElementById(scrollToIndex.toString()).scrollIntoView({
+      behavior: 'instant'
+    });
+  }
+
   onDragEnd(result) {
     // dropped outside the list
     if (!result.destination) {
@@ -58,7 +65,7 @@ class VerticalSlideList extends React.Component {
               {...provided.droppableProps}
             >
               {this.props.formations.map((item, index) => (
-                <div key={index} className={index === this.props.activeFormationId ? 'linear-gradient-bg' : null}
+                <div key={index} id={index} className={index === this.props.activeFormationId ? 'linear-gradient-bg' : null}
                      onClick={() => this.handleClick(index)}>
                   <Draggable draggableId={index} index={index} isDragDisabled={!editable}>
                     {(provided, snapshot) => {
