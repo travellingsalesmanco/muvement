@@ -57,6 +57,7 @@ class DancerLabel extends PureComponent {
             this.textLabel = ref
           }}
           fill={'white'}
+          opacity={0}
           text={name}
           fontSize={fontSize}
           padding={textPadding}
