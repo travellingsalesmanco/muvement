@@ -14,22 +14,28 @@ const PublishedView = ({ link }) => (
   <Fragment>
     <h3>Share with your performers!</h3>
     <MobilePortrait>
+      <div style={{display: "flex", justifyContent: "flex-end"}}>
+        <CopyToClipboard text={link}>
+          <Button className="publish-copy-button" icon="link" ghost>Copy to clipboard</Button>
+        </CopyToClipboard>
+      </div>
       <p className="publish-link" style={{ width: '70vw' }}>{link}</p>
-      <CopyToClipboard text={link}>
-        <Button className="publish-copy-button" ghost>Copy to clipboard</Button>
-      </CopyToClipboard>
     </MobilePortrait>
     <MobileLandscape>
+      <div style={{display: "flex", justifyContent: "flex-end"}}>
+        <CopyToClipboard text={link}>
+          <Button className="publish-copy-button" icon="link" ghost>Copy to clipboard</Button>
+        </CopyToClipboard>
+      </div>
       <p className="publish-link">{link}</p>
-      <CopyToClipboard text={link}>
-        <Button className="publish-copy-button" ghost>Copy to clipboard</Button>
-      </CopyToClipboard>
     </MobileLandscape>
     <MinTablet>
-      <p className="publish-link">{link}</p>
+      <div style={{display: "flex", justifyContent: "flex-end"}}>
       <CopyToClipboard text={link}>
-        <Button className="publish-copy-button" ghost>Copy to clipboard</Button>
+        <Button className="publish-copy-button" icon="link" ghost>Copy to clipboard</Button>
       </CopyToClipboard>
+      </div>
+      <p className="publish-link">{link}</p>
     </MinTablet>
   </Fragment>
 );
