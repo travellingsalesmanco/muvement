@@ -112,8 +112,10 @@ export function updateChoreoIfNewer(id, choreo) {
   }
 }
 
-export function syncCreatorChoreo(id, choreo) {
+export function syncCreatorChoreo(id, choreo, overwrite) {
   return (dispatch, getState) => {
+    // Tracks if manual overwrite is required (when overwrite is not allowed)
+    let requiresManualOverwrite = false;
     if (!hasChoreo(id, getState()) || !ownsChoreo(id, getState())) {
       dispatch({
         type: ADD_CHOREO,
@@ -121,18 +123,33 @@ export function syncCreatorChoreo(id, choreo) {
         payload: choreo
       });
     } else if (isNewer(choreo, id, getState())) {
-      dispatch({
-        type: LOAD_CHOREO,
-        choreoId: id,
-        payload: choreo
-      });
+      if (overwrite) {
+        dispatch({
+          type: LOAD_CHOREO,
+          choreoId: id,
+          payload: choreo
+        });
+      } else {
+        requiresManualOverwrite = true;
+      }
     }
-    return Promise.resolve();
+    return Promise.resolve({
+      requiresManualOverwrite: requiresManualOverwrite,
+      affectedChoreo: {
+        data: choreo,
+        id: id
+      }
+    });
   }
 }
 
-export function syncCreatorChoreos(choreos) {
+export function syncCreatorChoreos(choreos, overwrite) {
   return (dispatch, getState) => {
+    // Tracks if manual overwrite is required (when overwrite is not allowed)
+    let requiresManualOverwrite = false;
+    // Collates list of choreos that need manual overwrite
+    let affectedChoreos = [];
+
     // Remove choreos no longer tagged under creator in cloud
     let lostChoreos = getLostChoreos(choreos, getState());
     lostChoreos.forEach((choreoId) => {
@@ -152,15 +169,26 @@ export function syncCreatorChoreos(choreos) {
           payload: choreo.data
         });
       } else if (isNewer(choreo.data, choreo.id, getState())) {
-        // Update existing choreos if newer
-        dispatch({
-          type: LOAD_CHOREO,
-          choreoId: choreo.id,
-          payload: choreo.data
-        });
+        // Update existing choreos if newer and overwrite allowed
+        if (overwrite) {
+          dispatch({
+            type: LOAD_CHOREO,
+            choreoId: choreo.id,
+            payload: choreo.data
+          });
+        } else {
+          requiresManualOverwrite = true;
+          affectedChoreos.push({
+            data: choreo.data,
+            id: choreo.id
+          })
+        }
       }
     });
-    return Promise.resolve()
+    return Promise.resolve({
+      requiresManualOverwrite: requiresManualOverwrite,
+      affectedChoreos: affectedChoreos
+    });
   }
 }
 
