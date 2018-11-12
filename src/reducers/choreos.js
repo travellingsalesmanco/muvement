@@ -14,6 +14,7 @@ import { defaultStageDim } from '../constants/defaults';
 import { defaultChoreos } from '../constants/dummyData';
 import dancers from './dancers';
 import formations from './formations';
+import { currentTimeStamp } from "../firebase";
 
 const choreoNameReducer = (state = "", action) => action.type === RENAME_CHOREO ? action.payload : state;
 
@@ -53,7 +54,8 @@ const musicUrlReducer = (state = null, action) => {
 const choreoReducer = combineReducers({
   createdAt: (state = null) => state,
   creator: (state = null) => state,
-  updatedAt: (state = null) => state,
+  // hack to update local updatedAt time to sync with firestore recorded time
+  updatedAt: (state = null) => currentTimeStamp(),
   imageUrl: imageUrlReducer,
   musicUrl: musicUrlReducer,
   name: choreoNameReducer,

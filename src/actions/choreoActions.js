@@ -47,7 +47,8 @@ function getLostChoreos(choreos, state) {
 
 function isNewer(choreo, choreoId, state) {
   const currChoreo = getChoreo(state, choreoId);
-  return currChoreo ? currChoreo.updatedAt.seconds < choreo.updatedAt.seconds
+  // consider choreo as newer if the updatedAt is 30 seconds (arbitrary buffer) later than previous updatedAt
+  return currChoreo ? currChoreo.updatedAt.seconds + 30 < choreo.updatedAt.seconds
     : true;
 }
 
