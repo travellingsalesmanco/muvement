@@ -18,7 +18,7 @@ class StageLayer extends PureComponent {
             <Fragment>
               <Line points={[midPoint.x, midPoint.y - 5, midPoint.x, midPoint.y + 5]} stroke={"white"} opacity={0.5} />
               <Line points={[midPoint.x - 5, midPoint.y, midPoint.x + 5, midPoint.y]} stroke={"white"} opacity={0.5} />
-              <Text x={midPoint.x - 100} y={layout.height + layout.tl.y - 10}
+              <Text x={midPoint.x - 100} y={layout.height + layout.tl.y}
                 width={200}
                 align={"center"} text={"Stage Front"} fill={"white"} opacity={0.5} />
             </Fragment>
