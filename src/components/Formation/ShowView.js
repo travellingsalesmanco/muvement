@@ -179,8 +179,8 @@ class ShowView extends Component {
                 {playControls}
                 {this.msToDisplayedTime(elapsedTime)}
               </div>
-              {editable &&
-                <div style={{ flex: 1, textAlign: "right" }}>
+              {editable
+                ? <div style={{ flex: 1, textAlign: "right" }}>
                   {
                     this.props.musicUrl
                       ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }} onClick={this.handleRemoveMusic}> Remove
@@ -204,6 +204,8 @@ class ShowView extends Component {
                       </Upload>
                   }
 
+                </div>
+                : <div style={{flex: 1}}>
                 </div>
               }
             </div>
