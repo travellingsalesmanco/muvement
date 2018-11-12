@@ -21,7 +21,7 @@ ReactGA.initialize('UA-125447140-3', {
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App" style={{overflow:"hidden"}}>
         <Switch>
           <Route exact path="/dashboard" component={HomeScreen} />
           <Route exact path="/privacy" component={Privacy} />

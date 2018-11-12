@@ -22,6 +22,8 @@ import PreviewSlideList from "./PreviewSlideList";
 import SidePanel from "./SidePanel";
 import VerticalSlideList from "./VerticalSlideList";
 import ShowView from './ShowView';
+import Timeline from './Timeline/Timeline';
+import { getTimeline } from '../../selectors/layout';
 
 const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameConfirm }) => (
   <div className="section-title-container">
@@ -124,20 +126,24 @@ class FormationScreen extends Component {
     return (
       <Fragment>
         <MobilePortrait>
-          <Layout className="mp-body" style={{ minHeight: '100vh', height: '100%' }}>
-            <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
-            <Layout style={{ backgroundColor: 'transparent' }}>
-              <Content style={{ display: "flex", flexDirection: "column" }}>
-                <Spin indicator={loadingIcon} spinning={loading}>
+          <Spin indicator={loadingIcon} spinning={loading}>
+            <Layout className="mp-body">
+              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
+              <Layout className="contents">
+                <Content className="contents-main">
                   <SectionTitle key={this.props.formationName} mobile={true} formationName={this.props.formationName}
-                                handleEditName={this.handleEditName}
-                                handleEditNameConfirm={this.handleEditNameConfirm} />
-                  <div className="stage-canvas" style={{ height: '15rem', marginBottom: '25px' }}>
-                    <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                                           withGrid animated={this.props.animated} />
+                    handleEditName={this.handleEditName}
+                    handleEditNameConfirm={this.handleEditNameConfirm} />
+                  <div className="formationscreen-stage" style={{ flexBasis: "60%", flexGrow: 10, position: "relative" }}>
+                    <div style={{ position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}>
+                      <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
+                        withGrid animated={this.props.animated} />
+                    </div>
                   </div>
-                  <div style={{ overflowY: 'scroll' }}>
-                    <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
+                  <div style={{flexBasis: "10%", flexShrink: 1, paddingTop: '2em'}}>
+                  <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
+                  </div>
+                  <div style={{ flexBasis: "30%", flexShrink: 1, height:"30vh", overflow:"scroll" }}>
                     {
                       activeButton === 1 &&
                       <Fragment>
@@ -151,15 +157,15 @@ class FormationScreen extends Component {
                               flex: 1
                             }}>
                               <Button type={"default"} icon="plus" ghost block style={{ borderRadius: '1em' }}
-                                      onClick={this.handleAddFormation}>Add</Button>
+                                onClick={this.handleAddFormation}>Add</Button>
                             </div>
                             <div style={{
                               padding: '0.5em 2em 1em 0.5em',
                               flex: 1
                             }}>
                               <Button className="delete-formation" icon="delete" ghost block
-                                      style={{ borderRadius: '1em' }}
-                                      onClick={this.handleRemoveFormation}>Delete</Button>
+                                style={{ borderRadius: '1em' }}
+                                onClick={this.handleRemoveFormation}>Delete</Button>
                             </div>
                           </div>
                         </div>
@@ -167,17 +173,19 @@ class FormationScreen extends Component {
                     }
                     {
                       activeButton === 2 &&
+                      <div style={{overflowY: "scroll"}}>
                       <PerformerList choreoId={this.props.choreoId} />
+                      </div>
                     }
                     {
                       activeButton === 3 &&
                       <ShowView choreoId={this.props.choreoId} editable />
                     }
-                  </div>
-                </Spin>
-              </Content>
+                    </div>
+                </Content>
+              </Layout>
             </Layout>
-          </Layout>
+          </Spin>
         </MobilePortrait>
 
         <MobileLandscape>
@@ -187,35 +195,36 @@ class FormationScreen extends Component {
               <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
 
                 <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                                       withGrid animated={this.props.animated} />
+                  withGrid animated={this.props.animated} />
               </div>
             </Layout>
           </Spin>
         </MobileLandscape>
 
         <MinTablet>
-          <Layout className="body">
-            <GradientSVG
-              startColor="#24c6dc"
-              endColor="#514a9d"
-              idCSS="cool-gradient"
-            />
-            <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
-            <Layout className="contents">
-              <Content style={{ display: "flex", flexDirection: "column" }}>
-                <Spin indicator={loadingIcon} spinning={loading}>
+          <Spin indicator={loadingIcon} spinning={loading}>
+            <Layout className="body">
+              <GradientSVG
+                startColor="#24c6dc"
+                endColor="#514a9d"
+                idCSS="cool-gradient"
+              />
+              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
+              <Layout className="contents">
+                <Content className="contents-main">
                   <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
-                                handleEditName={this.handleEditName}
-                                handleEditNameConfirm={this.handleEditNameConfirm} />
+                    handleEditName={this.handleEditName}
+                    handleEditNameConfirm={this.handleEditNameConfirm} />
                   <div className="formationscreen-stage"
-                       style={{ background: '#000', height: '30em', overflow: "hidden" }}>
+                    style={{ flexBasis: "62.5%", flexGrow: 5 }}>
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                                           withGrid animated={this.props.animated} />
+                      withGrid animated={this.props.animated} />
                   </div>
-                </Spin>
-              </Content>
-              <Sider width={'12rem'} className="sider">
-                <Spin indicator={loadingIcon} spinning={loading}>
+                  <div style={{ flexBasis: "25%", flexGrow: 2 }}>
+                    <ShowView choreoId={this.props.choreoId} editable />
+                  </div>
+                </Content>
+                <Sider width={'12rem'} className="sider">
                   <div className="button-container">
                     <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
                       <UserAddIcon style={{ fontSize: '33px' }} />
@@ -229,23 +238,23 @@ class FormationScreen extends Component {
                   </div>
                   <h3 className="slide-list-title">All Formations</h3>
                   <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)` }}>
-                    <VerticalSlideList choreoId={choreoId} editable/>
+                    <VerticalSlideList choreoId={choreoId} editable />
                   </div>
                   {/*<PreviewSlideList choreoId={this.props.choreoId} />*/}
-                </Spin>
-              </Sider>
-              <SidePanel
-                choreoId={this.props.choreoId}
-                placement={this.state.placement}
-                closable={true}
-                onClose={this.onClose}
-                visible={this.state.visible}
-                mask={false}
-                id={this.state.sidePanelID}
-                width={200}
-              />
+                </Sider>
+                <SidePanel
+                  choreoId={this.props.choreoId}
+                  placement={this.state.placement}
+                  closable={true}
+                  onClose={this.onClose}
+                  visible={this.state.visible}
+                  mask={false}
+                  id={this.state.sidePanelID}
+                  width={200}
+                />
+              </Layout>
             </Layout>
-          </Layout>
+          </Spin>
         </MinTablet>
       </Fragment>
     );

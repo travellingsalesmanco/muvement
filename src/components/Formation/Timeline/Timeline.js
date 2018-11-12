@@ -38,14 +38,13 @@ class Timeline extends Component {
   checkSize = () => {
     if (this.state.displayWidth !== this.container.offsetWidth
       || this.state.displayHeight !== this.container.offsetHeight) {
-
       this.setState({
         displayWidth: this.container.offsetWidth,
         displayHeight: this.container.offsetHeight,
         midPoint: this.container.offsetWidth / 2
       });
-      if (this.wavesurfer) {
-        this.wavesurfer.setHeight(this.state.displayHeight * this.props.timelineRatio * 2)
+      if (this.wavesurfer && this.wavesurfer.isReady) {
+        this.wavesurfer.setHeight(this.container.offsetHeight * this.props.timelineRatio * 2)
       }
     }
   };
@@ -117,9 +116,10 @@ class Timeline extends Component {
       waveColor: 'violet',
       progressColor: 'grey',
       cursorWidth: 0,
-      barWidth: this.props.msWidth * timingInterval / 2,
+      barWidth: this.props.msWidth * timingInterval / 4,
       barGap: 0,
       normalize: true,
+      hideScrollbar: true,
       minPxPerSec: this.props.msWidth * 1000
     });
     this.wavesurfer.on('ready', () => {
@@ -149,7 +149,7 @@ class Timeline extends Component {
       // Wavesurfer hasn't been created, nothing to do here
       return
     }
-    // Check if music has changed, reload necessary
+    // Check if music has changed, reload if necessary
     if (this.state.musicUrl !== this.props.musicUrl) {
       console.log("[Audio] Music updated");
       this.wavesurfer.empty();
@@ -275,7 +275,11 @@ class Timeline extends Component {
                                   onTouchStart={() => {
                                     this.setState({ timelineDraggable: false })
                                   }}
+                                  onMouseDown={() => {
+                                    this.setState({ timelineDraggable: false })
+                                  }}
                                   onTouchEnd={() => this.setState({ timelineDraggable: true })}
+                                  onMouseUp={() => this.setState({ timelineDraggable: true })}
                                   onDragEnd={() => this.setState({ timelineDraggable: true })}
                                   dragBoundFunc={() => {
                                     return { x: this.toDisplayX(formationStartPos - handleWidth / 2), y: timelineY }
@@ -303,7 +307,11 @@ class Timeline extends Component {
                                   onTouchStart={() => {
                                     this.setState({ timelineDraggable: false })
                                   }}
+                                  onMouseDown={() => {
+                                    this.setState({ timelineDraggable: false })
+                                  }}
                                   onTouchEnd={() => this.setState({ timelineDraggable: true })}
+                                  onMouseUp={() => this.setState({ timelineDraggable: true })}
                                   onDragEnd={() => this.setState({ timelineDraggable: true })}
                                   dragBoundFunc={() => {
                                     return { x: this.toDisplayX(formationEndPos - handleWidth), y: timelineY }

@@ -120,6 +120,12 @@ export function syncCreatorChoreo(id, choreo) {
         choreoId: id,
         payload: choreo
       });
+    } else if (isNewer(choreo, id, getState())) {
+      dispatch({
+        type: LOAD_CHOREO,
+        choreoId: id,
+        payload: choreo
+      });
     }
     return Promise.resolve();
   }

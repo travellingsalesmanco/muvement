@@ -1,17 +1,24 @@
 import { Button, Icon, message, Upload } from 'antd';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { gotoFormation, updateChoreoMusic } from '../../actions/choreoActions';
 import { jumpToTime, play, slowDown, speedUp } from '../../actions/timelineActions';
-import { TIMELINE_JUMP, TIMELINE_PAUSE, TIMELINE_PLAY } from '../../constants/actionTypes';
+import { TIMELINE_JUMP, TIMELINE_PAUSE, TIMELINE_PLAY, LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/actionTypes';
 import { storage } from '../../firebase';
 import { getChoreo } from '../../selectors/choreo';
 import { getTimeline } from '../../selectors/layout';
 import './FormationScreen.css';
 import Timeline from './Timeline/Timeline';
 import { removeChoreoMusic } from '../../firebase/storage';
+import { MobilePortrait, MinTablet } from '../ResponsiveUtils/BreakPoint';
 
 class ShowView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formation: 0
+    }
+  }
   componentDidMount() {
     this.props.dispatch(jumpToTime(
       this.props.timeline.cumDurations[this.props.activeFormation][0]
@@ -23,9 +30,27 @@ class ShowView extends Component {
   }
 
   componentDidUpdate() {
-    const formation = this.findCurrentFormation();
-    if (formation !== this.props.activeFormation) {
-      this.props.dispatch(gotoFormation(this.props.choreoId, formation));
+    const [formationStart, formationEnd] = this.props.timeline.cumDurations[this.props.activeFormation]
+    if (this.props.elapsedTime >= formationStart && this.props.elapsedTime <= formationEnd) {
+      this.props.dispatch({type: UNLOAD_ANIMATED_VIEW})
+    } else {
+      this.props.dispatch({type: LOAD_ANIMATED_VIEW})
+    }
+
+    if (this.state.formation !== this.props.activeFormation) {
+      // Detect activeFormation change
+      this.setState({ formation: this.props.activeFormation })
+      // ActiveFormation mismatch with timeline => sync timeline
+      if (this.props.elapsedTime < formationStart || this.props.elapsedTime > formationEnd) {
+        this.props.dispatch(jumpToTime(formationStart))
+      }
+      return;
+    } else {
+      const formation = this.findCurrentFormation();
+      // Timeline mismatched with activeFormation => sync active formation
+      if (formation !== null && formation !== this.props.activeFormation) {
+        this.props.dispatch(gotoFormation(this.props.choreoId, formation));
+      }
     }
   }
 
@@ -51,17 +76,19 @@ class ShowView extends Component {
   // Binary search for formation in focus
   findCurrentFormation() {
     const cumDurations = this.props.timeline.cumDurations;
+    const elapsedTime = this.props.elapsedTime;
     let l = 0, r = cumDurations.length - 1;
     let mid = 0;
     while (l < r) {
       mid = Math.floor((r + l) / 2);
-      if (this.props.elapsedTime > cumDurations[mid][1]) {
+      if (elapsedTime > cumDurations[mid][1]) {
         l = mid + 1;
       } else {
         r = mid;
       }
     }
-    return l;
+    const [formationStart, formationEnd] = cumDurations[l];
+    return elapsedTime >= formationStart && elapsedTime <= formationEnd ? l : null;
   }
 
   handleMusicUploadChange = (info) => {
@@ -84,58 +111,116 @@ class ShowView extends Component {
     if (elapsedTime > timeline.totalDuration) {
       this.props.dispatch({ type: TIMELINE_JUMP, payload: timeline.totalDuration })
     }
-    return (
-      <div className="show-view" style={{ flex: 1, textAlign: "center" }}>
-        <div style={{ height: "6rem", paddingTop: "0.5rem" }}>
-          <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
-                    playbackRate={playbackRate}
-                    labelRadius={14} handleWidth={10} timestampSeparation={2000} timelineRatio={0.85}
-                    editable={editable} musicUrl={musicUrl} />
-        </div>
-        <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff" }}>
-          {this.msToDisplayedTime(elapsedTime)}
-        </div>
-        <div className="show-buttons">
-          <Button type={"default"} ghost style={{ border: 0 }} onClick={() => this.props.dispatch(slowDown())}>
-            <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-left"} theme="outlined" />
-          </Button>
-          <Button type={"default"} ghost style={{ marginLeft: "0.5rem", marginRight: "0.5rem", border: "0" }}
-                  onClick={this.togglePlay}>
-            <Icon style={{ fontSize: "2.5rem", color: "#24C6DC" }} type={isPlaying ? "pause" : "caret-right"}
-                  theme="outlined" />
-          </Button>
-          <Button type={"default"} ghost style={{ border: 0 }} onClick={() => this.props.dispatch(speedUp())}>
-            <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-right"} theme="outlined" />
-          </Button>
-        </div>
-        { editable &&
-          <div style={{ padding: "1rem" }}>
-            {
-              this.props.musicUrl
-                ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }} onClick={this.handleRemoveMusic}> Remove
-                  Music </Button>
-                : <Upload name={"music"} accept={"audio/*"} showUploadList={false}
-                          customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
-                            req.onSuccess(link);
-                          })}
-                          beforeUpload={(file) => {
-                            if (file.size / 1024 / 1024 > 5) {
-                              message.error('Audio file must be smaller than 5MB!')
-                              return false
-                            }
-                            return true;
-                          }}
-                          onChange={this.handleMusicUploadChange}
-                >
-                  <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
-                    Add Music
-                  </Button>
-                </Upload>
-            }
-
-          </div>
-        }
+    const playControls = (
+      <div className="show-buttons">
+        <Button type={"default"} ghost style={{ border: 0 }} onClick={() => this.props.dispatch(slowDown())}>
+          <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-left"} theme="outlined" />
+        </Button>
+        <Button type={"default"} ghost style={{ marginLeft: "0.5rem", marginRight: "0.5rem", border: "0" }}
+          onClick={this.togglePlay}>
+          <Icon style={{ fontSize: "2.5rem", color: "#24C6DC" }} type={isPlaying ? "pause" : "caret-right"}
+            theme="outlined" />
+        </Button>
+        <Button type={"default"} ghost style={{ border: 0 }} onClick={() => this.props.dispatch(speedUp())}>
+          <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-right"} theme="outlined" />
+        </Button>
       </div>
+    )
+    return (
+      <Fragment>
+        <MobilePortrait>
+          <div className="show-view" style={{ flex: 1, textAlign: "center" }}>
+            <div style={{ height: "6rem", paddingTop: "0.5rem" }}>
+              <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
+                playbackRate={playbackRate}
+                labelRadius={14} handleWidth={10} timestampSeparation={2000} timelineRatio={0.85}
+                editable={editable} musicUrl={musicUrl} />
+            </div>
+            <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff" }}>
+              {this.msToDisplayedTime(elapsedTime)}
+            </div>
+            {playControls}
+
+            {editable &&
+              <div style={{ padding: "1rem" }}>
+                {
+                  this.props.musicUrl
+                    ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }} onClick={this.handleRemoveMusic}> Remove
+                  Music </Button>
+                    : <Upload name={"music"} accept={"audio/*"} showUploadList={false}
+                      customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
+                        req.onSuccess(link);
+                      })}
+                      beforeUpload={(file) => {
+                        if (file.size / 1024 / 1024 > 5) {
+                          message.error('Audio file must be smaller than 5MB!')
+                          return false
+                        }
+                        return true;
+                      }}
+                      onChange={this.handleMusicUploadChange}
+                    >
+                      <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
+                        Add Music
+                      </Button>
+                    </Upload>
+                }
+
+              </div>
+            }
+          </div>
+        </MobilePortrait>
+        <MinTablet>
+          <div style={{height: "100%", display: "flex", flexDirection: "column"}}>
+            <div style={{display: "flex", alignItems: "center", justifyContent: "center", flexBasis: "50%", flexGrow: 1}}>
+              <div style={{flex: 1}}>
+              </div>
+              <div className="show-timing" style={{ fontFamily: "Sen-bold", fontSize: "1.5rem", color: "#fff", flex:1, textAlign: "center" }}>
+                {playControls}
+                {this.msToDisplayedTime(elapsedTime)}
+              </div>
+              {editable
+                ? <div style={{ flex: 1, textAlign: "right" }}>
+                  {
+                    this.props.musicUrl
+                      ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }} onClick={this.handleRemoveMusic}> Remove
+                  Music </Button>
+                      : <Upload name={"music"} accept={"audio/*"} showUploadList={false}
+                        customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
+                          req.onSuccess(link);
+                        })}
+                        beforeUpload={(file) => {
+                          if (file.size / 1024 / 1024 > 5) {
+                            message.error('Audio file must be smaller than 5MB!')
+                            return false
+                          }
+                          return true;
+                        }}
+                        onChange={this.handleMusicUploadChange}
+                      >
+                        <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
+                          Add Music
+                        </Button>
+                      </Upload>
+                  }
+
+                </div>
+                : <div style={{flex: 1}}>
+                </div>
+              }
+            </div>
+
+            <div style={{ paddingTop: "0.5rem", flexBasis:"50%", flexGrow: 1 }}>
+              <Timeline choreoId={choreoId} data={timeline} msWidth={0.05} elapsedTime={elapsedTime} isPlaying={isPlaying}
+                playbackRate={playbackRate}
+                labelRadius={14} handleWidth={10} timestampSeparation={2000} timelineRatio={0.85}
+                editable={editable} musicUrl={musicUrl} />
+            </div>
+          </div>
+
+        </MinTablet>
+      </Fragment>
+
     )
   }
 }

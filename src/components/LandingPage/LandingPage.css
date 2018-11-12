@@ -1,7 +1,12 @@
+.landingpage {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100vh;
+}
 /* Mobile Portrait */
 
 .landingpage-contents {
-  height: 100%;
+  min-height: min-content;
   background-image: url("../../img/PortraitBackground.png");
   /* background: linear-gradient(to top, #303030 -10%, #000000 100%); */
   background-repeat: no-repeat;
@@ -9,6 +14,7 @@
 }
 
 .landingpage-navbar {
+  position: relative;
   background-color: black;
   padding: 0em;
   border-bottom: 1px solid #191919;
@@ -100,8 +106,6 @@
 
 .ml-demo-grid{
   margin-top: 15%;
-  margin-left: 3em;
-  margin-right: -4em;
   height: 15rem;
   box-shadow: 0px 0px 15px #141414;
 }
@@ -109,7 +113,6 @@
 /* Mobile Landscape */
 .ml-muvement-name-img {
   margin: 0 auto;
-  padding-top: 10%;
   width: 15rem;
 }
 
@@ -167,7 +170,7 @@
 
 /* Tablet */
 .tablet-landingpage-contents {
-  height: 100%;
+  min-height: min-content;
   background-image: url("../../img/LandingPageBackground.png");
   /* background: linear-gradient(to top, #303030 -10%, #000000 100%); */
   background-repeat: no-repeat;
@@ -180,7 +183,6 @@
 
 .tablet-muvement-name-img {
   margin: 0 auto;
-  padding-top: 10%;
   width: 20rem;
 }
 
@@ -212,8 +214,6 @@
 }
 
 .tablet-demo-grid{
-  margin-left: 3em;
-  margin-right: -3em;
   height: 25em;
   box-shadow: 0px 0px 15px #141414;
 }

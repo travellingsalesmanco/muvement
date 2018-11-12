@@ -1,6 +1,6 @@
 .body {
   min-height: 100vh;
-  height: 100%;
+  height: 100vh;
   background-image: url("../../img/EditBackground.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -8,7 +8,7 @@
 
 .mp-body {
   min-height: 100vh;
-  height: 100%;
+  height: 100vh;
   background-image: url("../../img/PortraitEditBackground.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,14 +18,17 @@
   background-color: transparent;
 }
 
-.contents .ant-layout-content {
-  padding: 0 2rem;
+.contents-main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .section-title-container {
   display: -webkit-flex; /* Safari */
   -webkit-align-items: center; /* Safari 7.0+ */
   display: flex;
+  flex: 1 0 12.5%;
   align-items: center;
   justify-content: center;
   margin-top: 10px;
@@ -164,7 +167,7 @@
 }
 
 .formationscreen-stage{
-    margin-bottom: 2rem;
+  background: #000;
 }
 
 .formationscreen-buttons{
