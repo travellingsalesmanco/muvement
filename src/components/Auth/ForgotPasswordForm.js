@@ -24,7 +24,6 @@ class ForgotPasswordForm extends React.Component {
           disabled: false,
         })
       } else {
-        console.log('Received values of form: ', values);
         auth.doPasswordReset(values.email)
         this.setState({
           loading: false,
