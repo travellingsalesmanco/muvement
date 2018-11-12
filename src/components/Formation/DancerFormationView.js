@@ -140,26 +140,29 @@ class FormationScreen extends Component {
         </MobileLandscape>
 
         <MinTablet>
-          <Layout className="body">
-            <GradientSVG
-              startColor="#24c6dc"
-              endColor="#514a9d"
-              idCSS="cool-gradient"
-            />
-            <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
-            <Layout className="contents">
-              <Content style={{ display: "flex", flexDirection: "column" }}>
-                <Spin indicator={loadingIcon} spinning={loading}>
-                  <SectionTitle key={this.props.formationName} formationName={this.props.formationName} />
+          <Spin indicator={loadingIcon} spinning={loading}>
+            <Layout className="body">
+              <GradientSVG
+                startColor="#24c6dc"
+                endColor="#514a9d"
+                idCSS="cool-gradient"
+              />
+              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
+              <Layout className="contents">
+                <Content className="contents-main">
+                  <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
+                                handleEditName={this.handleEditName}
+                                handleEditNameConfirm={this.handleEditNameConfirm} />
                   <div className="formationscreen-stage"
-                       style={{ background: '#000', height: '30em', overflow: "hidden" }}>
+                       style={{ flexBasis: "62.5%", flexGrow: 5 }}>
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId}
                                            withGrid animated={this.props.animated} />
                   </div>
-                </Spin>
-              </Content>
-              <Sider width={'12rem'} className="sider">
-                <Spin indicator={loadingIcon} spinning={loading}>
+                  <div style={{ flexBasis: "25%", flexGrow: 2}}>
+                    <ShowView choreoId={this.props.choreoId} />
+                  </div>
+                </Content>
+                <Sider width={'12rem'} className="sider">
                   <div className="button-container">
                     <Button className="sider-button" shape="circle" onClick={this.handleViewPerformers}>
                       <UserAddIcon style={{ fontSize: '33px' }} />
@@ -185,10 +188,10 @@ class FormationScreen extends Component {
                   </Fragment>
                   }
                   {/*<PreviewSlideList choreoId={this.props.choreoId} />*/}
-                </Spin>
-              </Sider>
+                </Sider>
+              </Layout>
             </Layout>
-          </Layout>
+          </Spin>
         </MinTablet>
       </Fragment>
     );
