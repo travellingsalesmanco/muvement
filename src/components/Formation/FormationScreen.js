@@ -1,7 +1,7 @@
-import { Button, Input, Layout, Spin } from 'antd';
+import { Button, Input, Layout, Spin, Modal } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
-import { addAndSetActiveFormation, removeFormation } from "../../actions/choreoActions";
+import { addAndSetActiveFormation, removeFormation, updateChoreoIfNewer } from "../../actions/choreoActions";
 import { renameFormation } from "../../actions/formationActions";
 import { LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/actionTypes';
 import FileAddIcon from "../../icons/FileAddIcon";
@@ -69,8 +69,24 @@ class FormationScreen extends Component {
       sidePanelID: 0,
       formationName: '',
       activeButton: props.animated ? 3 : 2,
+      isManualOverwriteAddressed: false
     }
   }
+
+  confirmManualOverwriteModal = () => {
+    let affectedChoreo = this.props.affectedChoreos[0];
+    this.props.dispatch(updateChoreoIfNewer(affectedChoreo.id, affectedChoreo.data)).then(() =>
+      this.setState({
+        isManualOverwriteAddressed: true
+      })
+    );
+  };
+
+  cancelManualOverwriteModal = () => {
+    this.setState({
+      isManualOverwriteAddressed: true
+    });
+  };
 
   handleClick = (number) => {
     if (number === 3 && this.state.activeButton !== 3) {
@@ -121,29 +137,43 @@ class FormationScreen extends Component {
 
   render() {
     const { Content, Sider } = Layout;
-    const { activeButton } = this.state;
-    const { loading, choreoId } = this.props;
+    const { activeButton, isManualOverwriteAddressed } = this.state;
+    const { loading, manualOverwrite, affectedChoreos, choreoId } = this.props;
     return (
       <Fragment>
         <MobilePortrait>
           <Spin indicator={loadingIcon} spinning={loading}>
+            <Modal
+              centered
+              visible={manualOverwrite && !isManualOverwriteAddressed}
+              onOk={this.confirmManualOverwriteModal}
+              onCancel={this.cancelManualOverwriteModal}
+              maskClosable={false}
+              closable={false}
+              cancelText={"Keep my local version"}
+              okText={"Replace with newer version"}
+            >
+              <p>A newer version of this choreo is found. Would you like to replace your local version?</p>
+            </Modal>
             <Layout className="mp-body">
               <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
               <Layout className="contents">
                 <Content className="contents-main">
                   <SectionTitle key={this.props.formationName} mobile={true} formationName={this.props.formationName}
-                    handleEditName={this.handleEditName}
-                    handleEditNameConfirm={this.handleEditNameConfirm} />
-                  <div className="formationscreen-stage" style={{ flexBasis: "60%", flexGrow: 10, position: "relative" }}>
+                                handleEditName={this.handleEditName}
+                                handleEditNameConfirm={this.handleEditNameConfirm} />
+                  <div className="formationscreen-stage"
+                       style={{ flexBasis: "60%", flexGrow: 10, position: "relative" }}>
                     <div style={{ position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}>
-                      <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                        withGrid animated={this.props.animated} />
+                      <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId}
+                                             editable
+                                             withGrid animated={this.props.animated} />
                     </div>
                   </div>
-                  <div style={{flexBasis: "10%", flexShrink: 1, paddingTop: '2em'}}>
-                  <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
+                  <div style={{ flexBasis: "10%", flexShrink: 1, paddingTop: '2em' }}>
+                    <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                   </div>
-                  <div style={{ flexBasis: "30%", flexShrink: 1, height:"30vh", overflow:"scroll" }}>
+                  <div style={{ flexBasis: "30%", flexShrink: 1, height: "30vh", overflow: "scroll" }}>
                     {
                       activeButton === 1 &&
                       <Fragment>
@@ -157,15 +187,15 @@ class FormationScreen extends Component {
                               flex: 1
                             }}>
                               <Button type={"default"} icon="plus" ghost block style={{ borderRadius: '1em' }}
-                                onClick={this.handleAddFormation}>Add</Button>
+                                      onClick={this.handleAddFormation}>Add</Button>
                             </div>
                             <div style={{
                               padding: '0.5em 2em 1em 0.5em',
                               flex: 1
                             }}>
                               <Button className="delete-formation" icon="delete" ghost block
-                                style={{ borderRadius: '1em' }}
-                                onClick={this.handleRemoveFormation}>Delete</Button>
+                                      style={{ borderRadius: '1em' }}
+                                      onClick={this.handleRemoveFormation}>Delete</Button>
                             </div>
                           </div>
                         </div>
@@ -173,15 +203,15 @@ class FormationScreen extends Component {
                     }
                     {
                       activeButton === 2 &&
-                      <div style={{overflowY: "scroll"}}>
-                      <PerformerList choreoId={this.props.choreoId} />
+                      <div style={{ overflowY: "scroll" }}>
+                        <PerformerList choreoId={this.props.choreoId} />
                       </div>
                     }
                     {
                       activeButton === 3 &&
                       <ShowView choreoId={this.props.choreoId} editable />
                     }
-                    </div>
+                  </div>
                 </Content>
               </Layout>
             </Layout>
@@ -190,12 +220,24 @@ class FormationScreen extends Component {
 
         <MobileLandscape>
           <Spin indicator={loadingIcon} spinning={loading}>
+            <Modal
+              centered
+              visible={manualOverwrite && !isManualOverwriteAddressed}
+              onOk={this.confirmManualOverwriteModal}
+              onCancel={this.cancelManualOverwriteModal}
+              maskClosable={false}
+              closable={false}
+              cancelText={"Keep my local version"}
+              okText={"Replace with newer version"}
+            >
+              <p>A newer version of this choreo is found. Would you like to replace your local version?</p>
+            </Modal>
             <Layout className="body" style={{ height: '100vh' }}>
               <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
               <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
 
                 <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                  withGrid animated={this.props.animated} />
+                                       withGrid animated={this.props.animated} />
               </div>
             </Layout>
           </Spin>
@@ -203,6 +245,18 @@ class FormationScreen extends Component {
 
         <MinTablet>
           <Spin indicator={loadingIcon} spinning={loading}>
+            <Modal
+              centered
+              visible={manualOverwrite && !isManualOverwriteAddressed}
+              onOk={this.confirmManualOverwriteModal}
+              onCancel={this.cancelManualOverwriteModal}
+              maskClosable={false}
+              closable={false}
+              cancelText={"Keep my local version"}
+              okText={"Replace with newer version"}
+            >
+              <p>A newer version of this choreo is found. Would you like to replace your local version?</p>
+            </Modal>
             <Layout className="body">
               <GradientSVG
                 startColor="#24c6dc"
@@ -213,12 +267,12 @@ class FormationScreen extends Component {
               <Layout className="contents">
                 <Content className="contents-main">
                   <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
-                    handleEditName={this.handleEditName}
-                    handleEditNameConfirm={this.handleEditNameConfirm} />
+                                handleEditName={this.handleEditName}
+                                handleEditNameConfirm={this.handleEditNameConfirm} />
                   <div className="formationscreen-stage"
-                    style={{ flexBasis: "62.5%", flexGrow: 5 }}>
+                       style={{ flexBasis: "62.5%", flexGrow: 5 }}>
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                      withGrid animated={this.props.animated} />
+                                           withGrid animated={this.props.animated} />
                   </div>
                   <div style={{ flexBasis: "25%", flexGrow: 2 }}>
                     <ShowView choreoId={this.props.choreoId} editable />
