@@ -14,7 +14,7 @@ import {
   SWITCH_ACTIVE_FORMATION,
   REMOVE_FORMATION,
   UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY, UPDATE_CHOREO_MUSIC,
-  PUBLISH_CHOREO, UNPUBLISH_CHOREO
+  PUBLISH_CHOREO, UNPUBLISH_CHOREO, CLEAR_TRIAL_CHOREO, RESET_UI_STATE
 } from "../constants/actionTypes";
 import { getChoreo } from "../selectors/choreo";
 
@@ -439,6 +439,17 @@ export function unpublishChoreo(choreoId) {
     dispatch({
       type: UNPUBLISH_CHOREO,
       choreoId: choreoId,
+    })
+  }
+}
+
+export function clearTrialChoreo() {
+  return dispatch => {
+    dispatch({
+      type: CLEAR_TRIAL_CHOREO
+    });
+    dispatch({
+      type: RESET_UI_STATE
     })
   }
 }

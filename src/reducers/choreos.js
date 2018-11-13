@@ -8,10 +8,10 @@ import {
   RENAME_CHOREO,
   UNPUBLISH_CHOREO,
   UPDATE_CHOREO_IMAGE,
-  UPDATE_CHOREO_MUSIC,
+  UPDATE_CHOREO_MUSIC, CLEAR_TRIAL_CHOREO,
 } from '../constants/actionTypes';
 import { defaultStageDim } from '../constants/defaults';
-import { defaultChoreos } from '../constants/dummyData';
+import { defaultChoreos, trialChoreo } from '../constants/dummyData';
 import dancers from './dancers';
 import formations from './formations';
 import { currentTimeStamp } from "../firebase";
@@ -97,6 +97,12 @@ export default (state = defaultChoreos, action) => {
         ...state,
         byId: prunedByIds,
         myChoreos: state.myChoreos.filter(id => id !== choreoId)
+      }
+    }
+    case CLEAR_TRIAL_CHOREO: {
+      return {
+        ...state,
+        byId: { ...state.byId, ['trial']: trialChoreo }
       }
     }
     default: {
