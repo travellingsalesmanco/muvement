@@ -2,6 +2,7 @@ import {
   ADD_CHOREO,
   LOAD_CHOREO,
   REMOVE_CHOREO,
+  RENAME_CHOREO,
   UPDATE_CHOREO_IMAGE,
   ADD_DANCER,
   RENAME_DANCER,
@@ -77,6 +78,16 @@ export function removeChoreo(id) {
       removeImage: isStorageImage(id, getState())
     })
     return Promise.resolve()
+  }
+}
+
+export function renameChoreo(id, name) {
+  return (dispatch) => {
+    dispatch({
+      type: RENAME_CHOREO,
+      choreoId: id,
+      payload: name
+    })
   }
 }
 
