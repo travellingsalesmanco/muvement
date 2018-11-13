@@ -13,7 +13,7 @@ import { canRedo, canUndo } from "../../lib/historyUtils";
 class Navigation extends React.Component {
   render() {
     const { Header } = Layout;
-    const { choreoId, canUndo, canRedo } = this.props;
+    const { choreoId, canUndo, canRedo, editable, handleShowProperties } = this.props;
     console.log("CAN UNDO: " + canUndo);
     console.log("CAN REDO: " + canRedo);
     const undoStyle = canUndo
@@ -61,6 +61,7 @@ class Navigation extends React.Component {
                 <RedoIcon />
               </Button>
               <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
+              {editable && <Button icon="info-circle" onClick={handleShowProperties} />}
             </div>
           </div>
         </MobilePortrait>
@@ -101,6 +102,7 @@ class Navigation extends React.Component {
               </Button>
               {/* TODO: change eye icon depending on current show state */}
               <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
+              {editable && <Button icon="info-circle" onClick={handleShowProperties} />}
               <Button icon="fullscreen" />
             </div>
           </div>

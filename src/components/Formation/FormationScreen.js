@@ -1,7 +1,12 @@
 import { Button, Input, Layout, Spin, Modal } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
-import { addAndSetActiveFormation, removeFormation, updateChoreoIfNewer } from "../../actions/choreoActions";
+import {
+  addAndSetActiveFormation,
+  removeFormation,
+  renameChoreo,
+  updateChoreoIfNewer
+} from "../../actions/choreoActions";
 import { renameFormation } from "../../actions/formationActions";
 import { LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/actionTypes';
 import FileAddIcon from "../../icons/FileAddIcon";
@@ -24,6 +29,8 @@ import VerticalSlideList from "./VerticalSlideList";
 import ShowView from './ShowView';
 import Timeline from './Timeline/Timeline';
 import { getTimeline } from '../../selectors/layout';
+import StageDimForm from "./StageDimForm";
+import ChoreoPicture from "../Choreo/ChoreoPicture";
 
 const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameConfirm }) => (
   <div className="section-title-container">
@@ -60,6 +67,23 @@ const MobileSwitchTabs = ({ activeButton, handleClick }) => (
   </div>
 );
 
+const Properties = ({ choreoId, choreoName, handleNameEdit }) => (
+  <div>
+    <div>
+      <Input
+        defaultValue={choreoName}
+        onBlur={handleNameEdit}
+        onPressEnter={(e) => e.target.blur()}
+      />
+    </div>
+    <ChoreoPicture choreoId={choreoId} />
+    <div style={{ pointerEvents: "None" }}>
+      <ResponsiveStageCanvas choreoId={choreoId} formationId={0} withGrid preview />
+    </div>
+    <StageDimForm choreoId={choreoId} />
+  </div>
+);
+
 class FormationScreen extends Component {
   constructor(props) {
     super(props);
@@ -69,7 +93,8 @@ class FormationScreen extends Component {
       sidePanelID: 0,
       formationName: '',
       activeButton: props.animated ? 3 : 2,
-      isManualOverwriteAddressed: false
+      isManualOverwriteAddressed: false,
+      isPropertiesVisible: false
     }
   }
 
@@ -86,6 +111,25 @@ class FormationScreen extends Component {
     this.setState({
       isManualOverwriteAddressed: true
     });
+  };
+
+  handleShowProperties = () => {
+    this.setState({
+      isPropertiesVisible: true
+    });
+  };
+
+  handleHideProperties = () => {
+    this.setState({
+      isPropertiesVisible: false
+    });
+  };
+
+  handleNameEdit = (newName) => {
+    // Only dispatch if name is not the same
+    if (newName !== this.props.choreoName) {
+      this.props.dispatch(renameChoreo(this.props.choreoId, newName));
+    }
   };
 
   handleClick = (number) => {
@@ -110,7 +154,7 @@ class FormationScreen extends Component {
 
   handleRemoveFormation = () => {
     this.props.dispatch(removeFormation(this.props.choreoId, this.props.formationId));
-  }
+  };
 
   handleEditTimeline = () => {
 
@@ -137,8 +181,8 @@ class FormationScreen extends Component {
 
   render() {
     const { Content, Sider } = Layout;
-    const { activeButton, isManualOverwriteAddressed } = this.state;
-    const { loading, manualOverwrite, affectedChoreos, choreoId } = this.props;
+    const { activeButton, isManualOverwriteAddressed, isPropertiesVisible } = this.state;
+    const { loading, manualOverwrite, affectedChoreos, choreoId, choreoName } = this.props;
     return (
       <Fragment>
         <MobilePortrait>
@@ -156,8 +200,17 @@ class FormationScreen extends Component {
             >
               <p>A newer version of this choreo is found. Would you like to replace your local version?</p>
             </Modal>
+            <Modal
+              centered
+              visible={isPropertiesVisible}
+              onCancel={this.handleHideProperties}
+              footer={null}
+            >
+              {<Properties choreoId={choreoId} choreoName={choreoName} handleNameEdit={() => this.handleNameEdit()} />}
+            </Modal>
             <Layout className="mp-body">
-              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
+              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId}
+                          editable handleShowProperties={this.handleShowProperties} />
               <Layout className="contents">
                 <Content className="contents-main">
                   <SectionTitle key={this.props.formationName} mobile={true} formationName={this.props.formationName}
@@ -260,13 +313,22 @@ class FormationScreen extends Component {
             >
               <p>A newer version of this choreo is found. Would you like to replace your local version?</p>
             </Modal>
+            <Modal
+              centered
+              visible={isPropertiesVisible}
+              onCancel={this.handleHideProperties}
+              footer={null}
+            >
+              {<Properties choreoId={choreoId} choreoName={choreoName} handleNameEdit={() => this.handleNameEdit()} />}
+            </Modal>
             <Layout className="body">
               <GradientSVG
                 startColor="#24c6dc"
                 endColor="#514a9d"
                 idCSS="cool-gradient"
               />
-              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
+              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId}
+                          editable handleShowProperties={this.handleShowProperties} />
               <Layout className="contents">
                 <Content className="contents-main">
                   <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
