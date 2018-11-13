@@ -166,7 +166,7 @@ class LandingPage extends React.Component {
                       paper</p>
                     <div className="tablet-landing-signup">
                       <Button className="tablet-landing-signup-button"
-                        onClick={() => this.props.history.push(`/signup`)}>LETS GET
+                        onClick={() => this.props.history.push(`/trial/formation`)}>LETS GET
                         CREATIVE</Button>
                     </div>
                   </Col>

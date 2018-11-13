@@ -7,6 +7,7 @@ import GoogleIcon from "../../img/google.svg";
 import withAuthorization from "../withAuthorization";
 import './Auth.css';
 import SignUpForm from "./SignUpForm";
+import { withRouter } from 'react-router-dom';
 
 const FACEBOOK_PROVIDER_MESSAGE = "You are registered through Facebook. Please sign in through that instead.";
 const GOOGLE_PROVIDER_MESSAGE = "You are registered through Google. Please sign in through that instead.";
@@ -89,7 +90,16 @@ class SignUp extends React.Component {
         <div className="auth-form">
           <SignUpForm />
         </div>
-        <p className="auth-text">Have an account? <Link className="form-link" to={`/login`}>Log in</Link></p>
+        {
+          this.props.switchHandler
+            ? <p className="auth-text">
+              Have an account? <span className="form-link" style={{ textDecoration: 'underline' }} onClick={this.props.switchHandler}>Log in</span>
+            </p>
+            :
+            <p className="auth-text">
+              Have an account? <Link className="form-link" to={`/login`}>Log in</Link>
+            </p>
+        }
       </div>
     );
   }
@@ -100,3 +110,7 @@ const authCondition = (authUser) => !authUser;
 const failRoute = "/dashboard";
 
 export default withAuthorization(authCondition, failRoute)(SignUp);
+
+const SignUpScreen = withRouter(SignUp);
+
+export { SignUpScreen };

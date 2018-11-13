@@ -226,6 +226,19 @@ button.ant-btn.mp-back-button.ant-btn-icon-only{
   outline: none;
 }
 
+.switch-tabs-active {
+  background-color: #24C6DC;
+  border: none;
+  width: 50%;
+  height: 100%;
+  border-radius: 30px;
+  color: white;
+  font-family: "Sen-Bold";
+  padding: 0px;
+  font-size: 0.8em;
+  outline: none;
+}
+
 .mobile-switch-tabs-inactive {
   background-color: transparent;
   border: none;
@@ -236,6 +249,18 @@ button.ant-btn.mp-back-button.ant-btn-icon-only{
   font-family: "Sen-Bold";
   padding: 0px;
   font-size: 1em;
+}
+
+.switch-tabs-inactive {
+  background-color: transparent;
+  border: none;
+  width: 50%;
+  height: 100%;
+  border-radius: 30px;
+  color: white;
+  font-family: "Sen-Bold";
+  padding: 0px;
+  font-size: 0.8em;
 }
 
 .backbutton-desc {

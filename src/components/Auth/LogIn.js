@@ -90,7 +90,16 @@ class LogIn extends React.Component {
         <div className="auth-form">
           <LogInForm />
         </div>
-        <p className="auth-text">Your first time here? <Link className="form-link" to={`/signup`}>Get Started</Link></p>
+        {
+          this.props.switchHandler
+          ? <p className="auth-text">
+              Your first time here? <span className="form-link" style={{ textDecoration: 'underline' }} onClick={this.props.switchHandler}>Get Started</span>
+            </p>
+          :
+            <p className="auth-text">
+              Your first time here? <Link className="form-link" to={`/signup`}>Get Started</Link>
+            </p>
+        }
       </div>
 
     );
@@ -102,3 +111,6 @@ const authCondition = (authUser) => !authUser;
 const failRoute = "/dashboard";
 
 export default withAuthorization(authCondition, failRoute)(withRouter(LogIn));
+
+const LogInScreen = withRouter(LogIn);
+export { LogInScreen };

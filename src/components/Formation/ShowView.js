@@ -107,7 +107,7 @@ class ShowView extends Component {
   }
 
   render() {
-    const { elapsedTime, timeline, isPlaying, choreoId, musicUrl, playbackRate, editable } = this.props;
+    const { elapsedTime, timeline, isPlaying, choreoId, musicUrl, playbackRate, editable, music } = this.props;
     if (elapsedTime > timeline.totalDuration) {
       this.props.dispatch({ type: TIMELINE_JUMP, payload: timeline.totalDuration })
     }
@@ -125,7 +125,29 @@ class ShowView extends Component {
           <Icon style={{ fontSize: "1.5rem", color: "white" }} type={"double-right"} theme="outlined" />
         </Button>
       </div>
-    )
+    );
+    const MusicButton = (
+      musicUrl
+        ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }}
+                  onClick={this.handleRemoveMusic}> Remove Music </Button>
+        : <Upload name={"music"} accept={"audio/*"} showUploadList={false}
+                  customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
+                    req.onSuccess(link);
+                  })}
+                  beforeUpload={(file) => {
+                    if (file.size / 1024 / 1024 > 5) {
+                      message.error('Audio file must be smaller than 5MB!')
+                      return false
+                    }
+                    return true;
+                  }}
+                  onChange={this.handleMusicUploadChange}
+        >
+          <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
+            Add Music
+          </Button>
+        </Upload>
+    );
     return (
       <Fragment>
         <MobilePortrait>
@@ -144,26 +166,9 @@ class ShowView extends Component {
             {editable &&
               <div style={{ padding: "1rem" }}>
                 {
-                  this.props.musicUrl
-                    ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }} onClick={this.handleRemoveMusic}> Remove
-                  Music </Button>
-                    : <Upload name={"music"} accept={"audio/*"} showUploadList={false}
-                      customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
-                        req.onSuccess(link);
-                      })}
-                      beforeUpload={(file) => {
-                        if (file.size / 1024 / 1024 > 5) {
-                          message.error('Audio file must be smaller than 5MB!')
-                          return false
-                        }
-                        return true;
-                      }}
-                      onChange={this.handleMusicUploadChange}
-                    >
-                      <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
-                        Add Music
-                      </Button>
-                    </Upload>
+                  music
+                  ? <MusicButton musicUrl={musicUrl}/>
+                  : null
                 }
 
               </div>
@@ -182,28 +187,10 @@ class ShowView extends Component {
               {editable
                 ? <div style={{ flex: 1, textAlign: "right" }}>
                   {
-                    this.props.musicUrl
-                      ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }} onClick={this.handleRemoveMusic}> Remove
-                  Music </Button>
-                      : <Upload name={"music"} accept={"audio/*"} showUploadList={false}
-                        customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
-                          req.onSuccess(link);
-                        })}
-                        beforeUpload={(file) => {
-                          if (file.size / 1024 / 1024 > 5) {
-                            message.error('Audio file must be smaller than 5MB!')
-                            return false
-                          }
-                          return true;
-                        }}
-                        onChange={this.handleMusicUploadChange}
-                      >
-                        <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
-                          Add Music
-                        </Button>
-                      </Upload>
+                    music
+                      ? <MusicButton musicUrl={musicUrl}/>
+                      : null
                   }
-
                 </div>
                 : <div style={{flex: 1}}>
                 </div>
@@ -226,7 +213,8 @@ class ShowView extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const timeline = getTimeline(state, props)
+  const timeline = getTimeline(state, props);
+  console.log(timeline, state.UI.elapsedTime);
   return {
     timeline: timeline,
     elapsedTime: state.UI.elapsedTime,
@@ -235,5 +223,6 @@ const mapStateToProps = (state, props) => {
     musicUrl: getChoreo(state, props.choreoId).musicUrl,
     playbackRate: state.UI.playbackRate
   }
-}
+};
+
 export default connect(mapStateToProps)(ShowView);

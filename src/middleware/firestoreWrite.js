@@ -68,6 +68,9 @@ const updateFireStoreDebounced = (choreoId, newChoreo) => {
 }
 
 export const firestoreWriter = store => next => action => {
+  if (action.choreoId === "trial") { // skips firestore if user is editing trial choreo
+    return next(action);
+  }
 
   switch (action.type) {
     case USER_LOGOUT: {

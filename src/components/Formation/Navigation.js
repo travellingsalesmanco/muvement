@@ -42,7 +42,12 @@ class Navigation extends React.Component {
           <div className="nav-bar">
             <div className="mp-back-button">
               <Button style={{ fontSize: '25px' }} icon="left"
-                      onClick={() => this.props.history.push(`/dashboard`)} />
+                      onClick={() => {
+                        if (trial) {
+                          this.props.openModal()
+                        } else {
+                          this.props.history.push(`/dashboard`)
+                        }}} />
             </div>
             <div className="mp-title">
               <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
@@ -82,7 +87,12 @@ class Navigation extends React.Component {
           <div className="nav-bar">
             <div className="mp-back-button">
               <Button style={{ fontSize: '25px' }} icon="left"
-                      onClick={() => this.props.history.push(`/dashboard`)} />
+                      onClick={() => {
+                        if (trial) {
+                          this.props.openModal('back')
+                        } else {
+                          this.props.history.push(`/dashboard`)
+                        }}} />
             </div>
             <div className="title">
               <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
@@ -104,6 +114,13 @@ class Navigation extends React.Component {
               <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
               {editable && <Button icon="info-circle" onClick={handleShowProperties} />}
               <Button icon="fullscreen" />
+              {/*<Button icon="fullscreen" />*/}
+              {
+                trial &&
+                  <Button onClick={() => this.props.openModal('save')}>
+                    <span>SAVE</span>
+                  </Button>
+              }
             </div>
           </div>
         </MinTablet>
