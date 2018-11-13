@@ -221,6 +221,20 @@
   font-size: 14px;
 }
 
+.formation-properties .ant-modal-content {
+  padding: 2px 2px;
+  background-image: linear-gradient(to right, #24c6dc, #514a9d);
+  border-radius: 15px;
+}
+
+.formation-properties .ant-modal-close {
+  color: #fff;
+}
+
+.formation-properties .ant-modal-body {
+  padding: 0;
+}
+
 @media only screen
 and (min-device-width : 375px)
 and (max-device-width : 812px)

@@ -223,6 +223,7 @@ class FormationScreen extends Component {
               visible={isPropertiesVisible}
               onCancel={this.handleHideProperties}
               footer={null}
+              className={'formation-properties'}
             >
               {<Properties choreoId={choreoId} choreoName={choreoName} handleNameEdit={this.handleNameEdit} />}
             </Modal>
@@ -336,6 +337,7 @@ class FormationScreen extends Component {
               visible={isPropertiesVisible}
               onCancel={this.handleHideProperties}
               footer={null}
+              className={'formation-properties'}
             >
               {<Properties choreoId={choreoId} choreoName={choreoName} handleNameEdit={this.handleNameEdit} />}
             </Modal>
@@ -404,6 +406,7 @@ function mapStateToProps(state, props) {
   const choreoId = props.match.params.choreoId;
   const choreo = getChoreo(state, choreoId);
   if (choreo) {
+    console.log(choreo, state.UI.activeFormation);
     const activeFormation = choreo.formations[state.UI.activeFormation];
     return {
       choreoId: choreoId,
