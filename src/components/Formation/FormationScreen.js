@@ -94,7 +94,7 @@ const Properties = ({ choreoId, choreoName, handleNameEdit }) => (
       />
     </div>
     <ChoreoPicture choreoId={choreoId} />
-    <div style={{ pointerEvents: "None" }}>
+    <div style={{ height: '9em', width: '100%', pointerEvents: "None" }}>
       <ResponsiveStageCanvas choreoId={choreoId} formationId={0} withGrid preview />
     </div>
     <StageDimForm choreoId={choreoId} />
