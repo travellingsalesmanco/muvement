@@ -16,6 +16,7 @@ import {
   UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY, UPDATE_CHOREO_MUSIC,
   PUBLISH_CHOREO, UNPUBLISH_CHOREO, CLEAR_TRIAL_CHOREO, RESET_UI_STATE
 } from "../constants/actionTypes";
+import { trialChoreo } from "../constants/dummyData";
 import { getChoreo } from "../selectors/choreo";
 
 function containsDancer(choreoId, name, state) {
@@ -197,9 +198,23 @@ export function syncCreatorChoreos(choreos, overwrite) {
         }
       }
     });
+
+    const editedTrialChoreo = getChoreo(getState(), 'trial');
+    let trialChoreoTransferred = false;
+    // Checks whether trial was edited and imports trial into user account if it was.
+    if (trialChoreo.updatedAt.seconds < editedTrialChoreo.updatedAt.seconds) {
+      dispatch({
+        type: ADD_CHOREO,
+        choreoId: null,
+        payload: editedTrialChoreo
+      });
+      trialChoreoTransferred = true;
+    }
+
     return Promise.resolve({
       requiresManualOverwrite: requiresManualOverwrite,
-      affectedChoreos: affectedChoreos
+      affectedChoreos: affectedChoreos,
+      trialChoreoTransferred: trialChoreoTransferred
     });
   }
 }

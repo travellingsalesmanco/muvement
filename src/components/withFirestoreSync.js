@@ -1,6 +1,6 @@
 import React from 'react';
 import { firestore } from '../firebase';
-import { syncCreatorChoreo, syncCreatorChoreos, updateChoreoIfNewer } from "../actions/choreoActions";
+import { clearTrialChoreo, syncCreatorChoreo, syncCreatorChoreos, updateChoreoIfNewer } from "../actions/choreoActions";
 import { connect } from "react-redux/";
 import NotFound from "./Static/NotFound";
 
@@ -56,6 +56,9 @@ const withFireStoreSync = (withChoreoRouteParams, mustOwn) => (Component) => {
         return firestore.getCreatorChoreos().then((choreos) => {
           // Dispatch possible update(s) to redux and return component
           this.props.dispatch(syncCreatorChoreos(choreos)).then((res) => {
+              if (res.trialChoreoTransferred) {
+                this.props.dispatch(clearTrialChoreo());
+              }
               this.setState({
                 loading: false,
                 error: null,
