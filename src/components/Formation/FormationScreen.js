@@ -68,7 +68,7 @@ const MobileSwitchTabs = ({ activeButton, handleClick }) => (
 );
 
 const Properties = ({ choreoId, choreoName, handleNameEdit }) => (
-  <div>
+  <div className="mp-formation-properties-modal">
     <div>
       <Input
         defaultValue={choreoName}
