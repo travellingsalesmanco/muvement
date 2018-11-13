@@ -44,7 +44,7 @@ class Navigation extends React.Component {
               <Button style={{ fontSize: '25px' }} icon="left"
                       onClick={() => {
                         if (trial) {
-                          this.props.openModal()
+                          this.props.openModal('back')
                         } else {
                           this.props.history.push(`/dashboard`)
                         }}} />
@@ -113,8 +113,6 @@ class Navigation extends React.Component {
               {/* TODO: change eye icon depending on current show state */}
               <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
               {editable && <Button icon="info-circle" onClick={handleShowProperties} />}
-              <Button icon="fullscreen" />
-              {/*<Button icon="fullscreen" />*/}
               {
                 trial &&
                   <Button onClick={() => this.props.openModal('save')}>

@@ -53,7 +53,7 @@ class LandingPage extends React.Component {
               <Content style={{ display: "flex", flexDirection: "column" }}>
                 <img className="muvement-name-img" src={Name} alt="muvement name" />
                 <p className="muvement-desc">Create and visualise your formations <br /> without pen and paper</p>
-                <Button className="landing-signup-button" onClick={() => this.props.history.push(`/signup`)}>LETS GET
+                <Button className="landing-signup-button" onClick={() => this.props.history.push(`/trial/formation`)}>LETS GET
                   CREATIVE</Button>
                 <p className="muvement-features">How it works</p>
                 <SpotlightIcon style={{ fontSize: '35px' }} />
@@ -99,7 +99,8 @@ class LandingPage extends React.Component {
                     <p className="ml-muvement-desc">Create and visualise your formations <br /> without pen and paper
                     </p>
                     <div className="tablet-landing-signup">
-                      <Button className="ml-landing-signup-button" onClick={() => this.props.history.push(`/signup`)}>LETS
+                      <Button className="ml-landing-signup-button" onClick={() => this.props.history.push(`/trial/formation`)}>
+                        LETS
                         GET
                         CREATIVE</Button>
                     </div>
