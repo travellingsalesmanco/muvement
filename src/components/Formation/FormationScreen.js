@@ -125,8 +125,9 @@ class FormationScreen extends Component {
     });
   };
 
-  handleNameEdit = (newName) => {
+  handleNameEdit = (e) => {
     // Only dispatch if name is not the same
+    let newName = e.target.value;
     if (newName !== this.props.choreoName) {
       this.props.dispatch(renameChoreo(this.props.choreoId, newName));
     }
@@ -206,7 +207,7 @@ class FormationScreen extends Component {
               onCancel={this.handleHideProperties}
               footer={null}
             >
-              {<Properties choreoId={choreoId} choreoName={choreoName} handleNameEdit={() => this.handleNameEdit()} />}
+              {<Properties choreoId={choreoId} choreoName={choreoName} handleNameEdit={this.handleNameEdit} />}
             </Modal>
             <Layout className="mp-body">
               <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId}
@@ -319,7 +320,7 @@ class FormationScreen extends Component {
               onCancel={this.handleHideProperties}
               footer={null}
             >
-              {<Properties choreoId={choreoId} choreoName={choreoName} handleNameEdit={() => this.handleNameEdit()} />}
+              {<Properties choreoId={choreoId} choreoName={choreoName} handleNameEdit={this.handleNameEdit} />}
             </Modal>
             <Layout className="body">
               <GradientSVG
