@@ -92,11 +92,11 @@ class TrialFormationScreen extends Component {
   }
 
   componentDidUpdate() {
-    if (true) {
-      window.onbeforeunload = () => true
-    } else {
-      window.onbeforeunload = undefined
-    }
+    // if (true) {
+    //   window.onbeforeunload = () => true
+    // } else {
+    //   window.onbeforeunload = undefined
+    // }
   }
 
   handleClick = (number) => {
