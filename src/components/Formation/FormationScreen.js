@@ -152,6 +152,7 @@ class FormationScreen extends Component {
               closable={false}
               cancelText={"Keep my local version"}
               okText={"Replace with newer version"}
+              keyboard={false}
             >
               <p>A newer version of this choreo is found. Would you like to replace your local version?</p>
             </Modal>
@@ -229,6 +230,7 @@ class FormationScreen extends Component {
               closable={false}
               cancelText={"Keep my local version"}
               okText={"Replace with newer version"}
+              keyboard={false}
             >
               <p>A newer version of this choreo is found. Would you like to replace your local version?</p>
             </Modal>
@@ -254,6 +256,7 @@ class FormationScreen extends Component {
               closable={false}
               cancelText={"Keep my local version"}
               okText={"Replace with newer version"}
+              keyboard={false}
             >
               <p>A newer version of this choreo is found. Would you like to replace your local version?</p>
             </Modal>
