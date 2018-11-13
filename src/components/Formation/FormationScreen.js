@@ -67,6 +67,23 @@ const MobileSwitchTabs = ({ activeButton, handleClick }) => (
   </div>
 );
 
+const SwitchTabs = ({ activeButton, handleEditPerformer, handleOnClose }) => (
+  <Fragment>
+    <div className="mobile-switch-tabs">
+      <button
+        className={activeButton === 0 ? 'switch-tabs-active' : 'switch-tabs-inactive'}
+        onClick={() => handleOnClose()}>
+        FORMATION
+      </button>
+      <button
+        className={activeButton === 1 ? 'switch-tabs-active' : 'switch-tabs-inactive'}
+        onClick={() => handleEditPerformer()}>
+        PERFORMERS
+      </button>
+    </div>
+  </Fragment>
+);
+
 const Properties = ({ choreoId, choreoName, handleNameEdit }) => (
   <div className="mp-formation-properties-modal">
     <div>
@@ -182,7 +199,7 @@ class FormationScreen extends Component {
 
   render() {
     const { Content, Sider } = Layout;
-    const { activeButton, isManualOverwriteAddressed, isPropertiesVisible } = this.state;
+    const { activeButton, isManualOverwriteAddressed, isPropertiesVisible, sidePanelID } = this.state;
     const { loading, manualOverwrite, affectedChoreos, choreoId, choreoName } = this.props;
     return (
       <Fragment>
@@ -344,19 +361,21 @@ class FormationScreen extends Component {
                     <ShowView choreoId={this.props.choreoId} editable />
                   </div>
                 </Content>
-                <Sider width={'12rem'} className="sider">
+                <Sider width={'16rem'} className="sider">
                   <div className="button-container">
-                    <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
-                      <UserAddIcon style={{ fontSize: '33px' }} />
-                    </Button>
-                    <Button className="sider-button" shape="circle" onClick={this.handleAddFormation}>
-                      <FileAddIcon style={{ fontSize: '25px' }} />
-                    </Button>
-                    <Button className="sider-button" shape="circle" onClick={this.handleEditTimeline}>
-                      <HeadphoneIcon style={{ fontSize: '25px' }} />
-                    </Button>
+                    <SwitchTabs activeButton={sidePanelID} handleEditPerformer={this.handleEditPerformer} handleOnClose={this.onClose}/>
                   </div>
                   <h3 className="slide-list-title">All Formations</h3>
+                  <div style={{ display: 'flex' }}>
+                    <Button type={"default"} icon="plus" ghost block onClick={this.handleAddFormation}
+                            style={{ margin: '0 0.5em 1em 1em', borderColor: '#24c6dc', color: '#24c6dc' }}>
+                      <span>Add</span>
+                    </Button>
+                    <Button type={"default"} icon="delete" ghost block onClick={this.handleRemoveFormation}
+                            style={{ margin: '0 1em 1em 0.5em', borderColor: '#514a9d', color: '#514a9d' }}>
+                      <span>Delete</span>
+                    </Button>
+                  </div>
                   <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)` }}>
                     <VerticalSlideList choreoId={choreoId} editable />
                   </div>
@@ -370,7 +389,7 @@ class FormationScreen extends Component {
                   visible={this.state.visible}
                   mask={false}
                   id={this.state.sidePanelID}
-                  width={200}
+                  width={'16rem'}
                 />
               </Layout>
             </Layout>
