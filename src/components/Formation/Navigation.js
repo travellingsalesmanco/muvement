@@ -13,7 +13,7 @@ import { canRedo, canUndo } from "../../lib/historyUtils";
 class Navigation extends React.Component {
   render() {
     const { Header } = Layout;
-    const { choreoId, canUndo, canRedo, editable, handleShowProperties } = this.props;
+    const { choreoId, canUndo, canRedo, editable, handleShowProperties, trial } = this.props;
     console.log("CAN UNDO: " + canUndo);
     console.log("CAN REDO: " + canRedo);
     const undoStyle = canUndo
