@@ -110,10 +110,29 @@ export const emptyChoreo = {
   }]
 };
 
+export const trialChoreo = {
+  createdAt: { nanoseconds: 171000000, seconds: 1541337862 },
+  creator: { id: "dummy", name: "Dummy" },
+  updatedAt: { "seconds": 1541342390, "nanoseconds": 681000000 },
+  imageUrl: "https://dummyimage.com/300x300/000000/fff.jpg&text=M",
+  musicUrl: null,
+  name: "My First Choreo",
+  published: true,
+  stageDim: { gridSize: 0.5, height: 5.18, units: "m", width: 9.6 },
+  dancers: [],
+  formations: [{
+    dancers: [],
+    duration: 5000,
+    name: "",
+    transitionBefore: { duration: 2000, midPoint: 0 }
+  }]
+};
+
 export const defaultChoreos = {
   byId: {
     demo: demoChoreo,
-    empty: emptyChoreo
+    empty: emptyChoreo,
+    trial: trialChoreo
   },
   myChoreos: []
 };
