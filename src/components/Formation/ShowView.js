@@ -30,6 +30,9 @@ class ShowView extends Component {
   }
 
   componentDidUpdate() {
+    if (this.props.elapsedTime > this.props.timeline.totalDuration) {
+      this.props.dispatch({ type: TIMELINE_JUMP, payload: this.props.timeline.totalDuration })
+    }
     const [formationStart, formationEnd] = this.props.timeline.cumDurations[this.props.activeFormation]
     if (this.props.elapsedTime >= formationStart && this.props.elapsedTime <= formationEnd) {
       this.props.dispatch({type: UNLOAD_ANIMATED_VIEW})
@@ -108,9 +111,6 @@ class ShowView extends Component {
 
   render() {
     const { elapsedTime, timeline, isPlaying, choreoId, musicUrl, playbackRate, editable, music } = this.props;
-    if (elapsedTime > timeline.totalDuration) {
-      this.props.dispatch({ type: TIMELINE_JUMP, payload: timeline.totalDuration })
-    }
     const playControls = (
       <div className="show-buttons">
         <Button type={"default"} ghost style={{ border: 0 }} onClick={() => this.props.dispatch(slowDown())}>
