@@ -50,6 +50,23 @@ const MobileSwitchTabs = ({ activeButton, handleClick }) => (
   </div>
 );
 
+const SwitchTabs = ({ activeButton, handleViewPerformers, handleViewFormations }) => (
+  <Fragment>
+    <div className="mobile-switch-tabs">
+      <button
+        className={activeButton === 0 ? 'switch-tabs-active' : 'switch-tabs-inactive'}
+        onClick={() => handleViewFormations()}>
+        FORMATION
+      </button>
+      <button
+        className={activeButton === 1 ? 'switch-tabs-active' : 'switch-tabs-inactive'}
+        onClick={() => handleViewPerformers()}>
+        PERFORMERS
+      </button>
+    </div>
+  </Fragment>
+);
+
 class FormationScreen extends Component {
   constructor(props) {
     super(props);
@@ -162,14 +179,11 @@ class FormationScreen extends Component {
                     <ShowView choreoId={this.props.choreoId} />
                   </div>
                 </Content>
-                <Sider width={'12rem'} className="sider">
+                <Sider width={'16rem'} className="sider">
                   <div className="button-container">
-                    <Button className="sider-button" shape="circle" onClick={this.handleViewPerformers}>
-                      <UserAddIcon style={{ fontSize: '33px' }} />
-                    </Button>
-                    <Button className="sider-button" shape="circle" onClick={this.handleViewFormations}>
-                      <HeadphoneIcon style={{ fontSize: '25px' }} />
-                    </Button>
+                    <SwitchTabs activeButton={tabletSideActiveId}
+                                handleViewFormations={this.handleViewFormations}
+                                handleViewPerformers={this.handleViewPerformers}/>
                   </div>
                   {tabletSideActiveId === 1 &&
                   <Fragment>

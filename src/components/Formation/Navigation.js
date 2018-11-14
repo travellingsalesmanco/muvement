@@ -13,7 +13,7 @@ import { canRedo, canUndo } from "../../lib/historyUtils";
 class Navigation extends React.Component {
   render() {
     const { Header } = Layout;
-    const { choreoId, canUndo, canRedo } = this.props;
+    const { choreoId, canUndo, canRedo, editable, handleShowProperties, trial } = this.props;
     console.log("CAN UNDO: " + canUndo);
     console.log("CAN REDO: " + canRedo);
     const undoStyle = canUndo
@@ -42,7 +42,12 @@ class Navigation extends React.Component {
           <div className="nav-bar">
             <div className="mp-back-button">
               <Button style={{ fontSize: '25px' }} icon="left"
-                      onClick={() => this.props.history.push(`/dashboard`)} />
+                      onClick={() => {
+                        if (trial) {
+                          this.props.openModal('back')
+                        } else {
+                          this.props.history.push(`/dashboard`)
+                        }}} />
             </div>
             <div className="mp-title">
               <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
@@ -61,6 +66,7 @@ class Navigation extends React.Component {
                 <RedoIcon />
               </Button>
               <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
+              {editable && <Button icon="info-circle" onClick={handleShowProperties} />}
             </div>
           </div>
         </MobilePortrait>
@@ -81,7 +87,12 @@ class Navigation extends React.Component {
           <div className="nav-bar">
             <div className="mp-back-button">
               <Button style={{ fontSize: '25px' }} icon="left"
-                      onClick={() => this.props.history.push(`/dashboard`)} />
+                      onClick={() => {
+                        if (trial) {
+                          this.props.openModal('back')
+                        } else {
+                          this.props.history.push(`/dashboard`)
+                        }}} />
             </div>
             <div className="title">
               <h3 style={{ color: '#fff' }}>{this.props.title}</h3>
@@ -101,7 +112,13 @@ class Navigation extends React.Component {
               </Button>
               {/* TODO: change eye icon depending on current show state */}
               <Button icon="eye" onClick={() => this.props.dispatch(toggleLabels())} />
-              <Button icon="fullscreen" />
+              {editable && <Button icon="info-circle" onClick={handleShowProperties} />}
+              {
+                trial &&
+                  <Button onClick={() => this.props.openModal('save')}>
+                    <span>SAVE</span>
+                  </Button>
+              }
             </div>
           </div>
         </MinTablet>

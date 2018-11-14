@@ -1,6 +1,6 @@
 import React from 'react';
 import { firestore } from '../firebase';
-import { syncCreatorChoreo, syncCreatorChoreos, updateChoreoIfNewer } from "../actions/choreoActions";
+import { clearTrialChoreo, syncCreatorChoreo, syncCreatorChoreos, updateChoreoIfNewer } from "../actions/choreoActions";
 import { connect } from "react-redux/";
 import NotFound from "./Static/NotFound";
 
@@ -11,7 +11,9 @@ const withFireStoreSync = (withChoreoRouteParams, mustOwn) => (Component) => {
 
       this.state = {
         loading: true,
-        error: null
+        error: null,
+        manualOverwrite: false,
+        affectedChoreos: []
       };
     }
 
@@ -22,9 +24,15 @@ const withFireStoreSync = (withChoreoRouteParams, mustOwn) => (Component) => {
         // Strictly requires ownership
         if (mustOwn) {
           return firestore.getChoreoIfOwned(choreoId).then((choreo) => {
-            // Dispatch possible update to redux and return component
-            this.props.dispatch(syncCreatorChoreo(choreoId, choreo)).then(() =>
-              this.setState({ loading: false, error: null })
+            // Dispatch possible update to redux and return component (prevents overwrites)
+            this.props.dispatch(syncCreatorChoreo(choreoId, choreo)).then((res) => {
+                this.setState({
+                  loading: false,
+                  error: null,
+                  manualOverwrite: res.requiresManualOverwrite,
+                  affectedChoreos: [res.affectedChoreo]
+                })
+              }
             )
           }).catch((error) => {
             console.log(error);
@@ -33,7 +41,7 @@ const withFireStoreSync = (withChoreoRouteParams, mustOwn) => (Component) => {
           })
         } else {
           return firestore.getChoreo(choreoId).then((choreo) => {
-            // Dispatch possible update to redux and return component
+            // Dispatch possible update to redux and return component (prevents overwrites)
             this.props.dispatch(updateChoreoIfNewer(choreoId, choreo)).then(() =>
               this.setState({ loading: false, error: null })
             )
@@ -47,8 +55,14 @@ const withFireStoreSync = (withChoreoRouteParams, mustOwn) => (Component) => {
         // Currently a one-time read, can switch to firestore listener in future for collaborative editing
         return firestore.getCreatorChoreos().then((choreos) => {
           // Dispatch possible update(s) to redux and return component
-          this.props.dispatch(syncCreatorChoreos(choreos)).then(() =>
-            this.setState({ loading: false, error: null })
+          this.props.dispatch(syncCreatorChoreos(choreos)).then((res) => {
+              this.setState({
+                loading: false,
+                error: null,
+                manualOverwrite: res.requiresManualOverwrite,
+                affectedChoreos: res.affectedChoreos
+              })
+            }
           )
         }).catch((error) => {
           console.log(error);
@@ -59,11 +73,14 @@ const withFireStoreSync = (withChoreoRouteParams, mustOwn) => (Component) => {
     }
 
     render() {
-      const { loading, error } = this.state;
+      const { loading, error, manualOverwrite, affectedChoreos } = this.state;
       if (error != null) {
         return <NotFound />;
       } else {
-        return <Component loading={loading} {...this.props} />
+        return <Component loading={loading}
+                          manualOverwrite={manualOverwrite}
+                          affectedChoreos={affectedChoreos}
+                          {...this.props} />
       }
     }
   }

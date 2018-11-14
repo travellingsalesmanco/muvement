@@ -9,7 +9,7 @@ import {
   TIMELINE_PAUSE,
   LOAD_ANIMATED_VIEW,
   UNLOAD_ANIMATED_VIEW,
-  SET_PLAYBACK_RATE,
+  SET_PLAYBACK_RATE, RESET_UI_STATE,
 } from "../constants/actionTypes";
 import { defaultUI } from "../constants/defaults";
 
@@ -87,7 +87,11 @@ export default (state = defaultUI, action) => {
         playbackRate: rate
       }
     }
-
+    case RESET_UI_STATE: {
+      return {
+        ...defaultUI
+      }
+    }
     default:
       return state;
   }

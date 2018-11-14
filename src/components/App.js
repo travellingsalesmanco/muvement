@@ -13,6 +13,7 @@ import ReactGA from 'react-ga';
 import Privacy from "./Static/Privacy";
 import Terms from "./Static/Terms";
 import DancerFormationView from "./Formation/DancerFormationView";
+import TrialFormationScreen from "./Trial/TrialFormationScreen";
 
 ReactGA.initialize('UA-125447140-3', {
   debug: false
@@ -23,17 +24,21 @@ class App extends Component {
     return (
       <div className="App" style={{overflow:"hidden"}}>
         <Switch>
+          {/* Authenticated routes */}
           <Route exact path="/dashboard" component={HomeScreen} />
-          <Route exact path="/privacy" component={Privacy} />
-          <Route exact path="/terms" component={Terms} />
-          <Route exact path="/signup" component={SignUpScreen} />
-          <Route exact path="/login" component={LogInScreen} />
-          <Route exact path="/resetpassword" component={ResetPwScreen} />
-          <Route exact path="/forgotpassword" component={ForgotPwScreen} />
-          <Route exact path="/settings" component={Settings} />
           <Route exact path={`/choreo/:choreoId`} component={ChoreoHomeScreen} />
           <Route exact path={`/choreo/:choreoId/formation`} component={FormationScreen} />
           <Route exact path={`/choreoview/:choreoId/`} component={DancerFormationView} />
+          <Route exact path="/settings" component={Settings} />
+          <Route exact path="/resetpassword" component={ResetPwScreen} />
+
+          {/* Non-authenticated routes */}
+          <Route exact path="/signup" component={SignUpScreen} />
+          <Route exact path="/login" component={LogInScreen} />
+          <Route exact path="/privacy" component={Privacy} />
+          <Route exact path="/terms" component={Terms} />
+          <Route exact path="/forgotpassword" component={ForgotPwScreen} />
+          <Route exact path="/trial/formation" component={TrialFormationScreen} />
           <Route exact path="/" render={(props) => <LandingPageScreen {...props} choreoId={'demo'} />} />
           <Redirect path="*" to="/" />
         </Switch>

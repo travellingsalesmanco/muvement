@@ -1,7 +1,12 @@
-import { Button, Input, Layout, Spin } from 'antd';
+import { Button, Input, Layout, Spin, Modal } from 'antd';
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
-import { addAndSetActiveFormation, removeFormation } from "../../actions/choreoActions";
+import {
+  addAndSetActiveFormation,
+  removeFormation,
+  renameChoreo,
+  updateChoreoIfNewer
+} from "../../actions/choreoActions";
 import { renameFormation } from "../../actions/formationActions";
 import { LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from '../../constants/actionTypes';
 import FileAddIcon from "../../icons/FileAddIcon";
@@ -24,6 +29,8 @@ import VerticalSlideList from "./VerticalSlideList";
 import ShowView from './ShowView';
 import Timeline from './Timeline/Timeline';
 import { getTimeline } from '../../selectors/layout';
+import StageDimForm from "./StageDimForm";
+import ChoreoPicture from "../Choreo/ChoreoPicture";
 
 const SectionTitle = ({ mobile, formationName, handleEditName, handleEditNameConfirm }) => (
   <div className="section-title-container">
@@ -60,6 +67,40 @@ const MobileSwitchTabs = ({ activeButton, handleClick }) => (
   </div>
 );
 
+const SwitchTabs = ({ activeButton, handleEditPerformer, handleOnClose }) => (
+  <Fragment>
+    <div className="mobile-switch-tabs">
+      <button
+        className={activeButton === 0 ? 'switch-tabs-active' : 'switch-tabs-inactive'}
+        onClick={() => handleOnClose()}>
+        FORMATION
+      </button>
+      <button
+        className={activeButton === 1 ? 'switch-tabs-active' : 'switch-tabs-inactive'}
+        onClick={() => handleEditPerformer()}>
+        PERFORMERS
+      </button>
+    </div>
+  </Fragment>
+);
+
+const Properties = ({ choreoId, choreoName, handleNameEdit }) => (
+  <div className="mp-formation-properties-modal">
+    <div>
+      <Input
+        defaultValue={choreoName}
+        onBlur={handleNameEdit}
+        onPressEnter={(e) => e.target.blur()}
+      />
+    </div>
+    <ChoreoPicture choreoId={choreoId} />
+    <div style={{ height: '9em', width: '100%', pointerEvents: "None" }}>
+      <ResponsiveStageCanvas choreoId={choreoId} formationId={0} withGrid preview />
+    </div>
+    <StageDimForm choreoId={choreoId} />
+  </div>
+);
+
 class FormationScreen extends Component {
   constructor(props) {
     super(props);
@@ -69,8 +110,45 @@ class FormationScreen extends Component {
       sidePanelID: 0,
       formationName: '',
       activeButton: props.animated ? 3 : 2,
+      isManualOverwriteAddressed: false,
+      isPropertiesVisible: false
     }
   }
+
+  confirmManualOverwriteModal = () => {
+    let affectedChoreo = this.props.affectedChoreos[0];
+    this.props.dispatch(updateChoreoIfNewer(affectedChoreo.id, affectedChoreo.data)).then(() =>
+      this.setState({
+        isManualOverwriteAddressed: true
+      })
+    );
+  };
+
+  cancelManualOverwriteModal = () => {
+    this.setState({
+      isManualOverwriteAddressed: true
+    });
+  };
+
+  handleShowProperties = () => {
+    this.setState({
+      isPropertiesVisible: true
+    });
+  };
+
+  handleHideProperties = () => {
+    this.setState({
+      isPropertiesVisible: false
+    });
+  };
+
+  handleNameEdit = (e) => {
+    // Only dispatch if name is not the same
+    let newName = e.target.value;
+    if (newName !== this.props.choreoName) {
+      this.props.dispatch(renameChoreo(this.props.choreoId, newName));
+    }
+  };
 
   handleClick = (number) => {
     if (number === 3 && this.state.activeButton !== 3) {
@@ -94,7 +172,7 @@ class FormationScreen extends Component {
 
   handleRemoveFormation = () => {
     this.props.dispatch(removeFormation(this.props.choreoId, this.props.formationId));
-  }
+  };
 
   handleEditTimeline = () => {
 
@@ -121,29 +199,54 @@ class FormationScreen extends Component {
 
   render() {
     const { Content, Sider } = Layout;
-    const { activeButton } = this.state;
-    const { loading, choreoId } = this.props;
+    const { activeButton, isManualOverwriteAddressed, isPropertiesVisible, sidePanelID } = this.state;
+    const { loading, manualOverwrite, affectedChoreos, choreoId, choreoName } = this.props;
     return (
       <Fragment>
         <MobilePortrait>
           <Spin indicator={loadingIcon} spinning={loading}>
+            <Modal
+              centered
+              visible={manualOverwrite && !isManualOverwriteAddressed}
+              onOk={this.confirmManualOverwriteModal}
+              onCancel={this.cancelManualOverwriteModal}
+              maskClosable={false}
+              closable={false}
+              cancelText={"Keep my local version"}
+              okText={"Replace with newer version"}
+              keyboard={false}
+            >
+              <p>A newer version of this choreo is found. Would you like to replace your local version?</p>
+            </Modal>
+            <Modal
+              centered
+              visible={isPropertiesVisible}
+              onCancel={this.handleHideProperties}
+              footer={null}
+              className={'formation-properties'}
+            >
+              {<Properties choreoId={choreoId} choreoName={choreoName} handleNameEdit={this.handleNameEdit} />}
+            </Modal>
             <Layout className="mp-body">
-              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
+              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId}
+                          editable handleShowProperties={this.handleShowProperties} />
               <Layout className="contents">
                 <Content className="contents-main">
                   <SectionTitle key={this.props.formationName} mobile={true} formationName={this.props.formationName}
-                    handleEditName={this.handleEditName}
-                    handleEditNameConfirm={this.handleEditNameConfirm} />
-                  <div className="formationscreen-stage" style={{ flexBasis: "60%", flexGrow: 10, position: "relative" }}>
+                                handleEditName={this.handleEditName}
+                                handleEditNameConfirm={this.handleEditNameConfirm} />
+                  <div className="formationscreen-stage"
+                       style={{ flexBasis: "60%", flexGrow: 10, position: "relative" }}>
                     <div style={{ position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}>
-                      <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                        withGrid animated={this.props.animated} />
+                      <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId}
+                                             editable
+                                             withGrid animated={this.props.animated} />
                     </div>
                   </div>
-                  <div style={{flexBasis: "10%", flexShrink: 1, paddingTop: '2em'}}>
-                  <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
+                  <div style={{ flexBasis: "10%", flexShrink: 1, paddingTop: '2em' }}>
+                    <MobileSwitchTabs activeButton={activeButton} handleClick={this.handleClick} />
                   </div>
-                  <div style={{ flexBasis: "30%", flexShrink: 1, height:"30vh", overflow:"scroll" }}>
+                  <div style={{ flexBasis: "30%", flexShrink: 1, height: "30vh", overflow: "scroll" }}>
                     {
                       activeButton === 1 &&
                       <Fragment>
@@ -157,15 +260,15 @@ class FormationScreen extends Component {
                               flex: 1
                             }}>
                               <Button type={"default"} icon="plus" ghost block style={{ borderRadius: '1em' }}
-                                onClick={this.handleAddFormation}>Add</Button>
+                                      onClick={this.handleAddFormation}>Add</Button>
                             </div>
                             <div style={{
                               padding: '0.5em 2em 1em 0.5em',
                               flex: 1
                             }}>
                               <Button className="delete-formation" icon="delete" ghost block
-                                style={{ borderRadius: '1em' }}
-                                onClick={this.handleRemoveFormation}>Delete</Button>
+                                      style={{ borderRadius: '1em' }}
+                                      onClick={this.handleRemoveFormation}>Delete</Button>
                             </div>
                           </div>
                         </div>
@@ -173,15 +276,15 @@ class FormationScreen extends Component {
                     }
                     {
                       activeButton === 2 &&
-                      <div style={{overflowY: "scroll"}}>
-                      <PerformerList choreoId={this.props.choreoId} />
+                      <div style={{ overflowY: "scroll" }}>
+                        <PerformerList choreoId={this.props.choreoId} />
                       </div>
                     }
                     {
                       activeButton === 3 &&
-                      <ShowView choreoId={this.props.choreoId} editable />
+                      <ShowView choreoId={this.props.choreoId} editable music={true}/>
                     }
-                    </div>
+                  </div>
                 </Content>
               </Layout>
             </Layout>
@@ -190,12 +293,25 @@ class FormationScreen extends Component {
 
         <MobileLandscape>
           <Spin indicator={loadingIcon} spinning={loading}>
+            <Modal
+              centered
+              visible={manualOverwrite && !isManualOverwriteAddressed}
+              onOk={this.confirmManualOverwriteModal}
+              onCancel={this.cancelManualOverwriteModal}
+              maskClosable={false}
+              closable={false}
+              cancelText={"Keep my local version"}
+              okText={"Replace with newer version"}
+              keyboard={false}
+            >
+              <p>A newer version of this choreo is found. Would you like to replace your local version?</p>
+            </Modal>
             <Layout className="body" style={{ height: '100vh' }}>
               <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
               <div style={{ background: '#000', flex: 1, overflow: "hidden" }}>
 
                 <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                  withGrid animated={this.props.animated} />
+                                       withGrid animated={this.props.animated} />
               </div>
             </Layout>
           </Spin>
@@ -203,40 +319,65 @@ class FormationScreen extends Component {
 
         <MinTablet>
           <Spin indicator={loadingIcon} spinning={loading}>
+            <Modal
+              centered
+              visible={manualOverwrite && !isManualOverwriteAddressed}
+              onOk={this.confirmManualOverwriteModal}
+              onCancel={this.cancelManualOverwriteModal}
+              maskClosable={false}
+              closable={false}
+              cancelText={"Keep my local version"}
+              okText={"Replace with newer version"}
+              keyboard={false}
+            >
+              <p>A newer version of this choreo is found. Would you like to replace your local version?</p>
+            </Modal>
+            <Modal
+              centered
+              visible={isPropertiesVisible}
+              onCancel={this.handleHideProperties}
+              footer={null}
+              className={'formation-properties'}
+            >
+              {<Properties choreoId={choreoId} choreoName={choreoName} handleNameEdit={this.handleNameEdit} />}
+            </Modal>
             <Layout className="body">
               <GradientSVG
                 startColor="#24c6dc"
                 endColor="#514a9d"
                 idCSS="cool-gradient"
               />
-              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId} />
+              <Navigation title={this.props.choreoName} history={this.props.history} choreoId={this.props.choreoId}
+                          editable handleShowProperties={this.handleShowProperties} />
               <Layout className="contents">
                 <Content className="contents-main">
                   <SectionTitle key={this.props.formationName} formationName={this.props.formationName}
-                    handleEditName={this.handleEditName}
-                    handleEditNameConfirm={this.handleEditNameConfirm} />
+                                handleEditName={this.handleEditName}
+                                handleEditNameConfirm={this.handleEditNameConfirm} />
                   <div className="formationscreen-stage"
-                    style={{ flexBasis: "62.5%", flexGrow: 5 }}>
+                       style={{ flexBasis: "62.5%", flexGrow: 5 }}>
                     <ResponsiveStageCanvas choreoId={this.props.choreoId} formationId={this.props.formationId} editable
-                      withGrid animated={this.props.animated} />
+                                           withGrid animated={this.props.animated} />
                   </div>
                   <div style={{ flexBasis: "25%", flexGrow: 2 }}>
-                    <ShowView choreoId={this.props.choreoId} editable />
+                    <ShowView choreoId={this.props.choreoId} editable music={true}/>
                   </div>
                 </Content>
-                <Sider width={'12rem'} className="sider">
+                <Sider width={'16rem'} className="sider">
                   <div className="button-container">
-                    <Button className="sider-button" shape="circle" onClick={this.handleEditPerformer}>
-                      <UserAddIcon style={{ fontSize: '33px' }} />
-                    </Button>
-                    <Button className="sider-button" shape="circle" onClick={this.handleAddFormation}>
-                      <FileAddIcon style={{ fontSize: '25px' }} />
-                    </Button>
-                    <Button className="sider-button" shape="circle" onClick={this.handleEditTimeline}>
-                      <HeadphoneIcon style={{ fontSize: '25px' }} />
-                    </Button>
+                    <SwitchTabs activeButton={sidePanelID} handleEditPerformer={this.handleEditPerformer} handleOnClose={this.onClose}/>
                   </div>
                   <h3 className="slide-list-title">All Formations</h3>
+                  <div style={{ display: 'flex' }}>
+                    <Button type={"default"} icon="plus" ghost block onClick={this.handleAddFormation}
+                            style={{ margin: '0 0.5em 1em 1em', borderColor: '#24c6dc', color: '#24c6dc' }}>
+                      <span>Add</span>
+                    </Button>
+                    <Button type={"default"} icon="delete" ghost block onClick={this.handleRemoveFormation}
+                            style={{ margin: '0 1em 1em 0.5em', borderColor: '#514a9d', color: '#514a9d' }}>
+                      <span>Delete</span>
+                    </Button>
+                  </div>
                   <div style={{ overflowY: 'scroll', height: `calc(100vh - 234px)` }}>
                     <VerticalSlideList choreoId={choreoId} editable />
                   </div>
@@ -250,7 +391,7 @@ class FormationScreen extends Component {
                   visible={this.state.visible}
                   mask={false}
                   id={this.state.sidePanelID}
-                  width={200}
+                  width={'16rem'}
                 />
               </Layout>
             </Layout>
@@ -265,6 +406,7 @@ function mapStateToProps(state, props) {
   const choreoId = props.match.params.choreoId;
   const choreo = getChoreo(state, choreoId);
   if (choreo) {
+    console.log(choreo, state.UI.activeFormation);
     const activeFormation = choreo.formations[state.UI.activeFormation];
     return {
       choreoId: choreoId,

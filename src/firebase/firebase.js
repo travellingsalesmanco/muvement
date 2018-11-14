@@ -39,6 +39,10 @@ const currentTimeStamp = () => {
   return firebase.firestore.Timestamp.now();
 };
 
+const buildTimeStamp = (seconds, nanoseconds) => {
+  return new firebase.firestore.Timestamp(seconds, nanoseconds);
+};
+
 // Define consts for internal and external use
 const constants = {
   FACEBOOK_SIGN_IN_METHOD: firebase.auth.FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD,
@@ -73,5 +77,6 @@ export {
   constants,
   currentTimeStampField,
   currentTimeStamp,
+  buildTimeStamp,
   storageRef
 };

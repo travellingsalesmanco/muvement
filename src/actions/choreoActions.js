@@ -2,6 +2,7 @@ import {
   ADD_CHOREO,
   LOAD_CHOREO,
   REMOVE_CHOREO,
+  RENAME_CHOREO,
   UPDATE_CHOREO_IMAGE,
   ADD_DANCER,
   RENAME_DANCER,
@@ -13,8 +14,9 @@ import {
   SWITCH_ACTIVE_FORMATION,
   REMOVE_FORMATION,
   UNDO_FORMATION_CHANGE, REDO_FORMATION_CHANGE, CLEAR_FORMATION_HISTORY, UPDATE_CHOREO_MUSIC,
-  PUBLISH_CHOREO, UNPUBLISH_CHOREO
+  PUBLISH_CHOREO, UNPUBLISH_CHOREO, CLEAR_TRIAL_CHOREO, RESET_UI_STATE
 } from "../constants/actionTypes";
+import { trialChoreo } from "../constants/dummyData";
 import { getChoreo } from "../selectors/choreo";
 
 function containsDancer(choreoId, name, state) {
@@ -47,7 +49,8 @@ function getLostChoreos(choreos, state) {
 
 function isNewer(choreo, choreoId, state) {
   const currChoreo = getChoreo(state, choreoId);
-  return currChoreo ? currChoreo.updatedAt.seconds < choreo.updatedAt.seconds
+  // consider choreo as newer if the updatedAt is 30 seconds (arbitrary buffer) later than previous updatedAt
+  return currChoreo ? currChoreo.updatedAt.seconds + 30 < choreo.updatedAt.seconds
     : true;
 }
 
@@ -76,6 +79,16 @@ export function removeChoreo(id) {
       removeImage: isStorageImage(id, getState())
     })
     return Promise.resolve()
+  }
+}
+
+export function renameChoreo(id, name) {
+  return (dispatch) => {
+    dispatch({
+      type: RENAME_CHOREO,
+      choreoId: id,
+      payload: name
+    })
   }
 }
 
@@ -112,8 +125,10 @@ export function updateChoreoIfNewer(id, choreo) {
   }
 }
 
-export function syncCreatorChoreo(id, choreo) {
+export function syncCreatorChoreo(id, choreo, overwrite) {
   return (dispatch, getState) => {
+    // Tracks if manual overwrite is required (when overwrite is not allowed)
+    let requiresManualOverwrite = false;
     if (!hasChoreo(id, getState()) || !ownsChoreo(id, getState())) {
       dispatch({
         type: ADD_CHOREO,
@@ -121,18 +136,33 @@ export function syncCreatorChoreo(id, choreo) {
         payload: choreo
       });
     } else if (isNewer(choreo, id, getState())) {
-      dispatch({
-        type: LOAD_CHOREO,
-        choreoId: id,
-        payload: choreo
-      });
+      if (overwrite) {
+        dispatch({
+          type: LOAD_CHOREO,
+          choreoId: id,
+          payload: choreo
+        });
+      } else {
+        requiresManualOverwrite = true;
+      }
     }
-    return Promise.resolve();
+    return Promise.resolve({
+      requiresManualOverwrite: requiresManualOverwrite,
+      affectedChoreo: {
+        data: choreo,
+        id: id
+      }
+    });
   }
 }
 
-export function syncCreatorChoreos(choreos) {
+export function syncCreatorChoreos(choreos, overwrite) {
   return (dispatch, getState) => {
+    // Tracks if manual overwrite is required (when overwrite is not allowed)
+    let requiresManualOverwrite = false;
+    // Collates list of choreos that need manual overwrite
+    let affectedChoreos = [];
+
     // Remove choreos no longer tagged under creator in cloud
     let lostChoreos = getLostChoreos(choreos, getState());
     lostChoreos.forEach((choreoId) => {
@@ -152,15 +182,26 @@ export function syncCreatorChoreos(choreos) {
           payload: choreo.data
         });
       } else if (isNewer(choreo.data, choreo.id, getState())) {
-        // Update existing choreos if newer
-        dispatch({
-          type: LOAD_CHOREO,
-          choreoId: choreo.id,
-          payload: choreo.data
-        });
+        // Update existing choreos if newer and overwrite allowed
+        if (overwrite) {
+          dispatch({
+            type: LOAD_CHOREO,
+            choreoId: choreo.id,
+            payload: choreo.data
+          });
+        } else {
+          requiresManualOverwrite = true;
+          affectedChoreos.push({
+            data: choreo.data,
+            id: choreo.id
+          })
+        }
       }
     });
-    return Promise.resolve()
+    return Promise.resolve({
+      requiresManualOverwrite: requiresManualOverwrite,
+      affectedChoreos: affectedChoreos,
+    });
   }
 }
 
@@ -399,6 +440,38 @@ export function unpublishChoreo(choreoId) {
     dispatch({
       type: UNPUBLISH_CHOREO,
       choreoId: choreoId,
+    })
+  }
+}
+
+export function transferTrialChoreo() {
+  return (dispatch, getState) => {
+    const editedTrialChoreo = getChoreo(getState(), 'trial');
+    // Add trial choreo to my choreos
+    dispatch({
+      type: ADD_CHOREO,
+      choreoId: null,
+      payload: editedTrialChoreo
+    });
+    // Reset trial choreo
+    dispatch({
+      type: RESET_UI_STATE
+    });
+    dispatch({
+      type: CLEAR_TRIAL_CHOREO
+    });
+
+    return Promise.resolve();
+  }
+}
+
+export function clearTrialChoreo() {
+  return dispatch => {
+    dispatch({
+      type: CLEAR_TRIAL_CHOREO
+    });
+    dispatch({
+      type: RESET_UI_STATE
     })
   }
 }

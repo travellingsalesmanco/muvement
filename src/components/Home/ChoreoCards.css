@@ -142,14 +142,10 @@
 }
 
 .new-choreo-modal-inner .ant-input {
-  background: linear-gradient(to right, #24c6dc, #514a9d);
   border: 0;
+  border-radius: 0;
   font-family: 'Sen-Regular', Arial, sans-serif;
   font-size: 18px;
-  text-align: center;
-  border-radius: 50px;
-  margin-top:30px;
-  width: 400px;
   height: 45px;
 }
 
@@ -157,17 +153,15 @@
     color: white;
 }
 
-.new-choreo-modal-inner > button {
+.new-choreo-modal-inner-button {
   border-radius: 50px;
-  margin-top: 30px;
-  margin-bottom: 40px;
   border: 2px solid #24c6dc;
   font-family: 'Sen-Black', Arial, sans-serif;
-  color: #24c6dc;
   background: transparent;
-  width: 400px;
   height: 45px;
   font-size: 20px;
+  margin: 1em 1em 0 1em;
+  color: #fff;
 }
 
 /**/

@@ -1,4 +1,4 @@
-import { db, auth, currentTimeStampField } from './firebase';
+import { db, auth, currentTimeStampField, buildTimeStamp } from './firebase';
 
 // Returns created choreo if successful
 export const createChoreo = (choreo) => {
@@ -52,6 +52,8 @@ export const getCreatorChoreos = () => {
 export const updateChoreo = (choreoId, choreo) => {
   return db.collection("choreos").doc(choreoId).set({
     ...choreo,
+    // Build back timestamp on update
+    createdAt: buildTimeStamp(choreo.createdAt.seconds, choreo.createdAt.nanoseconds),
     updatedAt: currentTimeStampField()
   });
 };
