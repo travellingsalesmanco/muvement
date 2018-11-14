@@ -255,7 +255,7 @@ class TrialFormationScreen extends Component {
                   }
                   {
                     activeButton === 3 &&
-                    <ShowView choreoId={this.props.choreoId} editable />
+                    <ShowView choreoId={this.props.choreoId} editable music={false}/>
                   }
                 </div>
               </Content>

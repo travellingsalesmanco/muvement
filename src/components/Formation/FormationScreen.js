@@ -282,7 +282,7 @@ class FormationScreen extends Component {
                     }
                     {
                       activeButton === 3 &&
-                      <ShowView choreoId={this.props.choreoId} editable />
+                      <ShowView choreoId={this.props.choreoId} editable music={true}/>
                     }
                   </div>
                 </Content>
@@ -360,7 +360,7 @@ class FormationScreen extends Component {
                                            withGrid animated={this.props.animated} />
                   </div>
                   <div style={{ flexBasis: "25%", flexGrow: 2 }}>
-                    <ShowView choreoId={this.props.choreoId} editable />
+                    <ShowView choreoId={this.props.choreoId} editable music={true}/>
                   </div>
                 </Content>
                 <Sider width={'16rem'} className="sider">

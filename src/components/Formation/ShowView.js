@@ -126,28 +126,30 @@ class ShowView extends Component {
         </Button>
       </div>
     );
-    const MusicButton = (
-      musicUrl
-        ? <Button type={"danger"} ghost style={{ borderRadius: "1em" }}
-                  onClick={this.handleRemoveMusic}> Remove Music </Button>
-        : <Upload name={"music"} accept={"audio/*"} showUploadList={false}
-                  customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
-                    req.onSuccess(link);
-                  })}
-                  beforeUpload={(file) => {
-                    if (file.size / 1024 / 1024 > 5) {
-                      message.error('Audio file must be smaller than 5MB!')
-                      return false
-                    }
-                    return true;
-                  }}
-                  onChange={this.handleMusicUploadChange}
-        >
-          <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
-            Add Music
-          </Button>
-        </Upload>
-    );
+    const MusicButton = () => {
+      if (musicUrl) {
+        return <Button type={"danger"} ghost style={{ borderRadius: "1em" }}
+                       onClick={this.handleRemoveMusic}> Remove Music </Button>
+      } else {
+        return <Upload name={"music"} accept={"audio/*"} showUploadList={false}
+                       customRequest={(req) => storage.addChoreoMusic(req.file, choreoId).then((link) => {
+                         req.onSuccess(link);
+                       })}
+                       beforeUpload={(file) => {
+                         if (file.size / 1024 / 1024 > 5) {
+                           message.error('Audio file must be smaller than 5MB!')
+                           return false
+                         }
+                         return true;
+                       }}
+                       onChange={this.handleMusicUploadChange}
+              >
+                <Button type={"default"} ghost style={{ borderRadius: "1em" }}>
+                  Add Music
+                </Button>
+              </Upload>
+      }
+    };
     return (
       <Fragment>
         <MobilePortrait>
