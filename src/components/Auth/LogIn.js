@@ -24,7 +24,13 @@ class LogIn extends React.Component {
     this.setState({
         disabled: true,
       }, () => auth.facebookSignIn()
-        .then(() => this.props.history.push(`/dashboard`))
+        .then(() => {
+          if (this.props.trialHandler) {
+            this.props.trialHandler().then(() => this.props.history.push(`/dashboard`));
+          } else {
+            this.props.history.push(`/dashboard`)
+          }
+        })
         .catch((err) => {
           let errMessage = "Could not log in";
           if (err.code === firebaseConstants.PROVIDER.ACCOUNT_EXISTS_CODE) {
@@ -46,7 +52,13 @@ class LogIn extends React.Component {
     this.setState({
         disabled: true,
       }, () => auth.googleSignIn()
-        .then(() => this.props.history.push(`/dashboard`))
+        .then(() => {
+          if (this.props.trialHandler) {
+            this.props.trialHandler().then(() => this.props.history.push(`/dashboard`));
+          } else {
+            this.props.history.push(`/dashboard`)
+          }
+        })
         .catch((err) => {
           let errMessage = "Could not log in";
           if (err.code === firebaseConstants.PROVIDER.ACCOUNT_EXISTS_CODE) {
@@ -65,6 +77,7 @@ class LogIn extends React.Component {
   };
 
   render() {
+    const { trialHandler } = this.props;
     return (
       <div className="auth-background">
         <h1 className="auth-title">LOG IN</h1>
@@ -88,14 +101,15 @@ class LogIn extends React.Component {
           <Divider className="auth-divider"><span className="divider-text">Or Log In With</span></Divider>
         </div>
         <div className="auth-form">
-          <LogInForm />
+          <LogInForm trialHandler={trialHandler} />
         </div>
         {
           this.props.switchHandler
-          ? <p className="auth-text">
-              Your first time here? <span className="form-link" style={{ textDecoration: 'underline' }} onClick={this.props.switchHandler}>Get Started</span>
+            ? <p className="auth-text">
+              Your first time here? <span className="form-link" style={{ textDecoration: 'underline' }}
+                                          onClick={this.props.switchHandler}>Get Started</span>
             </p>
-          :
+            :
             <p className="auth-text">
               Your first time here? <Link className="form-link" to={`/signup`}>Get Started</Link>
             </p>

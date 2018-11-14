@@ -30,8 +30,13 @@ class SignUpForm extends React.Component {
             disabled: false,
           })
         } else {
-          auth.doSignUpWithEmailAndPassword(values.username, values.email, values.password).then(
-            () => this.props.history.push(`/dashboard`)
+          auth.doSignUpWithEmailAndPassword(values.username, values.email, values.password).then(() => {
+              if (this.props.trialHandler) {
+                this.props.trialHandler().then(() => this.props.history.push(`/dashboard`));
+              } else {
+                this.props.history.push(`/dashboard`)
+              }
+            }
           ).catch((err) => {
             console.log(err);
             let errMessage = "Could not sign up";

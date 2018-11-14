@@ -198,23 +198,9 @@ export function syncCreatorChoreos(choreos, overwrite) {
         }
       }
     });
-
-    const editedTrialChoreo = getChoreo(getState(), 'trial');
-    let trialChoreoTransferred = false;
-    // Checks whether trial was edited and imports trial into user account if it was.
-    if (trialChoreo.updatedAt.seconds < editedTrialChoreo.updatedAt.seconds) {
-      dispatch({
-        type: ADD_CHOREO,
-        choreoId: null,
-        payload: editedTrialChoreo
-      });
-      trialChoreoTransferred = true;
-    }
-
     return Promise.resolve({
       requiresManualOverwrite: requiresManualOverwrite,
       affectedChoreos: affectedChoreos,
-      trialChoreoTransferred: trialChoreoTransferred
     });
   }
 }
@@ -455,6 +441,27 @@ export function unpublishChoreo(choreoId) {
       type: UNPUBLISH_CHOREO,
       choreoId: choreoId,
     })
+  }
+}
+
+export function transferTrialChoreo() {
+  return (dispatch, getState) => {
+    const editedTrialChoreo = getChoreo(getState(), 'trial');
+    // Add trial choreo to my choreos
+    dispatch({
+      type: ADD_CHOREO,
+      choreoId: null,
+      payload: editedTrialChoreo
+    });
+    // Reset trial choreo
+    dispatch({
+      type: RESET_UI_STATE
+    });
+    dispatch({
+      type: CLEAR_TRIAL_CHOREO
+    });
+
+    return Promise.resolve();
   }
 }
 

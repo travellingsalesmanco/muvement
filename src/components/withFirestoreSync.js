@@ -56,9 +56,6 @@ const withFireStoreSync = (withChoreoRouteParams, mustOwn) => (Component) => {
         return firestore.getCreatorChoreos().then((choreos) => {
           // Dispatch possible update(s) to redux and return component
           this.props.dispatch(syncCreatorChoreos(choreos)).then((res) => {
-              if (res.trialChoreoTransferred) {
-                this.props.dispatch(clearTrialChoreo());
-              }
               this.setState({
                 loading: false,
                 error: null,

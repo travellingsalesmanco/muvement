@@ -24,7 +24,13 @@ class SignUp extends React.Component {
     this.setState({
         disabled: true,
       }, () => auth.facebookSignIn()
-        .then(() => this.props.history.push(`/dashboard`))
+        .then(() => {
+          if (this.props.trialHandler) {
+            this.props.trialHandler().then(() => this.props.history.push(`/dashboard`));
+          } else {
+            this.props.history.push(`/dashboard`)
+          }
+        })
         .catch((err) => {
           let errMessage = "Could not sign up";
           if (err.code === firebaseConstants.PROVIDER.ACCOUNT_EXISTS_CODE) {
@@ -46,7 +52,13 @@ class SignUp extends React.Component {
     this.setState({
         disabled: true,
       }, () => auth.googleSignIn()
-        .then(() => this.props.history.push(`/dashboard`))
+        .then(() => {
+          if (this.props.trialHandler) {
+            this.props.trialHandler().then(() => this.props.history.push(`/dashboard`));
+          } else {
+            this.props.history.push(`/dashboard`)
+          }
+        })
         .catch((err) => {
           let errMessage = "Could not sign up";
           if (err.code === firebaseConstants.PROVIDER.ACCOUNT_EXISTS_CODE) {
@@ -65,6 +77,7 @@ class SignUp extends React.Component {
   };
 
   render() {
+    const { trialHandler } = this.props;
     return (
       <div className="auth-background">
         <h1 className="auth-title">SIGN UP</h1>
@@ -88,12 +101,13 @@ class SignUp extends React.Component {
           <Divider className="auth-divider"><span className="divider-text">Or Create Your Own Account</span></Divider>
         </div>
         <div className="auth-form">
-          <SignUpForm />
+          <SignUpForm trialHandler={trialHandler} />
         </div>
         {
           this.props.switchHandler
             ? <p className="auth-text">
-              Have an account? <span className="form-link" style={{ textDecoration: 'underline' }} onClick={this.props.switchHandler}>Log in</span>
+              Have an account? <span className="form-link" style={{ textDecoration: 'underline' }}
+                                     onClick={this.props.switchHandler}>Log in</span>
             </p>
             :
             <p className="auth-text">

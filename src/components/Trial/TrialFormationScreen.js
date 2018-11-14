@@ -2,7 +2,12 @@ import { Button, Input, Layout, Modal, Spin } from "antd";
 import React, { Component, Fragment } from "react";
 import connect from "react-redux/es/connect/connect";
 import { Prompt } from 'react-router'
-import { addAndSetActiveFormation, clearTrialChoreo, removeFormation } from "../../actions/choreoActions";
+import {
+  addAndSetActiveFormation,
+  clearTrialChoreo,
+  removeFormation,
+  transferTrialChoreo
+} from "../../actions/choreoActions";
 import { renameFormation } from "../../actions/formationActions";
 import { LOAD_ANIMATED_VIEW, UNLOAD_ANIMATED_VIEW } from "../../constants/actionTypes";
 import GradientSVG from "../../icons/GradientSVG";
@@ -180,6 +185,10 @@ class TrialFormationScreen extends Component {
     } else if (dest === "signup") {
       this.handleSignUp();
     }
+  };
+
+  handleTransferTrial = () => {
+    return this.props.dispatch(transferTrialChoreo());
   };
 
   render() {
@@ -369,10 +378,10 @@ class TrialFormationScreen extends Component {
                   </Fragment>
               }
               {
-                trialLogIn && <LogInScreen switchHandler={() => this.handleSwitch('signup')}/>
+                trialLogIn && <LogInScreen trialHandler={this.handleTransferTrial} switchHandler={() => this.handleSwitch('signup')}/>
               }
               {
-                trialSignUp && <SignUpScreen switchHandler={() => this.handleSwitch('login')}/>
+                trialSignUp && <SignUpScreen trialHandler={this.handleTransferTrial} switchHandler={() => this.handleSwitch('login')}/>
               }
             </div>
           </Modal>
