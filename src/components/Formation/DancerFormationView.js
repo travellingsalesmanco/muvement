@@ -16,6 +16,7 @@ import Navigation from "./Navigation";
 import VerticalSlideList from "./VerticalSlideList";
 import ShowView from './ShowView';
 import DancerPerformerList from "./DancerView/DancerPerformerList";
+import { Mixpanel } from '../../mixpanel';
 
 const SectionTitle = ({ mobile, formationName }) => (
   <div className="section-title-container">
@@ -70,6 +71,7 @@ const SwitchTabs = ({ activeButton, handleViewPerformers, handleViewFormations }
 class FormationScreen extends Component {
   constructor(props) {
     super(props);
+    Mixpanel.track('Dancer View Visited', {'choreo': props.match.params.choreoId});
     this.state = {
       placement: 'right',
       formationName: '',
