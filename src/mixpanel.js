@@ -1,6 +1,6 @@
 import mixpanel from 'mixpanel-browser';
 
-mixpanel.init('2b2f7395877efa017a965fe914c609c3');
+mixpanel.init(process.env.REACT_APP_MIXPANEL_TOKEN);
 
 let actions = {
   identify: (id) => {
