@@ -4,6 +4,8 @@ import {
   googleProvider,
   constants
 } from './firebase';
+import { Mixpanel } from '../mixpanel';
+
 
 // TODO: handle multiple credentials
 
@@ -20,6 +22,8 @@ export const doSignOut = () => {
 export const doSignUpWithEmailAndPassword = (displayName, email, password) => {
   const { EMAIL_SIGN_UP, EMAIL_SIGN_IN_METHOD } = constants;
   return auth.createUserWithEmailAndPassword(email, password).then((userCred) => {
+    Mixpanel.alias(userCred.user.uid);
+    Mixpanel.track('New User With Email', {'user': userCred.user.uid});
     return userCred.user.updateProfile({
       displayName: displayName,
       photoURL: null
@@ -44,7 +48,10 @@ export const doSignUpWithEmailAndPassword = (displayName, email, password) => {
 
 export const doSignInWithEmailAndPassword = (email, password) => {
   const { EMAIL_SIGN_IN, EMAIL_SIGN_IN_METHOD } = constants;
-  return auth.signInWithEmailAndPassword(email, password).catch((err) => {
+  return auth.signInWithEmailAndPassword(email, password).then((userCred) => {
+    Mixpanel.identify(userCred.user.uid);
+    Mixpanel.track('User Log In Email', {'user': userCred.user.uid});
+  }).catch((err) => {
     // Reform error to auth errors
     if (err.code === EMAIL_SIGN_IN.WRONG_PASSWORD_CODE) {
       return auth.fetchSignInMethodsForEmail(email).then((methods) => {
@@ -79,7 +86,10 @@ export const doPasswordUpdate = (password) => {
 
 export const googleSignIn = () => {
   const { PROVIDER } = constants;
-  return auth.signInWithPopup(googleProvider).catch((err) => {
+  return auth.signInWithPopup(googleProvider).then((userCred) => {
+    Mixpanel.identify(userCred.user.uid);
+    Mixpanel.track('User Log In Google', {'user': userCred.user.uid});
+  }).catch((err) => {
     // Reform error to auth errors
     if (err.code === PROVIDER.ACCOUNT_EXISTS_CODE) {
       let userEmail = err.email;
@@ -98,7 +108,10 @@ export const googleSignIn = () => {
 
 export const facebookSignIn = () => {
   const { PROVIDER } = constants;
-  return auth.signInWithPopup(facebookProvider).catch((err) => {
+  return auth.signInWithPopup(facebookProvider).then((userCred) => {
+    Mixpanel.identify(userCred.user.uid);
+    Mixpanel.track('User Log In Facebook', {'user': userCred.user.uid});
+  }).catch((err) => {
     // Reform error to auth errors
     if (err.code === PROVIDER.ACCOUNT_EXISTS_CODE) {
       let userEmail = err.email;
