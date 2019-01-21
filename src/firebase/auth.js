@@ -23,6 +23,7 @@ export const doSignUpWithEmailAndPassword = (displayName, email, password) => {
   const { EMAIL_SIGN_UP, EMAIL_SIGN_IN_METHOD } = constants;
   return auth.createUserWithEmailAndPassword(email, password).then((userCred) => {
     Mixpanel.alias(userCred.user.uid);
+    Mixpanel.track('New User With Email', {'user': userCred.user.uid});
     return userCred.user.updateProfile({
       displayName: displayName,
       photoURL: null
@@ -49,6 +50,7 @@ export const doSignInWithEmailAndPassword = (email, password) => {
   const { EMAIL_SIGN_IN, EMAIL_SIGN_IN_METHOD } = constants;
   return auth.signInWithEmailAndPassword(email, password).then((userCred) => {
     Mixpanel.identify(userCred.user.uid);
+    Mixpanel.track('User Log In Email', {'user': userCred.user.uid});
   }).catch((err) => {
     // Reform error to auth errors
     if (err.code === EMAIL_SIGN_IN.WRONG_PASSWORD_CODE) {
@@ -86,6 +88,7 @@ export const googleSignIn = () => {
   const { PROVIDER } = constants;
   return auth.signInWithPopup(googleProvider).then((userCred) => {
     Mixpanel.identify(userCred.user.uid);
+    Mixpanel.track('User Log In Google', {'user': userCred.user.uid});
   }).catch((err) => {
     // Reform error to auth errors
     if (err.code === PROVIDER.ACCOUNT_EXISTS_CODE) {
@@ -107,6 +110,7 @@ export const facebookSignIn = () => {
   const { PROVIDER } = constants;
   return auth.signInWithPopup(facebookProvider).then((userCred) => {
     Mixpanel.identify(userCred.user.uid);
+    Mixpanel.track('User Log In Facebook', {'user': userCred.user.uid});
   }).catch((err) => {
     // Reform error to auth errors
     if (err.code === PROVIDER.ACCOUNT_EXISTS_CODE) {

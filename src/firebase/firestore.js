@@ -1,4 +1,5 @@
 import { db, auth, currentTimeStampField, buildTimeStamp } from './firebase';
+import { Mixpanel } from '../mixpanel';
 
 // Returns created choreo if successful
 export const createChoreo = (choreo) => {
@@ -14,6 +15,7 @@ export const createChoreo = (choreo) => {
   }).then(docRef => {
     // Require updated
     return docRef.get({ source: "server" }).then((docSnap) => {
+      Mixpanel.track('New Choreo Created', {'choreo': docRef.id, 'user': auth.currentUser.uid});
       return {
         id: docRef.id,
         data: docSnap.data({ serverTimestamps: "estimate" })
