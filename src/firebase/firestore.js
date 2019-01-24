@@ -52,6 +52,7 @@ export const getCreatorChoreos = () => {
 };
 
 export const updateChoreo = (choreoId, choreo) => {
+  Mixpanel.track('Choreo Updated', {'choreo': choreoId, 'user': auth.currentUser.uid});
   return db.collection("choreos").doc(choreoId).set({
     ...choreo,
     // Build back timestamp on update
