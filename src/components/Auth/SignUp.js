@@ -1,13 +1,12 @@
 import { Button, Divider } from 'antd';
 import React from 'react';
-import Link from "react-router-dom/es/Link";
 import { auth, firebaseConstants } from "../../firebase";
 import FacebookIcon from "../../img/facebook.svg";
 import GoogleIcon from "../../img/google.svg";
 import withAuthorization from "../withAuthorization";
 import './Auth.css';
 import SignUpForm from "./SignUpForm";
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const FACEBOOK_PROVIDER_MESSAGE = "You are registered through Facebook. Please sign in through that instead.";
 const GOOGLE_PROVIDER_MESSAGE = "You are registered through Google. Please sign in through that instead.";

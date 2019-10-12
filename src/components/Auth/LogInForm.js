@@ -1,8 +1,7 @@
 import { Form, Input, Icon, Button, Checkbox } from 'antd';
 import React from 'react';
 import './Auth.css';
-import Link from "react-router-dom/es/Link";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from 'react-router-dom';
 import { auth, firebaseConstants } from "../../firebase";
 
 const FormItem = Form.Item;

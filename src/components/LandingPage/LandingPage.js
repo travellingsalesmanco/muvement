@@ -1,7 +1,7 @@
 import { Button, Col, Layout, Row } from 'antd';
 import React, { Fragment } from 'react';
 import ReactGA from 'react-ga';
-import connect from "react-redux/es/connect/connect";
+import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { loop, stopPlaying } from "../../actions/timelineActions";
 import GradientSVG from "../../icons/GradientSVG";

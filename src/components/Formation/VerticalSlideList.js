@@ -1,6 +1,6 @@
 import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import connect from "react-redux/es/connect/connect";
+import { connect } from 'react-redux';
 import { gotoFormation, reorderAndFocusFormation } from "../../actions/choreoActions";
 import { getChoreo } from "../../selectors/choreo";
 import ResponsiveStageCanvas from "../StageCanvas/ResponsiveStageCanvas";
@@ -54,6 +54,7 @@ class VerticalSlideList extends React.Component {
       width: '100%'
     });
 
+    // TODO: Fix draggableId, should be string. See https://github.com/atlassian/react-beautiful-dnd/issues/950
     const { editable } = this.props;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
