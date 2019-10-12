@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.10.0",
+    "antd": "^3.23.6",
     "firebase": "^5.5.5",
     "konva": "^2.4.1",
     "localforage": "^1.7.2",
