@@ -28,7 +28,6 @@ const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 // Additional configs
 auth.useDeviceLanguage();
-db.settings({ timestampsInSnapshots: true });
 
 // Timestamp methods
 const currentTimeStampField = () => {

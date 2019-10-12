@@ -130,45 +130,47 @@ class PreviewSlideList extends React.Component {
     }
   };
 
+  // TODO: Fix draggableId, should be string. See https://github.com/atlassian/react-beautiful-dnd/issues/950
   render() {
     return (
       <div className="slide-list-container">
         <h3 className="slide-list-title">All Formations</h3>
         <div className="slide-list">
           <div style={{height: this.state.slideListHeight}}>
-          {
-            this.props.formations.map((formation, index) => (
-              <Draggable
-                key={index}
-                axis="y"
-                bounds="parent"
-                grid={[this.state.slideWidth, this.state.slideHeight]}
-                position={{x: 0, y: 0}}
-                onDrag={(e, ui) => this.handleDrag(index, e, ui)}
-                onStop={() => this.handleDragStop(index)}
-              >
-                <div className={index === this.props.activeFormationId ? "slide-outer linear-gradient-bg" : "slide-outer"}
-                     ref={node=>{
-                       if (index === 0) {
-                         this.slide = node;
-                       }}}
+            {
+              this.props.formations.map((formation, index) => (
+                <Draggable
+                  draggableId={index.toString()}
+                  key={index}
+                  axis="y"
+                  bounds="parent"
+                  grid={[this.state.slideWidth, this.state.slideHeight]}
+                  position={{x: 0, y: 0}}
+                  onDrag={(e, ui) => this.handleDrag(index, e, ui)}
+                  onStop={() => this.handleDragStop(index)}
                 >
-                  <div className="stage-wrapper">
-                    <div className="stage-container"
-                         ref={node => {
-                           if (index === 0) {
-                             this.container = node;
-                           }
-                         }}>
-                      <StageCanvas choreoId={this.props.choreoId} formationId={index} width={this.state.stageWidth}
-                                   height={this.state.stageHeight} />
+                  <div className={index === this.props.activeFormationId ? "slide-outer linear-gradient-bg" : "slide-outer"}
+                       ref={node=>{
+                         if (index === 0) {
+                           this.slide = node;
+                         }}}
+                  >
+                    <div className="stage-wrapper">
+                      <div className="stage-container"
+                           ref={node => {
+                             if (index === 0) {
+                               this.container = node;
+                             }
+                           }}>
+                        <StageCanvas choreoId={this.props.choreoId} formationId={index} width={this.state.stageWidth}
+                                     height={this.state.stageHeight} />
+                      </div>
                     </div>
+                    <span className="slide-title">{index + 1}. {formation.name}</span>
                   </div>
-                  <span className="slide-title">{index + 1}. {formation.name}</span>
-                </div>
-              </Draggable>
-            ))
-          }
+                </Draggable>
+              ))
+            }
           </div>
         </div>
       </div>

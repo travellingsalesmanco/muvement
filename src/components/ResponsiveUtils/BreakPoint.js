@@ -14,7 +14,7 @@ const breakpoints = {
 export function Breakpoint(props) {
   const breakpoint = breakpoints[props.device] || breakpoints.desktop;
   return (
-    <MediaQuery {...props } query={breakpoint}>
+    <MediaQuery query={breakpoint}>
       {props.children}
     </MediaQuery>
   );

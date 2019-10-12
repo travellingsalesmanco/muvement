@@ -1,7 +1,7 @@
 import React from 'react';
 import { firestore } from '../firebase';
 import { clearTrialChoreo, syncCreatorChoreo, syncCreatorChoreos, updateChoreoIfNewer } from "../actions/choreoActions";
-import { connect } from "react-redux/";
+import { connect } from 'react-redux';
 import NotFound from "./Static/NotFound";
 
 const withFireStoreSync = (withChoreoRouteParams, mustOwn) => (Component) => {

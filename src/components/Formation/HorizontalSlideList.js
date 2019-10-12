@@ -1,6 +1,6 @@
 import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import connect from "react-redux/es/connect/connect";
+import { connect } from 'react-redux';
 import { gotoFormation, reorderAndFocusFormation } from "../../actions/choreoActions";
 import { getChoreo } from "../../selectors/choreo";
 import ResponsiveStageCanvas from "../StageCanvas/ResponsiveStageCanvas";
@@ -55,6 +55,7 @@ class HorizontalSlideList extends React.Component {
     this.props.dispatch(gotoFormation(this.props.choreoId, index));
   };
 
+  // TODO: Fix draggableId, should be string. See https://github.com/atlassian/react-beautiful-dnd/issues/950
   render() {
     const { activeFormationId, editable } = this.props;
     return (
@@ -68,7 +69,7 @@ class HorizontalSlideList extends React.Component {
             >
               {this.props.formations.map((item, index) => (
                 <div key={index} id={index} onClick={() => this.handleClick(index)}>
-                  <Draggable draggableId={index} index={index} isDragDisabled={!editable}>
+                  <Draggable draggableId={index.toString()} index={index} isDragDisabled={!editable}>
                     {(provided, snapshot) => {
                       return (<div
                         ref={provided.innerRef}
