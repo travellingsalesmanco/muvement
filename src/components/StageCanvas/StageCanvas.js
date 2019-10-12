@@ -16,25 +16,25 @@ class StageCanvas extends PureComponent {
     // TODO: Properly address side effects from internal provider under stage
     // See: https://github.com/konvajs/react-konva/issues/311
     return (
-        <ReactReduxContext.Consumer>
-          {({ store }) => (
-              <Stage preventDefault={true} width={width} height={height}>
-                {withGrid ? <GridLayer grid={stageLayout.grid} /> : null}
-                <StageLayer layout={stageLayout.stageRect} showMarkings={editable} />
-                <Provider store={store}>
-                  {
-                    animated
-                        ? <AnimatedDancerDotsLayer choreoId={choreoId}
-                                                   width={width} height={height} stageRect={stageLayout.stageRect}
-                                                   preview={preview} />
-                        : <DancerDotsLayer choreoId={choreoId} formationId={formationId}
-                                           width={width} height={height} stageRect={stageLayout.stageRect}
-                                           editable={editable} preview={preview} />
-                  }
-                </Provider>
-              </Stage>
-          )}
-        </ReactReduxContext.Consumer>
+      <ReactReduxContext.Consumer>
+        {({ store }) => (
+          <Stage preventDefault={true} width={width} height={height}>
+            {withGrid ? <GridLayer grid={stageLayout.grid} /> : null}
+            <StageLayer layout={stageLayout.stageRect} showMarkings={editable} />
+            <Provider store={store}>
+              {
+                animated
+                  ? <AnimatedDancerDotsLayer choreoId={choreoId}
+                                             width={width} height={height} stageRect={stageLayout.stageRect}
+                                             preview={preview} />
+                  : <DancerDotsLayer choreoId={choreoId} formationId={formationId}
+                                     width={width} height={height} stageRect={stageLayout.stageRect}
+                                     editable={editable} preview={preview} />
+              }
+            </Provider>
+          </Stage>
+        )}
+      </ReactReduxContext.Consumer>
     );
   }
 }
