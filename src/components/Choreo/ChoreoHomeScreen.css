@@ -1,6 +1,6 @@
 .choreo-homescreen-body {
   min-height: 100vh;
-  background-image: url(" ../../img/FormationsOverviewBackground.png");
+  background-image: url("../../img/FormationsOverviewBackground.png");
   background-repeat: repeat;
   background-size: cover;
   max-width: 100%;
@@ -9,7 +9,7 @@
 
 .mp-choreo-homescreen-body {
   min-height: 100vh;
-  background-image: url(" ../../img/PortraitEditBackground.png");
+  background-image: url("../../img/PortraitEditBackground.png");
   background-repeat: repeat;
   background-size: cover;
   max-width: 100%;

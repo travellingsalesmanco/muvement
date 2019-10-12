@@ -1,7 +1,6 @@
 import { Button, Divider } from 'antd';
 import React from 'react';
-import { withRouter } from "react-router-dom";
-import Link from "react-router-dom/es/Link";
+import { withRouter, Link } from 'react-router-dom';
 import { auth, firebaseConstants } from "../../firebase"
 import FacebookIcon from "../../img/facebook.svg";
 import GoogleIcon from "../../img/google.svg";

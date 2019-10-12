@@ -1,8 +1,6 @@
 import React from 'react';
 import './Auth.css';
 import { Button, Layout } from 'antd';
-import connect from "react-redux/es/connect/connect";
-import { BrowserRouter as Route } from "react-router-dom";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 
 class ForgotPassword extends React.Component {
