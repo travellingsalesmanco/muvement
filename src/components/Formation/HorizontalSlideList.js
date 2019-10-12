@@ -69,7 +69,7 @@ class HorizontalSlideList extends React.Component {
             >
               {this.props.formations.map((item, index) => (
                 <div key={index} id={index} onClick={() => this.handleClick(index)}>
-                  <Draggable draggableId={index} index={index} isDragDisabled={!editable}>
+                  <Draggable draggableId={index.toString()} index={index} isDragDisabled={!editable}>
                     {(provided, snapshot) => {
                       return (<div
                         ref={provided.innerRef}

@@ -140,7 +140,7 @@ class PreviewSlideList extends React.Component {
             {
               this.props.formations.map((formation, index) => (
                 <Draggable
-                  draggableId={index}
+                  draggableId={index.toString()}
                   key={index}
                   axis="y"
                   bounds="parent"

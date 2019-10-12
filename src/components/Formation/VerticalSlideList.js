@@ -68,7 +68,7 @@ class VerticalSlideList extends React.Component {
               {this.props.formations.map((item, index) => (
                 <div key={index} id={index} className={index === this.props.activeFormationId ? 'linear-gradient-bg' : null}
                      onClick={() => this.handleClick(index)}>
-                  <Draggable draggableId={index} index={index} isDragDisabled={!editable}>
+                  <Draggable draggableId={index.toString()} index={index} isDragDisabled={!editable}>
                     {(provided, snapshot) => {
                       return (<div
                         ref={provided.innerRef}
